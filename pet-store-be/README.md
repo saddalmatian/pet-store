@@ -1,8 +1,5 @@
-# Documentation
-To install all required libraries:
-- pip install -r requirements/requirements.txt
+# Backend pet store
+docker run -p 3306:3306 --name pet_store -e MYSQL_ROOT_PASSWORD=123456789 -d mysql:latest
 
-Run uvicorn to start server:
-- uvicorn app.main:app --reload
-
-Go to http://127.0.0.1:8000/docs to navigate to the OpenAPI
+sudo service mysql stop
+sudo service mysql start
