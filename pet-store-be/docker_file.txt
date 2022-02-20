@@ -1,0 +1,1 @@
+docker run --name pet_store_sql -e MYSQL_ROOT_PASSWORD=admin -d mysql:latest
