@@ -1,1 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+:root {
+  --primary-color: #FE9938;
+  --black-color: #130f40;
+  --light-color: #666666;
+  --white-color: #fff;
+  --bg-color: #FFF8F2;
+  --border-line: .1rem solid rgba(0, 0, 0, .2);
+  --box-shadow-color: 0 1rem 1rem rgba(0, 0, 0, .05);
+}
+
+ul {
+  list-style: none;
+}
+
+.mixin-font { 
+  font-family: 'Satisfy', cursive;
+  color: var(--primary-color);
+  font-size: 3rem;
+}
+
+.title {
+  font-size: 3rem;
+  padding-top: .5rem;
+  color: var(--black-color);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
