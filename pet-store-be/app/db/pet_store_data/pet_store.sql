@@ -30,7 +30,7 @@ CREATE TABLE `address` (
   `address_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`address_id`),
   KEY `fk_a_c_ci_idx` (`customer_id`),
-  CONSTRAINT `fk_a_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_a_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,8 +62,8 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`bill_id`),
   KEY `fk_b_c_ci_idx` (`customer_id`),
   KEY `fk_b_e_ei_idx` (`employee_id`),
-  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -94,9 +94,9 @@ CREATE TABLE `bill_detail` (
   KEY `fk_bd_p_pi_idx` (`product_id`),
   KEY `fk_bd_s_si_idx` (`service_id`),
   KEY `fk_bd_p_pi_idx1` (`promotional_id`),
-  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_bd_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_bd_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bd_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bd_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,8 +126,8 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`comment_id`),
   KEY `fk_c_c_ci_idx` (`customer_id`),
   KEY `fk_c_e_ei_idx` (`employee_id`),
-  CONSTRAINT `fk_c_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_c_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_c_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_c_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,8 +209,8 @@ CREATE TABLE `image` (
   PRIMARY KEY (`image_id`),
   KEY `fk_i_p_pi_idx` (`product_id`),
   KEY `fk_i_s_si_idx` (`service_id`),
-  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_i_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_i_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,8 +286,8 @@ CREATE TABLE `product_pet` (
   `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `fk_pp_pt_pi_idx` (`pet_type_id`),
   KEY `fk_pp_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -313,7 +313,7 @@ CREATE TABLE `product_type` (
   `product_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`product_type_id`),
   KEY `fk_pt_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_pt_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_pt_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,8 +341,8 @@ CREATE TABLE `promotional` (
   PRIMARY KEY (`promotional_id`),
   KEY `fk_p_p_pi_idx` (`product_id`),
   KEY `fk_p_s_si_idx` (`service_id`),
-  CONSTRAINT `fk_p_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_p_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_p_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_p_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -369,7 +369,7 @@ CREATE TABLE `promotional_detail` (
   `promotional_start_date` date NOT NULL,
   `promotional_end_date` date NOT NULL,
   KEY `fk_pd_p_idx` (`promotional_id`),
-  CONSTRAINT `fk_pd_p` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_pd_p` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -397,8 +397,8 @@ CREATE TABLE `rate` (
   PRIMARY KEY (`rate_id`),
   KEY `fk_r_p_pi_idx` (`product_id`),
   KEY `fk_r_c_ci_idx` (`customer_id`),
-  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -451,8 +451,8 @@ CREATE TABLE `service_pet` (
   `service_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `fk_sp_pt_pt_idx` (`pet_type_id`),
   KEY `fk_sp_pt_s_idx` (`service_id`),
-  CONSTRAINT `fk_sp_pt_pt` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_sp_pt_s` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_sp_pt_pt` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sp_pt_s` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
