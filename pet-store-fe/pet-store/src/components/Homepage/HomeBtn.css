@@ -1,0 +1,14 @@
+.home-btn {
+    width: 160px;
+    height: 40px;
+    font-size: 1.6rem;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    margin-top: 10px;
+    border: none;
+}
+
+.home-btn:hover {
+    background-color: var(--primary-color);
+    opacity: 0.8;
+}
