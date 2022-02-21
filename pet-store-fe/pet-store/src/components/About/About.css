@@ -1,0 +1,23 @@
+.square{
+    position: relative;
+    height: 80px;
+    background-color:#ffff;
+    border-radius: 5px;
+    line-height:3px;
+    box-shadow: 1px 3px #aaa;
+    
+}
+.content{
+    font-family: Poppins;
+    font-weight: bold;
+    position: absolute;
+    padding-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 20px;
+
+}
+.img-content{
+    width:30%;
+    margin-right: 10%;
+}
