@@ -1,0 +1,8 @@
+.button {
+  min-width: 120px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  box-shadow: var(--box-shadow-color);
+}

@@ -1,0 +1,12 @@
+.category-item {
+  cursor: pointer;
+}
+
+.category-item__heading {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.category-item__heading:hover {
+  color: var(--primary-color);
+}
