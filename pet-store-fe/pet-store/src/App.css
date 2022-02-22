@@ -29,12 +29,13 @@ ul {
   font-family: 'Satisfy', cursive;
   color: var(--primary-color);
   font-size: 3rem;
+  line-height: 3rem;
 }
 
 .title {
   font-size: 3rem;
   font-weight: bold;
-  /* padding-top: .25rem; */
+  line-height: 3rem;
   color: var(--black-color);
 }
 

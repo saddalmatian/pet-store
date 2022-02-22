@@ -10,42 +10,8 @@
 .product-filter__heading {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-left: 1rem;
-  padding-top: 0.5rem;
+  margin: 0 4rem;
+  padding: 0.5 2rem 0;
   align-self: center;
   line-height: 1.5rem;
-}
-
-
-.product-filter__page {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
-
-.product-filter__page-current {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-}
-
-.product-filter__page-total {
-  font-size: 1.4rem;
-}
-
-.filter-page__btn {
-  margin-left: 2rem;
-  display: flex;
-}
-
-.filter-page__btn:first-child {
-  border-right: 1px solid var(--primary-color);
-}
-
-.filter-page__icon {
-  padding: 1rem;
-  margin: auto;
-  font-size: 1.4rem;
-  color: var(--primary-color);
-  background-color: var(--white-color);
-  box-shadow: var(--box-shadow-color);
 }
