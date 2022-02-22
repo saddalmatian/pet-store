@@ -1,6 +1,0 @@
-ENV PORT 8000
-COPY ["./app", "./requirements/requirements.txt"]
-RUN apt-get update && \
-    mv app/requirements.txt /tmp && \
-    RUN pip install --no-cache-dir -r /tmp/requirements.txt
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

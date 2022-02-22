@@ -1,8 +1,15 @@
-# Documentation
-To install all required libraries:
-- pip install -r requirements/requirements.txt
+# Backend pet store
+-> First, stop mysql service\
+sudo service mysql stop
 
-Run uvicorn to start server:
-- uvicorn app.main:app --reload
+-> Start environment in docker\
+sh start_docker.sh
 
-Go to http://127.0.0.1:8000/docs to navigate to the OpenAPI
+-> GO to this link to open docs\
+http://0.0.0.0/docs
+
+-> Stop docker environment\
+sh stop_docker.sh
+
+
+
