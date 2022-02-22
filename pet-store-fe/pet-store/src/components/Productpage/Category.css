@@ -1,0 +1,14 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffddbf;
+}
+
+.category-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-top: 10px;
+}
+
