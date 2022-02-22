@@ -18,5 +18,9 @@ class ServiceType(SQLModel, table=True):
 
 class ServicePet(SQLModel, table=True):
     __tablename__ = "service_pet"
-    pet_type_id: str = Field(foreign_key="pet_type.pet_type_id")
-    service_id: str = Field(foreign_key="service.service_id")
+    pet_type_id: str = Field(
+        foreign_key="pet_type.pet_type_id", primary_key=True
+    )
+    service_id: str = Field(
+        foreign_key="service.service_id", primary_key=True
+    )

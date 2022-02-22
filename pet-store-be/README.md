@@ -1,9 +1,15 @@
 # Backend pet store
--Run mysql on docker\
-sh init_docker.sh
-
-username: gianghoatran
-password: 123456789
-
+-> First, stop mysql service\
 sudo service mysql stop
-sudo service mysql start
+
+-> Start environment in docker\
+sh start_docker.sh
+
+-> GO to this link to open docs\
+http://0.0.0.0/docs
+
+-> Stop docker environment\
+sh stop_docker.sh
+
+
+
