@@ -33,7 +33,8 @@ ul {
 
 .title {
   font-size: 3rem;
-  padding-top: .5rem;
+  font-weight: bold;
+  /* padding-top: .25rem; */
   color: var(--black-color);
 }
 
