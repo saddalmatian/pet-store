@@ -18,7 +18,9 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                <HomeImage />
+                <div className="col-md me-5 pe-5">
+                    <HomeImage />
+                </div>
             </div>
         </div>
     );
