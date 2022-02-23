@@ -1,0 +1,11 @@
+.line-1-ser{
+    display: flex;
+    justify-content: center;
+    padding: 4% 0 0 0;
+}
+.line-2-ser{
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
