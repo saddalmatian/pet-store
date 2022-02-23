@@ -1,0 +1,23 @@
+.img-combo{
+    width: 100%;
+}
+.name-combo{
+    width: 100%;
+    height: 100%;
+    font-size:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: Poppins;
+}
+.img-combo3{
+    width: 100%;
+}
+p{
+    margin-bottom:0;
+    padding: 4%;
+}
+p.name-combo:hover, p.name-combo:active{
+    font-size: 150%;
+}
