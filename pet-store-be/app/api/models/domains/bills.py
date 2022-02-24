@@ -2,7 +2,7 @@ from datetime import date
 from sqlmodel import Field, SQLModel
 
 
-class Bill(SQLModel, table=True):
+class BillSQL(SQLModel, table=True):
     __tablename__ = "bill"
     bill_id: str = Field(primary_key=True)
     customer_id: str = Field(foreign_key="customer.customer_id")
@@ -14,7 +14,7 @@ class Bill(SQLModel, table=True):
     pay_method: str
 
 
-class BillDetail(SQLModel, table=True):
+class BillDetailSQL(SQLModel, table=True):
     __tablename__ = "bill_detail"
     bill_id: str = Field(foreign_key="bill.bill_id")
     product_id: str = Field(foreign_key="product.product_id")

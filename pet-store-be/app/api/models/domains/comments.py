@@ -1,7 +1,7 @@
 from sqlmodel import Field, SQLModel
 
 
-class Comment(SQLModel, table=True):
+class CommentSQL(SQLModel, table=True):
     __tablename__ = "comment"
     comment_id: str = Field(primary_key=True)
     customer_id: str = Field(foreign_key="customer.customer_id")

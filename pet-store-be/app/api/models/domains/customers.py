@@ -1,7 +1,7 @@
 from sqlmodel import Field, SQLModel
 
 
-class Customer(SQLModel, table=True):
+class CustomerSQL(SQLModel, table=True):
     __tablename__ = "customer"
     customer_id: str = Field(primary_key=True)
     customer_name: str
@@ -10,7 +10,7 @@ class Customer(SQLModel, table=True):
     customer_pwd: str
 
 
-class Address(SQLModel, table=True):
+class AddressSQL(SQLModel, table=True):
     __tablename__ = "address"
     address_id: str = Field(primary_key=True)
     customer_id: str = Field(foreign_key="customer.customer_id")

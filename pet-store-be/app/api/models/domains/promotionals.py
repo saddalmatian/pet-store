@@ -2,7 +2,7 @@ from datetime import date
 from sqlmodel import Field, SQLModel
 
 
-class Promotional(SQLModel, table=True):
+class PromotionalSQL(SQLModel, table=True):
     __tablename__ = "promotional"
     promotional_id: str = Field(primary_key=True)
     product_id: str = Field(foreign_key="product.product_id")
@@ -10,7 +10,7 @@ class Promotional(SQLModel, table=True):
     promotional_name: str
 
 
-class PromotionalDetail(SQLModel, table=True):
+class PromotionalDetailSQL(SQLModel, table=True):
     __tablename__ = "promotional_detail"
     promotional_id: str = Field(foreign_key="promotional.promotional_id")
     promotional_description: str

@@ -1,7 +1,7 @@
 from sqlmodel import Field, SQLModel
 
 
-class Employee(SQLModel, table=True):
+class EmployeeSQL(SQLModel, table=True):
     __tablename__ = "employee"
     employee_id: str = Field(primary_key=True)
     employee_name: str
