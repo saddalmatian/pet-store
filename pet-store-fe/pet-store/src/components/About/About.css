@@ -1,23 +1,32 @@
-.square{
-    position: relative;
-    height: 80px;
-    background-color:#ffff;
-    border-radius: 5px;
-    line-height:3px;
-    box-shadow: 1px 3px #aaa;
-    
+.about {
+  padding-bottom: 50px;
+  background-color: var(--bg-color);
 }
-.content{
-    font-family: Poppins;
-    font-weight: bold;
-    position: absolute;
-    padding-top: 3%;
-    margin-left: 10%;
-    margin-right: 10%;
-    font-size: 20px;
 
+.square {
+  position: relative;
+  height: 80px;
+  background-color: #ffff;
+  border-radius: 5px;
+  line-height: 3px;
+  box-shadow: 0 2rem 3rem rgba(0, 0, 0, .15);
 }
-.img-content{
-    width:30%;
-    margin-right: 10%;
+
+.content {
+  font-weight: bold;
+  position: absolute;
+  padding-top: 10px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-content {
+  width: 20%;
+  margin-right: 15px;
+}
+
+.like-img {
+
 }

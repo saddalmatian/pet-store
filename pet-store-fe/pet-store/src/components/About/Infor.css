@@ -1,7 +1,8 @@
-.infor{
-    font-family: Poppins;
-    font-size:20px; 
-    line-height: 35px;
-    text-align:justify;
-    color:#000;   
+.infor {
+  font-family: Poppins;
+  font-size: 2rem;
+  line-height: 35px;
+  text-align: justify;
+  color: var(--black-color);
+  margin-bottom: 30px;
 }

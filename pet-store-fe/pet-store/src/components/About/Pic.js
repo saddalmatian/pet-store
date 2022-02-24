@@ -1,10 +1,10 @@
 import './Pic.css';
-import about from './About.png'
+import AboutImg from '../../assets/images/About.png'
 
 function Pic(options) {
     return(
         <div className="col-md">
-        <img src={about} alt="No pic" className="img-fluid img"></img>
+        <img src={AboutImg} alt="About-images" className="img-fluid about-img"></img>
         </div>
     )
 }
