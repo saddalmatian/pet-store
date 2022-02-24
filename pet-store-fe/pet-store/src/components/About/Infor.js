@@ -1,6 +1,6 @@
 import './Infor.css';
 
-function Infor( props){
+function Infor(){
     return(
         <p className="infor">Pet store is a locally owned and operated pet food and supply store. 
         Our mission is to provide dog and cat parents with everything that 

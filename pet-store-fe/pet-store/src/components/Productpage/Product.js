@@ -8,7 +8,7 @@ import ProductItem from './ProductItem';
 function Product() {
     return (
         <div className="container product-container">
-            <Heading />
+            <Heading mixin="Our Product" title="Must-Have Items For Your Pet" />
             <div className="row ms-5 ps-5">
                 <Category />
                 <div className="col-md-10">

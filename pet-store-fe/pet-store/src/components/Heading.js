@@ -1,10 +1,10 @@
 import './Heading.css';
 
-function Heading() {
+function Heading( props ) {
     return (
         <div className="row ms-5 ps-5 heading">
-            <p className="mixin-font">Our Product</p>
-            <p className="title">Must-Have Products For Your Pet</p>
+            <p className="mixin-font">{props.mixin}</p>
+            <p className="title">{props.title}</p>
         </div>
     );
 }
