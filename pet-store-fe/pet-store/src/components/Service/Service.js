@@ -1,26 +1,20 @@
 import './SloganSer.css';
 import Pic from "./ServicePics"
 import Combo from "./ComboSer"
+import Heading from '../Heading'
 
-function Service(){
-    return(
-        <div className="container service vh-100" style={{backgroundColor:"var(--bg-color)"}}>
+function Service() {
+    return (
+        <div className="container service" style={{ backgroundColor: "var(--bg-color)", paddingBottom: "50px" }}>
             <div className="row">
-                <div className="slogan-ser">
-                    <p className="mixin-font line-1-ser">Our Services</p>
-                    <p className="title line-2-ser">Make your pets become queen and king</p>
+                <Heading mixin="Our Services" title="Make Your Pets Become Queen And King" />
+                <div style={{ paddingBottom: "50px" }}>
+                    <Pic />
                 </div>
-                <div>
-                    <Pic/>
-                </div>
-                <div className="slogan-ser" style={{marginTop:"7%"}}>
-                    <p className="mixin-font line-1-ser">Our Services</p>
-                    <p className="title line-2-ser">What make your pet comfortable?</p>
-                </div>
+                <Heading mixin="Our Combo" title="What Make Your Pet Comfortable?" />
                 <div className="col-md">
-                    <Combo/>
+                    <Combo />
                 </div>
-                
             </div>
         </div>
     );
