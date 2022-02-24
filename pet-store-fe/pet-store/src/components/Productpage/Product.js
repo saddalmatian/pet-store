@@ -9,7 +9,7 @@ function Product() {
     return (
         <div className="container product-container">
             <Heading mixin="Our Product" title="Must-Have Items For Your Pet" />
-            <div className="row ms-5 ps-5">
+            <div className="row">
                 <Category />
                 <div className="col-md-10">
                     <div className="row">

@@ -1,23 +1,30 @@
-.img-combo{
-    width: 100%;
+.img-combo {
+  width: 100%;
 }
-.name-combo{
-    width: 100%;
-    height: 100%;
-    font-size:20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-family: Poppins;
+
+.name-combo {
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: auto;
+    padding: 1rem;
 }
-.img-combo3{
-    width: 100%;
+
+.img-combo3 {
+  width: 100%;
 }
-p{
-    margin-bottom:0;
-    padding: 4%;
+
+.service-combo-hover {
+    transition: transform ease-in 0.1s;
+  will-change: transform;
 }
-p.name-combo:hover, p.name-combo:active{
-    font-size: 150%;
+
+.service-combo-hover:hover {
+    transform: translateY(-1px);
+  box-shadow: 0 1px 20px 0 rgb(0 0 0 / 5%);
+}
+
+.service-combo-hover:hover .name-combo {
+    color: var(--white-color);
 }

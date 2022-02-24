@@ -4,7 +4,7 @@ import pic2 from "./ser2.png";
 import pic3 from "./ser3.png";
 import pic4 from "./ser4.png";
 
-function ServicePics(props) {
+function ServicePics() {
 
     return (
         <div className="container service-pic">
