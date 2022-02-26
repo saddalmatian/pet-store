@@ -1,4 +1,5 @@
 from sqlmodel import Field, SQLModel
+from pydantic import BaseModel
 
 
 class ServiceSQL(SQLModel, table=True):
@@ -24,3 +25,7 @@ class ServicePetSQL(SQLModel, table=True):
     service_id: str = Field(
         foreign_key="service.service_id", primary_key=True
     )
+
+
+class SerivceID(BaseModel):
+    service_id: str = Field(alias="ServiceID")

@@ -4,7 +4,6 @@ pydantic[email]
 svix-ksuid==0.6.0
 python-multipart==0.0.5
 PyJWT
-sqlalchemy
 pymysql
 cryptography
 sqlmodel

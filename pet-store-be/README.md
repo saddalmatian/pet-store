@@ -11,5 +11,5 @@ http://0.0.0.0/docs
 -> Stop docker environment\
 sh stop_docker.sh
 
-root@localhost password: petstore123aA@
+root@localhost password: petstore#123A
 

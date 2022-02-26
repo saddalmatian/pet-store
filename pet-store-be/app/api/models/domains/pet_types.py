@@ -10,3 +10,7 @@ class PetTypeSQL(SQLModel, table=True):
 
 class PetTypeID(BaseModel):
     pet_type_id: str = Field(alias="PetTypeID")
+
+
+class PetTypeName(BaseModel):
+    pet_type_name: str = Field(alias="PetTypeName")
