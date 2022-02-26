@@ -1,5 +1,6 @@
 import './ProductItem.css';
 import Vong from '../../assets/images/VongThoCam.jpg';
+import Start from '../Start';
 
 
 function ProductItem() {
@@ -13,13 +14,7 @@ function ProductItem() {
                     <div className="product-item__price-current">900.000đ</div>
                 </div>
                 <div className="product-item__action">
-                    <div className="product-item__action-rating">
-                        <i class="product-item__star--gold fas fa-star"></i>
-                        <i class="product-item__star--gold fas fa-star"></i>
-                        <i class="product-item__star--gold fas fa-star"></i>
-                        <i class="product-item__star--gold fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
+                    <Start />
                     <div className="product-item__cart">
                         <i class="fas fa-shopping-cart product-item__cart-icon"></i>
                     </div>

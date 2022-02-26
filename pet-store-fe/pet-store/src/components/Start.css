@@ -1,0 +1,8 @@
+.product-item__action-rating {
+  font-size: 1rem;
+  color: #d5d5d5;
+}
+
+.product-item__star--gold {
+  color: var(--primary-color);
+}

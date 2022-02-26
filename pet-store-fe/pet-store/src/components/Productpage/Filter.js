@@ -7,12 +7,12 @@ import PageControl from './PageControl';
 function Filter(props) {
     return (
         <div className="col-md product-filter">
-                <p className="product-filter__heading">Sort by</p>
+            <p className="product-filter__heading">Sort by</p>
             <div class="d-flex gap-3">
                 <Button title="Best Seller" />
                 <Button title="New" />
-            <Dropdown title="Cost"/>
-            <Search />
+                <Dropdown title="Cost" />
+                <Search />
             </div>
             <PageControl current="1" total="10" />
         </div>
