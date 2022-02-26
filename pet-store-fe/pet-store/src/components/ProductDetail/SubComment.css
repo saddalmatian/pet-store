@@ -1,0 +1,5 @@
+.sub-comment__container {
+    margin: 0 50px 0 100px;
+    display: flex;
+    flex-direction: row;
+}
