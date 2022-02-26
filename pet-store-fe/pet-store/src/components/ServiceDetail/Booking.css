@@ -1,0 +1,43 @@
+.booking {
+    background-color: var(--bg-color);
+}
+
+.booking__heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.booking-form__container {
+    margin: auto;
+}
+
+.booking-label {
+    font-size: 1.6rem;
+    margin-bottom: .5rem;
+}
+
+.booking-input {
+    width: 100%;
+    min-width: 260px;
+    font-size: 1.4rem;
+    border: 1px solid var(--primary-color);
+    padding: .75rem;
+    margin-bottom: 20px;
+}
+
+.booking-btn {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: .75rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.booking-btn:hover {
+    background-color: var(--white-color);
+}
