@@ -7,11 +7,13 @@ import Service from './components/Service/Service';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import ServiceDetail from './components/ServiceDetail/ServiceDetail';
 import Cart from './components/Cart/Cart';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (
     <div className="App">
       <Header/>
+      <SignUp />
       <Home />
       <About />
       <Product />
