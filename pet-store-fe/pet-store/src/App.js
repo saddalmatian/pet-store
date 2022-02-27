@@ -6,6 +6,7 @@ import Product from './components/Productpage/Product';
 import Service from './components/Service/Service';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import ServiceDetail from './components/ServiceDetail/ServiceDetail';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <ProductDetail />
       <Service />
       <ServiceDetail />
+      <Cart />
     </div>
   );
 }
