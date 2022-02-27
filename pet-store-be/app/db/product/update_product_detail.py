@@ -78,4 +78,4 @@ def update_product_detail(
                 raise HTTPException(
                     400, 'This item already have these colors or sizes'
                 )
-    return "response"
+    return product_up_in

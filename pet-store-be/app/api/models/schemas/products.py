@@ -47,3 +47,7 @@ class ProductUpIn(
 ):
     product_color:  Optional[List[_product_domain.ProductColor]]
     product_size:  Optional[List[_product_domain.ProductSize]]
+
+
+class ProductUpResp(ProductUpIn):
+    pass

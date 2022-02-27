@@ -43,9 +43,10 @@ async def get_all_products(
 
 @router.put(
     "/update-product",
+    response_model=_schemas_product.ProductUpResp
 )
 async def update_product(
-    update_product_in: _schemas_product.ProductUpIn
+    update_product_in: _schemas_product.ProductUpIn,
 ):
     response = _service_product.update_product(update_product_in)
     return response
