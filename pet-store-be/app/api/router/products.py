@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form, UploadFile, File
-from typing import List
+from typing import List, Optional
 from app.api.models.schemas import \
     products as _schemas_product
 from app.api.services import products \
@@ -35,9 +35,10 @@ async def create_product(
     response_model=List[_schemas_product.ProductGetAllResp]
 )
 async def get_all_products(
-    filter: _schemas_product.ProductGetAllIn
+    product_type_id: Optional[_schemas_product.ProductGetAllIn]
 ):
-    response = _service_product.get_all_products(filter)
+    product_type_id = product_type_id.product_type_id
+    response = _service_product.get_all_products(product_type_id)
     return response
 
 

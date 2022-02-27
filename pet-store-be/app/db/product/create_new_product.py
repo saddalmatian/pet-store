@@ -31,8 +31,8 @@ def create_new_product(
                 pet_type.pet_type_name == pet_type_name
             )
             result = session.exec(statement)
-            for pet_type in result:
-                pet_type_id = pet_type.pet_type_id
+            pet_type = result.one()
+            pet_type_id = pet_type.pet_type_id
             statement = select(product_type_sql).where(
                 and_(
                     product_type_sql.product_type == product_type,
@@ -74,8 +74,8 @@ def create_new_product(
                 image_display=image_display_bool
             )
             session.add(product)
-            session.add(image)
             session.commit()
+            session.add(image)
             session.add(product_detail)
             session.commit()
     except Exception:

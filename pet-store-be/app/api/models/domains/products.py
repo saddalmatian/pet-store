@@ -94,12 +94,12 @@ class ProductType(BaseModel):
     product_type: str = Field(alias='ProductType')
 
 
-class ProductTypeGetAll(BaseModel):
-    product_type: Optional[str] = Field(default='', alias='ProductType')
-
-
 class ProductTypeID(BaseModel):
     product_type_id: str = Field(alias='ProductTypeID')
+
+
+class ProductTypeIDGetAll(BaseModel):
+    product_type_id: Optional[str] = Field(default='', alias='ProductTypeID')
 
 
 class ProductDescription(BaseModel):

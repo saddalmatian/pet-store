@@ -7,3 +7,5 @@ PyJWT
 pymysql
 cryptography
 sqlmodel
+flake8
+autopep8

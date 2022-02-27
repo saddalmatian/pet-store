@@ -33,10 +33,10 @@ def create_product_type(
 
 
 def get_all_products(
-    filter: _schemas_product.ProductGetAllIn
+    product_type_id: str
 ) -> List[_schemas_product.ProductGetAllResp]:
     response = get_all_products_in_db(
-        filter
+        product_type_id
     )
     return response
 

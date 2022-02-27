@@ -7,6 +7,12 @@ from app.api.models.domains import (
 from typing import List, Optional
 
 
+class ProductGetAllIn(
+    _product_domain.ProductTypeIDGetAll
+):
+    pass
+
+
 class ProductResp(
     _product_domain.ProductName, _product_domain.ProductQuantity,
     _product_domain.ProductCost
@@ -17,12 +23,6 @@ class ProductResp(
 class ProductGetAllResp(
     _product_domain.ProductCost, _product_domain.ProductName,
     _image_domain.ImageSource, _rate_domain.RateStarNumber
-):
-    pass
-
-
-class ProductGetAllIn(
-    _product_domain.ProductTypeGetAll
 ):
     pass
 
