@@ -43,7 +43,7 @@ def get_all_products(
 
 def update_product(
     product_up_in: _schemas_product.ProductUpIn
-):
+) -> _schemas_product.ProductUpResp:
     response = update_product_detail(
         product_up_in
     )
