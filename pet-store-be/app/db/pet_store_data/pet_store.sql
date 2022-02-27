@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `pet_store` /*!40100 DEFAULT CHARACTER SET utf8mb
 USE `pet_store`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: pet_store
+-- Host: localhost    Database: pet_store
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -30,7 +30,7 @@ CREATE TABLE `address` (
   `address_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`address_id`),
   KEY `fk_a_c_ci_idx` (`customer_id`),
-  CONSTRAINT `fk_a_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_a_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,8 +62,8 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`bill_id`),
   KEY `fk_b_c_ci_idx` (`customer_id`),
   KEY `fk_b_e_ei_idx` (`employee_id`),
-  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -94,9 +94,9 @@ CREATE TABLE `bill_detail` (
   KEY `fk_bd_p_pi_idx` (`product_id`),
   KEY `fk_bd_s_si_idx` (`service_id`),
   KEY `fk_bd_p_pi_idx1` (`promotional_id`),
-  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bd_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bd_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`),
+  CONSTRAINT `fk_bd_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `fk_bd_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,6 +107,33 @@ CREATE TABLE `bill_detail` (
 LOCK TABLES `bill_detail` WRITE;
 /*!40000 ALTER TABLE `bill_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bill_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `color`
+--
+
+DROP TABLE IF EXISTS `color`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `color` (
+  `product_detail_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_color` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `temp_column` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`temp_column`),
+  KEY `fk_c_pd_pdi_idx` (`product_detail_id`),
+  CONSTRAINT `fk_c_pd_pdi` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`product_detail_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `color`
+--
+
+LOCK TABLES `color` WRITE;
+/*!40000 ALTER TABLE `color` DISABLE KEYS */;
+INSERT INTO `color` VALUES ('25gBBDVHd2KKfdiUBkN','Blue','25gBBDVHd2KKfdiUBkNBlue'),('25gBBDVHd2KKfdiUBkN','BlueRed','25gBBDVHd2KKfdiUBkNBlueRed'),('25gBBDVHd2KKfdiUBkN','Gray','25gBBDVHd2KKfdiUBkNGray'),('25gBBDVHd2KKfdiUBkN','GrayRed','25gBBDVHd2KKfdiUBkNGrayRed');
+/*!40000 ALTER TABLE `color` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -123,11 +150,14 @@ CREATE TABLE `comment` (
   `comment_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `comment_rep_target` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `comment_main` tinyint(1) NOT NULL,
+  `product_id` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `fk_c_c_ci_idx` (`customer_id`),
   KEY `fk_c_e_ei_idx` (`employee_id`),
-  CONSTRAINT `fk_c_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_c_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_c_p_pi_idx` (`product_id`),
+  CONSTRAINT `fk_c_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `fk_c_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
+  CONSTRAINT `fk_c_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -203,14 +233,12 @@ DROP TABLE IF EXISTS `image`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `image` (
   `image_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `service_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `service_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `image_source` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `image_display` tinyint NOT NULL,
   PRIMARY KEY (`image_id`),
-  KEY `fk_i_p_pi_idx` (`product_id`),
-  KEY `fk_i_s_si_idx` (`service_id`),
-  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_i_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `image_source_UNIQUE` (`image_source`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -220,6 +248,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES ('25gBBGdZRI0vf9d06rf','25gBBD67u1vnLzA7MTy',NULL,'app/media/product/137279.jpg',1);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,8 +261,9 @@ DROP TABLE IF EXISTS `pet_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pet_type` (
   `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`pet_type_id`)
+  `pet_type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`pet_type_id`),
+  UNIQUE KEY `pet_type_name_UNIQUE` (`pet_type_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -243,6 +273,7 @@ CREATE TABLE `pet_type` (
 
 LOCK TABLES `pet_type` WRITE;
 /*!40000 ALTER TABLE `pet_type` DISABLE KEYS */;
+INSERT INTO `pet_type` VALUES ('25e4ZNqws4WtdsLL16E','Bird'),('25e4Z1jf2Gb09xbKLMU','Cat'),('25e4Yd7QFbidTDwaQSc','Dog');
 /*!40000 ALTER TABLE `pet_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,13 +286,13 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_cost` int NOT NULL,
+  `product_quantity` int NOT NULL,
+  `product_sold` int NOT NULL,
+  `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`product_id`),
-  KEY `fk_p_pt_pti_idx` (`pet_type_id`),
-  CONSTRAINT `fk_p_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `product_pet` (`pet_type_id`)
+  UNIQUE KEY `product_name_UNIQUE` (`product_name`),
+  KEY `fk_p_pt_pti_idx` (`product_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -271,7 +302,36 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES ('25gBBD67u1vnLzA7MTy','25gBBD67u1vnLzA7MTy',12,0,'25e4orCMpwimZ7PosXL');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_detail`
+--
+
+DROP TABLE IF EXISTS `product_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_detail` (
+  `product_detail_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_description` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_cost` int NOT NULL,
+  PRIMARY KEY (`product_detail_id`),
+  KEY `fk_pd_p_pi_idx` (`product_id`),
+  CONSTRAINT `fk_pd_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_detail`
+--
+
+LOCK TABLES `product_detail` WRITE;
+/*!40000 ALTER TABLE `product_detail` DISABLE KEYS */;
+INSERT INTO `product_detail` VALUES ('25gBBDVHd2KKfdiUBkN','25gBBD67u1vnLzA7MTy','Test',121);
+/*!40000 ALTER TABLE `product_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -286,8 +346,8 @@ CREATE TABLE `product_pet` (
   `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `fk_pp_pt_pi_idx` (`pet_type_id`),
   KEY `fk_pp_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -309,11 +369,11 @@ DROP TABLE IF EXISTS `product_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_type` (
   `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `product_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`product_type_id`),
-  KEY `fk_pt_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_pt_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_pt_pt_pti_idx` (`pet_type_id`),
+  CONSTRAINT `fk_pt_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -323,6 +383,7 @@ CREATE TABLE `product_type` (
 
 LOCK TABLES `product_type` WRITE;
 /*!40000 ALTER TABLE `product_type` DISABLE KEYS */;
+INSERT INTO `product_type` VALUES ('25e4orCMpwimZ7PosXL','Accessories','25e4Yd7QFbidTDwaQSc'),('25e4pOk9ANpVrPmPHxs','Accessories','25e4Z1jf2Gb09xbKLMU'),('25e4pi93eFipon10x68','Accessories','25e4ZNqws4WtdsLL16E'),('25e4pz4iMotJnOv7Mp6','Food','25e4ZNqws4WtdsLL16E'),('25e4qI6XQoe2lCQEcM1','Food','25e4Z1jf2Gb09xbKLMU'),('25e4qYhLwy26VkCl78U','Food','25e4Yd7QFbidTDwaQSc'),('25e4rP5ds5RdoOkP0d4','Hygiene','25e4Yd7QFbidTDwaQSc'),('25e4rbrfym7t7QQgf6S','Hygiene','25e4Z1jf2Gb09xbKLMU');
 /*!40000 ALTER TABLE `product_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,8 +402,8 @@ CREATE TABLE `promotional` (
   PRIMARY KEY (`promotional_id`),
   KEY `fk_p_p_pi_idx` (`product_id`),
   KEY `fk_p_s_si_idx` (`service_id`),
-  CONSTRAINT `fk_p_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_p_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_p_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `fk_p_s_si` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -369,7 +430,7 @@ CREATE TABLE `promotional_detail` (
   `promotional_start_date` date NOT NULL,
   `promotional_end_date` date NOT NULL,
   KEY `fk_pd_p_idx` (`promotional_id`),
-  CONSTRAINT `fk_pd_p` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_pd_p` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -397,8 +458,8 @@ CREATE TABLE `rate` (
   PRIMARY KEY (`rate_id`),
   KEY `fk_r_p_pi_idx` (`product_id`),
   KEY `fk_r_c_ci_idx` (`customer_id`),
-  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -451,8 +512,8 @@ CREATE TABLE `service_pet` (
   `service_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `fk_sp_pt_pt_idx` (`pet_type_id`),
   KEY `fk_sp_pt_s_idx` (`service_id`),
-  CONSTRAINT `fk_sp_pt_pt` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_sp_pt_s` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_sp_pt_pt` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`),
+  CONSTRAINT `fk_sp_pt_s` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -487,6 +548,33 @@ LOCK TABLES `service_type` WRITE;
 /*!40000 ALTER TABLE `service_type` DISABLE KEYS */;
 /*!40000 ALTER TABLE `service_type` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `size`
+--
+
+DROP TABLE IF EXISTS `size`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `size` (
+  `product_detail_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_size` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `temp_column` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`temp_column`),
+  KEY `fk_s_pd_pdi_idx` (`product_detail_id`),
+  CONSTRAINT `fk_s_pd_pdi` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`product_detail_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `size`
+--
+
+LOCK TABLES `size` WRITE;
+/*!40000 ALTER TABLE `size` DISABLE KEYS */;
+INSERT INTO `size` VALUES ('25gBBDVHd2KKfdiUBkN','X','25gBBDVHd2KKfdiUBkNX'),('25gBBDVHd2KKfdiUBkN','XL','25gBBDVHd2KKfdiUBkNXL');
+/*!40000 ALTER TABLE `size` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -497,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-20 15:10:14
+-- Dump completed on 2022-02-27 13:17:26
