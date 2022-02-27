@@ -5,7 +5,7 @@ from app.db.product.get_all_products import get_all_products_in_db
 from app.db.product.create_new_product_type import create_new_product_type
 from app.db.product.update_product_detail import update_product_detail
 from fastapi import UploadFile, File
-from typing import List
+from typing import List, Optional
 
 
 def create_product(
@@ -33,8 +33,9 @@ def create_product_type(
 
 
 def get_all_products(
-    product_type_id: str
+    product_type_id: Optional[_schemas_product.ProductGetAllIn]
 ) -> List[_schemas_product.ProductGetAllResp]:
+    product_type_id = product_type_id.product_type_id
     response = get_all_products_in_db(
         product_type_id
     )

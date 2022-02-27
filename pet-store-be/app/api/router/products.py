@@ -37,7 +37,6 @@ async def create_product(
 async def get_all_products(
     product_type_id: Optional[_schemas_product.ProductGetAllIn]
 ):
-    product_type_id = product_type_id.product_type_id
     response = _service_product.get_all_products(product_type_id)
     return response
 

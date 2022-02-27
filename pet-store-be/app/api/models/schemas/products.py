@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from app.api.models.domains import (
     products as _product_domain,
     images as _image_domain,
