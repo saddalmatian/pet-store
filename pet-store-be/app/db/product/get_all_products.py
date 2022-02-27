@@ -14,7 +14,6 @@ def get_all_products_in_db(
     product = _domain_products.ProductSQL
     image = _domain_images.ImageSQL
     product_detail = _domain_products.ProductDetailSQL
-    print(product_type_id)
     if product_type_id:
         statement_filter = and_(
             and_(
