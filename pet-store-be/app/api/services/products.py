@@ -3,6 +3,7 @@ from app.api.models.schemas import \
 from app.db.product.create_new_product import create_new_product
 from app.db.product.get_all_products import get_all_products_in_db
 from app.db.product.create_new_product_type import create_new_product_type
+from app.db.product.update_product_detail import update_product_detail
 from fastapi import UploadFile, File
 from typing import List
 
@@ -36,5 +37,14 @@ def get_all_products(
 ) -> List[_schemas_product.ProductGetAllResp]:
     response = get_all_products_in_db(
         filter
+    )
+    return response
+
+
+def update_product(
+    product_up_in: _schemas_product.ProductUpIn
+):
+    response = update_product_detail(
+        product_up_in
     )
     return response

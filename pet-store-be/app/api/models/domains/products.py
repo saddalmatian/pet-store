@@ -54,6 +54,14 @@ class ColorSQL(SQLModel, table=True):
     temp_column: str = Field(primary_key=True)
 
 
+class ProductColor(BaseModel):
+    product_color: str = Field(alias='ProductColor')
+
+
+class ProductSize(BaseModel):
+    product_size: str = Field(alias='ProductSize')
+
+
 class ProductID(BaseModel):
     product_id: str = Field(alias='ProductID')
 
@@ -92,3 +100,7 @@ class ProductTypeGetAll(BaseModel):
 
 class ProductTypeID(BaseModel):
     product_type_id: str = Field(alias='ProductTypeID')
+
+
+class ProductDescription(BaseModel):
+    product_description: str = Field(alias='ProductDescription')

@@ -41,6 +41,16 @@ async def get_all_products(
     return response
 
 
+@router.put(
+    "/update-product",
+)
+async def update_product(
+    update_product_in: _schemas_product.ProductUpIn
+):
+    response = _service_product.update_product(update_product_in)
+    return response
+
+
 @router.post(
     "/create-product-type",
     response_model=_schemas_product.ProductTypeResp

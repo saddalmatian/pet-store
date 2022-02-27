@@ -4,6 +4,7 @@ from app.api.models.domains import (
     rates as _rate_domain,
     pet_types as _pet_type_domain
 )
+from typing import List, Optional
 
 
 class ProductResp(
@@ -37,3 +38,12 @@ class ProductTypeResp(
     _pet_type_domain.PetTypeName
 ):
     pass
+
+
+class ProductUpIn(
+    _product_domain.ProductID, _product_domain.ProductName,
+    _product_domain.ProductQuantity, _product_domain.ProductDescription,
+    _product_domain.ProductCost
+):
+    product_color:  Optional[List[_product_domain.ProductColor]]
+    product_size:  Optional[List[_product_domain.ProductSize]]
