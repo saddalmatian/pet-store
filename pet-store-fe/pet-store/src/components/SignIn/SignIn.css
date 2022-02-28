@@ -1,57 +1,54 @@
-.sign-up__container {
+.sign-in {
     background-color: var(--bg-color);
     padding-bottom: 70px;
-    margin: auto;
 }
 
-.hihi {margin: auto;}
-
-.sign-up__img {
-    width: 600px;
-    min-width: 280px;
+.sign-in__img {
+    width: 100%;
     border-radius: 20px;
 }
 
-.sign-up__form {
+.sign-in__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.sign-up__label {
+.sign-in__label {
     font-size: 1.6rem;
     font-weight: bold;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
-.sign-up__input {
-    padding: .75rem;
-    margin-bottom: 20px;
-    margin-left: 10px;
+.sign-in__input {
     font-size: 1.6rem;
+    padding: .75rem;
+    margin-bottom: 30px;
+    margin-left: 20px;
     width: 90%;
-    min-width: 260px;
+    min-width: 280px;
     border: 1px solid var(--primary-color);
     box-shadow: var(--box-shadow-color);
     border-radius: 8px;
 }
 
-.sign-up__description {
+.sign-in__description {
     font-size: 1.4rem;
-    margin-left: 20px;
+    margin-left: 30px;
     margin-top: 10px;
 }
 
-.sign-up__description span {
+.sign-in__description span {
     color: var(--primary-color);
     text-decoration: underline;
 }
 
-.sign-up__btn {
+.sign-in__btn {
     font-size: 1.8rem;
     font-weight: bold;
     padding: 1rem;
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-bottom: 30px;
     width: 90%;
     min-width: 280px;
     border-radius: 8px;
@@ -59,12 +56,12 @@
     border: 1px solid var(--primary-color);
 }
 
-.sign-up__btn:hover {
+.sign-in__btn:hover {
     color: var(--primary-color);
     background-color: var(--white-color);
 }
 
-.sign-up__btn:active {
+.sign-in__btn:active {
     background-color: var(--primary-color);
     color: var(--white-color);
 }
