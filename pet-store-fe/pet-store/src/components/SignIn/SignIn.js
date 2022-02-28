@@ -12,7 +12,7 @@ function SignIn() {
                     <input type="text" className="sign-in__input"></input>
                     <p className="sign-in__label">Password (*)</p>
                     <input type="text" className="sign-in__input"></input>
-                    <p className="sign-in__description">If you dont's have an account, please <a href="#1"><span>Sign Up</span></a></p>
+                    <p className="sign-in__description">If you don't have an account, please <a href="#1"><span>Sign Up</span></a></p>
                     <input type="button" className="sign-in__btn" value="Sign Up"></input>
                 </div>
 
