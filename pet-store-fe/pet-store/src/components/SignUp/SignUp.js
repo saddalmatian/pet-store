@@ -1,6 +1,6 @@
 import './SignUp.css';
 import Heading from '../Heading';
-import SignUpImg from '../../assets/images/SignUp.jpg'
+import SignUpImg from '../../assets/images/SignUp1.jpg'
 
 function SignUp() {
     return (
