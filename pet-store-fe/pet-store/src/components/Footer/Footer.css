@@ -1,0 +1,20 @@
+.footer {
+    background-color: var(--white-color);
+    padding: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-description {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+
+.footer-icon {
+    margin-right: 2px;
+}
+
+.footer-description span {
+    font-weight: bold;
+}
