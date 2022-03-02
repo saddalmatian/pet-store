@@ -9,11 +9,12 @@ import ServiceDetail from './components/ServiceDetail/ServiceDetail';
 import Cart from './components/Cart/Cart';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
+import Admin from './components/Admin/Admin';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/>
       <SignUp />
       <SignIn />
       <Home />
@@ -22,7 +23,8 @@ function App() {
       <ProductDetail />
       <Service />
       <ServiceDetail />
-      <Cart />
+      <Cart /> */}
+      <Admin />
     </div>
   );
 }
