@@ -9,7 +9,7 @@ import ServiceDetail from './components/ServiceDetail/ServiceDetail';
 import Cart from './components/Cart/Cart';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
-import Footer from './components/Footer/Footer';
+
 
 function App() {
   return (
@@ -23,8 +23,6 @@ function App() {
       <ProductDetail />
       <Service />
       <ServiceDetail />
-      <Cart />
-      <Footer />
     </div>
   );
 }
