@@ -13,28 +13,24 @@ def get_all_products_in_db(
 ) -> dict:
     product = _domain_products.ProductSQL
     image = _domain_images.ImageSQL
-    product_detail = _domain_products.ProductDetailSQL
     if product_type_id:
         statement_filter = and_(
-            and_(
-                product.product_id == image.product_id,
-                product.product_id == product_detail.product_id),
+            product.product_id == image.product_id,
             product.product_type_id == product_type_id
         )
     else:
-        statement_filter = and_(
-            product.product_id == image.product_id,
-            product.product_id == product_detail.product_id
+        statement_filter = (
+            product.product_id == image.product_id
         )
     response = []
     with Session(engine) as session:
-        statement = select(product, image, product_detail).where(
+        statement = select(product, image).where(
             statement_filter)
         results = session.exec(statement)
         for item in results:
             product_name = item.ProductSQL.product_name
             image_source = item.ImageSQL.image_source
-            product_cost = item.ProductDetailSQL.product_cost
+            product_cost = item.ProductSQL.product_cost
             item_dict = {
                 "ProductName": product_name,
                 "ImageSource": image_source,

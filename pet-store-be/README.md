@@ -13,3 +13,5 @@ sh stop_docker.sh
 
 root@localhost password: petstore#123A
 
+check port listening ubuntu
+sudo lsof -i -P -n | grep LISTEN

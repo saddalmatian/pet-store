@@ -12,11 +12,9 @@ router = APIRouter(
 @router.post("/upload-multiple-images")
 async def upload_multiple_images(
     product_id: Optional[str] = Form(default=''),
-    service_id: Optional[str] = Form(default=''),
     image_file: List[UploadFile] = File(...)
 ) -> str:
     response = _service_image.upload_multiple_images(
-        product_id, service_id,
-        image_file
+        product_id, image_file
     )
     return response

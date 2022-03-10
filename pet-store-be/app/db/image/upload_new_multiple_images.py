@@ -14,35 +14,22 @@ from sqlmodel import Session, select
 
 
 def upload_new_multiple_images(
-    product_id: str, service_id: str,
-    image_file: List[UploadFile] = File(...)
+    product_id: str, image_file: List[UploadFile] = File(...)
 ) -> str:
     image_display_bool = 0
     product = _domain_products.ProductSQL
     service = _domain_services.ServiceSQL
     with Session(engine) as session:
-        if product_id:
-            statement = select(product).where(
-                product.product_id == product_id
+        statement = select(product).where(
+            product.product_id == product_id
+        )
+        results = session.exec(statement)
+        try:
+            _ = results.one()
+        except Exception:
+            raise HTTPException(
+                400, 'Product not found'
             )
-            results = session.exec(statement)
-            try:
-                _ = results.one()
-            except Exception:
-                raise HTTPException(
-                    400, 'Product not found'
-                )
-        if service_id:
-            statement = select(product).where(
-                service.service_id == service_id
-            )
-            results = session.exec(statement)
-            try:
-                _ = results.one()
-            except Exception:
-                raise HTTPException(
-                    400, 'Service not found'
-                )
         for image in image_file:
             image_id = db_helper.generate_ksuid()
             # Save file
@@ -53,7 +40,6 @@ def upload_new_multiple_images(
             image = _domain_images.ImageSQL(
                 image_id=image_id,
                 product_id=product_id,
-                service_id=service_id,
                 image_source=image_source,
                 image_display=image_display_bool
             )

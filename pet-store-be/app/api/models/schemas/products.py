@@ -1,11 +1,9 @@
-from pydantic import BaseModel
 from app.api.models.domains import (
     products as _product_domain,
     images as _image_domain,
     rates as _rate_domain,
     pet_types as _pet_type_domain
 )
-from typing import List, Optional
 
 
 class ProductGetAllIn(
@@ -46,8 +44,7 @@ class ProductUpIn(
     _product_domain.ProductQuantity, _product_domain.ProductDescription,
     _product_domain.ProductCost
 ):
-    product_color:  Optional[List[_product_domain.ProductColor]]
-    product_size:  Optional[List[_product_domain.ProductSize]]
+    pass
 
 
 class ProductUpResp(ProductUpIn):

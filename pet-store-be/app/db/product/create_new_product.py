@@ -1,5 +1,4 @@
 
-from sqlalchemy import null
 from app.utils import db_helper
 from app.api.models.domains import \
     (
@@ -20,7 +19,6 @@ def create_new_product(
     image_display: UploadFile = File(...)
 ) -> dict:
     product_id = db_helper.generate_ksuid()
-    product_detail_id = db_helper.generate_ksuid()
     product_sold = 0
     # Create 2 model PetType, ProductType for checking
     pet_type = _domain_pettypes.PetTypeSQL
@@ -49,16 +47,10 @@ def create_new_product(
                 product_name=product_name,
                 product_quantity=product_quantity,
                 product_sold=product_sold,
-                product_type_id=product_type_id
-            )
-            # Create model ProductDetail
-            product_detail = _domain_products.ProductDetailSQL(
-                product_detail_id=product_detail_id,
-                product_id=product_id,
+                product_type_id=product_type_id,
                 product_description=product_description,
-                product_cost=product_cost,
+                product_cost=product_cost
             )
-            service_id = null
             image_display_bool = 1
             image_id = db_helper.generate_ksuid()
             # Save file
@@ -69,14 +61,12 @@ def create_new_product(
             image = _domain_images.ImageSQL(
                 image_id=image_id,
                 product_id=product_id,
-                service_id=service_id,
                 image_source=image_source,
                 image_display=image_display_bool
             )
             session.add(product)
             session.commit()
             session.add(image)
-            session.add(product_detail)
             session.commit()
     except Exception:
         raise HTTPException(
