@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Form, UploadFile, File
+from fastapi import APIRouter, Form, UploadFile, File, Header
 from typing import List, Optional
 from app.api.models.schemas import \
     products as _schemas_product
 from app.api.services import products \
     as _service_product
-
+from app.utils.security import get_username_from_token
 router = APIRouter(
     prefix="/product",
     tags=["Product"]
@@ -35,8 +35,10 @@ async def create_product(
     response_model=List[_schemas_product.ProductGetAllResp]
 )
 async def get_all_products(
-    product_type_id: Optional[_schemas_product.ProductGetAllIn]
+    product_type_id: Optional[_schemas_product.ProductGetAllIn],
+    authorization: str = Header(None)
 ):
+    _ = get_username_from_token(authorization)
     response = _service_product.get_all_products(product_type_id)
     return response
 

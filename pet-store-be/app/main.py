@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.router import\
     (
         products, pet_types,
-        images
+        images, customers
     )
 # db connection
 
@@ -13,6 +13,7 @@ app = FastAPI(
 app.include_router(products.router)
 app.include_router(pet_types.router)
 app.include_router(images.router)
+app.include_router(customers.router)
 
 origins = [
     "http://localhost:3000",

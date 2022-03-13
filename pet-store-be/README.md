@@ -1,17 +1,8 @@
-# Backend pet store
--> First, stop mysql service\
-sudo service mysql stop
+- How to run back-end project:
 
--> Start environment in docker\
-sh start_docker.sh
+1. Must be in Pet-Store-Be folder
 
--> GO to this link to open docs\
-http://0.0.0.0/docs
+2. Type this command below:\
+uvicorn app.main:app --reload
 
--> Stop docker environment\
-sh stop_docker.sh
-
-root@localhost password: petstore#123A
-
-check port listening ubuntu
-sudo lsof -i -P -n | grep LISTEN
+3. Go to http://127.0.0.1:8000/docs to check API !
