@@ -6,8 +6,7 @@ from app.utils import db_helper
 from app.api.models.domains import \
     (
         images as _domain_images,
-        products as _domain_products,
-        services as _domain_services
+        products as _domain_products
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
@@ -18,7 +17,6 @@ def upload_new_multiple_images(
 ) -> str:
     image_display_bool = 0
     product = _domain_products.ProductSQL
-    service = _domain_services.ServiceSQL
     with Session(engine) as session:
         statement = select(product).where(
             product.product_id == product_id

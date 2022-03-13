@@ -29,13 +29,15 @@ def get_all_products_in_db(
         results = session.exec(statement)
         for item in results:
             product_name = item.ProductSQL.product_name
+            product_id = item.ProductSQL.product_id
             image_source = item.ImageSQL.image_source
             product_cost = item.ProductSQL.product_cost
             item_dict = {
+                "ProductID": product_id,
                 "ProductName": product_name,
                 "ImageSource": image_source,
                 "ProductCost": product_cost,
-                "RateStarNumber": 5
+                "RateStarNumber": 0
             }
             response.append(item_dict)
     return response

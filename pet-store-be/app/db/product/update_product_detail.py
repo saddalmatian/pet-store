@@ -33,7 +33,7 @@ def update_product_detail(
         product_result.product_name = product_name
         product_result.product_quantity = product_quantity
         product_result.product_cost = product_cost
-        product_result.product_description = product_result.product_description
+        product_result.product_description = product_description
         session.add(product_result)
         session.commit()
     return product_up_in

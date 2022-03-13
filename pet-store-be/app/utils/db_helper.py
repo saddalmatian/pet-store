@@ -19,7 +19,7 @@ DATABASE_NAME = 'pet_store'
 engine = create_engine(
     f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@localhost:3306\
         /{DATABASE_NAME}",
-    echo=True
+    # echo=True
 )
 SQLModel.metadata.create_all(engine)
 

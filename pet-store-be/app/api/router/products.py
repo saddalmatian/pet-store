@@ -13,7 +13,7 @@ router = APIRouter(
 
 @router.post(
     "/create-product",
-    response_model=_schemas_product.ProductResp
+    response_model=_schemas_product.ProductCreResp
 )
 async def create_product(
     image_display: UploadFile = File(...), product_quantity: int = Form(...),
@@ -62,4 +62,27 @@ async def create_product_type(
     response = _service_product.create_product_type(
         product_type_in
     )
+    return response
+
+
+@router.delete(
+    "/delete-product"
+)
+async def delete_product(
+    product_id: str
+):
+    response = _service_product.delete_product(
+        product_id
+    )
+    return response
+
+
+@router.get(
+    "/get-product-detail",
+    response_model=_schemas_product.ProductDetailResp
+)
+async def get_product_detail(
+    product_id: str
+):
+    response = _service_product.get_product_detail(product_id)
     return response
