@@ -1,3 +1,4 @@
+import React from 'react';
 import './ServiceDetail.css';
 import Booking from './Booking';
 import Heading from '../Heading';

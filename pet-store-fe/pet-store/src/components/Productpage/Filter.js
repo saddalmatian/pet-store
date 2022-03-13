@@ -1,3 +1,4 @@
+import React from 'react';
 import './Filter.css'
 import Button from '../Button';
 import Dropdown from '../Dropdown';

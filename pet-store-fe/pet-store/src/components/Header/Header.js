@@ -1,16 +1,19 @@
+import React from 'react';
 import './Header.css'
 import Logo from './Logo';
 import Navigation from './Navigation';
 
 function Header() {
     return (
-        <div className="header">
+        <div className="container header">
             <Logo />
             <Navigation />
             <div className="header-action">
-                <span className="header-action__signin">Sign in </span>
+                <i class="fa-solid fa-cart-shopping header-icon__cart"></i>
+                {/* <i class="fa-solid fa-user"></i> */}
+                <span className="header-action__signin">Đăng ký </span>
                  / 
-                <span className="header-action__signup"> Sign up</span>
+                <span className="header-action__signup"> Đăng nhập</span>
             </div>
         </div>
         

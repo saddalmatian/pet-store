@@ -1,3 +1,4 @@
+import React from 'react';
 import './SignIn.css';
 import Heading from '../Heading';
 import SignInImg from '../../assets/images/SignIn.jpg'
@@ -6,14 +7,14 @@ function SignIn() {
     return (
         <div className="container sign-in">
             <div className="row">
-                <Heading mixin="Welcome to Pet Store" title="Sign In" />
+                <Heading mixin="Welcome to Pet Store" title="Đăng nhập" />
                 <div className="col-md sign-in__form">
-                    <p className="sign-in__label">Username (*)</p>
+                    <p className="sign-in__label">Tên đăng nhập (*)</p>
                     <input type="text" className="sign-in__input"></input>
-                    <p className="sign-in__label">Password (*)</p>
+                    <p className="sign-in__label">Mật khẩu (*)</p>
                     <input type="text" className="sign-in__input"></input>
-                    <p className="sign-in__description">If you don't have an account, please <a href="#1"><span>Sign Up</span></a></p>
-                    <input type="button" className="sign-in__btn" value="Sign Up"></input>
+                    <p className="sign-in__description">Nếu bạn chưa có tài khoản, vui lòng chọn <a href="#1"><span>Đăng ký</span></a></p>
+                    <input type="button" className="sign-in__btn" value="Đăng nhập"></input>
                 </div>
 
                 <div className="col-md sign-in__image">

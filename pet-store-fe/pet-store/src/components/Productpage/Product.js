@@ -1,3 +1,4 @@
+import React from 'react';
 import './Product.css';
 import Heading from '../Heading';
 import Category from './Category';

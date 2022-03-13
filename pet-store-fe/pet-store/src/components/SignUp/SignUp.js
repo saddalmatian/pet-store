@@ -1,3 +1,4 @@
+import React from 'react';
 import './SignUp.css';
 import Heading from '../Heading';
 import SignUpImg from '../../assets/images/SignUp1.jpg'
@@ -5,29 +6,29 @@ import SignUpImg from '../../assets/images/SignUp1.jpg'
 function SignUp() {
     return (
         <div className="container sign-up__container">
-            <div className="row hihi">
-                <Heading mixin="Become a member of Pet Store" title="Sign Up" />
+            <div className="row">
+                <Heading mixin="Become a member of Pet Store" title="Đăng ký" />
                 <div className="col-md">
                     <img className="sign-up__img" src={SignUpImg} alt="Sign Up Img" />            
                 </div>
 
-                <div className="col-md-6 sign-up__form">
-                    <p className="sign-up__label">Fullname (*)</p>
+                <div className="col-md sign-up__form">
+                    <p className="sign-up__label">Họ và tên (*)</p>
                     <input type="text" className="sign-up__input"></input>
                     <p className="sign-up__label">Email (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__label">Phone Number (*)</p>
+                    <p className="sign-up__label">Số điện thoại (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__label">Address (*)</p>
+                    <p className="sign-up__label">Địa chỉ (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__label">Username (*)</p>
+                    <p className="sign-up__label">Tên đăng nhập (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__label">Password (*)</p>
+                    <p className="sign-up__label">Mật khẩu (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__label">Password Confirm (*)</p>
+                    <p className="sign-up__label">Xác nhận mật khẩu (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__description">If you already have an account, please <a href="#1"><span>Sign In</span></a></p>
-                    <input type="button" className="sign-up__btn" value="Sign Up"></input>
+                    <p className="sign-up__description">Nếu bạn đã có tài khoản, vui lòng chọn <a href="#1"><span>Đăng nhập</span></a></p>
+                    <input type="button" className="sign-up__btn" value="Đăng ký"></input>
                 </div>
             </div>
         </div>

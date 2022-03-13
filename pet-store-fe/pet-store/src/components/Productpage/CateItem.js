@@ -1,3 +1,4 @@
+import React from 'react';
 import './CateItem.css';
 import CateItemLink from './CateItemLink';
 

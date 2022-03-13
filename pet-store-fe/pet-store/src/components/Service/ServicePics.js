@@ -1,3 +1,4 @@
+import React from 'react';
 import './ServicePics.css';
 import pic1 from "./ser1.png";
 import pic2 from "./ser2.png";

@@ -1,3 +1,4 @@
+import React from 'react';
 import './Cart.css';
 import Heading from '../Heading.js';
 import Hinh from '../../assets/images/VongThoCam.jpg';
