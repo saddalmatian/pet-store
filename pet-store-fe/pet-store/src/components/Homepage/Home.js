@@ -1,3 +1,4 @@
+import React from 'react';
 import './Home.css';
 import HomeImage from './HomeImage';
 import HomeBtn from './HomeBtn';
@@ -10,12 +11,8 @@ function Home() {
                 <div className="col-md ms-5 ps-5 d-md-flex justify-content-center flex-column">
                     <HomeContent />
                     <div className="d-md-flex">
-                        <div className="col-md-4">
-                            <HomeBtn title="Shop now"/>
-                        </div>
-                        <div className="col-md-3">
-                            <HomeBtn title="Pet Services"/>
-                        </div>
+                        <HomeBtn title="Sản phẩm" />
+                        <HomeBtn title="Dịch vụ" />
                     </div>
                 </div>
                 <div className="col-md">

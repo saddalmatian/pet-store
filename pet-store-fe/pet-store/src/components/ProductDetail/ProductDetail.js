@@ -1,3 +1,4 @@
+import React from 'react';
 import './ProductDetail.css';
 import Heading from '../Heading';
 import Start from '../Start';

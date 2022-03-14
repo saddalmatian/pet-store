@@ -3,4 +3,9 @@
   padding-bottom: 50px;
 }
 
+.product {
+  width: 205px;
+  min-width: 160px;
+  margin: 0 5px;
+}
 

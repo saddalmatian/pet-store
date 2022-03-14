@@ -1,8 +1,9 @@
+import React from 'react';
 import './Button.css';
 
 function Button( props ) {
     return (
-        <button type="button" class="btn btn-primary button">{props.title}</button>
+        <button type="button" class="button">{props.title}</button>
     );
 }
 

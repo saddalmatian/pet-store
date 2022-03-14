@@ -1,3 +1,4 @@
+import React from 'react';
 import './CateItemLink.css';
 
 function CateItemLink( props ) {

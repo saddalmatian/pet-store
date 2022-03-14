@@ -1,3 +1,4 @@
+import React from 'react';
 import './Pic.css';
 import AboutImg from '../../assets/images/About.png'
 

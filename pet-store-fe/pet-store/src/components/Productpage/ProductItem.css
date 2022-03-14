@@ -5,7 +5,7 @@
 
 .product:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1px 20px 0 rgb(0 0 0 / 5%);
+  box-shadow: 0 4px 20px 0 rgb(0 0 0 / 5%);
 }
 
 .product-item {
@@ -80,4 +80,8 @@
 .product-item__cart-icon {
   font-size: 1.4rem;
   color: var(--primary-color);
+}
+
+.product-item__cart-icon:hover {
+  opacity: .7;
 }

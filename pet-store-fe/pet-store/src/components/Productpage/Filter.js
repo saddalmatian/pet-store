@@ -1,3 +1,4 @@
+import React from 'react';
 import './Filter.css'
 import Button from '../Button';
 import Dropdown from '../Dropdown';
@@ -8,7 +9,7 @@ function Filter(props) {
     return (
         <div className="col-md product-filter">
             <p className="product-filter__heading">Sort by</p>
-            <div class="d-flex gap-3">
+            <div class="d-flex">
                 <Button title="Best Seller" />
                 <Button title="New" />
                 <Dropdown title="Cost" />

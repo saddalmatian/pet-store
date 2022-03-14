@@ -1,3 +1,4 @@
+import React from 'react';
 import './SloganSer.css';
 import Pic from "./ServicePics"
 import Combo from "./ComboSer"

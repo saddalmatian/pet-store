@@ -1,3 +1,4 @@
+import React from 'react';
 import './HomeImage.css';
 import HomeImg from '../../assets/images/img-home.png'
 

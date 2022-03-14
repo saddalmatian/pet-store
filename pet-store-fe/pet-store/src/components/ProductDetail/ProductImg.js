@@ -1,3 +1,4 @@
+import React from 'react';
 import './ProductImg.css';
 import Item from '../../assets/images/VongThoCam.jpg'
 

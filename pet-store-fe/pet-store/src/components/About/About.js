@@ -1,14 +1,15 @@
-import Infor from "./Infor"
+import React from 'react';
+import Infor from "./Infor";
 import Pic from './Pic';
 import like from "./like.png";
 import delivery from "./delivery.png";
-import './About.css'
+import './About.css';
 import Heading from "../Heading";
 
 function About(props) {
     return (
         <div className="container about">
-            <Heading mixin="Why Choose Us?" title="What Make Our Team Trusted?" />
+            <Heading mixin="Why Choose Us?" title="Điều gì làm mọi người tin tưởng chúng tôi?" />
             <div className="row ">
                 <div className="col-md d-md-flex justify-content-center flex-column">
                     <div className="d-md-flex">

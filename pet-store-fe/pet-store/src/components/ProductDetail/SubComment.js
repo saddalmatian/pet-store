@@ -1,3 +1,4 @@
+import React from 'react';
 import './SubComment.css';
 
 function SubComment(props) {

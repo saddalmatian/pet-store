@@ -8,11 +8,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 9%;
+    padding: 2rem 2%;
     z-index: 10000;
 }
 
 .header-action {
     font-size: 1.7rem;
+    font-weight: 500;
     color: var(--primary-color);
+}
+
+.header-icon__cart {
+    margin-right: .5rem;
+    padding: .75rem;
+    transition: all ease-in .1s;
+}
+
+.header-icon__cart:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 1rem;
+}
+
+.header-action__signin,
+.header-action__signup {
+    cursor: pointer;
+}
+
+.header-action__signin:hover,
+.header-action__signup:hover {
+    opacity: .8;
 }
