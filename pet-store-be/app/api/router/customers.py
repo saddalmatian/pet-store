@@ -16,3 +16,12 @@ async def customer_sign_up(
 ) -> dict:
     response = _service_customer.customer_sign_up(customer_info_in)
     return response
+
+
+@router.post("/sign-in")
+async def customer_sign_in(
+    username: str,
+    password: str
+) -> dict:
+    response = _service_customer.customer_sign_in(username, password)
+    return response

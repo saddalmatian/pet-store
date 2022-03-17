@@ -36,9 +36,9 @@ async def create_product(
 )
 async def get_all_products(
     product_type_id: Optional[_schemas_product.ProductGetAllIn],
-    authorization: str = Header(None)
+    authorization_token: str = Header(None),
 ):
-    _ = get_username_from_token(authorization)
+    _ = get_username_from_token(authorization_token)
     response = _service_product.get_all_products(product_type_id)
     return response
 

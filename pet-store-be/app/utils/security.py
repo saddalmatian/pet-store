@@ -38,7 +38,7 @@ def decode_jwt_token(token: str) -> dict:
 
 def get_username_from_token(token: str) -> str:
     payload = decode_jwt_token(token)
-    username = payload.get("username")
+    username = payload.get("Username")
     if username:
         return username
     raise HTTPException(
@@ -57,4 +57,4 @@ def check_exist(user_or_email: str):
         results = session.exec(statement)
         if results.first():
             raise HTTPException(400, detail="Username or email existed!")
-        return True
+        return False
