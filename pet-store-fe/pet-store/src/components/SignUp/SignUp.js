@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './SignUp.css';
 import Heading from '../Heading';
 import SignUpImg from '../../assets/images/SignUp1.jpg'
@@ -27,7 +28,7 @@ function SignUp() {
                     <input type="text" className="sign-up__input"></input>
                     <p className="sign-up__label">Xác nhận mật khẩu (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__description">Nếu bạn đã có tài khoản, vui lòng chọn <a href="#1"><span>Đăng nhập</span></a></p>
+                    <p className="sign-up__description">Nếu bạn đã có tài khoản, vui lòng chọn <Link to="/sign_in"><span>Đăng nhập</span></Link></p>
                     <input type="button" className="sign-up__btn" value="Đăng ký"></input>
                 </div>
             </div>

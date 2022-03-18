@@ -11,8 +11,8 @@ function Home() {
                 <div className="col-md ms-5 ps-5 d-md-flex justify-content-center flex-column">
                     <HomeContent />
                     <div className="d-md-flex">
-                        <HomeBtn title="Sản phẩm" />
-                        <HomeBtn title="Dịch vụ" />
+                        <HomeBtn href="/product" title="Sản phẩm" />
+                        <HomeBtn href="/service" title="Dịch vụ" />
                     </div>
                 </div>
                 <div className="col-md">
