@@ -21,7 +21,7 @@ function Cart() {
                                 <p className="box-product__delete">Delete</p>
                             </div>
                             <div className="box-product__quantity">
-                                <p className="box-product__label">Quantity</p>
+                                <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
                                     <button type="button" class="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
@@ -29,7 +29,7 @@ function Cart() {
                                 </div>
                             </div>
                             <div className="box-product__subtotal">
-                                <p className="box-product__label">Subtotal</p>
+                                <p className="box-product__label">Thành tiền</p>
                                 <p className="box-product__subtotal-amount">1.600.000đ</p>
                             </div>
                         </div>
@@ -45,7 +45,7 @@ function Cart() {
                                 <p className="box-product__delete">Delete</p>
                             </div>
                             <div className="box-product__quantity">
-                                <p className="box-product__label">Quantity</p>
+                                <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
                                     <button type="button" class="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
@@ -53,7 +53,7 @@ function Cart() {
                                 </div>
                             </div>
                             <div className="box-product__subtotal">
-                                <p className="box-product__label">Subtotal</p>
+                                <p className="box-product__label">Thành tiền</p>
                                 <p className="box-product__subtotal-amount">1.600.000đ</p>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ function Cart() {
                                 <p className="box-product__delete">Delete</p>
                             </div>
                             <div className="box-product__quantity">
-                                <p className="box-product__label">Quantity</p>
+                                <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
                                     <button type="button" class="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
@@ -77,7 +77,7 @@ function Cart() {
                                 </div>
                             </div>
                             <div className="box-product__subtotal">
-                                <p className="box-product__label">Subtotal</p>
+                                <p className="box-product__label">Thành tiền</p>
                                 <p className="box-product__subtotal-amount">1.600.000đ</p>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ function Cart() {
                     <div className="cart-box">
                         <div className="box-total">
                             <div className="box-total__wrap">
-                                <p className="box-total-label">Total</p>
+                                <p className="box-total-label">Tổng thanh toán</p>
                                 <p className="box-total-amount">1.200.000đ</p>
                             </div>
                             <button className="box-total__btn">Order</button>
@@ -97,27 +97,23 @@ function Cart() {
                 <div className="col-md">
                     <div className="cart-box">
                         <div className="box-address">
-                            <p className="box-address__heading">Delivery Address</p>
-                            <input type="text" className="box-address__input" placeholder="Full Name"></input>
-                            <input type="text" className="box-address__input" placeholder="Phone Number"></input>
+                            <p className="box-address__heading">Địa chỉ giao hàng</p>
+                            <input type="text" className="box-address__input" placeholder="Họ và tên"></input>
+                            <input type="text" className="box-address__input" placeholder="Số điện thoại"></input>
                             <input type="text" className="box-address__input" placeholder="Email"></input>
-                            <select className="box-address__input">
-                                <option value="0">Địa chỉ cũ</option>
-                                <option value="1">Địa chỉ 2</option>
-                                <option value="2">Địa chỉ mới</option>
-                            </select>
+                            <input type="text" className="box-address__input" placeholder="Địa chỉ"></input>
                         </div>
                         <Line />
 
                         <div className="box-payment">
-                            <p className="box-payment__heading">Payment Methods</p>
+                            <p className="box-payment__heading">Phương thức thanh toán</p>
                             <div className="box-payment-method">
                                 <input type="radio" className="box-payment__method" name="payment_method"></input>
-                                <label className="box-payment__label" htmlFor="payment_method">Pay With Momo</label>
+                                <label className="box-payment__label" htmlFor="payment_method">Thanh toán bằng Ví điện tử Momo</label>
                             </div>
                             <div className="box-payment-method">
                                 <input type="radio" checked className="box-payment__method" name="payment_method"></input>
-                                <label className="box-payment__label" htmlFor="payment_method">Payment On Delivery</label>
+                                <label className="box-payment__label" htmlFor="payment_method">Thanh toán khi nhận hàng</label>
                             </div>
                         </div>
                     </div>
