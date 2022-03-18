@@ -19,6 +19,7 @@
 }
 
 .header-icon__cart {
+    color: var(--primary-color);
     margin-right: .5rem;
     padding: .75rem;
     transition: all ease-in .1s;
@@ -32,10 +33,12 @@
 
 .header-action__signin,
 .header-action__signup {
-    cursor: pointer;
+    text-decoration: none;
+    color: var(--primary-color);
 }
 
 .header-action__signin:hover,
 .header-action__signup:hover {
     opacity: .8;
+    color: var(--primary-color);
 }

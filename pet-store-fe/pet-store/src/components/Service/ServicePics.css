@@ -27,6 +27,7 @@
 .service-hover {
   transition: transform ease-in 0.1s;
   will-change: transform;
+  text-decoration: none;
 }
 
 .service-hover:hover {
