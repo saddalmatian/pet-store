@@ -8,11 +8,11 @@ function Service() {
     return (
         <div className="container service" style={{ backgroundColor: "var(--bg-color)", paddingBottom: "50px" }}>
             <div className="row">
-                <Heading mixin="Our Services" title="Make Your Pets Become Queen And King" />
+                <Heading mixin="Our Services" title="Các Dịch Vụ Mà Pet Store Có" />
                 <div style={{ paddingBottom: "50px" }}>
                     <Pic />
                 </div>
-                <Heading mixin="Our Combo" title="What Make Your Pet Comfortable?" />
+                <Heading mixin="Our Combo" title="Các Gói Dịch Vụ Kết Hợp Có Tại Pet Store" />
                 <div className="col-md">
                     <Combo />
                 </div>

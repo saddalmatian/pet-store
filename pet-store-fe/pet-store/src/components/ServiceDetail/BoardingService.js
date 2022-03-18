@@ -11,7 +11,7 @@ function BoardingService() {
     return (
         <div className="container service-detail">
             <div className="row">
-                <Heading mixin="What we have?" title="Dịch vụ tắm rửa tại Pet Store có gì?" />
+                <Heading mixin="What we have?" title="Những tiện ích khi gửi Pet Store trông hộ" />
                 <div className="col-md image-container">
                     <div className="img-container">
                         <img className="service-img" src={Hinh} alt="img"></img>

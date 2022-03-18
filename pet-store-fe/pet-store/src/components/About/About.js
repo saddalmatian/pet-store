@@ -9,7 +9,7 @@ import Heading from "../Heading";
 function About(props) {
     return (
         <div className="container about">
-            <Heading mixin="Why Choose Us?" title="Điều gì làm mọi người tin tưởng chúng tôi?" />
+            <Heading mixin="Why Choose Us?" title="Điều Gì Làm Mọi Người Tin Tưởng Pet Store?" />
             <div className="row ">
                 <div className="col-md d-md-flex justify-content-center flex-column">
                     <div className="d-md-flex">
