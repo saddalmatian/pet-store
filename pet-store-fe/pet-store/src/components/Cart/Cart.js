@@ -8,7 +8,7 @@ function Cart() {
     return (
         <div className="container cart-container">
             <div className="row">
-                <Heading mixin="Your cart" title="Something Cute For Your Pet" />
+                <Heading mixin="Your cart" title="Một Vài Món Đồ Dễ Thương Nên Mua Cho Các Bé Cưng Của Bạn" />
                 <div className="col-md">
                     <div className="cart-box">
                         <div className="box-product">

@@ -12,7 +12,7 @@ function WalkingService() {
     return (
         <div className="container service-detail">
             <div className="row">
-                <Heading mixin="What we have?" title="Dịch vụ tắm rửa tại Pet Store có gì?" />
+                <Heading mixin="What we have?" title="Những đảm bảo khi bạn đặt lịch dắt thú cưng đi dạo tại Pet Store" />
                 <div className="col-md image-container">
                     <div className="img-container">
                         <img className="service-img" src={Hinh} alt="img"></img>
@@ -27,8 +27,8 @@ function WalkingService() {
                 <div className="col-md service-info">
                     <div className="content-container">
                         <p className="service-content">
-                            - Tất cả thú cưng sẽ được trang bị GPS và cập nhật ảnh và
-                                video để bạn tiện theo dõi.
+                            - Tất cả thú cưng sẽ được trang bị GPS, được cập nhật ảnh và
+                                video thường xuyên để bạn tiện theo dõi.
                         </p>
                         <p className="service-content">
                             - Tất cả nhân viên của chúng tôi đều phải vượt qua các khóa học 
