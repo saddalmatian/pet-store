@@ -12,7 +12,7 @@ function Product() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.post('http://192.168.2.154:8000/product/get-all-products',
+        axios.post('http://127.0.0.1:8000/product/get-all-products',
             {
                 ProductTypeID: ''
             },

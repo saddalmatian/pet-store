@@ -1,21 +1,22 @@
 .about {
-  padding-bottom: 50px;
+  padding: 0 0 100px 0;
   background-color: var(--bg-color);
 }
 
 .square {
   position: relative;
   height: 80px;
+  margin: 10px 2rem;
   background-color: #ffff;
   border-radius: 5px;
   line-height: 3px;
   box-shadow: 0 2rem 3rem rgba(0, 0, 0, .15);
+  display: flex;
+  justify-content: center;
 }
 
 .content {
   font-weight: bold;
-  position: absolute;
-  padding-top: 10px;
   font-size: 2rem;
   display: flex;
   justify-content: center;
@@ -25,8 +26,4 @@
 .img-content {
   width: 20%;
   margin-right: 15px;
-}
-
-.like-img {
-
 }

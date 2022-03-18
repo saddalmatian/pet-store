@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css'
 import Logo from './Logo';
 import Navigation from './Navigation';
@@ -9,11 +10,11 @@ function Header() {
             <Logo />
             <Navigation />
             <div className="header-action">
-                <i class="fa-solid fa-cart-shopping header-icon__cart"></i>
+                <Link className="header-icon__cart" to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
                 {/* <i class="fa-solid fa-user"></i> */}
-                <span className="header-action__signin">Đăng ký </span>
-                 / 
-                <span className="header-action__signup"> Đăng nhập</span>
+                <Link to="/sign_up" className="header-action__signin"><span>Đăng ký</span></Link>
+                 <span>/</span> 
+                <Link to="/sign_in" className="header-action__signup"><span>Đăng nhập</span></Link>
             </div>
         </div>
         

@@ -3,9 +3,11 @@
     font-weight: 900;
     color: var(--primary-color);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .logo:hover {
     opacity: 0.85;
+    color: var(--primary-color);
 }
 
