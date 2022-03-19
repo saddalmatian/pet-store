@@ -28,7 +28,9 @@ function SignUp() {
                     <input type="text" className="sign-up__input"></input>
                     <p className="sign-up__label">Xác nhận mật khẩu (*)</p>
                     <input type="text" className="sign-up__input"></input>
-                    <p className="sign-up__description">Nếu bạn đã có tài khoản, vui lòng chọn <Link to="/sign_in"><span>Đăng nhập</span></Link></p>
+                    <p className="sign-up__description">Nếu bạn đã có tài khoản, vui lòng chọn 
+                        <Link to="/sign_in"><span>Đăng nhập</span></Link>
+                    </p>
                     <input type="button" className="sign-up__btn" value="Đăng ký"></input>
                 </div>
             </div>

@@ -12,7 +12,7 @@ function ServicePics() {
         <div className="container service-pic">
             <div className="row d-flex gap-4 justify-content-around justify-content-start">
                 <div className="col-md text-center position-relative p-0">
-                    <Link to="/bathing_service" class="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff'}}>
+                    <Link to="/bathing_service" className="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff'}}>
                         <img src={pic1} alt="No-pic" className="img-ser1" />
                         <div className="wrap col-md-3">
                         <p className="name-ser col-md-3 text-nowrap">Tắm rửa</p>
@@ -20,7 +20,7 @@ function ServicePics() {
                     </Link> 
                 </div>
                 <div className="col-md text-center position-relative p-0">
-                    <Link to="/grooming_service" class="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff', marginTop: '30%'}}>
+                    <Link to="/grooming_service" className="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff', marginTop: '30%'}}>
                         <img src={pic2} alt="No-pic" className="img-ser2" />
                         <div className="wrap col-md-3">
                         <p className="name-ser col-md-3 text-nowrap">Cắt tỉa lông</p>
@@ -28,7 +28,7 @@ function ServicePics() {
                     </Link> 
                 </div>
                 <div className="col-md text-center position-relative p-0">
-                    <Link to="/boarding_service" class="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff'}}>
+                    <Link to="/boarding_service" className="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff'}}>
                         <img src={pic3} alt="No-pic" className="img-ser1" />
                         <div className="wrap col-md-3">
                         <p className="name-ser col-md-3 text-nowrap">Trông hộ</p>
@@ -36,7 +36,7 @@ function ServicePics() {
                     </Link> 
                 </div>
                 <div className="col-md text-center position-relative p-0">
-                    <Link to="/walking_service" class="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff',  marginTop: '30%'}}>
+                    <Link to="/walking_service" className="d-flex flex-column round-3 shadow-lg service-hover" style={{borderRadius: '15px', backgroundColor: '#fff',  marginTop: '30%'}}>
                         <img src={pic4} alt="No-pic" className="img-ser2" />
                         <div className="wrap col-md-3">
                         <p className="name-ser col-md-3 text-nowrap">Đi dạo</p>

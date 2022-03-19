@@ -13,7 +13,7 @@ function ComboSer(props){
         <div className="container service-combo">
             <div className="row d-flex gap-5 justify-content-center">
                 <div className="col-md-3 text-center position-relative p-0">
-                    <div class="d-flex flex-column round-3 shadow-lggit service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
+                    <div className="d-flex flex-column round-3 shadow-lggit service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
                         <img src={pic1} alt="No-pic" className="img-combo" />
                         <p className="name-combo col-md-3 text-nowrap">Tắm & Cắt tỉa</p>
                         <img src={pic2} alt="No-pic" className="img-combo" />
@@ -21,7 +21,7 @@ function ComboSer(props){
                     </div>
                 </div> 
                 <div className="col-md-3 text-center position-relative p-0">
-                    <div class="d-flex flex-column round-3 shadow-lg service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
+                    <div className="d-flex flex-column round-3 shadow-lg service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
                         <img src={pic3} alt="No-pic" className="img-combo" />
                         <p className="name-combo col-md-3 text-nowrap">Trông hộ & Đi dạo</p>
                         <img src={pic4} alt="No-pic" className="img-combo" />
@@ -29,7 +29,7 @@ function ComboSer(props){
                     </div>
                 </div> 
                 <div className="col-md-3 text-center position-relative p-0">
-                    <div class="d-flex flex-column round-3 shadow-lg service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
+                    <div className="d-flex flex-column round-3 shadow-lg service-combo-hover" style={{borderRadius: '15px',backgroundColor: 'var(--primary-color)'}}>
                         <img src={pic5} alt="No-pic" className="img-combo" />
                         <p className="name-combo col-md-3 text-nowrap">Tất cả</p>
                         <img src={pic6} alt="No-pic" className="img-combo" />

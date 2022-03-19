@@ -16,7 +16,7 @@ function About(props) {
                         <div className="col-md-6">
                             <Pic />
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                             <div className="row justify-content-around">
                                 <div className="col-md-12">
                                     <Infor />

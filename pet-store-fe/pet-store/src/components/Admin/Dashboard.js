@@ -6,7 +6,7 @@ import BarChartMonthly from './BarChartMonthly'
 import BarChartQuarterly from './BarChartQuarterly'
 import 'chart.js/auto';
 import { Line } from "react-chartjs-2";
-import React from 'react';
+
 
 const data = {
     labels: ["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"],

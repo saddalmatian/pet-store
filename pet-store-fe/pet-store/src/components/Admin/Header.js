@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css'
 import Sidebar from"./Sidebar"
-import React from 'react';
+
 
 function Header() {
 

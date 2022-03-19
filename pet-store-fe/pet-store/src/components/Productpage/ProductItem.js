@@ -9,7 +9,7 @@ function ProductItem( {...props} ) {
     return (
         <div className="col-md product">
             <Link to="/product_detail" className="product-item">
-                <div class="product-item__img" style={{ backgroundImage: `url(${Vong})` }} alt="product-img"></div>
+                <div className="product-item__img" style={{ backgroundImage: `url(${Vong})` }} alt="product-img"></div>
                 <h4 className="product-item__name">{props.ProductName}</h4>
                 <div className="product-item__price">
                     <div className="product-item__price-old">1.800.000đ</div>
@@ -18,7 +18,7 @@ function ProductItem( {...props} ) {
                 <div className="product-item__action">
                     <Start />
                     <div className="product-item__cart">
-                        <i class="fas fa-shopping-cart product-item__cart-icon"></i>
+                        <i className="fas fa-shopping-cart product-item__cart-icon"></i>
                     </div>
                 </div>
             </Link >

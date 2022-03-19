@@ -9,7 +9,7 @@ function Filter(props) {
     return (
         <div className="col-md product-filter">
             <p className="product-filter__heading">Sort by</p>
-            <div class="d-flex">
+            <div className="d-flex">
                 <Button title="Best Seller" />
                 <Button title="New" />
                 <Dropdown title="Cost" />

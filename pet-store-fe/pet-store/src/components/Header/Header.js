@@ -11,7 +11,7 @@ function Header() {
             <Navigation />
             <div className="header-action">
                 <Link className="header-icon__cart" to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
-                {/* <i class="fa-solid fa-user"></i> */}
+                {/* <i className="fa-solid fa-user"></i> */}
                 <Link to="/sign_up" className="header-action__signin"><span>Đăng ký</span></Link>
                  <span>/</span> 
                 <Link to="/sign_in" className="header-action__signup"><span>Đăng nhập</span></Link>

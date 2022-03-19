@@ -34,11 +34,11 @@ function ProductDetail() {
                         <p className="item-price">200.000đ</p>
                         <div className="item-size__wrap">
                             <p className="item-size">Size:</p>
-                            <div class="dropdown item-btn__dropdow">
-                                <button class="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div className="dropdown item-btn__dropdow">
+                                <button className="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     Size
                                 </button>
-                                <ul class="dropdown-menu item-btn__dropdow-menu" aria-labelledby="dropdownMenuButton1">
+                                <ul className="dropdown-menu item-btn__dropdow-menu" aria-labelledby="dropdownMenuButton1">
                                     <DropdownItem title="S" />
                                     <DropdownItem title="M" />
                                     <DropdownItem title="L" />
@@ -47,8 +47,8 @@ function ProductDetail() {
                         </div>
                         <div className="item-color__wrap">
                             <p className="item-color">Color:</p>
-                            <div class="dropdown item-btn__dropdow">
-                                <button class="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div className="dropdown item-btn__dropdow">
+                                <button className="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     Color
                                 </button>
                                 <ul class="dropdown-menu item-btn__dropdow-menu" aria-labelledby="dropdownMenuButton1">
@@ -61,15 +61,15 @@ function ProductDetail() {
 
                         <div className="item-quantity__wrap">
                             <p className="item-quantity">Quantity: </p>
-                            <button type="button" class="item-btn__plus">-</button>
+                            <button type="button" className="item-btn__plus">-</button>
                             <p className="item-quantity">1</p>
-                            <button type="button" class="item-btn__minus">+</button>
+                            <button type="button" className="item-btn__minus">+</button>
                         </div>
                         <p className="item-quantity__available-heading">Available:
                             <span className="item-quantity__available-content"> 30</span>
                         </p>
                         <div>
-                            <button type="button" class="item-btn__add-cart">Add to cart</button>
+                            <button type="button" className="item-btn__add-cart">Add to cart</button>
                         </div>
                     </div>
 

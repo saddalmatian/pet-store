@@ -27,7 +27,7 @@ function BathingService() {
                 <div className="col-md service-info">
                     <div className="content-container">
                         <p className="service-content">
-                            - Dầu gội và dầu xả tại Pet Store với thành phần hoàn toàn từ thiên nhiên, 
+                            - Dầu gội và dầu xả tại Pet Store với thành phần hoàn toàn từ thiên nhiên,
                             không chứa chất tẩy rửa, không gây dị ứng.
                         </p>
                         <p className="service-content">
@@ -40,34 +40,38 @@ function BathingService() {
 
                     <div className="table-container">
                         <table className="service-table">
-                            <tr className="service-table__row">
-                                <th className="service-table__heading">Weight</th>
-                                <th className="service-table__heading">Price</th>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data"><i className="fas fa-angle-left"></i> 2kg</td>
-                                <td className="service-table__data">80.000đ</td>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data">2 - 4kg</td>
-                                <td className="service-table__data">100.000đ</td>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data">4 - 7kg</td>
-                                <td className="service-table__data">160.000đ</td>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data">7 - 10kg</td>
-                                <td className="service-table__data">200.000đ</td>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data">10 - 15kg</td>
-                                <td className="service-table__data">250.000đ</td>
-                            </tr>
-                            <tr className="service-table__row">
-                                <td className="service-table__data"><i className="fas fa-angle-right"></i> 15kg</td>
-                                <td className="service-table__data">450.000đ</td>
-                            </tr>
+                            <thead>
+                                <tr className="service-table__row">
+                                    <th className="service-table__heading">Weight</th>
+                                    <th className="service-table__heading">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data"><i className="fas fa-angle-left"></i> 2kg</td>
+                                    <td className="service-table__data">80.000đ</td>
+                                </tr>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data">2 - 4kg</td>
+                                    <td className="service-table__data">100.000đ</td>
+                                </tr>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data">4 - 7kg</td>
+                                    <td className="service-table__data">160.000đ</td>
+                                </tr>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data">7 - 10kg</td>
+                                    <td className="service-table__data">200.000đ</td>
+                                </tr>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data">10 - 15kg</td>
+                                    <td className="service-table__data">250.000đ</td>
+                                </tr>
+                                <tr className="service-table__row">
+                                    <td className="service-table__data"><i className="fas fa-angle-right"></i> 15kg</td>
+                                    <td className="service-table__data">450.000đ</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

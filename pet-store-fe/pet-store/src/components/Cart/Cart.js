@@ -23,9 +23,9 @@ function Cart() {
                             <div className="box-product__quantity">
                                 <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
-                                    <button type="button" class="box-product-btn__plus">-</button>
+                                    <button type="button" className="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
-                                    <button type="button" class="box-product-btn__minus">+</button>
+                                    <button type="button" className="box-product-btn__minus">+</button>
                                 </div>
                             </div>
                             <div className="box-product__subtotal">
@@ -47,9 +47,9 @@ function Cart() {
                             <div className="box-product__quantity">
                                 <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
-                                    <button type="button" class="box-product-btn__plus">-</button>
+                                    <button type="button" className="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
-                                    <button type="button" class="box-product-btn__minus">+</button>
+                                    <button type="button" className="box-product-btn__minus">+</button>
                                 </div>
                             </div>
                             <div className="box-product__subtotal">
@@ -71,9 +71,9 @@ function Cart() {
                             <div className="box-product__quantity">
                                 <p className="box-product__label">Số lượng</p>
                                 <div className="box-product__action">
-                                    <button type="button" class="box-product-btn__plus">-</button>
+                                    <button type="button" className="box-product-btn__plus">-</button>
                                     <p className="box-product-quantity__num">1</p>
-                                    <button type="button" class="box-product-btn__minus">+</button>
+                                    <button type="button" className="box-product-btn__minus">+</button>
                                 </div>
                             </div>
                             <div className="box-product__subtotal">

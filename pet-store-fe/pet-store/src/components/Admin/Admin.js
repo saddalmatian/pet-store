@@ -5,7 +5,6 @@ import Product from "./Product"
 import Promo from "./Promo"
 import Staff from "./Staff"
 import Bill from "./Bill"
-import React from 'react';
 
 
 function Admin(){

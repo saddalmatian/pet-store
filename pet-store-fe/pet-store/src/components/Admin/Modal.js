@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import "./Modal.css"
+
+
 const Modal = ({isShowing, hide}) => isShowing ? ReactDom.createPortal(
     <React.Fragment>
         <div className="modal-overlay"/>
@@ -13,7 +15,7 @@ const Modal = ({isShowing, hide}) => isShowing ? ReactDom.createPortal(
                     </div>   
                     <div className="modal-body">
                         <div className="form-group">
-                                
+                                hihi
                         </div>   
                     </div>    
                 </div> 

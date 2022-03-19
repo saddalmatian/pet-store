@@ -14,7 +14,8 @@ import WalkingService from './components/ServiceDetail/WalkingService';
 import Cart from './components/Cart/Cart';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
-import Footer from './components/Footer/Footer'
+import Footer from './components/Footer/Footer';
+import Admin from './components/Admin/Admin';
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
         <Route path='/cart' element={<Cart />} />
       </Routes>
       <Footer />
+
+      {/* <Admin /> */}
     </div>
   );
 }
