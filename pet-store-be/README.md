@@ -16,6 +16,6 @@ source env/bin/activate
 pip install -r requirements/requirements.txt
 
 5. Type this command below:\
-uvicorn app.main:app --reload
+sh init.sh
 
 6. Go to http://127.0.0.1:8000/docs to check API !

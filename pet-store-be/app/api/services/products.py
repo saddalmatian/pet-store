@@ -14,13 +14,13 @@ def create_product(
     product_quantity: int, product_name: str,
     product_description: str, product_cost: int,
     product_type: str, pet_type_name: str,
-    image_display: UploadFile = File(...)
+    brand_name: str, image_display: UploadFile = File(...),
 ) -> _schemas_product.ProductCreResp:
     response = create_new_product(
         product_quantity, product_name,
         product_description, product_cost,
         product_type, pet_type_name,
-        image_display,
+        brand_name, image_display,
     )
     return response
 

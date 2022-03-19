@@ -19,13 +19,13 @@ async def create_product(
     image_display: UploadFile = File(...), product_quantity: int = Form(...),
     product_name: str = Form(...), product_description: str = Form(...),
     product_cost: int = Form(...), product_type: str = Form(...),
-    pet_type_name: str = Form(...)
+    pet_type_name: str = Form(...), brand_name: str = Form(...)
 ):
     response = _service_product.create_product(
         product_quantity, product_name,
         product_description, product_cost,
         product_type, pet_type_name,
-        image_display
+        brand_name, image_display
     )
     return response
 

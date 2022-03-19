@@ -13,6 +13,9 @@ class ProductSQL(SQLModel, table=True):
         foreign_key='product_type.product_type_id')
     product_description: str
     product_cost: int
+    brand_id: str = Field(
+        foreign_key='brand.brand_id'
+    )
 
 
 class ProductPetSQL(SQLModel, table=True):
