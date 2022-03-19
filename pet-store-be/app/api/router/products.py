@@ -19,8 +19,10 @@ async def create_product(
     image_display: UploadFile = File(...), product_quantity: int = Form(...),
     product_name: str = Form(...), product_description: str = Form(...),
     product_cost: int = Form(...), product_type: str = Form(...),
-    pet_type_name: str = Form(...), brand_name: str = Form(...)
+    pet_type_name: str = Form(...), brand_name: str = Form(...),
+    authorization_token: str = Header(None),
 ):
+    _ = get_username_from_token(authorization_token)
     response = _service_product.create_product(
         product_quantity, product_name,
         product_description, product_cost,
@@ -36,9 +38,7 @@ async def create_product(
 )
 async def get_all_products(
     product_type_id: Optional[_schemas_product.ProductGetAllIn],
-    authorization_token: str = Header(None),
 ):
-    _ = get_username_from_token(authorization_token)
     response = _service_product.get_all_products(product_type_id)
     return response
 
@@ -49,7 +49,9 @@ async def get_all_products(
 )
 async def update_product(
     update_product_in: _schemas_product.ProductUpIn,
+    authorization_token: str = Header(None),
 ):
+    _ = get_username_from_token(authorization_token)
     response = _service_product.update_product(update_product_in)
     return response
 
@@ -59,8 +61,10 @@ async def update_product(
     response_model=_schemas_product.ProductTypeResp
 )
 async def create_product_type(
-    product_type_in: _schemas_product.ProductTypeCreIn
+    product_type_in: _schemas_product.ProductTypeCreIn,
+    authorization_token: str = Header(None)
 ):
+    _ = get_username_from_token(authorization_token)
     response = _service_product.create_product_type(
         product_type_in
     )
@@ -71,8 +75,10 @@ async def create_product_type(
     "/delete-product"
 )
 async def delete_product(
-    product_id: str
+    product_id: str,
+    authorization_token: str = Header(None)
 ):
+    _ = get_username_from_token(authorization_token)
     response = _service_product.delete_product(
         product_id
     )

@@ -12,3 +12,4 @@ sqlalchemy2-stubs==0.0.2a20
 sqlmodel==0.0.6
 svix-ksuid==0.6.0
 uvicorn==0.17.6
+cryptography==36.0.2
