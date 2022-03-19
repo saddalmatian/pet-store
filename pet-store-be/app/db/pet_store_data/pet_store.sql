@@ -3958,7 +3958,7 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-12 12:45:29
+-- Dump completed on 2022-03-19 15:42:29
 CREATE DATABASE  IF NOT EXISTS `pet_store` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pet_store`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
@@ -4045,6 +4045,30 @@ LOCK TABLES `bill_detail` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `brand`
+--
+
+DROP TABLE IF EXISTS `brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `brand` (
+  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `brand_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`brand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `brand`
+--
+
+LOCK TABLES `brand` WRITE;
+/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
+INSERT INTO `brand` VALUES ('brand_id_A','BrandA'),('brand_id_B','BrandB');
+/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -4053,18 +4077,13 @@ DROP TABLE IF EXISTS `comment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comment` (
   `comment_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `comment_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `comment_rep_target` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `comment_main` tinyint(1) NOT NULL,
-  `product_id` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `commentor_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`comment_id`),
-  KEY `fk_c_c_ci_idx` (`customer_id`),
-  KEY `fk_c_e_ei_idx` (`employee_id`),
   KEY `fk_c_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_c_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  CONSTRAINT `fk_c_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
   CONSTRAINT `fk_c_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4092,6 +4111,7 @@ CREATE TABLE `customer` (
   `customer_username` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `customer_pwd` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `address_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `customer_phone` varchar(11) NOT NULL,
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -4102,6 +4122,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES ('26KF8Teu1JDYQTKKSGr','string','an@gmaisl.com','sdasd','string','string','string'),('26WAu5wyyGDOcSIIM7M','4324','test@gmail.com','gianghoatran01','123','123','0914764104'),('asdasd','qweqweasd','an@gmail.com','gianghoatran','123','aweqlkweqwle','');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4143,12 +4164,12 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `image_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `image_source` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `image_source` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `image_display` tinyint NOT NULL,
   PRIMARY KEY (`image_id`),
   UNIQUE KEY `image_source_UNIQUE` (`image_source`),
   KEY `fk_i_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -4158,7 +4179,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES ('26CIAbDGd5cA9r0Y22O','26CIAYCd2sPRX2V24st','app/media/product/108051435_1429508700579519_3385485519983786125_n.jpg',1);
+INSERT INTO `image` VALUES ('26axi5FKH6uDMzxy4hJ','26axhzsFwxsO6kiB0o0','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26axi5FKH6uDMzxy4hJhmgoepprod.jpeg',1),('26ayrjhlVG0X9Nq9MFT','26ayrmAVXRUYGzgjwc5','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26ayrjhlVG0X9Nq9MFTHff7b5b5aa7ea419eae3256c5519480f3U.jpg_220x220.jpg',1),('26ayxdJYWunR1LuLzqX','26ayxYECWVhrLk4FsXB','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26ayxdJYWunR1LuLzqXHe5bdf0c5cd0d4d25ab114adc8f262810G.jpg_220x220.jpg',1),('26az1RZEAFi2ob2ETAn','26az1TgUCr3K6385fpx','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26az1RZEAFi2ob2ETAnHd5d29b4f2d6d4913b21511b981a2d3b0e.jpg_220x220.jpg',1),('26azGuHUB2MVFbXrDK1','26azGsA3hAws7ChJ1rN','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26azGuHUB2MVFbXrDK1Ha771aa337f7b4ba2a5f1490fc9767c6eU.jpg_220x220.jpg',1),('26azLGuHDCSS5feFV0I','26azLIvCadD1R6TCIrI','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26azLGuHDCSS5feFV0IH36a89edbe6b845d3a107e289de7b136ee.jpg_220x220.jpg',1),('26azOJwswwip4yn8uVA','26azOK82N7OYTz5FUPg','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F26azOJwswwip4yn8uVA137279.jpg',1);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4202,9 +4223,12 @@ CREATE TABLE `product` (
   `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `product_description` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `product_cost` int DEFAULT NULL,
+  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`product_id`),
   UNIQUE KEY `product_name_UNIQUE` (`product_name`),
-  KEY `fk_p_pt_pti_idx` (`product_type_id`)
+  KEY `fk_p_pt_pti_idx` (`product_type_id`),
+  KEY `fk_p_b_bi_idx` (`brand_id`),
+  CONSTRAINT `fk_p_b_bi` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -4214,7 +4238,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('26CIAYCd2sPRX2V24st','Test1',12,0,'25e4orCMpwimZ7PosXL','GiangHoaDescription',2123123);
+INSERT INTO `product` VALUES ('26axhzsFwxsO6kiB0o0','Túi xách cho chó',120,0,'25e4orCMpwimZ7PosXL','Đây là túi xách cho chó',250000,'brand_id_A'),('26ayrmAVXRUYGzgjwc5','Dây đeo phát sáng cho chó có USB sạc',25,0,'25e4orCMpwimZ7PosXL','Đây là dây đeo phát sáng cho chó có USB sạc',100000,'brand_id_B'),('26ayxYECWVhrLk4FsXB','Dây đeo có áo mặc cho chó',89,0,'25e4orCMpwimZ7PosXL','Đây là dây đeo có áo mặc cho chó',120000,'brand_id_A'),('26az1TgUCr3K6385fpx','Trái banh phát sáng cho chó chơi',179,0,'25e4orCMpwimZ7PosXL','Đây là trái banh phát sáng cho chó chơi',150000,'brand_id_A'),('26azGsA3hAws7ChJ1rN','Kềm cắt móng cho mèo',57,0,'25e4pOk9ANpVrPmPHxs','Đây là kềm cắt móng cho mèo',25000,'brand_id_B'),('26azLIvCadD1R6TCIrI','Ca uống nước di động cho chó',86,0,'25e4orCMpwimZ7PosXL','Đây là ca uống nước di động cho chó',25000,'brand_id_B'),('26azOK82N7OYTz5FUPg','Dây dắt mèo',86,0,'25e4pOk9ANpVrPmPHxs','Đây là dây dắt mèo',25000,'brand_id_B');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4419,4 +4443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-12 12:45:30
+-- Dump completed on 2022-03-19 15:42:29
