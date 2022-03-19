@@ -83,3 +83,9 @@
     background: 0 0;
     border: 0;
 }
+.sidebar{
+    display: relative
+}
+.header-wrapper{
+    display: absolute;
+}

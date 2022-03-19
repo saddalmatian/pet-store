@@ -1,16 +1,19 @@
 import React from 'react';
 import './Header.css'
+import Sidebar from"./Sidebar"
+import React from 'react';
+
 function Header() {
 
     return (
         <nav className="navbar navbar-expand-lg header" colorOnScroll="500">
-            <div className="container-fluid">
+            <div className="sidebar">
+                <Sidebar/>
+            </div>
+            <div className="container-fluid header-wrapper" style={{marginLeft:'64px'}}> 
+                
                 <a className="navbar-brand" href="#">Dashboard</a>
-                <button href="#" className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="navigation-index" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-bar burger-lines"></span>
-                    <span className="navbar-toggler-bar burger-lines"></span>
-                    <span className="navbar-toggler-bar burger-lines"></span>
-                </button>
+                
                 <div className="collapse navbar-collapse justify-content-end" id="navigation">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item dropdown">

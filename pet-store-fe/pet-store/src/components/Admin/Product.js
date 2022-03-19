@@ -1,6 +1,10 @@
+import './Dashboard.css';
+import Modal from './Modal';
+import UseModal from './UseModal';
 import React from 'react';
-import './Dashboard.css'
+
 function Product() {
+    const {isShowing, toggle} = UseModal();
     return(
         <div className="content-dashboard container-fluid">
             <div className="title text-center"style={{paddingTop:"10px"}}>Sản phẩm</div>
@@ -29,7 +33,8 @@ function Product() {
                         <td>First Name</td>
                         <td>First Name</td>
                         <td className="text-center">
-                            <i className="fa fa-edit"></i>
+                            <button className="btn btn-default"  onClick={toggle} ><i className="fa fa-edit"></i></button>
+                            <Modal isShowing = {isShowing} hide={toggle}/>
                             <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
                         </td>
                     </tr>

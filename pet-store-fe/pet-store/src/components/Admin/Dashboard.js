@@ -1,197 +1,139 @@
 import React from 'react';
 import './Dashboard.css'
+import ChartQuarterly from './LinesChartQuarterly'
+import ChartMonthly from './LinesChartMonthly'
+import BarChartMonthly from './BarChartMonthly'
+import BarChartQuarterly from './BarChartQuarterly'
+import 'chart.js/auto';
+import { Line } from "react-chartjs-2";
+import React from 'react';
+
+const data = {
+    labels: ["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"],
+    datasets: [
+      {
+        label: "Khuyến mãi được tung ra",
+        data: [33, 53, 85, 41],
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)"
+      },
+      {
+        label: "Khuyến mãi được sử dụng",
+        data: [33, 25, 35, 51],
+        fill: false,
+        borderColor: "#742774"
+      }
+    ]
+  };
+  const data2 = {
+    labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4"],
+    datasets: [
+      {
+        label: "Phụ kiện",
+        data: [33, 53, 85, 41],
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)"
+      },
+      {
+        label: "Dịch vụ",
+        data: [33, 25, 35, 51],
+        fill: false,
+        borderColor: "#742774"
+      }
+    ]
+  };
 function Dashboard() {
     return(
-        <div className="content-dashboard container-fluid">
-            <div className="title text-center"style={{paddingTop:"10px"}}>Số lượng sản phẩm bán được</div>
-            <div className="row d-flex justify-content-start">
-            <table className="table table-striped col-md table-content" style={{width: '100%'}} >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Loại</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Loại</th>
-                        <th>Ngày xuất kho</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>Last Name</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div className="content-dashboard container-fluid">
+        <div className="chart d-flex col-md">
+            <div className="chart-doughnut " style={{width: '50%', height: '50%'}}>
+                
+                <ChartMonthly/>
+                
             </div>
+            <div className="chart-pie " style={{width: '50%', height: '50%'}}>
+                
+                <ChartQuarterly/>
+                
+            </div>
+        </div>
+            <div className="chart d-flex col-md">
+                <div className="chart-doughnut " style={{width: '50%', height: '50%'}}>
+                
+                <BarChartMonthly/>
+                
+            </div> 
+            <div className="chart-pie " style={{width: '50%', height: '50%'}}>
+                
+                <BarChartQuarterly/>
+                
+            </div>
+                </div>
+            
+                <div className="chart d-flex col-md">
+                <div className="chart-doughnut " style={{width: '50%', height: '50%'}}>
+                
+                <Line data={data} options={ {
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Thống kê khuyến mãi trong tháng',
+                                                color:'#FE9938',
+                                                font: {
+                                                    size:34
+                                                },
+                                                padding:{
+                                                    top:30,
+                                                    bottom:30
+                                                },
+                                                responsive:true,
+                                                animation:{
+                                                    animateScale: true,
+                                                            }
+                                            }
 
-            <div className="title text-center"style={{paddingTop:"50px"}}>Dịch vụ ưa chuộng</div>
-            <div className="row d-flex justify-content-start">
-            <table className="table table-striped col-md table-content" style={{width: '100%'}} >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên dịch vụ</th>
-                        <th>Loại</th>
-                        <th>Giá</th>
-                        <th>Ngày bán</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+                                        },
+                                        legend:{
+                                            display: true,
+                                            position: 'right'
+                                        }
+                                    }}/>
+                
+            </div> 
+            <div className="chart-pie " style={{width: '50%', height: '50%'}}>
+                
+            <Line data={data2} options={ {
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Thống kê khuyến mãi trong quý',
+                                                color:'#FE9938',
+                                                font: {
+                                                    size:34
+                                                },
+                                                padding:{
+                                                    top:30,
+                                                    bottom:30
+                                                },
+                                                responsive:true,
+                                                animation:{
+                                                    animateScale: true,
+                                                            }
+                                            }
 
-            <div className="title text-center"style={{paddingTop:"50px"}}>Dịch vụ ưa chuộng</div>
-            <div className="row d-flex justify-content-start">
-            <table className="table table-striped col-md table-content" style={{width: '100%'}} >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên dịch vụ</th>
-                        <th>Loại</th>
-                        <th>Giá</th>
-                        <th>Ngày bán</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                </tbody>
-            </table>
+                                        },
+                                        legend:{
+                                            display: true,
+                                            position: 'right'
+                                        }
+                                    }}/>
+                
             </div>
-
-            <div className="title text-center"style={{paddingTop:"50px"}}>Dịch vụ ưa chuộng</div>
-            <div className="row d-flex justify-content-start">
-            <table className="table table-striped col-md table-content" style={{width: '100%'}} >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên dịch vụ</th>
-                        <th>Loại</th>
-                        <th>Giá</th>
-                        <th>Ngày bán</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+                </div>
+            
+            
         </div>
     )
 }
