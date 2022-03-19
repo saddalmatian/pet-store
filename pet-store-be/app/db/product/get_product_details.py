@@ -63,17 +63,20 @@ def get_product_details(
             }
             list_comments.append(comments)
         comment_amount = len(list_comments)
-        statement_rate = select(product, rate).where(
-            and_(
-                product.product_id == rate.product_id,
-                product.product_id == product_id
-            )
-        )
-        rate_number = 0
-        results_rate = session.exec(statement_rate)
-        result_rate = results_rate.one()
-        rate_number = result_rate.RateSQL.rate_star_number
 
+        rate_number = 0
+        try:
+            statement_rate = select(product, rate).where(
+                and_(
+                    product.product_id == rate.product_id,
+                    product.product_id == product_id
+                )
+            )
+            results_rate = session.exec(statement_rate)
+            result_rate = results_rate.one()
+            rate_number = result_rate.RateSQL.rate_star_number
+        except Exception:
+            rate_number = 0
     response = {
         "RateStarNumber": rate_number,
         "ProductDescription": product_description,

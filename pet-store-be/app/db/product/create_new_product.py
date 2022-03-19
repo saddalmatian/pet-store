@@ -4,7 +4,7 @@ from app.api.models.domains import \
     (
         products as _domain_products,
         images as _domain_images,
-        pet_types as _domain_pettypes,
+        pet_types as _domain_pettypes
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
