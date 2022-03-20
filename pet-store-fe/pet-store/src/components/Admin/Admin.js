@@ -5,6 +5,8 @@ import Product from "./Product"
 import Promo from "./Promo"
 import Staff from "./Staff"
 import Bill from "./Bill"
+import { Routes, Route} from 'react-router-dom';
+
 
 
 function Admin(){
@@ -14,7 +16,15 @@ function Admin(){
 
                 <div className="col-md" style={{paddingLeft:"0"}}><Header/>
                 <div className="col-md" style={{marginLeft:'64px'}} >
-                            <Dashboard/> <Product/> <Promo/> <Staff/>  <Bill/>
+                <Routes>
+                    <Route path='/' element={<Dashboard />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/product' element={<Product />} />
+                    <Route path='/promo' element={<Promo />} />
+                    <Route path='/staff' element={<Staff />} />
+                    <Route path='/bill' element={<Bill />} />
+                    
+                </Routes>
                         </div>
             
                 </div>
