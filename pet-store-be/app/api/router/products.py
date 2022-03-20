@@ -94,3 +94,12 @@ async def get_product_detail(
 ):
     response = _service_product.get_product_detail(product_id)
     return response
+
+
+@router.get(
+    "/get-all-product-type",
+    response_model=_schemas_product.ProductTypeGetResp
+)
+async def get_all_product_type():
+    response = _service_product.get_all_product_type()
+    return response

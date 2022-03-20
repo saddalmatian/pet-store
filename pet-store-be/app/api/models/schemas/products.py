@@ -1,4 +1,4 @@
-from pydantic import Field
+from pydantic import BaseModel, Field
 from app.api.models.domains import (
     products as _product_domain,
     images as _image_domain,
@@ -61,3 +61,53 @@ class ProductDetailResp(
 ):
     list_comments: Optional[List[dict]] = Field(alias='ListComments')
     comments_amount: int = Field(alias='CommentAmounts')
+
+
+class ProductTypeGetResp(BaseModel):
+    list_type: List[dict] = Field(..., alias='Listype')
+
+    class Config:
+        schema_extra = {
+            "Listype": [
+                {
+                    "Bird": [
+                        {
+                            "ProductType": "Accessories",
+                            "ProductTypeID": "25e4pi93eFipon10x68"
+                        },
+                        {
+                            "ProductType": "Food",
+                            "ProductTypeID": "25e4pz4iMotJnOv7Mp6"
+                        }
+                    ],
+                    "Cat": [
+                        {
+                            "ProductType": "Accessories",
+                            "ProductTypeID": "25e4pOk9ANpVrPmPHxs"
+                        },
+                        {
+                            "ProductType": "Food",
+                            "ProductTypeID": "25e4qI6XQoe2lCQEcM1"
+                        },
+                        {
+                            "ProductType": "Hygiene",
+                            "ProductTypeID": "25e4rbrfym7t7QQgf6S"
+                        }
+                    ],
+                    "Dog": [
+                        {
+                            "ProductType": "Accessories",
+                            "ProductTypeID": "25e4orCMpwimZ7PosXL"
+                        },
+                        {
+                            "ProductType": "Food",
+                            "ProductTypeID": "25e4qYhLwy26VkCl78U"
+                        },
+                        {
+                            "ProductType": "Hygiene",
+                            "ProductTypeID": "25e4rP5ds5RdoOkP0d4"
+                        }
+                    ]
+                }
+            ]
+        }

@@ -6,6 +6,7 @@ from app.db.product.create_new_product_type import create_new_product_type
 from app.db.product.update_product_detail import update_product_detail
 from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
+from app.db.product.get_all_type import get_all_type
 from fastapi import UploadFile, File
 from typing import List, Optional
 
@@ -68,4 +69,10 @@ def get_product_detail(
     response = get_product_details(
         product_id
     )
+    return response
+
+
+def get_all_product_type(
+) -> _schemas_product.ProductTypeGetResp:
+    response = get_all_type()
     return response
