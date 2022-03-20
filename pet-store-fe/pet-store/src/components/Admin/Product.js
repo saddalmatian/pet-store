@@ -1,10 +1,47 @@
 import './Dashboard.css';
-import Modal from './Modal';
+import ModalEdit from './ModalEdit';
 import UseModal from './UseModal';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
 
 function Product() {
     const {isShowing, toggle} = UseModal();
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        axios.post('http://127.0.0.1:8000/product/get-all-products',
+            {
+                ProductTypeID: ''
+            },
+            {
+                headers: {
+                    accept: 'application/json'
+                }
+            }
+        )
+        .then(res => setProducts(res.data))
+        .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }, [])
+
+    const [productstype, setProductsType] = useState([]);
+    useEffect(() => {
+        axios.post('http://127.0.0.1:8000/product/get-all-products',
+            {
+                ProductTypeID: ''
+            },
+            {
+                headers: {
+                    accept: 'application/json'
+                }
+            }
+        )
+        .then(res => setProducts(res.data))
+        .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }, [])
+    console.log(products)
+    const [modalShow, setModalShow] = useState(false);
     return(
         <div className="content-dashboard container-fluid">
             <div className="title text-center"style={{paddingTop:"10px"}}>Sản phẩm</div>
@@ -14,135 +51,55 @@ function Product() {
                     <tr className="text-center">
                         <th>ID</th>
                         <th>Tên sản phẩm</th>
-                        <th>Loại</th>
                         <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Loại</th>
-                        <th>Ngày xuất kho</th>
-                        <th>Cập nhật</th>
-
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td className="text-center">
-                            <button className="btn btn-default"  onClick={toggle} ><i className="fa fa-edit"></i></button>
-                            <Modal isShowing = {isShowing} hide={toggle}/>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>Last Name</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left "style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left" style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
+                    {products.map((product, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{product.ProductID} </td>
+                                <td>{product.ProductName} </td>
+                                <td>{product.ProductCost} </td>
+                                <td className="text-center">
+                                    <button className="btn btn-primary" onClick={() => setModalShow(true)}><i className="fa fa-edit"></i></button>
+                                    <ModalEdit show={modalShow} onHide={() => setModalShow(false)}/>
+                                    <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
+                                </td>
+                            </tr>                            
+                        )
+                    })}
+                   
                 </tbody>
             </table>
             </div>
 
-            <div className="title text-center"style={{paddingTop:"50px"}}>Loại sản phẩm</div>
+            <div className="title text-center"style={{paddingTop:"10px"}}>Sản phẩm</div>
             <div className="row d-flex justify-content-start">
             <table className="table table-striped col-md table-content" style={{width: '100%'}} >
                 <thead>
                     <tr className="text-center">
                         <th>ID</th>
-                        <th>Tên dịch vụ</th>
-                        <th>Loại</th>
+                        <th>Tên sản phẩm</th>
                         <th>Giá</th>
-                        <th>Ngày bán</th>
-                        <th>Cập nhật</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td className="text-center">
-                            <i className="fa fa-edit"></i>
-                            <i className="fa fa-delete-left"style={{paddingLeft:"10px"}}></i>
-                        </td>
-                    </tr>
+                    {products.map((product, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{product.ProductID} </td>
+                                <td>{product.ProductName} </td>
+                                <td>{product.ProductCost} </td>
+                            </tr>                            
+                        )
+                    })}
+                   
                 </tbody>
             </table>
             </div>
-           
         </div>
     )
 }

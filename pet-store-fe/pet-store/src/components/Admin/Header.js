@@ -6,7 +6,7 @@ import Sidebar from"./Sidebar"
 function Header() {
 
     return (
-        <nav className="navbar navbar-expand-lg header" colorOnScroll="500">
+        <nav className="navbar navbar-expand-lg header" colorOnScroll="500" style={{zIndex:"1000"}}>
             <div className="sidebar">
                 <Sidebar/>
             </div>

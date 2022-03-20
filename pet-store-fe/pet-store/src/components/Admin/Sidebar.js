@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -16,42 +17,43 @@ function Sidebar(){
         <SideNav.Nav defaultSelected="dashboard" >
             <NavItem eventKey="dashboard">
                 <NavIcon >
-                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em', color:"#ffff" }} />
+                <Link to="/dashboard"><i className="fa fa-fw fa-home" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
                 </NavIcon>
                 <NavText style={{color:"#ffff"}}>
-                    Trang chủ
+                    <Link to="/dashboard" style={{ textDecoration:'0'}}>Trang chủ</Link>
                 </NavText>
             </NavItem>
             <NavItem eventKey="product">
                 <NavIcon >
-                    <i className="fa fa-fw fa-box-open" style={{ fontSize: '1.75em', color:"#ffff" }} />
+                <Link to="/product"><i className="fa fa-fw fa-box-open" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
                 </NavIcon>
                 <NavText style={{color:"#ffff"}}>
-                    Sản phẩm
+                    <Link to="/product"style={{ textDecoration:'0'}} >  Sản phẩm</Link>
                 </NavText>
             </NavItem>
             <NavItem eventKey="bill">
                 <NavIcon >
-                    <i className="fa fa-fw fa-credit-card" style={{ fontSize: '1.75em', color:"#ffff" }} />
+                <Link to="/bill" ><i className="fa fa-fw fa-credit-card" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
                 </NavIcon>
                 <NavText style={{color:"#ffff"}}>
-                    Đơn hàng
+                    
+                    <Link to="/bill" style={{ textDecoration:'0'}}>Đơn hàng</Link>
                 </NavText>
             </NavItem>
             <NavItem eventKey="promo">
                 <NavIcon >
-                    <i className="fa fa-fw fa-tag" style={{ fontSize: '1.75em', color:"#ffff" }} />
+                <Link to="/promo"><i className="fa fa-fw fa-tag" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
                 </NavIcon>
                 <NavText style={{color:"#ffff"}}>
-                    Khuyến mãi
+                    <Link to="/promo"style={{ textDecoration:'0'}}>Khuyến mãi</Link>
                 </NavText>
             </NavItem>
             <NavItem eventKey="staff">
                 <NavIcon >
-                    <i className="fa fa-fw fa-user-circle" style={{ fontSize: '1.75em', color:"#ffff" }} />
+                <Link to="/staff"><i className="fa fa-fw fa-user-circle" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
                 </NavIcon>
                 <NavText style={{color:"#ffff"}}>
-                    Nhân viên
+                    <Link to="/staff"style={{ textDecoration:'0'}}>Nhân viên</Link>
                 </NavText>
             </NavItem>
         </SideNav.Nav>

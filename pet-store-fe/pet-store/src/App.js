@@ -21,7 +21,7 @@ import Admin from './components/Admin/Admin';
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
@@ -36,9 +36,9 @@ function App() {
         <Route path='/sign_up' element={<SignUp />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
 
-      {/* <Admin /> */}
+      <Admin />
     </div>
   );
 }
