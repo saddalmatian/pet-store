@@ -10,7 +10,8 @@ def customer_sign_up(
 ) -> dict:
     email = customer_in.email
     username = customer_in.username
-    if not check_exist(email) and not check_exist(username):
+    if not check_exist(email) and\
+            not check_exist(username):
         _ = sign_up_customer(**customer_in.dict())
         response = {
             "Message": "Successfully signed up"

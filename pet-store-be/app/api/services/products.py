@@ -7,23 +7,30 @@ from app.db.product.update_product_detail import update_product_detail
 from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
 from app.db.product.get_all_type import get_all_type
-from fastapi import UploadFile, File
+from fastapi import HTTPException, UploadFile, File
 from typing import List, Optional
+from app.utils.security import is_employee_or_customer
 
 
 def create_product(
     product_quantity: int, product_name: str,
     product_description: str, product_cost: int,
     product_type: str, pet_type_name: str,
-    brand_name: str, image_display: UploadFile = File(...),
+    brand_name: str, username: str,
+    image_display: UploadFile = File(...),
 ) -> _schemas_product.ProductCreResp:
-    response = create_new_product(
-        product_quantity, product_name,
-        product_description, product_cost,
-        product_type, pet_type_name,
-        brand_name, image_display,
+    user = is_employee_or_customer(username)
+    if user == 'employee':
+        response = create_new_product(
+            product_quantity, product_name,
+            product_description, product_cost,
+            product_type, pet_type_name,
+            brand_name, image_display,
+        )
+        return response
+    raise HTTPException(
+        status_code=401, detail='You don\'t have permission to do this'
     )
-    return response
 
 
 def create_product_type(
@@ -46,21 +53,32 @@ def get_all_products(
 
 
 def update_product(
-    product_up_in: _schemas_product.ProductUpIn
+    product_up_in: _schemas_product.ProductUpIn,
+    username: str
 ) -> _schemas_product.ProductUpResp:
-    response = update_product_detail(
-        product_up_in
+    user = is_employee_or_customer(username)
+    if user == 'employee':
+        response = update_product_detail(
+            product_up_in
+        )
+        return response
+    raise HTTPException(
+        status_code=401, detail='You don\'t have permission to do this'
     )
-    return response
 
 
 def delete_product(
-    product_id: str
+    product_id: str, username: str
 ) -> dict:
-    response = delete_product_by_id(
-        product_id
+    user = is_employee_or_customer(username)
+    if user == 'employee':
+        response = delete_product_by_id(
+            product_id
+        )
+        return response
+    raise HTTPException(
+        status_code=401, detail='You don\'t have permission to do this'
     )
-    return response
 
 
 def get_product_detail(

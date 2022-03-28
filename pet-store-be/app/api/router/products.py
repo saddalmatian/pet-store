@@ -22,12 +22,13 @@ async def create_product(
     pet_type_name: str = Form(...), brand_name: str = Form(...),
     authorization_token: str = Header(None),
 ):
-    _ = get_username_from_token(authorization_token)
+    username = get_username_from_token(authorization_token)
     response = _service_product.create_product(
         product_quantity, product_name,
         product_description, product_cost,
         product_type, pet_type_name,
-        brand_name, image_display
+        brand_name, username,
+        image_display
     )
     return response
 
@@ -51,8 +52,8 @@ async def update_product(
     update_product_in: _schemas_product.ProductUpIn,
     authorization_token: str = Header(None),
 ):
-    _ = get_username_from_token(authorization_token)
-    response = _service_product.update_product(update_product_in)
+    username = get_username_from_token(authorization_token)
+    response = _service_product.update_product(update_product_in, username)
     return response
 
 
@@ -78,9 +79,9 @@ async def delete_product(
     product_id: str,
     authorization_token: str = Header(None)
 ):
-    _ = get_username_from_token(authorization_token)
+    username = get_username_from_token(authorization_token)
     response = _service_product.delete_product(
-        product_id
+        product_id, username
     )
     return response
 
