@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Form, Header
 from typing import List
 from app.api.services import employees \
     as _service_employees
@@ -24,8 +24,8 @@ async def employee_sign_up(
 
 @router.post("/sign-in")
 async def employee_sign_in(
-    username: str,
-    password: str
+    username: str = Form(...),
+    password: str = Form(...)
 ) -> dict:
     response = _service_employees.employee_sign_in(username, password)
     return response
