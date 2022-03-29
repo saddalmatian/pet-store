@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from"./Header"
+import React, {  useState }from 'react';
 import Dashboard from "./Dashboard"
 import Product from "./Product"
 import Promo from "./Promo"
@@ -10,12 +9,12 @@ import { Routes, Route} from 'react-router-dom';
 
 
 function Admin(){
+
     return(
         <div className="container-fluid admin" style={{backgroundColor:"var(--bg-color)"}}>
             <div className="row">
 
-                <div className="col-md" style={{paddingLeft:"0"}}><Header/>
-                <div className="col-md" style={{marginLeft:'64px'}} >
+                <div className="col-md" style={{paddingLeft:"0"}} >
                 <Routes>
                     <Route path='/' element={<Dashboard />} />
                     <Route path='/dashboard' element={<Dashboard />} />
@@ -30,7 +29,7 @@ function Admin(){
                 </div>
             </div>
             
-        </div>
+   
     )
 }
 export default Admin;

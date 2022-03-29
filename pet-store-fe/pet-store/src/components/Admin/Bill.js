@@ -1,10 +1,13 @@
 import React from 'react';
+import Header from "./Header"
 function Bill(){
 
     return(
-        <div className="content-bill container-fluid">
+        <div className="content-bill container-fluid"style={{paddingLeft:"0"}}>
+                <div className="col-md" style={{paddingLeft:"0"}}><Header title="Đơn hàng" /></div>
+
             <div className="title text-center"style={{paddingTop:"10px"}}>Đơn hàng</div>
-            <div className="row d-flex justify-content-start">
+            <div className="row d-flex justify-content-start" style={{marginLeft:'64px'}}>
             <table className="table table-striped col-md table-content" style={{width: '100%'}} >
                 <thead>
                     <tr>

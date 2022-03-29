@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { Link } from 'react-router-dom';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
@@ -6,15 +6,16 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import "./Sidebar.css";
 
 function Sidebar(){
+    const [selected, setSelected]= useState()
     return(
         <SideNav
         onSelect={(selected) => {
-            
+            setSelected({ selected });
         }}
         style={{backgroundColor:"var(--primary-color)", marginBottom:"-100%", paddingBottom:"100%" }}
     >
         <SideNav.Toggle style={{color:"#ffff"}} />
-        <SideNav.Nav defaultSelected="dashboard" >
+        <SideNav.Nav selected={ selected}>
             <NavItem eventKey="dashboard">
                 <NavIcon >
                 <Link to="/dashboard"><i className="fa fa-fw fa-home" style={{ fontSize: '1.75em', color:"#ffff" }} /></Link>
@@ -58,6 +59,7 @@ function Sidebar(){
             </NavItem>
         </SideNav.Nav>
     </SideNav>
+    
     )
 
 }

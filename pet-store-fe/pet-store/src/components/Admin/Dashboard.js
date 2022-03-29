@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dashboard.css'
+import Header from"./Header"
 import ChartQuarterly from './LinesChartQuarterly'
 import ChartMonthly from './LinesChartMonthly'
 import BarChartMonthly from './BarChartMonthly'
@@ -46,8 +47,10 @@ const data = {
   };
 function Dashboard() {
     return(
-    <div className="content-dashboard container-fluid">
-        <div className="chart d-flex col-md">
+    <div className="content-dashboard container-fluid" style={{paddingLeft:"0"}}>
+                <div className="col-md" style={{paddingLeft:"0"}}><Header title="Dashboard" /></div>
+        <div style={{marginLeft:'70px'}}>
+        <div className="chart d-flex col-md" >
             <div className="chart-doughnut " style={{width: '50%', height: '50%'}}>
                 
                 <ChartMonthly/>
@@ -133,7 +136,7 @@ function Dashboard() {
             </div>
                 </div>
             
-            
+                </div>  
         </div>
     )
 }
