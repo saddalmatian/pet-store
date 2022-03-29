@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from "./Header"
 function Promo(){
 
     return(
-        <div className="content-promo container-fluid">
+        <div className="content-promo container-fluid"style={{paddingLeft:"0"}}>
+        <div className="col-md" style={{paddingLeft:"0"}}><Header title="Khuyến mãi" /></div>
+        <div style={{marginLeft:"70px"}}>
             <div className="title text-center"style={{paddingTop:"10px"}}>Khuyến mãi hiện hành</div>
             <div className="row d-flex justify-content-start">
             <table className="table table-striped col-md table-content" style={{width: '100%'}} >
@@ -68,6 +71,7 @@ function Promo(){
                     </tr>
                 </tbody>
             </table>
+            </div>
             </div>
             </div>
     )
