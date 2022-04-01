@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductItem.css';
-import Vong from '../../assets/images/VongThoCam.jpg';
 import Start from '../Start';
 
 
 function ProductItem( {...props} ) {
     return (
         <div className="col-md product">
-            <Link to="/product_detail" className="product-item">
-                <div className="product-item__img" style={{ backgroundImage: `url(${Vong})` }} alt="product-img"></div>
+            <Link to={`/product_detail/${props.ProductID}`} className="product-item">
+                <div className="product-item__img" style={{ backgroundImage: `url(${props.ImageSource})` }} alt="product-img"></div>
                 <h4 className="product-item__name">{props.ProductName}</h4>
                 <div className="product-item__price">
                     <div className="product-item__price-old">1.800.000đ</div>

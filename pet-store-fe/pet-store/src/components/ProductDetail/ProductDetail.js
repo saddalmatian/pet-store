@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductDetail.css';
 import Heading from '../Heading';
 import Start from '../Start';
 import ProductImg from './ProductImg';
-import DropdownItem from '../DropdownItem';
 import ProductDes from './ProductDes';
 import Line from '../Line'
 import Avt from '../../assets/images/VongThoCam.jpg';
 import Comment from './Comment';
 import SubComment from './SubComment';
 import ProductItem from '../Productpage/ProductItem';
+import axios from 'axios';
 
-function ProductDetail() {
+function ProductDetail( {...props} ) {
+    const [product, setProduct] = useState();
+
+    useEffect(() => {
+        async function fetchData() {
+            await axios.get(`http://127.0.0.1:8000/product/get-product-detail?product_id=${props.ProductID}`,
+                {
+                    headers: {
+                        accept: 'applcation/json'
+                    }
+                }
+            )
+            .then(res => setProduct(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+        }
+    }, []);
+    
+    console.log(product);
+
     return (
         <div className="container product-detail">
             <Heading mixin="About item" title="Your Choice Is The Best Choice" />
@@ -19,10 +37,10 @@ function ProductDetail() {
                 <div className="col-md">
                     <div className="row">
                         <div className="row">
-                            <p className="item-name">Blued dog bag A10, 28"L x 28"W</p>
+                            <p className="item-name">{product.ProductName}</p>
                             <div className="item-reaction">
                                 <Start />
-                                <p className="item-comment__total">100 Reviews</p>
+                                <p className="item-comment__total">{product.CommentAmounts}</p>
                             </div>
                         </div>
                         <ProductImg />
@@ -31,33 +49,7 @@ function ProductDetail() {
 
                 <div className="col-md item-info">
                     <div className="item-wrap">
-                        <p className="item-price">200.000đ</p>
-                        <div className="item-size__wrap">
-                            <p className="item-size">Size:</p>
-                            <div className="dropdown item-btn__dropdow">
-                                <button className="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Size
-                                </button>
-                                <ul className="dropdown-menu item-btn__dropdow-menu" aria-labelledby="dropdownMenuButton1">
-                                    <DropdownItem title="S" />
-                                    <DropdownItem title="M" />
-                                    <DropdownItem title="L" />
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="item-color__wrap">
-                            <p className="item-color">Color:</p>
-                            <div className="dropdown item-btn__dropdow">
-                                <button className="btn btn-secondary dropdown-toggle item-btn__dropdow-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Color
-                                </button>
-                                <ul class="dropdown-menu item-btn__dropdow-menu" aria-labelledby="dropdownMenuButton1">
-                                    <DropdownItem title="Blue" />
-                                    <DropdownItem title="Yellow" />
-                                    <DropdownItem title="Red" />
-                                </ul>
-                            </div>
-                        </div>
+                        <p className="item-price">{product.ProductCost}</p>
 
                         <div className="item-quantity__wrap">
                             <p className="item-quantity">Quantity: </p>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './Product.css';
 import Heading from '../Heading';
 import Category from './Category';
 import Filter from './Filter';
 import ProductItem from './ProductItem';
+import ProductDetail from '../ProductDetail/ProductDetail';
 
 
 function Product() {
@@ -22,8 +24,8 @@ function Product() {
                 }
             }
         )
-        .then(res => setProducts(res.data))
-        .catch(err => console.log(JSON.stringify(err, null, 2)))
+            .then(res => setProducts(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, [])
 
 
@@ -38,9 +40,13 @@ function Product() {
                     </div>
                     <div className="d-flex gap-2 justify-content-center align-items-center">
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
-                            {products.map((product, index) => <ProductItem key={index} {...product} />)}
-                            {products.map((product, index) => <ProductItem key={index} {...product} />)}
-                            {products.map((product, index) => <ProductItem key={index} {...product} />)}
+                            {/* <Routes> */}
+                                {products.map((product, index) =>
+                                    // <Route path={`/product_detail/${product.ProductID}`} element={<ProductDetail />}>
+                                        <ProductItem key={index} {...product} />
+                                    // </Route>
+                                )}
+                            {/* </Routes> */}
                         </div>
                     </div>
                 </div>
