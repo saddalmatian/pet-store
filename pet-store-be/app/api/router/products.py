@@ -65,9 +65,9 @@ async def create_product_type(
     product_type_in: _schemas_product.ProductTypeCreIn,
     authorization_token: str = Header(None)
 ):
-    _ = get_username_from_token(authorization_token)
+    username = get_username_from_token(authorization_token)
     response = _service_product.create_product_type(
-        product_type_in
+        product_type_in, username
     )
     return response
 

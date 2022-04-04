@@ -4,7 +4,8 @@ from app.api.router import\
     (
         products, pet_types,
         images, customers,
-        employees
+        employees, services,
+        bills, comments
     )
 # db connection
 
@@ -16,6 +17,9 @@ app.include_router(pet_types.router)
 app.include_router(images.router)
 app.include_router(customers.router)
 app.include_router(employees.router)
+app.include_router(services.router)
+app.include_router(bills.router)
+app.include_router(comments.router)
 
 origins = [
     "http://localhost:3000",

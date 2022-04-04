@@ -29,3 +29,19 @@ class ServicePetSQL(SQLModel, table=True):
 
 class SerivceID(BaseModel):
     service_id: str = Field(alias="ServiceID")
+
+
+class ServiceName(BaseModel):
+    service_name: str = Field(alias="ServiceName")
+
+
+class ServiceCost(BaseModel):
+    service_cost: str = Field(alias="ServiceCost")
+
+
+class ServiceTypeName(BaseModel):
+    service_type_name: str = Field(alias="ServiceTypeName")
+
+
+class ServiceDetail(BaseModel):
+    service_detail: str = Field(alias="ServiceDetail")

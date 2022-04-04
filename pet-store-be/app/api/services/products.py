@@ -34,11 +34,14 @@ def create_product(
 
 
 def create_product_type(
-    product_type_in: _schemas_product.ProductTypeCreIn
+    product_type_in: _schemas_product.ProductTypeCreIn,
+    username: str
 ) -> _schemas_product.ProductTypeResp:
-    response = create_new_product_type(
-        product_type_in
-    )
+    user = is_employee_or_customer(username)
+    if user == 'employee':
+        response = create_new_product_type(
+            product_type_in
+        )
     return response
 
 
