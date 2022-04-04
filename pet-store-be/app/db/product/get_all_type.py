@@ -1,8 +1,6 @@
-from operator import and_
 from app.api.models.domains import\
     (
         products as _domain_products,
-        images as _domain_images,
         pet_types as _domain_pettypes
     )
 from app.utils.db_helper import engine
@@ -36,5 +34,5 @@ def get_all_type() -> list:
             }
             pet_name = pet_type_dict[product_type.pet_type_id]
             response[pet_name].append(product_type_dict)
-        final_response['Listype']=[response]
+        final_response['Listype'] = [response]
     return final_response

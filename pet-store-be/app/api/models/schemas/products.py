@@ -57,7 +57,9 @@ class ProductUpResp(ProductUpIn):
 
 class ProductDetailResp(
     ProductUpIn, _product_domain.ProductDescription,
-    _rate_domain.RateStarNumber
+    _rate_domain.RateStarNumber, _product_domain.ProductType,
+    _product_domain.ProductTypeID, _pet_type_domain.PetTypeName,
+    _pet_type_domain.PetTypeID
 ):
     list_comments: Optional[List[dict]] = Field(alias='ListComments')
     comments_amount: int = Field(alias='CommentAmounts')

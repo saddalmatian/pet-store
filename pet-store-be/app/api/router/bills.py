@@ -13,6 +13,21 @@ router = APIRouter(
 )
 
 
+@router.post(
+    "/add-product-to-cart"
+)
+async def add_to_cart(
+    product_entity: int, product_cost: int,
+    authorization_token: str = Header(None)
+):
+    username = get_username_from_token(authorization_token)
+    response = _service_bills.add_to_cart(
+        username, product_entity,
+        product_cost
+    )
+    return response
+
+
 @router.get(
     "/vn-pay"
 )

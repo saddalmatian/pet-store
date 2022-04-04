@@ -1,3 +1,4 @@
+from datetime import date
 from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 from typing import Optional
@@ -16,6 +17,9 @@ class ProductSQL(SQLModel, table=True):
     brand_id: str = Field(
         foreign_key='brand.brand_id'
     )
+    product_original_cost: int
+    product_date_in: date
+    product_date_out: date
 
 
 class ProductPetSQL(SQLModel, table=True):

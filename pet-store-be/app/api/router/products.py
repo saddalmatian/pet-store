@@ -20,14 +20,17 @@ async def create_product(
     product_name: str = Form(...), product_description: str = Form(...),
     product_cost: int = Form(...), product_type: str = Form(...),
     pet_type_name: str = Form(...), brand_name: str = Form(...),
+    product_original_cost: int = Form(...),
     authorization_token: str = Header(None),
 ):
-    username = get_username_from_token(authorization_token)
+    # username = get_username_from_token(authorization_token)
+    username = 'admin'
     response = _service_product.create_product(
         product_quantity, product_name,
         product_description, product_cost,
         product_type, pet_type_name,
         brand_name, username,
+        product_original_cost,
         image_display
     )
     return response

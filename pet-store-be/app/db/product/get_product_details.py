@@ -4,7 +4,8 @@ from app.api.models.domains import\
         products as _domain_products,
         images as _domain_images,
         comments as _domain_comments,
-        rates as _domain_rates
+        rates as _domain_rates,
+        pet_types as _domain_pettypes
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
@@ -14,9 +15,11 @@ def get_product_details(
     product_id: str
 ) -> dict:
     product = _domain_products.ProductSQL
+    product_type = _domain_products.ProductTypeSQL
     image = _domain_images.ImageSQL
     comment = _domain_comments.CommentSQL
     rate = _domain_rates.RateSQL
+    pettype = _domain_pettypes.PetTypeSQL
     with Session(engine) as session:
         statement = select(product).where(
             product.product_id == product_id
@@ -56,14 +59,15 @@ def get_product_details(
             comment_detail = comment_result.CommentSQL.comment_detail
             comment_rep_target = comment_result.CommentSQL.comment_rep_target
             comment_main = comment_result.CommentSQL.comment_main
+            commentor_name = comment_result.CommentSQL.commentor_name
             comments = {
                 "CommentDetail": comment_detail,
                 "CommentRepTarget": comment_rep_target,
-                "CommentMain": comment_main
+                "CommentMain": comment_main,
+                "CommentorName": commentor_name
             }
             list_comments.append(comments)
         comment_amount = len(list_comments)
-
         rate_number = 0
         try:
             statement_rate = select(product, rate).where(
@@ -77,6 +81,18 @@ def get_product_details(
             rate_number = result_rate.RateSQL.rate_star_number
         except Exception:
             rate_number = 0
+        statment_producttype = select(product_type).where(
+            product_result.product_type_id == product_type.product_type_id
+        )
+        result = session.exec(statment_producttype)
+        product_type_result = result.one()
+        product_type_id = product_type_result.product_type_id
+        product_type = product_type_result.product_type
+        pet_type_id = product_type_result.pet_type_id
+        statement_pettype = select(pettype).where(
+            pettype.pet_type_id == pet_type_id)
+        result = session.exec(statement_pettype).one()
+        pet_type_name = result.pet_type_name
     response = {
         "RateStarNumber": rate_number,
         "ProductDescription": product_description,
@@ -86,6 +102,10 @@ def get_product_details(
         "ProductQuantity": product_quantity,
         "ListImages": list_images,
         "ListComments": list_comments,
-        "CommentAmounts": comment_amount
+        "CommentAmounts": comment_amount,
+        "ProductTypeID": product_type_id,
+        "ProductType": product_type,
+        "PetTypeID": pet_type_id,
+        "PetTypeName": pet_type_name
     }
     return response

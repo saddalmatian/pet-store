@@ -17,6 +17,7 @@ def create_product(
     product_description: str, product_cost: int,
     product_type: str, pet_type_name: str,
     brand_name: str, username: str,
+    product_original_cost: str,
     image_display: UploadFile = File(...),
 ) -> _schemas_product.ProductCreResp:
     user = is_employee_or_customer(username)
@@ -25,7 +26,8 @@ def create_product(
             product_quantity, product_name,
             product_description, product_cost,
             product_type, pet_type_name,
-            brand_name, image_display,
+            brand_name, product_original_cost,
+            image_display,
         )
         return response
     raise HTTPException(

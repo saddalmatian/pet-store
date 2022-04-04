@@ -1,4 +1,5 @@
 
+from datetime import date, datetime
 from app.utils import db_helper
 from app.api.models.domains import \
     (
@@ -17,7 +18,8 @@ def create_new_product(
     product_quantity: int, product_name: str,
     product_description: str, product_cost: int,
     product_type: str, pet_type_name: str,
-    brand_name: str, image_display: UploadFile = File(...)
+    brand_name: str, product_original_cost: int,
+    image_display: UploadFile = File(...)
 ) -> dict:
     product_id = db_helper.generate_ksuid()
     product_sold = 0
@@ -64,6 +66,7 @@ def create_new_product(
                 400, 'THere is no brand like that'
             )
             # Create model Product
+        product_date_in = datetime.now().strftime("%Y-%m-%d")
         product = _domain_products.ProductSQL(
             product_id=product_id,
             product_name=product_name,
@@ -72,7 +75,10 @@ def create_new_product(
             product_type_id=product_type_id,
             product_description=product_description,
             product_cost=product_cost,
-            brand_id=brand_id
+            brand_id=brand_id,
+            product_original_cost=product_original_cost,
+            product_date_in=product_date_in,
+            product_date_out=None
         )
         image_display_bool = 1
         image_id = db_helper.generate_ksuid()
