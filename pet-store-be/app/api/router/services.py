@@ -27,7 +27,7 @@ async def create_service_type(
 
 @router.post(
     "/create-service",
-    response_model=_schemas_service.ServiceCreResp
+    # response_model=_schemas_service.ServiceCreResp
 )
 async def create_service(
     service_in: _schemas_service.ServiceCreIn,
