@@ -38,6 +38,12 @@ function App() {
       </Routes>
       <Footer />
 
+      {/* <Routes>
+        <Route path='/admin' element={<Admin />} />
+      </Routes>
+      <Footer /> */}
+
+
       {/* <Admin /> */}
     </div>
   );
