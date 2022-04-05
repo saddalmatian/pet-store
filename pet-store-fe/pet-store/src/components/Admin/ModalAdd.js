@@ -37,21 +37,20 @@ function ModalAdd (props){
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
                          <input type="text" className="form-control-lg border " placeholder="Product name"/>
                          <input type="text" className="form-control-lg border" placeholder="Brand name"/>
+                         <input type="text" className="form-control-lg border" placeholder="Quantity"/>
                          <input type="text" className="form-control-lg border" placeholder="Cost"/>
-                         <input type="file" className="form-control-lg border"/>
+                         <input type="text" className="form-control-lg border" placeholder="Orginal cost"/>
                          <select className="form-control-lg border" >
-                            <option value ='selected'>Choose type...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value ='selected'>Choose pet type name...</option>
+                            <option value="1">Bird</option>
+                            <option value="2">Dog</option>
+                            <option value="3">Cat</option>
                         </select>
+                         <input type="text" className="form-control-lg border" placeholder="Product type"/>
+                         Choose pic<input type="file" className="form-control-lg border" placeholder="Choose pic"/>
+                         
                         <textarea className="form-control-lg border" placeholder="Enter your description..." ></textarea>
-                        <select className="form-control-lg border" >
-                            <option value ='selected'>Choose pet type...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        
 
 
                     </div>
