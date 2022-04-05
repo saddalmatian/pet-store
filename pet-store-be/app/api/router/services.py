@@ -27,14 +27,13 @@ async def create_service_type(
 
 @router.post(
     "/create-service",
-    # response_model=_schemas_service.ServiceCreResp
+    response_model=_schemas_service.ServiceCreResp
 )
 async def create_service(
     service_in: _schemas_service.ServiceCreIn,
     authorization_token: str = Header(None),
 ):
-    # username = get_username_from_token(authorization_token)
-    username = 'admin'
+    username = get_username_from_token(authorization_token)
     response = _service_service.create_service(
         username, service_in
     )

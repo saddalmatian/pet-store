@@ -38,7 +38,7 @@ class ProductTypeSQL(SQLModel, table=True):
 
 
 class ProductID(BaseModel):
-    product_id: str = Field(alias='ProductID')
+    product_id: str = Field(default='', alias='ProductID')
 
 
 class PetTypeID(BaseModel):

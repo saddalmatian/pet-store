@@ -1,8 +1,6 @@
 from app.api.models.domains import (
-    comments as _domain_comment,
-    products as _domain_product
+    comments as _domain_comment
 )
-from app.utils.db_helper import generate_ksuid
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
 from fastapi import HTTPException

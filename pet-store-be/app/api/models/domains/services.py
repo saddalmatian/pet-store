@@ -28,7 +28,7 @@ class ServicePetSQL(SQLModel, table=True):
 
 
 class SerivceID(BaseModel):
-    service_id: str = Field(alias="ServiceID")
+    service_id: str = Field(default='', alias="ServiceID")
 
 
 class ServiceName(BaseModel):

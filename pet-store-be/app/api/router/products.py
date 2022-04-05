@@ -23,8 +23,7 @@ async def create_product(
     product_original_cost: int = Form(...),
     authorization_token: str = Header(None),
 ):
-    # username = get_username_from_token(authorization_token)
-    username = 'admin'
+    username = get_username_from_token(authorization_token)
     response = _service_product.create_product(
         product_quantity, product_name,
         product_description, product_cost,

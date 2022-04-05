@@ -3,7 +3,16 @@ import hmac
 from app.utils.db_helper import generate_ksuid
 from datetime import datetime
 from app.api.services.vnpay import vnpay
-VNPAY_RETURN_URL = 'http://localhost:8000/bill/payment_return'
+# from app.db.bill.add_to_cart import add_to_cart
+from app.db.bill.create_cart import create_a_cart
+from app.db.bill.add_item_to_cart import add_item_to_cart
+from app.db.bill.get_the_cart import get_the_cart
+from app.db.bill.update_cart_product_detail import update_cart_product_detail
+from app.db.bill.remove_product_cart import remove_product_cart
+from app.db.bill.update_status import update_bill_status
+from app.db.bill.get_all_cart import get_all_cart_admin
+
+VNPAY_RETURN_URL = 'http://localhost:8000/bills/payment_return'
 # get from config
 VNPAY_PAYMENT_URL = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
 # get from config
@@ -13,13 +22,85 @@ VNPAY_TMN_CODE = '14H33NEJ'  # Website ID in VNPAY System, get from config
 VNPAY_HASH_SECRET_KEY = 'NVTDUKXFKKOPKEEQJDUZMTPIXEZZALKS'
 
 
+def get_all_cart():
+    response = get_all_cart_admin()
+    return response
+
+
+def set_complete(
+    bill_id, employee_id,
+    payment_method, amount
+):
+    response = update_bill_status(
+        bill_id, employee_id,
+        'Completed', payment_method,
+        amount
+    )
+    return response
+
+
+def pay_cash(bill_id, amount):
+    response = update_bill_status(
+        bill_id, 'admin_id',
+        'Incomplete', 'Cash',
+        amount
+    )
+    return response
+
+
+def remove_product_from_cart(
+    bill_id: str, product_id: str
+):
+    response = remove_product_cart(bill_id, product_id)
+    return response
+
+
+def update_cart_product(
+    username, list_product,
+    bill_id
+):
+    response = update_cart_product_detail(
+        username, list_product,
+        bill_id
+    )
+    return response
+
+
+def get_cart(username: str):
+    response = get_the_cart(username)
+    return response
+
+
+def create_cart(username: str):
+    response = create_a_cart(username)
+    return response
+
+
+def add_to_cart(
+    product_quantity,
+    product_cost, bill_id,
+    promotional_id, service_id,
+    product_id
+):
+    response = add_item_to_cart(
+        product_quantity,
+        product_cost, bill_id,
+        promotional_id, service_id,
+        product_id
+    )
+    return response
+
+
 def hmacsha512(key, data):
     byteKey = key.encode('utf-8')
     byteData = data.encode('utf-8')
     return hmac.new(byteKey, byteData, hashlib.sha512).hexdigest()
 
 
-def payment(vn_amount, vn_detail):
+def payment(
+    vn_amount, vn_detail,
+    bill_id
+):
     # Process input data and build url payment
     order_type = 'other'
     order_id = generate_ksuid()
@@ -50,9 +131,11 @@ def payment(vn_amount, vn_detail):
     vnp.requestData['vnp_CreateDate'] = datetime.now().strftime(
         '%Y%m%d%H%M%S')  # 20150410063022
     vnp.requestData['vnp_IpAddr'] = '127.0.0.1'
-    vnp.requestData['vnp_ReturnUrl'] = VNPAY_RETURN_URL
+    vnp.requestData['vnp_ReturnUrl'] = VNPAY_RETURN_URL + \
+        f'?bill_id={bill_id}'
     vnpay_payment_url = vnp.get_payment_url(
-        VNPAY_PAYMENT_URL, VNPAY_HASH_SECRET_KEY)
+        VNPAY_PAYMENT_URL, VNPAY_HASH_SECRET_KEY
+    )
     return vnpay_payment_url
 
 
@@ -62,7 +145,9 @@ def payment_return(
         vnp_OrderInfo, vnp_PayDate,
         vnp_ResponseCode, vnp_TmnCode,
         vnp_TransactionNo, vnp_TransactionStatus,
-        vnp_TxnRef, vnp_SecureHash):
+        vnp_TxnRef, vnp_SecureHash,
+        bill_id
+):
     inputData = {
         "vnp_TxnRef": vnp_TxnRef,
         "vnp_Amount": vnp_Amount,
@@ -92,6 +177,11 @@ def payment_return(
         vnp_CardType = inputData['vnp_CardType']
         if vnp.validate_response(VNPAY_HASH_SECRET_KEY):
             if vnp_ResponseCode == "00":
+                _ = update_bill_status(
+                    bill_id, 'admin_id',
+                    'Completed', 'VNPay',
+                    vnp_Amount
+                )
                 return ("payment_return.html",
                         {
                             "title": "Kết quả thanh toán",

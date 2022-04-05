@@ -1,4 +1,5 @@
 from datetime import date
+from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 
 
@@ -12,3 +13,7 @@ class PromotionalSQL(SQLModel, table=True):
     promotional_sale: int
     promotional_start_date: date
     promotional_end_date: date
+
+
+class PromotionalID(BaseModel):
+    promotional_id: str = Field(alias='PromotionalID')
