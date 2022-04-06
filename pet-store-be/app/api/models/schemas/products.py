@@ -4,6 +4,7 @@ from app.api.models.domains import (
     images as _image_domain,
     rates as _rate_domain,
     pet_types as _pet_type_domain,
+    brands as _brand_domain
 )
 from app.api.models.schemas import images as _schema_images
 from typing import List, Optional
@@ -46,7 +47,10 @@ class ProductTypeResp(
 class ProductUpIn(
     _product_domain.ProductID, _product_domain.ProductName,
     _product_domain.ProductQuantity, _product_domain.ProductDescription,
-    _product_domain.ProductCost
+    _product_domain.ProductCost, _product_domain.ProductDateIn,
+    _product_domain.ProductDateOut, _product_domain.ProductOriginalCost,
+    _brand_domain.BrandName, _pet_type_domain.PetTypeName,
+    _product_domain.ProductType
 ):
     list_images: List[_schema_images.ImageListResp] = Field(alias='ListImages')
 
@@ -57,7 +61,7 @@ class ProductUpResp(ProductUpIn):
 
 class ProductDetailResp(
     ProductUpIn, _product_domain.ProductDescription,
-    _rate_domain.RateStarNumber, _product_domain.ProductType,
+    _rate_domain.RateStarNumber,
     _product_domain.ProductTypeID, _pet_type_domain.PetTypeName,
     _pet_type_domain.PetTypeID
 ):

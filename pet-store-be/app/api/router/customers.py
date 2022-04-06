@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, Form
 from app.api.services import customers \
     as _service_customer
 from app.api.models.schemas import customers\
@@ -21,8 +21,8 @@ async def customer_sign_up(
 
 @router.post("/sign-in")
 async def customer_sign_in(
-    username: str,
-    password: str
+    username: str = Form(...),
+    password: str = Form(...)
 ) -> dict:
     response = _service_customer.customer_sign_in(username, password)
     return response

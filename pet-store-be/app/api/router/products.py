@@ -1,3 +1,4 @@
+from datetime import date
 from fastapi import APIRouter, Form, UploadFile, File, Header
 from typing import List, Optional
 from app.api.models.schemas import \
@@ -47,14 +48,29 @@ async def get_all_products(
 
 @router.put(
     "/update-product",
-    response_model=_schemas_product.ProductUpResp
 )
 async def update_product(
-    update_product_in: _schemas_product.ProductUpIn,
+    product_quantity: int = Form(...),
+    product_name: str = Form(...), product_description: str = Form(...),
+    product_cost: int = Form(...), product_type: str = Form(...),
+    pet_type_name: str = Form(...), brand_name: str = Form(...),
+    product_original_cost: int = Form(...), product_id: str = Form(...),
+    image_list: List[UploadFile] = File(...),
+    product_date_in: date = Form(...),
+    product_date_out: date = Form(...),
     authorization_token: str = Header(None),
 ):
     username = get_username_from_token(authorization_token)
-    response = _service_product.update_product(update_product_in, username)
+    response = _service_product.update_product(
+        product_quantity,
+        product_name, product_description,
+        product_cost, product_type,
+        pet_type_name, brand_name,
+        product_original_cost,
+        product_id, product_date_in,
+        product_date_out,
+        image_list, username
+    )
     return response
 
 

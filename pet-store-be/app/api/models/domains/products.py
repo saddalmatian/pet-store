@@ -22,6 +22,18 @@ class ProductSQL(SQLModel, table=True):
     product_date_out: date
 
 
+class ProductDateIn(BaseModel):
+    product_date_in: date = Field(default='', alias='ProductDateIn')
+
+
+class ProductDateOut(BaseModel):
+    product_date_out: date = Field(default='', alias='ProductDateOut')
+
+
+class ProductOriginalCost(BaseModel):
+    product_original_cost: str = Field(default='', alias='ProductOriginalCost')
+
+
 class ProductPetSQL(SQLModel, table=True):
     __tablename__ = 'product_pet'
     product_id: str = Field(foreign_key='product.product_id', primary_key=True)

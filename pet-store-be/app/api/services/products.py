@@ -1,3 +1,4 @@
+from datetime import date
 from app.api.models.schemas import \
     products as _schemas_product
 from app.db.product.create_new_product import create_new_product
@@ -58,13 +59,24 @@ def get_all_products(
 
 
 def update_product(
-    product_up_in: _schemas_product.ProductUpIn,
-    username: str
+    product_quantity,
+        product_name: str, product_description: str,
+        product_cost: str, product_type: str,
+        pet_type_name: str, brand_name: str,
+        product_original_cost: int, product_id: str,
+        product_date_in: date, product_date_out: date,
+        image_list: list, username: str
 ) -> _schemas_product.ProductUpResp:
     user = is_employee_or_customer(username)
     if user == 'employee':
         response = update_product_detail(
-            product_up_in
+            product_quantity,
+            product_name, product_description,
+            product_cost, product_type,
+            pet_type_name, brand_name,
+            product_original_cost,
+            product_id, product_date_in,
+            product_date_out, image_list
         )
         return response
     raise HTTPException(
