@@ -8,7 +8,7 @@ from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
 from app.db.product.get_all_type import get_all_type
 from fastapi import HTTPException, UploadFile, File
-from typing import List, Optional
+from typing import Optional
 from app.utils.security import is_employee_or_customer
 
 
@@ -49,7 +49,7 @@ def create_product_type(
 
 def get_all_products(
     product_type_id: Optional[_schemas_product.ProductGetAllIn]
-) -> List[_schemas_product.ProductGetAllResp]:
+) -> list:
     product_type_id = product_type_id.product_type_id
     response = get_all_products_in_db(
         product_type_id

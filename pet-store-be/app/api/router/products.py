@@ -37,7 +37,6 @@ async def create_product(
 
 @router.post(
     "/get-all-products",
-    response_model=List[_schemas_product.ProductGetAllResp]
 )
 async def get_all_products(
     product_type_id: Optional[_schemas_product.ProductGetAllIn],

@@ -127,7 +127,7 @@ async def payment(
     bill_id: str,
     authorization_token: str = Header(None),
 ):
-    # username = get_username_from_token(authorization_token)
+    _ = get_username_from_token(authorization_token)
     response = _service_bills.payment(
         vn_amount, vn_detail,
         bill_id
