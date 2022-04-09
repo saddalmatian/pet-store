@@ -5,7 +5,8 @@ from app.api.models.domains import\
         images as _domain_images,
         comments as _domain_comments,
         rates as _domain_rates,
-        pet_types as _domain_pettypes
+        pet_types as _domain_pettypes,
+        brands as _domain_brands
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
@@ -20,6 +21,7 @@ def get_product_details(
     comment = _domain_comments.CommentSQL
     rate = _domain_rates.RateSQL
     pettype = _domain_pettypes.PetTypeSQL
+    brand = _domain_brands.BrandSQL
     with Session(engine) as session:
         statement = select(product).where(
             product.product_id == product_id
@@ -30,6 +32,7 @@ def get_product_details(
         product_name = product_result.product_name
         product_cost = product_result.product_cost
         product_quantity = product_result.product_quantity
+        product_brand_id = product_result.brand_id
         statement_image = select(product, image).where(
             and_(
                 product.product_id == image.product_id,
@@ -93,6 +96,9 @@ def get_product_details(
             pettype.pet_type_id == pet_type_id)
         result = session.exec(statement_pettype).one()
         pet_type_name = result.pet_type_name
+        statement = select(brand).where(brand.brand_id == product_brand_id)
+        result = session.exec(statement).one()
+        brand_name = result.brand_name
     response = {
         "RateStarNumber": rate_number,
         "ProductDescription": product_description,
@@ -106,6 +112,7 @@ def get_product_details(
         "ProductTypeID": product_type_id,
         "ProductType": product_type,
         "PetTypeID": pet_type_id,
-        "PetTypeName": pet_type_name
+        "PetTypeName": pet_type_name,
+        "BrandName": brand_name
     }
     return response
