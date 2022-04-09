@@ -25,7 +25,8 @@ def get_promo(promotional_id: str):
             )
         except Exception:
             raise HTTPException(
-                status_code=400, detail='There is no promtional id in database'
+                status_code=400,
+                detail='There is no promotional id in database'
             )
         list_product = []
         statement = select(propro).where(

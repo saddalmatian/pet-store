@@ -12,6 +12,7 @@ class BillSQL(SQLModel, table=True):
     bill_delivery_date: date
     bill_status: str
     bill_total: int
+    updated_at: date
     pay_method: str
 
 

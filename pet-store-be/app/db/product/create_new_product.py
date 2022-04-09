@@ -1,5 +1,5 @@
 
-from datetime import date, datetime
+from datetime import datetime
 from app.utils import db_helper
 from app.api.models.domains import \
     (
@@ -27,6 +27,11 @@ def create_new_product(
     pet_type = _domain_pettypes.PetTypeSQL
     product_type_sql = _domain_products.ProductTypeSQL
     brand = _domain_brands.BrandSQL
+    if product_original_cost >= product_cost:
+        raise HTTPException(
+            status_code=400,
+            detail="The original cost must smaller than sale cost"
+        )
     with Session(engine) as session:
         statement = select(pet_type).where(
             pet_type.pet_type_name == pet_type_name

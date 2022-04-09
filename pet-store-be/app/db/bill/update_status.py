@@ -23,6 +23,7 @@ def update_bill_status(
         result.bill_created_date = date_1_format
         result.pay_method = pay_method
         result.bill_total = vnp_Amount/100
+        result.updated_at = datetime.datetime.now()
         session.add(result)
         session.commit()
     return {"Message": "Sucessfully"}

@@ -6,7 +6,7 @@ from app.api.router import\
         images, customers,
         employees, services,
         bills, comments,
-        promotionals
+        promotionals, dashboards
     )
 # db connection
 
@@ -22,6 +22,7 @@ app.include_router(services.router)
 app.include_router(bills.router)
 app.include_router(comments.router)
 app.include_router(promotionals.router)
+app.include_router(dashboards.router)
 
 origins = [
     "http://localhost:3000",
