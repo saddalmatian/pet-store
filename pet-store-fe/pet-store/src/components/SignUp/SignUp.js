@@ -51,20 +51,27 @@ const SignUp = ({ submitForm }) => {
                         headers: { 'Content-Type': 'application/json' },
                         withCredentials: true
                     }
-                );
+                ).catch(function (err) {
+                    if (!err?.response) {
+                        setFormErrors({
+                            server: 'Máy chủ hiện không phản hồi'
+                        })
+                    } else if (err.response?.status === 400) {
+                        setFormErrors({
+                            username: 'Tên tài khoản này đã tồn tại'
+                        })
+                    } else {
+                        setFormErrors({
+                            server: 'Đăng ký không thành công'
+                        })
+                    }
+                });
                 console.log(formValues);
                 console.log(response.data);
                 console.log(response.accessToken);
                 console.log(JSON.stringify(response));
             } catch (err) {
-                if (!err?.response) {
-                    console.log('No server response')
-                } else if (err.response?.status === 400) {
-                    console.log('Username taken');
-                } else {
-                    console.log('Registration Failed');
-                }
-                // console.log(JSON.stringify(err, null, 2));
+                console.log(JSON.stringify(err, null, 2));
             }
         }
     }, [formErrors]);
@@ -215,6 +222,7 @@ const SignUp = ({ submitForm }) => {
                             <Link to="/sign_in"><span> Đăng nhập</span></Link>
                         </p>
                         <input type="submit" className="sign-up__btn" value="Đăng ký"></input>
+                        {formErrors.server && <p className='sign-up__error'>{formErrors.server}</p>}
                     </form>
                 )
                 }
