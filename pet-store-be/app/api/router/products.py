@@ -115,8 +115,7 @@ async def get_product_detail(
 
 
 @router.get(
-    "/get-all-product-type",
-    response_model=_schemas_product.ProductTypeGetResp
+    "/get-all-product-type"
 )
 async def get_all_product_type():
     response = _service_product.get_all_product_type()
