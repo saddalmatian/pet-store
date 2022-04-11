@@ -5,7 +5,7 @@
     flex-direction: column;
 }
 
-.img-item__one, .img-item__two, .img-item__three {
+.img-item {
     width: 60px;
     margin-bottom: 20px;
     border: 1px solid var(--primary-color);

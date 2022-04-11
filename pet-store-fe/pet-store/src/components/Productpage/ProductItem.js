@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './ProductItem.css';
 import Start from '../Start';
 
@@ -7,7 +6,7 @@ import Start from '../Start';
 function ProductItem( {...props} ) {
     return (
         <div className="col-md product">
-            <Link to={`/product_detail/${props.ProductID}`} className="product-item">
+            <div className="product-item">
                 <div className="product-item__img" style={{ backgroundImage: `url(${props.ImageSource})` }} alt="product-img"></div>
                 <h4 className="product-item__name">{props.ProductName}</h4>
                 <div className="product-item__price">
@@ -20,7 +19,7 @@ function ProductItem( {...props} ) {
                         <i className="fas fa-shopping-cart product-item__cart-icon"></i>
                     </div>
                 </div>
-            </Link >
+            </div >
         </div>
     );
 }
