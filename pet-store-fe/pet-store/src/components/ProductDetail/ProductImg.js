@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProductImg.css';
-import Item from '../../assets/images/VongThoCam.jpg'
 
 
-function ProductImg() {
+function ProductImg( props ) {
+    const [index, setIndex] = useState(0);
+    console.log(props);
+
+    const handleClick = (e) => {
+        setIndex(e);
+    }
     return (
         <div className="row">
             <div className="col-md-2 img-more">
-                <img className="img-item__one" src={Item} alt="Image_1" ></img>
-                <img className="img-item__two" src={Item} alt="Image_2"></img>
-                <img className="img-item__three" src={Item} alt="Image_3"></img>
+                {props.src && props.src?.map((img, index) => (
+                    <img onClick={()=>handleClick(index)} className="img-item" src={img.ImageSource} alt="Image_1" key={index}></img>
+                ))}
+                {/* <img className="img-item__two" src={Item} alt="Image_2"></img>
+                <img className="img-item__three" src={Item} alt="Image_3"></img> */}
             </div>
             <div className="col-md">
-                <img className="img-current" src={Item} alt="Image_current"></img>
+                <img className="img-current" src={props.src && props.src[index].ImageSource} alt="Image_current"></img>
             </div>
         </div>
     );

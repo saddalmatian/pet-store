@@ -27,6 +27,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/product' element={<Product />} />
         <Route path='/product_detail' element={<ProductDetail />} />
+        <Route path='/product_detail/:id' element={<ProductDetail />} />
         <Route path='/service' element={<Service />} />
         <Route path='/bathing_service' element={<BathingService />} />
         <Route path='/grooming_service' element={<GroomingService />} />
@@ -38,10 +39,10 @@ function App() {
       </Routes>
       <Footer />
 
-      {/* <Routes>
+      <Routes>
         <Route path='/admin' element={<Admin />} />
       </Routes>
-      <Footer /> */}
+      <Footer />
 
 
       {/* <Admin /> */}

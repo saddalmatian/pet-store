@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Product.css';
 import Heading from '../Heading';
 import Category from './Category';
 import Filter from './Filter';
 import ProductItem from './ProductItem';
-import ProductDetail from '../ProductDetail/ProductDetail';
 
 
 function Product() {
@@ -43,7 +42,9 @@ function Product() {
                             {/* <Routes> */}
                                 {products.map((product, index) =>
                                     // <Route path={`/product_detail/${product.ProductID}`} element={<ProductDetail />}>
-                                        <ProductItem key={index} {...product} />
+                                    <Link to={`/product_detail/${product.ProductID}`} key={index} style={{textDecoration: "none"}}>
+                                        <ProductItem  {...product} />
+                                    </Link>
                                     // </Route>
                                 )}
                             {/* </Routes> */}
