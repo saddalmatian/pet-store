@@ -27,7 +27,7 @@
 }
 
 .product-item__name {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 400;
   color: var(--black-color);
   line-height: 1.8rem;
@@ -55,7 +55,7 @@
 }
 
 .product-item__price-current {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: var(--primary-color);
   margin-left: 10px;
 }
@@ -73,15 +73,44 @@
   color: #d5d5d5;
 }
 
-.product-item__star--gold {
-  color: var(--primary-color);
-}
-
 .product-item__cart-icon {
   font-size: 1.4rem;
   color: var(--primary-color);
+  padding: 1rem;
 }
 
 .product-item__cart-icon:hover {
   opacity: .7;
+}
+
+.product-item__sale-off {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 42px;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  background-color: rgba(255, 212, 36, .9);
+  padding: 0.4rem 0;
+}
+
+.product-item__sale-off::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  border-width: 0 20px 5px;
+  border-style: solid;
+  color: rgba(255, 212, 36, .9);
+  border-color: transparent currentColor transparent currentColor;
+}
+
+.product-item__sale-off-percent {
+  color: #ee4d2d;
+}
+
+.product-item__sale-off-label {
+  color: var(--white-color);
 }
