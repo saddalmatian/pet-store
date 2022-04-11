@@ -34,6 +34,24 @@ function ProductDetail({ ...props }) {
         })
     }
 
+    const [quantity, setQuantity] = useState(1);
+
+    function handlePlus() {
+        if (quantity < product.ProductQuantity) {
+            setQuantity(
+                quantity + 1
+            )
+        }
+    }
+
+    function handleMinus() {
+        if (quantity > 1) {
+            setQuantity(
+                quantity - 1
+            )
+        }
+    }
+
     return (
         <div className="container product-detail">
             <Heading mixin="About item" title="Your Choice Is The Best Choice" />
@@ -56,12 +74,12 @@ function ProductDetail({ ...props }) {
                         {product.ProductCost && <p className="item-price">{formatCash(product.ProductCost.toString())} VND</p>}
 
                         <div className="item-quantity__wrap">
-                            <p className="item-quantity">Quantity: </p>
-                            <button type="button" className="item-btn__plus">-</button>
-                            <p className="item-quantity">1</p>
-                            <button type="button" className="item-btn__minus">+</button>
+                            <p className="item-quantity">Số lượng: </p>
+                            <button type="button" className="item-btn__minus" onClick={handleMinus}>-</button>
+                            <p className="item-quantity">{quantity}</p>
+                            <button type="button" className="item-btn__plus" onClick={handlePlus}>+</button>
                         </div>
-                        <p className="item-quantity__available-heading">Available:
+                        <p className="item-quantity__available-heading">Trong kho:
                             <span className="item-quantity__available-content">{product.ProductQuantity}</span>
                         </p>
                         <div>
