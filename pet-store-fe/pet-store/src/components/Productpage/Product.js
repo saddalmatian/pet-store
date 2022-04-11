@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Product.css';
 import Heading from '../Heading';
@@ -9,13 +9,13 @@ import ProductItem from './ProductItem';
 
 
 function Product() {
-
+    const { idType } = useParams();
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         axios.post('http://127.0.0.1:8000/product/get-all-products',
             {
-                ProductTypeID: ''
+                ProductTypeID: idType
             },
             {
                 headers: {
@@ -25,8 +25,7 @@ function Product() {
         )
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [])
-
+    }, [idType])
 
     return (
         <div className="container product-container">

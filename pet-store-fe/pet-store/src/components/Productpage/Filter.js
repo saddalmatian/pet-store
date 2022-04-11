@@ -1,21 +1,18 @@
 import React from 'react';
 import './Filter.css'
 import Button from '../Button';
-import Dropdown from '../Dropdown';
 import Search from './Search';
-import PageControl from './PageControl';
 
 function Filter(props) {
     return (
         <div className="col-md product-filter">
-            <p className="product-filter__heading">Sort by</p>
+            <p className="product-filter__heading">Sắp xếp theo</p>
             <div className="d-flex">
-                <Button title="Best Seller" />
-                <Button title="New" />
-                <Dropdown title="Cost" />
+                <Button title="Bán chạy" />
+                <Button title="Giá từ cao đến thấp" />
+                <Button title="Giá từ thấp đến cao" />
                 <Search />
             </div>
-            <PageControl current="1" total="10" />
         </div>
     );
 }
