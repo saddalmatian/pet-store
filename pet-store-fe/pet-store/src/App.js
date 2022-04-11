@@ -26,7 +26,6 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/product' element={<Product />} />
-        <Route path='/product_detail' element={<ProductDetail />} />
         <Route path='/product_detail/:id' element={<ProductDetail />} />
         <Route path='/service' element={<Service />} />
         <Route path='/bathing_service' element={<BathingService />} />
@@ -36,13 +35,14 @@ function App() {
         <Route path='/sign_in' element={<SignIn />} />
         <Route path='/sign_up' element={<SignUp />} />
         <Route path='/cart' element={<Cart />} />
+        
       </Routes>
       <Footer />
 
-      <Routes>
-        <Route path='/admin' element={<Admin />} />
+      {/* <Routes>
+      <Route path='/admin' element={<Admin />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
 
 
       {/* <Admin /> */}

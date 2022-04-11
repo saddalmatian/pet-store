@@ -28,9 +28,6 @@ function ProductDetail({ ...props }) {
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, [id]);
 
-    console.log(product);
-    console.log(id);
-
     function formatCash(str) {
         return str.split('').reverse().reduce((prev, next, index) => {
             return ((index % 3) ? next : (next + ',')) + prev
@@ -46,7 +43,7 @@ function ProductDetail({ ...props }) {
                         <div className="row">
                             <p className="item-name">{product.ProductName}</p>
                             <div className="item-reaction">
-                                <Start />
+                                <Start value={product.RateStarNumber} />
                                 <p className="item-comment__total">{product.CommentAmounts} comments</p>
                             </div>
                         </div>
