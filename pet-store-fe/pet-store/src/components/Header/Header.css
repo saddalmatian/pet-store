@@ -45,12 +45,22 @@
 
 .header-icon__user {
     color: var(--primary-color);
-    margin-right: .5rem;
-    padding: .75rem;
-    transition: all ease-in .1s;
+    padding: .5rem;
 }
 
-.header-icon__user:hover {
+.user {
+    cursor: pointer;
+    transition: all ease-in .1s;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+
+.user:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 1rem;
+}
+
+.user:hover .header-icon__user {
     background-color: var(--primary-color);
     color: var(--white-color);
     border-radius: 1rem;
