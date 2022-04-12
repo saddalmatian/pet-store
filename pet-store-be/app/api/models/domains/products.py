@@ -27,11 +27,11 @@ class ProductDateIn(BaseModel):
 
 
 class ProductDateOut(BaseModel):
-    product_date_out: date = Field(default='', alias='ProductDateOut')
+    product_date_out: date = Field(default=None, alias='ProductDateOut')
 
 
 class ProductOriginalCost(BaseModel):
-    product_original_cost: str = Field(default='', alias='ProductOriginalCost')
+    product_original_cost: int = Field(default='', alias='ProductOriginalCost')
 
 
 class ProductPetSQL(SQLModel, table=True):

@@ -17,7 +17,8 @@ router = APIRouter(
     response_model=_schemas_product.ProductCreResp
 )
 async def create_product(
-    image_display: UploadFile = File(...), product_quantity: int = Form(...),
+    image_list: List[UploadFile] = File(...),
+    product_quantity: int = Form(...),
     product_name: str = Form(...), product_description: str = Form(...),
     product_cost: int = Form(...), product_type: str = Form(...),
     pet_type_name: str = Form(...), brand_name: str = Form(...),
@@ -31,7 +32,7 @@ async def create_product(
         product_type, pet_type_name,
         brand_name, username,
         product_original_cost,
-        image_display
+        image_list
     )
     return response
 
@@ -40,9 +41,10 @@ async def create_product(
     "/get-all-products",
 )
 async def get_all_products(
-    product_type_id: Optional[_schemas_product.ProductGetAllIn],
+    product_type_id: Optional[str] = '',
+    pet_type_id: Optional[str] = ''
 ):
-    response = _service_product.get_all_products(product_type_id)
+    response = _service_product.get_all_products(product_type_id, pet_type_id)
     return response
 
 

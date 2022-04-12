@@ -10,8 +10,9 @@ from app.api.models.domains import \
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
-from fastapi import UploadFile, File, HTTPException
+from fastapi import UploadFile, HTTPException
 from operator import and_
+from typing import List
 
 
 def create_new_product(
@@ -19,7 +20,7 @@ def create_new_product(
     product_description: str, product_cost: int,
     product_type: str, pet_type_name: str,
     brand_name: str, product_original_cost: int,
-    image_display: UploadFile = File(...)
+    image_list: List[UploadFile]
 ) -> dict:
     product_id = db_helper.generate_ksuid()
     product_sold = 0
@@ -86,29 +87,28 @@ def create_new_product(
             product_date_out=None
         )
         image_display_bool = 1
-        image_id = db_helper.generate_ksuid()
-        # Save file
-        image_prefix = 'http://127.0.0.1:8000/images/get-image?image_path='
-        image_src = f'app/media/product/{image_id+image_display.filename}'
-        with open(image_src, "wb+") as file_object:
-            file_object.write(image_display.file.read())
-        # Create model Image
-        image_src = image_prefix + image_src.replace('/', '%2F')
-        image = _domain_images.ImageSQL(
-            image_id=image_id,
-            product_id=product_id,
-            image_source=image_src,
-            image_display=image_display_bool
-        )
-        try:
-            session.add(product)
-            session.commit()
+        session.add(product)
+        session.commit()
+        for image in image_list:
+            image_id = db_helper.generate_ksuid()
+            # Save file
+            image_prefix = 'http://127.0.0.1:8000/images/get-image?image_path='
+            image_src = f'app/media/product/{image_id+image.filename}'
+            with open(image_src, "wb+") as file_object:
+                file_object.write(image.file.read())
+            # Create model Image
+            image_src = image_prefix + image_src.replace('/', '%2F')
+            image = _domain_images.ImageSQL(
+                image_id=image_id,
+                product_id=product_id,
+                image_source=image_src,
+                image_display=image_display_bool
+            )
+
+            image_display_bool = 0
             session.add(image)
             session.commit()
-        except Exception:
-            raise HTTPException(
-                400, 'The product item is already in the database'
-            )
+
     response = {
         'ProductName': product_name,
         'ProductCost': product_cost,

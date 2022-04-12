@@ -140,7 +140,7 @@ async def payment(
 )
 async def payment_return(
     vnp_Amount: int, vnp_BankCode: str,
-    vnp_BankTranNo: int, vnp_CardType: str,
+    vnp_BankTranNo: str, vnp_CardType: str,
     vnp_OrderInfo: str, vnp_PayDate: str,
     vnp_ResponseCode: str, vnp_TmnCode: str,
     vnp_TransactionNo: str, vnp_TransactionStatus: str,

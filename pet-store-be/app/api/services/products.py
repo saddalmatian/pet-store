@@ -8,9 +8,10 @@ from app.db.product.update_product_detail import update_product_detail
 from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
 from app.db.product.get_all_type import get_all_type
-from fastapi import HTTPException, UploadFile, File
+from fastapi import HTTPException, UploadFile
 from typing import Optional
 from app.utils.security import is_employee_or_customer
+from typing import List
 
 
 def create_product(
@@ -19,7 +20,7 @@ def create_product(
     product_type: str, pet_type_name: str,
     brand_name: str, username: str,
     product_original_cost: str,
-    image_display: UploadFile = File(...),
+    image_list: List[UploadFile],
 ) -> _schemas_product.ProductCreResp:
     user = is_employee_or_customer(username)
     if user == 'employee':
@@ -28,7 +29,7 @@ def create_product(
             product_description, product_cost,
             product_type, pet_type_name,
             brand_name, product_original_cost,
-            image_display,
+            image_list,
         )
         return response
     raise HTTPException(
@@ -49,11 +50,11 @@ def create_product_type(
 
 
 def get_all_products(
-    product_type_id: Optional[_schemas_product.ProductGetAllIn]
+    product_type_id: Optional[str],
+    pet_type_id: Optional[str]
 ) -> list:
-    product_type_id = product_type_id.product_type_id
     response = get_all_products_in_db(
-        product_type_id
+        product_type_id, pet_type_id
     )
     return response
 

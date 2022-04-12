@@ -1,4 +1,4 @@
-from operator import and_
+from operator import and_, or_
 from app.api.models.domains import\
     (
         products as _domain_products,
@@ -7,30 +7,50 @@ from app.api.models.domains import\
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
+from functools import reduce
+
+
+def chain_2(type_id: str):
+    product = _domain_products.ProductSQL
+    return product.product_type_id == type_id
+
+
+def chain_or(a, b):
+    return or_(a, b)
 
 
 def get_all_products_in_db(
-    product_type_id: str
+    product_type_id: str,
+    pet_type_id: str
 ) -> dict:
-    product = _domain_products.ProductSQL
-    image = _domain_images.ImageSQL
-    if product_type_id:
-        statement_filter = and_(
-            product.product_id == image.product_id,
-            product.product_type_id == product_type_id
-        )
-    else:
-        statement_filter = (
-            product.product_id == image.product_id
-        )
-    response = []
     with Session(engine) as session:
-        statement = select(product, image).where(
-            statement_filter)
+        product = _domain_products.ProductSQL
+        product_type = _domain_products.ProductTypeSQL
+        statement_filter = ''
+        if pet_type_id:
+            statement_test = select(product_type).where(
+                product_type.pet_type_id == pet_type_id
+            )
+            result_test = session.exec(statement_test)
+            list_product_type_id = []
+            for pet_type in result_test:
+                list_product_type_id.append(pet_type.product_type_id)
+            list_type_id = list(map(chain_2, list_product_type_id))
+            statement_filter = reduce(chain_or, list_type_id)
+        if product_type_id:
+            statement_filter = and_(
+                product.product_type_id == product_type_id
+            )
+        response = []
+        if not pet_type_id and not product_type_id:
+            statement = select(product)
+        else:
+            statement = select(product).where(statement_filter)
         results = session.exec(statement)
         for item in results:
-            product_name = item.ProductSQL.product_name
-            product_id = item.ProductSQL.product_id
+            image = _domain_images.ImageSQL
+            product_name = item.product_name
+            product_id = item.product_id
             propro = _domain_promotionals.ProProSQL
             statement = select(propro).where(propro.product_id == product_id)
             result_propro = session.exec(statement).first()
@@ -49,8 +69,13 @@ def get_all_products_in_db(
                     promotion.promotional_id == promotional_id)
                 result_promo = session.exec(statement).first()
                 result_promotional = {**result_promo.dict()}
-            image_source = item.ImageSQL.image_source
-            product_cost = item.ProductSQL.product_cost
+            statement_img = select(image).where(image.product_id == product_id)
+            result_img = session.exec(statement_img)
+            image_source = ''
+            for detect_img in result_img:
+                if detect_img.image_display:
+                    image_source = detect_img.image_source
+            product_cost = item.product_cost
             item_dict = {
                 "ProductID": product_id,
                 "ProductName": product_name,

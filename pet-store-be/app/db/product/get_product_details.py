@@ -29,6 +29,9 @@ def get_product_details(
         results = session.exec(statement)
         product_result = results.one()
         product_description = product_result.product_description
+        product_original_cost = product_result.product_original_cost
+        product_date_in = product_result.product_date_in
+        product_date_out = product_result.product_date_out
         product_name = product_result.product_name
         product_cost = product_result.product_cost
         product_quantity = product_result.product_quantity
@@ -113,6 +116,9 @@ def get_product_details(
         "ProductType": product_type,
         "PetTypeID": pet_type_id,
         "PetTypeName": pet_type_name,
-        "BrandName": brand_name
+        "BrandName": brand_name,
+        "ProductOriginalCost": product_original_cost,
+        "ProductDateIn": product_date_in,
+        "ProductDateOut": product_date_out
     }
     return response
