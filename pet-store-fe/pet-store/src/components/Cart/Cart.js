@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import Heading from '../Heading.js';
 import Hinh from '../../assets/images/VongThoCam.jpg';
 import Line from '../Line';
+import axios from 'axios';
 
 function Cart() {
+
+    const [info, setInfo] = useState([]);
+
+    const token = localStorage.getItem('Token');
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/customers/get-customer-detail',
+            {
+                headers: {
+                    accept: 'application/json',
+                    'authorization-token': token
+                }
+            }
+        )
+            .then(res => setInfo(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }, [])
+
     return (
         <div className="container cart-container">
             <div className="row">
@@ -98,10 +117,22 @@ function Cart() {
                     <div className="cart-box">
                         <div className="box-address">
                             <p className="box-address__heading">Địa chỉ giao hàng</p>
-                            <input type="text" className="box-address__input" placeholder="Họ và tên"></input>
-                            <input type="text" className="box-address__input" placeholder="Số điện thoại"></input>
-                            <input type="text" className="box-address__input" placeholder="Email"></input>
-                            <input type="text" className="box-address__input" placeholder="Địa chỉ"></input>
+                            {
+                                info.FullName &&
+                                <input type="text" className="box-address__input" placeholder="Họ và tên" defaultValue={info.FullName}></input>
+                            }
+                            {
+                                info.Phone &&
+                                <input type="text" className="box-address__input" placeholder="Số điện thoại" defaultValue={info.Phone}></input>
+                            }
+                            {
+                                info.Email &&
+                                <input type="text" className="box-address__input" placeholder="Email" defaultValue={info.Email}></input>
+                            }
+                            {
+                                info.Address &&
+                                <input type="text" className="box-address__input" placeholder="Địa chỉ" defaultValue={info.Address}></input>
+                            }
                         </div>
                         <Line />
 
@@ -109,7 +140,7 @@ function Cart() {
                             <p className="box-payment__heading">Phương thức thanh toán</p>
                             <div className="box-payment-method">
                                 <input type="radio" className="box-payment__method" name="payment_method"></input>
-                                <label className="box-payment__label" htmlFor="payment_method">Thanh toán bằng Ví điện tử Momo</label>
+                                <label className="box-payment__label" htmlFor="payment_method">Thanh toán bằng VN-Pay</label>
                             </div>
                             <div className="box-payment-method">
                                 <input type="radio" checked className="box-payment__method" name="payment_method"></input>
