@@ -37,11 +37,11 @@ function SignIn() {
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
                 setSuccess(true);
                 const accessToken = response?.data?.Token;
-                console.log(accessToken);
+                const name = response?.data?.Username;
                 localStorage.setItem('Token', accessToken);
+                localStorage.setItem('Name', name);
                 setUser('');
                 setPwd('');
                 // window.location.reload();
@@ -73,7 +73,7 @@ function SignIn() {
                     {success && localStorage.getItem('Token') ? (
                         <div className="col-md success">
                             <p>Đăng nhập thành công!</p>
-                            <a href="/" onClick={handleClick} className='success-link'>Trở lại trang chủ</a>
+                            <a href="/" onclick={handleClick} className='success-link'>Trở lại trang chủ</a>
                         </div >
                     ) : (
                         <form className="col-md sign-in__form" onSubmit={handleSubmit}>

@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 function Header() {
     const handleClick = () => {
         localStorage.removeItem('Token');
+        localStorage.removeItem('Name');
         window.location.reload();
         window.history.forward();
     }
@@ -19,11 +20,14 @@ function Header() {
                 <Link className="header-icon__cart" to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
                 {localStorage.getItem('Token') ?
                     <div className="user-dropdown">
-                        <i className="fa-solid fa-user header-icon__user"></i>
+                        <div className="user">
+                            <i className="fa-solid fa-user header-icon__user"></i>
+                            <span className='username'>{localStorage.getItem('Name')}</span>
+                        </div>
                         <div className="user-dropdown__content">
                             <p onClick={handleClick}>Đăng xuất</p>
                         </div>
-                    </div> 
+                    </div>
                     :
                     <>
                         <Link to="/sign_up" className="header-action__signin"><span>Đăng ký</span></Link>
