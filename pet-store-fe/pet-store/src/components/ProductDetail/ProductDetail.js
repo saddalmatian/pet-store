@@ -83,7 +83,7 @@ function ProductDetail({ ...props }) {
                             <span className="item-quantity__available-content">{product.ProductQuantity}</span>
                         </p>
                         <div>
-                            <button type="button" className="item-btn__add-cart">Add to cart</button>
+                            <button type="button" className="item-btn__add-cart">Thêm vào giỏ hàng</button>
                         </div>
                     </div>
 

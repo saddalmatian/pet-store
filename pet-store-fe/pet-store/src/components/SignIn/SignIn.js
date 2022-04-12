@@ -73,7 +73,7 @@ function SignIn() {
                     {success && localStorage.getItem('Token') ? (
                         <div className="col-md success">
                             <p>Đăng nhập thành công!</p>
-                            <a href="/" onclick={handleClick} className='success-link'>Trở lại trang chủ</a>
+                            <a href="/" onClick={handleClick} className='success-link'>Trở lại trang chủ</a>
                         </div >
                     ) : (
                         <form className="col-md sign-in__form" onSubmit={handleSubmit}>
