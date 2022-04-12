@@ -28,6 +28,21 @@ function ProductDetail({ ...props }) {
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, [id]);
 
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/comments/get-all-comments?product_id=${id}`,
+            {
+                headers: {
+                    accept: 'applcation/json',
+                    'authorization-token': localStorage.getItem('Token')
+                }
+            }
+        )
+            .then(res => setComments(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }, [id]);
+
     function formatCash(str) {
         return str.split('').reverse().reduce((prev, next, index) => {
             return ((index % 3) ? next : (next + ',')) + prev
@@ -49,6 +64,25 @@ function ProductDetail({ ...props }) {
             setQuantity(
                 quantity - 1
             )
+        }
+    }
+
+    const handleAddCart = ( id, quantity ) => {
+        if(localStorage.getItem('Token')) {
+            axios.post(`http://127.0.0.1:8000/bills/create-cart`,
+            {
+                product_quantity: quantity,
+                product_id: id
+            },
+            {
+                headers: {
+                    accept: 'applcation/json',
+                    'authorization-token': localStorage.getItem('Token')
+                }
+            }
+            ).then(console.log('Ok'))
+        } else {
+            alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
         }
     }
 
@@ -83,7 +117,7 @@ function ProductDetail({ ...props }) {
                             <span className="item-quantity__available-content">{product.ProductQuantity}</span>
                         </p>
                         <div>
-                            <button type="button" className="item-btn__add-cart">Thêm vào giỏ hàng</button>
+                            <button type="button" className="item-btn__add-cart" onClick={handleAddCart}>Thêm vào giỏ hàng</button>
                         </div>
                     </div>
 
@@ -110,27 +144,11 @@ function ProductDetail({ ...props }) {
             </div>
             <Line />
 
-            {product.ListComments && product.ListComments.map((cmt, index) => (
-                <Comment avt={Avt} name="Cris" content="I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days.I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days." />
+            {comments.ListComments && comments.ListComments?.map((cmt, index) => (
+                    cmt.CommentMain ? 
+                        <Comment avt={Avt} name={cmt.CommentorName} content={cmt.CommentDetail} key={index}/> :
+                        <SubComment avt={Avt} name={cmt.CommentorName} content={cmt.CommentDetail} key={index}/>
             ))}
-
-            <SubComment avt={Avt} name="Cris" content="I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days.I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days." />
-
-            <Comment avt={Avt} name="Cris" content="I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days." />
-
-            <Comment avt={Avt} name="Cris" content="I bought this for
-                            my 25 pound puppy but it lost the shaping and fluff to
-                            it after just a few days." />
 
             <p className="comment-load-more">Load more...</p>
 
