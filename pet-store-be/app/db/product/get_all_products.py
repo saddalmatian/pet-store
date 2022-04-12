@@ -27,6 +27,7 @@ def get_all_products_in_db(
         product = _domain_products.ProductSQL
         product_type = _domain_products.ProductTypeSQL
         statement_filter = ''
+        temp_list = []
         if pet_type_id:
             statement_test = select(product_type).where(
                 product_type.pet_type_id == pet_type_id
@@ -84,5 +85,7 @@ def get_all_products_in_db(
                 "RateStarNumber": 0,
                 "Promotional": result_promotional
             }
-            response.append(item_dict)
+            if item_dict.get('ProductName') not in temp_list:
+                _ = temp_list.append(product_name)
+                response.append(item_dict)
     return response
