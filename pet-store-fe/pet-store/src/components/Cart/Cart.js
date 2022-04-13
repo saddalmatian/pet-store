@@ -4,7 +4,8 @@ import Heading from '../Heading.js';
 import Hinh from '../../assets/images/VongThoCam.jpg';
 import Line from '../Line';
 import axios from 'axios';
-import Header from '../Header/Header'
+import Header from '../Header/Header';
+import CartBox from './CartBox';
 
 function Cart() {
 
@@ -23,7 +24,30 @@ function Cart() {
         )
             .then(res => setInfo(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [])
+    }, [token])
+
+    const [cart, setCart] = useState({});
+    useEffect(() => {
+        if (token) {
+            axios.get('http://127.0.0.1:8000/bills/get-cart',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization-token': token
+                    },
+                }
+            ).then(function (res) {
+                setCart(res.data)
+            })
+            .catch(function (err) {
+                if(err.response?.status === 404) {
+                    console.log('No')
+                }
+            })
+        }
+    }, [token]);
+
+    console.log(cart);
 
     return (
         <>
@@ -31,79 +55,12 @@ function Cart() {
             <div className="container cart-container">
                 <div className="row">
                     <Heading mixin="Your cart" title="Giỏ hàng của bạn" />
+                    {token && cart ?
+                    <>
+                    
                     <div className="col-md">
-                        <div className="cart-box">
-                            <div className="box-product">
-                                <div className="box-product__image">
-                                    <img src={Hinh} alt="product_img" className="box-product__img"></img>
-                                </div>
-                                <div className="box-product__info">
-                                    <p className="box-product__name">Vòng thổ cẩm box-product-quantity__num</p>
-                                    <p className="box-product__price">650.000đ</p>
-                                    <p className="box-product__delete">Delete</p>
-                                </div>
-                                <div className="box-product__quantity">
-                                    <p className="box-product__label">Số lượng</p>
-                                    <div className="box-product__action">
-                                        <button type="button" className="box-product-btn__plus">-</button>
-                                        <p className="box-product-quantity__num">1</p>
-                                        <button type="button" className="box-product-btn__minus">+</button>
-                                    </div>
-                                </div>
-                                <div className="box-product__subtotal">
-                                    <p className="box-product__label">Thành tiền</p>
-                                    <p className="box-product__subtotal-amount">1.600.000đ</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cart-box">
-                            <div className="box-product">
-                                <div className="box-product__image">
-                                    <img src={Hinh} alt="product_img" className="box-product__img"></img>
-                                </div>
-                                <div className="box-product__info">
-                                    <p className="box-product__name">Vòng thổ cẩm box-product-quantity__num</p>
-                                    <p className="box-product__price">650.000đ</p>
-                                    <p className="box-product__delete">Delete</p>
-                                </div>
-                                <div className="box-product__quantity">
-                                    <p className="box-product__label">Số lượng</p>
-                                    <div className="box-product__action">
-                                        <button type="button" className="box-product-btn__plus">-</button>
-                                        <p className="box-product-quantity__num">1</p>
-                                        <button type="button" className="box-product-btn__minus">+</button>
-                                    </div>
-                                </div>
-                                <div className="box-product__subtotal">
-                                    <p className="box-product__label">Thành tiền</p>
-                                    <p className="box-product__subtotal-amount">1.600.000đ</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cart-box">
-                            <div className="box-product">
-                                <div className="box-product__image">
-                                    <img src={Hinh} alt="product_img" className="box-product__img"></img>
-                                </div>
-                                <div className="box-product__info">
-                                    <p className="box-product__name">Vòng thổ cẩm box-product-quantity__num</p>
-                                    <p className="box-product__price">650.000đ</p>
-                                    <p className="box-product__delete">Delete</p>
-                                </div>
-                                <div className="box-product__quantity">
-                                    <p className="box-product__label">Số lượng</p>
-                                    <div className="box-product__action">
-                                        <button type="button" className="box-product-btn__plus">-</button>
-                                        <p className="box-product-quantity__num">1</p>
-                                        <button type="button" className="box-product-btn__minus">+</button>
-                                    </div>
-                                </div>
-                                <div className="box-product__subtotal">
-                                    <p className="box-product__label">Thành tiền</p>
-                                    <p className="box-product__subtotal-amount">1.600.000đ</p>
-                                </div>
-                            </div>
-                        </div>
+                        {cart.BillDetail && cart.BillDetail?.map()}
+                        <CartBox product={cart.BillDetail}/>
 
                         <div className="cart-box">
                             <div className="box-total">
@@ -151,7 +108,12 @@ function Cart() {
                                 </div>
                             </div>
                         </div>
+                    </div> 
+                    </>    :
+                    <div className="col-md">
+                        <div className="cart-box cart-null">Giỏ hàng rỗng!</div>
                     </div>
+                }
                 </div>
             </div>
         </>

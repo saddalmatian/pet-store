@@ -5,6 +5,7 @@ import HomeBtn from './HomeBtn';
 import HomeContent from './HomeContent';
 import Header from '../Header/Header';
 
+
 function Home() {
     return (
         <>
