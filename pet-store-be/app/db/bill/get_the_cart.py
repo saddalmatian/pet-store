@@ -1,5 +1,9 @@
 from fastapi import HTTPException
-from app.api.models.domains import bills as _domain_bills
+from app.api.models.domains import (
+    bills as _domain_bills,
+    products as _domain_products,
+    images as _domain_images
+)
 from app.utils.db_helper import engine, get_userid_from_username
 from sqlmodel import Session, select
 from operator import and_
@@ -30,19 +34,51 @@ def get_the_cart(username):
             )
             detail_result = session.exec(statement)
             bill_detail_result = []
+            bill_cost = 0
             for bill_detail in detail_result:
+                product_id = bill_detail.product_id
+                product = _domain_products.ProductSQL
+                statement = select(product).where(
+                    product.product_id == product_id
+                )
+                try:
+                    result = session.exec(statement).first()
+                except Exception:
+                    raise HTTPException(
+                        status_code=404, detail='Product not found'
+                    )
+                image = _domain_images.ImageSQL
+                statement = select(image).where(
+                    and_(
+                        image.product_id == product_id,
+                        image.image_display == 1
+                    )
+                )
+                try:
+                    result_image = session.exec(statement).first()
+                except Exception:
+                    raise HTTPException(
+                        status_code=404, detail='Image not found'
+                    )
+                product_total_cost = \
+                    bill_detail.cost * bill_detail.product_quantity
+                bill_cost += product_total_cost
                 temp_response = {
-                    "ProductCost": bill_detail.cost,
+                    "ProductTotalCost": product_total_cost,
                     "PromotionalID": bill_detail.promotional_id,
                     "ServiceID": bill_detail.service_id,
                     "ProductQuantity": bill_detail.product_quantity,
-                    "ProductID": bill_detail.product_id,
-                    "BillID": bill_detail.bill_id
+                    "ProductID": product_id,
+                    "BillID": bill_detail.bill_id,
+                    "ImageSource": result_image.image_source,
+                    "ProductName": result.product_name,
+                    "ProductCost": bill_detail.cost
                 }
                 bill_detail_result.append(temp_response)
             response.update(
                 {
-                    "BillDetails": bill_detail_result
+                    "BillDetails": bill_detail_result,
+                    "BillTotalCost": bill_cost
                 }
             )
         except Exception:

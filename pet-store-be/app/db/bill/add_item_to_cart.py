@@ -1,5 +1,7 @@
 from fastapi import HTTPException
-from app.api.models.domains import bills as _domain_bills
+from app.api.models.domains import (
+    bills as _domain_bills
+)
 from app.utils.db_helper import engine, generate_ksuid
 from sqlmodel import Session, select
 from operator import and_
