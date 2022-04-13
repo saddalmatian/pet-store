@@ -6,6 +6,7 @@ import Heading from '../Heading';
 import Category from './Category';
 import Filter from './Filter';
 import ProductItem from './ProductItem';
+import Header from '../Header/Header';
 
 
 function Product() {
@@ -28,30 +29,33 @@ function Product() {
     }, [idType])
 
     return (
-        <div className="container product-container">
-            <Heading mixin="Our Product" title="Các Sản Phẩm Cần Thiết Cho Thú Cưng Của Bạn" />
-            <div className="row">
-                <Category />
-                <div className="col-md-10">
-                    <div className="row">
-                        <Filter />
-                    </div>
-                    <div className="d-flex gap-2 justify-content-center align-items-center">
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
-                            {/* <Routes> */}
+        <>
+            <Header />
+            <div className="container product-container">
+                <Heading mixin="Our Product" title="Các Sản Phẩm Cần Thiết Cho Thú Cưng Của Bạn" />
+                <div className="row">
+                    <Category />
+                    <div className="col-md-10">
+                        <div className="row">
+                            <Filter />
+                        </div>
+                        <div className="d-flex gap-2 justify-content-center align-items-center">
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
+                                {/* <Routes> */}
                                 {products.map((product, index) =>
                                     // <Route path={`/product_detail/${product.ProductID}`} element={<ProductDetail />}>
-                                    <Link to={`/product_detail/${product.ProductID}`} key={index} style={{textDecoration: "none"}}>
+                                    <Link to={`/product_detail/${product.ProductID}`} key={index} style={{ textDecoration: "none" }}>
                                         <ProductItem  {...product} />
                                     </Link>
                                     // </Route>
                                 )}
-                            {/* </Routes> */}
+                                {/* </Routes> */}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
