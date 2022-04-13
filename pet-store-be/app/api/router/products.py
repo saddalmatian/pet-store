@@ -122,3 +122,11 @@ async def get_product_detail(
 async def get_all_product_type():
     response = _service_product.get_all_product_type()
     return response
+
+
+@router.get(
+    '/get-random-product'
+)
+async def get_random_product(product_type_id: str):
+    response = _service_product.get_random_product(product_type_id)
+    return response

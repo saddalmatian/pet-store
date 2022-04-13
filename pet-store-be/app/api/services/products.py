@@ -8,6 +8,7 @@ from app.db.product.update_product_detail import update_product_detail
 from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
 from app.db.product.get_all_type import get_all_type
+from app.db.product.get_random_products import get_random_products
 from fastapi import HTTPException, UploadFile
 from typing import Optional
 from app.utils.security import is_employee_or_customer
@@ -112,3 +113,8 @@ def get_all_product_type(
 ) -> _schemas_product.ProductTypeGetResp:
     response = get_all_type()
     return response
+
+
+def get_random_product(product_type_id: str):
+    resposne = get_random_products(product_type_id)
+    return resposne
