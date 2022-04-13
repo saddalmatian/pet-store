@@ -42,7 +42,7 @@ function ProductDetail({ ...props }) {
         )
             .then(res => setComments(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [id]);
+    }, [id, comments]);
 
     function formatCash(str) {
         return str.split('').reverse().reduce((prev, next, index) => {
@@ -82,6 +82,29 @@ function ProductDetail({ ...props }) {
                     }
                 }
             ).then(console.log('Ok'))
+        } else {
+            alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
+        }
+    }
+
+    const [cmt, setCmt] = useState('');
+
+    const handleComment = (id, cmt) => {
+        if (localStorage.getItem('Token')) {
+            axios.post(`http://127.0.0.1:8000/comments/comment-on-product`,
+            {
+                ProductID: id,
+                CommentMain: true,
+                CommentRepTarget: "",
+                CommentDetail: cmt
+            },
+                {
+                    headers: {
+                        accept: 'applcation/json',
+                        'authorization-token': localStorage.getItem('Token')
+                    }
+                }
+            ).then(setCmt(''));
         } else {
             alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
         }
@@ -141,8 +164,19 @@ function ProductDetail({ ...props }) {
                             <p className="item-review__comment-total">{product.CommentAmounts} Comments</p>
                         </div>
                         <p className="item-review__comment-heading">Comment</p>
-                        <input type="text" className="item-review__input-comment"></input>
-                        <input type="button" className="item-review__input-btn" value="Send"></input>
+                        <input 
+                            type="text" 
+                            className="item-review__input-comment" 
+                            onChange={(e) => setCmt(e.target.value)}
+                            value={cmt}
+                        >
+                        </input>
+                        <input 
+                            type="button" 
+                            className="item-review__input-btn" 
+                            value="Gửi" 
+                            onClick={() => handleComment(product.ProductID,cmt)}
+                        ></input>
                     </div>
                 </div>
                 <Line />

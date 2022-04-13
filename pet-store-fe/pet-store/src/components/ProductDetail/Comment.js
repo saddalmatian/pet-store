@@ -15,7 +15,7 @@ function Comment( props ) {
                     </div>
                     <div className="user-reaction">
                         <p className="user-action">Reply</p>
-                        <p className="user-comment__time">8 hours ago</p>
+                        {/* <p className="user-comment__time">8 hours ago</p> */}
                     </div>
                 </div>
             </div>
