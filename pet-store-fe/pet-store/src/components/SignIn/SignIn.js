@@ -105,7 +105,7 @@ function SignIn() {
                             <p ref={errRef} className="errmsg">{errMsg}</p>
 
                             <p className="sign-in__description">Nếu bạn chưa có tài khoản, vui lòng chọn
-                                <Link to="/sign_up"><span>Đăng ký</span></Link>
+                                <Link to="/sign_up"><span> Đăng ký</span></Link>
                             </p>
                             <input type="submit" className="sign-in__btn" value="Đăng nhập"></input>
                         </form>

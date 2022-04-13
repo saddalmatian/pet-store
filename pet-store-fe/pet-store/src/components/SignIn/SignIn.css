@@ -1,6 +1,7 @@
 .sign-in {
     background-color: var(--bg-color);
     padding-bottom: 70px;
+    margin-top: 70px;
 }
 
 .success p {
