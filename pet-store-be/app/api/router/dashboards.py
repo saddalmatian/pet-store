@@ -15,7 +15,6 @@ async def get_product_sold(
     authorization_token: str = Header(None),
 ) -> dict:
     username = get_username_from_token(authorization_token)
-    username = 'admin'
     response = _service_dashboard.get_product_sold(
         username, order_by,
         product_type_id
@@ -29,6 +28,5 @@ async def get_product_profit(
     authorization_token: str = Header(None),
 ) -> dict:
     username = get_username_from_token(authorization_token)
-    username = 'admin'
     response = _service_dashboard.get_product_profit(username, order_by)
     return response
