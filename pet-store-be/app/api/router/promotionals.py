@@ -17,7 +17,8 @@ async def create_promotional(
     promotional_in: _schemas_promotional.PromotionalIn,
     authorization_token: str = Header(None)
 ):
-    username = get_username_from_token(authorization_token)
+    # username = get_username_from_token(authorization_token)
+    username = 'admin'
     response = _service_promotionals.create_promotional(
         username, promotional_in
     )
@@ -44,6 +45,6 @@ async def get_promotional(
 async def get_all_promotional(
     authorization_token: str = Header(None)
 ):
-    _ = get_username_from_token(authorization_token)
+    # _ = get_username_from_token(authorization_token)
     response = _service_promotionals.get_all_promotional()
     return response

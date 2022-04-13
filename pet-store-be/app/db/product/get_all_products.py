@@ -1,4 +1,4 @@
-from operator import and_, or_
+from operator import or_
 from app.api.models.domains import\
     (
         products as _domain_products,

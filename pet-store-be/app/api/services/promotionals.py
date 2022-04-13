@@ -2,7 +2,7 @@ from app.api.models.schemas import \
     promotionals as _schemas_promtional
 from app.utils.security import is_employee_or_customer
 from app.db.promotional.create_promo import create_promo
-from app.db.promotional.get_promo import get_promo
+from app.db.promotional.get_promo import get_promo, get_all_promo
 
 
 def create_promotional(
@@ -22,5 +22,5 @@ def get_promotional(
 
 
 def get_all_promotional():
-    response = get_promo()
+    response = get_all_promo()
     return response

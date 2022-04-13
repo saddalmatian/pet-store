@@ -49,7 +49,7 @@ async def get_all_products(
     response = _service_product.get_all_products(
         product_type_id, pet_type_id,
         most_sold, order_by
-    )
+        )
     return response
 
 

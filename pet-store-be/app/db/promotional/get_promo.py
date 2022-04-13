@@ -47,3 +47,39 @@ def get_promo(promotional_id: str = ''):
             }
         )
         return response
+
+
+def get_all_promo():
+    promotional = _prmotional_domains.PromotionalSQL
+    propro = _prmotional_domains.ProProSQL
+    product_sql = _product_domains.ProductSQL
+    response = []
+    with Session(engine) as session:
+        statement = select(promotional)
+        result = session.exec(statement)
+        for promo in result:
+            temp_response = {}
+            temp_response.update(
+                {
+                    "Promotional": promo.dict()
+                }
+            )
+            promotional_id = promo.promotional_id
+            list_product = []
+            statement = select(propro).where(
+                propro.promotional_id == promotional_id
+            )
+            result = session.exec(statement)
+            for product in result:
+                statement = select(product_sql).where(
+                    product_sql.product_id == product.product_id
+                )
+                result_product = session.exec(statement).first()
+                list_product.append(result_product.dict())
+            temp_response.update(
+                {
+                    "ListProducts": list_product
+                }
+            )
+            response.append(temp_response)
+        return response
