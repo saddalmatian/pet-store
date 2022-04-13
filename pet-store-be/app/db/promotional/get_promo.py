@@ -7,7 +7,7 @@ from app.api.models.domains import (
 from app.utils.db_helper import engine
 
 
-def get_promo(promotional_id: str):
+def get_promo(promotional_id: str = ''):
     promotional = _prmotional_domains.PromotionalSQL
     propro = _prmotional_domains.ProProSQL
     product_sql = _product_domains.ProductSQL
@@ -16,6 +16,8 @@ def get_promo(promotional_id: str):
         statement = select(promotional).where(
             promotional.promotional_id == promotional_id
         )
+        if not promotional_id:
+            statement = select(promotional)
         try:
             result = session.exec(statement).one()
             response.update(

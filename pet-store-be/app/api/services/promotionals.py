@@ -19,3 +19,8 @@ def get_promotional(
 ):
     response = get_promo(promotional_id)
     return response
+
+
+def get_all_promotional():
+    response = get_promo()
+    return response

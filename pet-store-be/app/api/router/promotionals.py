@@ -36,3 +36,14 @@ async def get_promotional(
         promotional_id
     )
     return response
+
+
+@router.get(
+    "/get-all-promotional"
+)
+async def get_all_promotional(
+    authorization_token: str = Header(None)
+):
+    _ = get_username_from_token(authorization_token)
+    response = _service_promotionals.get_all_promotional()
+    return response
