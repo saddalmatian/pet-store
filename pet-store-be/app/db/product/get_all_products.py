@@ -6,7 +6,7 @@ from app.api.models.domains import\
         promotionals as _domain_promotionals
     )
 from app.utils.db_helper import engine
-from sqlmodel import Session, select
+from sqlmodel import Session, select, asc, desc
 from functools import reduce
 
 
@@ -21,7 +21,9 @@ def chain_or(a, b):
 
 def get_all_products_in_db(
     product_type_id: str,
-    pet_type_id: str
+    pet_type_id: str,
+    most_sold: str,
+    order_by: str
 ) -> dict:
     with Session(engine) as session:
         product = _domain_products.ProductSQL
@@ -39,14 +41,17 @@ def get_all_products_in_db(
             list_type_id = list(map(chain_2, list_product_type_id))
             statement_filter = reduce(chain_or, list_type_id)
         if product_type_id:
-            statement_filter = and_(
-                product.product_type_id == product_type_id
-            )
+            statement_filter = product.product_type_id == product_type_id
         response = []
         if not pet_type_id and not product_type_id:
             statement = select(product)
         else:
             statement = select(product).where(statement_filter)
+        order_statement = desc(product.product_cost)
+        if order_by == 'asc':
+            order_statement = asc(product.product_cost)
+        statement = statement.order_by(order_statement)
+
         results = session.exec(statement)
         for item in results:
             image = _domain_images.ImageSQL
@@ -77,15 +82,21 @@ def get_all_products_in_db(
                 if detect_img.image_display:
                     image_source = detect_img.image_source
             product_cost = item.product_cost
+            product_sold = item.product_sold
             item_dict = {
                 "ProductID": product_id,
                 "ProductName": product_name,
                 "ImageSource": image_source,
                 "ProductCost": product_cost,
                 "RateStarNumber": 0,
-                "Promotional": result_promotional
+                "Promotional": result_promotional,
+                "ProductSold": product_sold
             }
             if item_dict.get('ProductName') not in temp_list:
                 _ = temp_list.append(product_name)
                 response.append(item_dict)
+        if most_sold:
+            response = sorted(
+                response, key=lambda d: d['ProductSold'], reverse=True
+            )
     return response

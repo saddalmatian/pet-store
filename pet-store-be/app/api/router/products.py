@@ -42,9 +42,14 @@ async def create_product(
 )
 async def get_all_products(
     product_type_id: Optional[str] = '',
-    pet_type_id: Optional[str] = ''
+    pet_type_id: Optional[str] = '',
+    most_sold: Optional[bool] = False,
+    order_by: str = 'desc'
 ):
-    response = _service_product.get_all_products(product_type_id, pet_type_id)
+    response = _service_product.get_all_products(
+        product_type_id, pet_type_id,
+        most_sold, order_by
+    )
     return response
 
 
