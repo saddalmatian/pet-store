@@ -11,13 +11,20 @@ import Header from '../Header/Header';
 
 function Product() {
     const { idType } = useParams();
+    const { petType } = useParams();
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.post('http://127.0.0.1:8000/product/get-all-products',
-            {
-                ProductTypeID: idType
-            },
+        let link = 'http://127.0.0.1:8000/product/get-all-products/';
+        if (idType) {
+            const path = `?product_type_id=${idType}`;
+            link = link.concat(path);
+        } 
+        if (petType) {
+            const path = `?pet_type_id=${petType}`;
+            link = link.concat(path);
+        } 
+        axios.post(link,
             {
                 headers: {
                     accept: 'application/json'
@@ -26,7 +33,7 @@ function Product() {
         )
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [idType])
+    }, [idType, petType])
 
     return (
         <>

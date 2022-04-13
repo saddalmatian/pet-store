@@ -11,6 +11,14 @@
     margin-bottom: 10px;
 }
 
+.cart-null{
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 4rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
 .box-product {
     display: flex;
     align-items: center;
