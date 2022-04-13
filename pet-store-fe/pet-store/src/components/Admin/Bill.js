@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from "./Header"
 function Bill(){
+
+    const [bills, setBills] = useState([]);
+    var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6Im5oYW52aWVuMSIsImV4cCI6MTY0OTY2MTk5N30.yx2vaDdKKvGSIRppgk2S0OU_GDL4SG_0yENPOxRUBA8'
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/bills/get-all-cart',
+            {
+                headers: {
+                    accept: 'application/json',
+                    'authorization-token': token
+                }
+            }
+        )
+            .then(res => setBills(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }, []);
+    console.log(token);
+    console.log(bills);
 
     return(
         <div className="content-bill container-fluid"style={{paddingLeft:"0"}}>
@@ -11,67 +29,25 @@ function Bill(){
             <table className="table table-striped col-md table-content" style={{width: '100%'}} >
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Tên khách hàng</th>
+                        <th>Create date</th>
+                        <th>Tên kh</th>
                         <th>Tình trạng</th>
                         <th>Ngày mua</th>
                         <th>Nhân viên nhận đơn</th>
+                        <th>Pay method</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                        <td>
-                            <select className="status">
-                                <option value="done">Thành công</option>
-                                <option value="process">Đang xử lý</option>
-                                <option value="delivery">Vận chuyển</option>
-                            </select>
-                        </td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                                               
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>Last Name</td>
-                        <td>
-                            <select className="status">
-                                <option value="done">Thành công</option>
-                                <option value="process">Đang xử lý</option>
-                                <option value="delivery">Vận chuyển</option>
-                            </select>
-                        </td>
-                        <td>First Name</td>
-                        <td>First Name</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>
-                            <select className="status">
-                                <option value="done">Thành công</option>
-                                <option value="process">Đang xử lý</option>
-                                <option value="delivery">Vận chuyển</option>
-                            </select>
-                        </td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>
-                            <select className="status">
-                                <option value="done">Thành công</option>
-                                <option value="process">Đang xử lý</option>
-                                <option value="delivery">Vận chuyển</option>
-                            </select>
-                        </td>
-                        <td>Email</td>
-                        <td>Email</td>
-                    </tr>
+                    {bills.map((b, i) =>{return(
+                        <tr key={i}>
+                            <td>{b.bill_created_date}</td>
+                            <td>{b.customer_id}</td>
+                            <td>{b.bill_status}</td>
+                            <td>{b.bill_delivery_date}</td>
+                            <td>{b.employee_id}</td>
+                            <td>{b.pay_method}</td>
+                        </tr>
+                    )})}
                 </tbody>
             </table>
             </div>
