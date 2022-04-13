@@ -72,7 +72,8 @@ def get_the_cart(username):
                     "BillID": bill_detail.bill_id,
                     "ImageSource": result_image.image_source,
                     "ProductName": result.product_name,
-                    "ProductCost": bill_detail.cost
+                    "ProductCost": bill_detail.cost,
+                    "ProductOriginalQuantity": result.product_quantity
                 }
                 bill_detail_result.append(temp_response)
             response.update(

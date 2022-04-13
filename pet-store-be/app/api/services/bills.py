@@ -11,6 +11,8 @@ from app.db.bill.update_cart_product_detail import update_cart_product_detail
 from app.db.bill.remove_product_cart import remove_product_cart
 from app.db.bill.update_status import update_bill_status
 from app.db.bill.get_all_cart import get_all_cart_admin
+from app.db.product.update_product_quantity_in_bill import\
+    update_product_quantity_in_bill
 
 VNPAY_RETURN_URL = 'http://localhost:8000/bills/payment_return'
 # get from config
@@ -31,6 +33,7 @@ def set_complete(
     bill_id, employee_id,
     payment_method, amount
 ):
+    _ = update_product_quantity_in_bill(bill_id)
     response = update_bill_status(
         bill_id, employee_id,
         'Completed', payment_method,

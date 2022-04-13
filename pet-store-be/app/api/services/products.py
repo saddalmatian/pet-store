@@ -9,9 +9,10 @@ from app.db.product.delete_product_by_id import delete_product_by_id
 from app.db.product.get_product_details import get_product_details
 from app.db.product.get_all_type import get_all_type
 from app.db.product.get_random_products import get_random_products
+from app.db.product.update_product_type_name import update_product_type_name
 from fastapi import HTTPException, UploadFile
 from typing import Optional
-from app.utils.security import is_employee_or_customer
+from app.utils.security import is_admin, is_employee_or_customer
 from typing import List
 
 
@@ -118,3 +119,14 @@ def get_all_product_type(
 def get_random_product(product_type_id: str):
     resposne = get_random_products(product_type_id)
     return resposne
+
+
+def update_product_type(
+    product_type_id, product_type_name,
+    username
+):
+    _ = is_admin(username)
+    _ = update_product_type_name(product_type_id, product_type_name)
+    return {
+        "Message": "Update product type successfully"
+    }

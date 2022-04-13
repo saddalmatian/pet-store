@@ -91,6 +91,22 @@ async def create_product_type(
     return response
 
 
+@router.post(
+    "/update-product-type",
+)
+async def update_product_type(
+    product_type_id: str,
+    product_type_name: str,
+    authorization_token: str = Header(None)
+):
+    username = get_username_from_token(authorization_token)
+    response = _service_product.update_product_type(
+        product_type_id, product_type_name,
+        username
+    )
+    return response
+
+
 @router.delete(
     "/delete-product"
 )
