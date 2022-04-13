@@ -5,9 +5,12 @@ import like from "./like.png";
 import delivery from "./delivery.png";
 import './About.css';
 import Heading from "../Heading";
+import Header from '../Header/Header';
 
 function About(props) {
     return (
+        <>
+            <Header />
         <div className="container about">
             <Heading mixin="Why Choose Us?" title="Điều Gì Làm Mọi Người Tin Tưởng Pet Store?" />
             <div className="row ">
@@ -51,6 +54,7 @@ function About(props) {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 export default About;

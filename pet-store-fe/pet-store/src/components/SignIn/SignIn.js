@@ -19,6 +19,11 @@ function SignIn() {
         userRef.current.focus();
     }, []);
 
+    // useEffect(() => {
+    //     // window.location.reload();
+    //     console.log(user);
+    // }, [user]);
+
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd]);
