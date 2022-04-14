@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from app.api.models.domains import bills as _domain_bills
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
@@ -16,7 +17,12 @@ def update_bill_status(
     end_date_format = end_date.strftime('%Y-%m-%d')
     with Session(engine) as session:
         statement = select(bill).where(bill.bill_id == bill_id)
-        result = session.exec(statement).one()
+        try:
+            result = session.exec(statement).one()
+        except Exception:
+            raise HTTPException(
+                status_code=404, detail='Bill not found'
+            )
         result.employee_id = employee_id
         result.bill_status = bill_status
         if not result.bill_delivery_date:

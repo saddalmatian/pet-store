@@ -16,6 +16,29 @@ class PromotionalIn(
         ..., alias='ListProductIds'
     )
 
+    class Config:
+        schema_extra = {
+            "PromotionalEndDate": "2022-04-23",
+            "PromotionalStartDate": "2022-04-20",
+            "PromotionalSale": 25,
+            "PromotionalDesc": "Đây là khuyến mãi test",
+            "PromotionalName": "TestPromo",
+            "ListProductIds": [
+                {
+                    "ProductID": "27hdA2ax69FsVtOYbPy"
+                },
+                {
+                    "ProductID": "27hdFgudaenFpMWUXi3"
+                },
+                {
+                    "ProductID": "27hdJ40P2nH1FGIBxO8"
+                },
+                {
+                    "ProductID": "27hdqq5z1Idb7qQs6hN"
+                }
+            ]
+        }
+
 
 class PromotionalInUp(PromotionalIn, _promational_domains.PromotionalID):
     pass
