@@ -41,7 +41,7 @@ function Product() {
             .then(res => setProductsTypes(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, [])
-    console.log(products)
+    console.log(productsTypes.length)
 
     const removeData = (id) => {
         axios.delete(`http://127.0.0.1:8000/product/delete-product?product_id=${id}`,
@@ -57,7 +57,7 @@ function Product() {
             renderProduct();
         })
     }
-    console.log(`${localStorage.getItem('token')}`)
+
     const renderProduct = () => {
         return products.map((product, index) => {
             return (
@@ -96,7 +96,6 @@ function Product() {
     const [modalShow, setModalShow] = useState({ show: false, productID: '' });
     const [modalShowAdd, setModalShowAdd] = useState({ show: false, productID: '' });
     const [modalType, setModalType] = useState({ show: false })
-
     return (
         <div className="content-dashboard container-fluid" style={{ paddingLeft: "0" }}>
             <ModalEdit products={details} show={modalShow.show} onHide={() => setModalShow({ show: false, productID: '' })} />
@@ -151,66 +150,28 @@ function Product() {
                     <ModalType show={modalType.show} onHide={() => setModalType(false)} />
                 </div>
                 <div className="row d-flex justify-content-start">
-                    <table className="table table-striped col-md table-content" style={{ width: '100%' }} >
+                    <table className="table col-md table-content" style={{ width: '100%' }} >
                         <thead>
                             <tr className="text-center">
                                 <th>Animal</th>
                                 <th>Type</th>
-                                <th>Update</th>
                             </tr>
                         </thead>
+                        {/* {tbodies} */}
                         <tbody>
-                            {productsTypes.Listype && productsTypes.Listype?.map((type, index) => (
+                            {productsTypes?.map((type) => (
+                                type?.ListType.map((a, i) => {
 
-                                type.Bird.map((bird, index) => (
-                                    <tr key={index}>
-                                        <td className="text-center">Bird</td>
-                                        <td key={index} className="text-center">{bird.ProductType}</td>
-                                        <td className="text-center">
-                                            <button className="btn btn-primary">
-                                                <i className="fa fa-edit"></i>
-                                            </button>
-                                            <i className="fa fa-delete-left" style={{ paddingLeft: "10px" }}></i>
-                                        </td>
+                                    const petName = i=== 0 ? <td className="text-center" style={{padding: '30px 1rem'}} rowSpan={type.ListType.length} >{type.PetTypeName}</td>: null
+                                    return(
+                                    <tr key={i}>
+                                        {petName}
+                                        <td key={i} className="border" >{a.ProductType}</td>
+
                                     </tr>
-                                ))
-
-
-                            ))}
-                            {productsTypes.Listype && productsTypes.Listype?.map((type, index) => (
-
-                                type.Dog.map((bird, index) => (
-                                    <tr key={index}>
-                                        <td className="text-center">Dog</td>
-                                        <td key={index} className="text-center">{bird.ProductType}</td>
-                                        <td className="text-center">
-                                            <button className="btn btn-primary" >
-                                                <i className="fa fa-edit"></i>
-                                            </button>
-                                            <i className="fa fa-delete-left" style={{ paddingLeft: "10px" }}></i>
-                                        </td>
-                                    </tr>
-                                ))
-
-
-                            ))}
-                            {productsTypes.Listype && productsTypes.Listype?.map((type, index) => (
-
-                                type.Cat.map((bird, index) => (
-                                    <tr key={index}>
-                                        <td className="text-center">Cat</td>
-                                        <td className="text-center" key={index}>{bird.ProductType}</td>
-                                        <td className="text-center">
-                                            <button className="btn btn-primary" >
-                                                <i className="fa fa-edit"></i>
-                                            </button>
-                                            <i className="fa fa-delete-left" style={{ paddingLeft: "10px" }}></i>
-                                        </td>
-                                    </tr>
-                                ))
-
-
-                            ))}
+                                )})
+                            ))
+                            }
                         </tbody>
                     </table>
                 </div>

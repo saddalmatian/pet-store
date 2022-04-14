@@ -7,14 +7,14 @@ const data = {
   datasets: [
     {
       label: "Phụ kiện",
-      data: [33, 53, 85, 41],
+      data: [1575000, 165000, 85, 41],
       fill: true,
       backgroundColor: "rgba(75,192,192,0.2)",
       borderColor: "rgba(75,192,192,1)"
     },
     {
       label: "Dịch vụ",
-      data: [33, 25, 35, 51],
+      data: [63, 33, 35, 51],
       fill: false,
       borderColor: "#742774"
     }
@@ -50,7 +50,7 @@ const options = {
 function LinesChartMonthly() {
 
     return (
-        <div>
+        <div className='col-12'>
            <Line data={data} options={options} />
         </div>
     )

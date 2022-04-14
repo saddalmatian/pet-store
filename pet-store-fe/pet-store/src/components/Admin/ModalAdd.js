@@ -13,8 +13,10 @@ function ModalAdd(props) {
         productDes: '',
         productOriginPrice: '',
         brandName: '',
-        image: '',
-        petTypeName: ''
+        imageList: [],
+        petTypeName: '',
+        productDateIn:'',
+        productDateOut:''
     }
     // const [selectOption, setSelectOption]=useState({value: ''})
     const [formValues, setFormValues] = useState(initValues);
@@ -32,14 +34,47 @@ function ModalAdd(props) {
             [name]: value
         });
     }
+    //preview image before upload
+    const [imageURL, setImageURL] = useState(null);
+    const [image, setImg] = useState(null);
+    const changeHandler = e => {
+        setImageURL(URL.createObjectURL(e.target.files[0]));
+        setImg(e.target.files[0]);
+    }
+    const [imageURL2, setImageURL2] = useState(null);
+    const [image2, setImg2] = useState(null);
+    const changeHandler2 = e => {
+        setImageURL2(URL.createObjectURL(e.target.files[0]));
+        setImg2(e.target.files[0]);
+    }
+    const [imageURL3, setImageURL3] = useState(null);
+    const [image3, setImg3] = useState(null);
+    const changeHandler3 = e => {
+        setImageURL3(URL.createObjectURL(e.target.files[0]));
+        setImg3(e.target.files[0]);
+    }
 
+
+    const removeImgPreview = () => {
+        setImageURL(null);
+        setImageURL2(null);
+        setImageURL3(null);
+        props.onHide();
+
+    }
+    
 
 
     console.log(typeof (formValues.image))
     async function handleSubmit(e) {
         e.preventDefault();
         var bodyFormData = new FormData();
-        bodyFormData.append('image_display', pic);
+        formValues.imageList = [image, image2, image3];
+        formValues.imageList.forEach(item => {
+            bodyFormData.append('image_list', item);
+            console.log(item)
+        })
+      
         bodyFormData.append('product_quantity', parseInt(formValues.productQuantity))
         bodyFormData.append('product_name', formValues.productName)
         bodyFormData.append('product_description', formValues.productDes)
@@ -48,6 +83,8 @@ function ModalAdd(props) {
         bodyFormData.append('pet_type_name', formValues.petTypeName)
         bodyFormData.append('brand_name', formValues.brandName)
         bodyFormData.append('product_original_cost', parseInt(formValues.productOriginPrice))
+        bodyFormData.append('product_date_in', formValues.productDateIn  )
+        bodyFormData.append('product_date_out', formValues.productDateOut)
         setSuccess(true);
         console.log(formValues.image, formValues);
         var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6Im5oYW52aWVuMSIsImV4cCI6MTY0OTY2MTk5N30.yx2vaDdKKvGSIRppgk2S0OU_GDL4SG_0yENPOxRUBA8'
@@ -95,7 +132,7 @@ function ModalAdd(props) {
 
                         <input type="text" className="form-control-lg border" placeholder="Quantity" name="productQuantity" value={formValues.productQuantity} onChange={handleChange} required />
                         <input type="text" className="form-control-lg border" placeholder="Cost" name="productCost" value={formValues.productCost} onChange={handleChange} required />
-                        <input type="text" className="form-control-lg border" placeholder="Orginal cost" name="productOriginPrice" value={formValues.productOriginPrice} onChange={handleChange} required/>
+                        <input type="text" className="form-control-lg border" placeholder="Orginal cost" name="productOriginPrice" value={formValues.productOriginPrice} onChange={handleChange} required />
                         <select className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
                             <option value="Bird" >Bird</option>
                             <option value="Dog" >Dog</option>
@@ -103,9 +140,42 @@ function ModalAdd(props) {
                         </select>
 
                         {/* <input type="text" className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}/> */}
-                        <input type="text" className="form-control-lg border" placeholder="Product type" name="productType" value={formValues.productType} onChange={handleChange}required />
+                        <input type="text" className="form-control-lg border" placeholder="Product type" name="productType" value={formValues.productType} onChange={handleChange} required />
                         <input type="file" className="form-control-lg border" id="fileInput" name="image" onChange={handlePictureSelected} />
+                        <div className="d-flex" >
+                            <label htmlFor="product-img" className="label-items">Upload image</label>
+                            <div className="row gap-3 ">
 
+                                <div className="col-md border">
+                                    <label htmlFor="product-img" className="label-items ">Image 1</label>
+                                    <div className="text-center"><img src={imageURL && imageURL} style={{ width: '100%', height: '100%' }} /></div>
+                                    <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler} alt="no pic" />
+
+                                </div>
+
+                                <div className="col-md border">
+                                    <label htmlFor="product-img" className="label-items ">Image 2</label>
+                                    <div className="text-center"><img src={imageURL2 && imageURL2} style={{ width: '100%', height: '100%' }} /></div>
+                                    <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler2} alt="no pic" />
+
+                                </div>
+                                <div className="col-md border">
+                                    <label htmlFor="product-img" className="label-items ">Image 3</label>
+                                    <div className="text-center"><img src={imageURL3 && imageURL3} style={{ width: '100%', height: '100%' }} /></div>
+                                    <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler3} alt="no pic" />
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="d-flex">
+                            <label htmlFor="product-date-in" className="label-items">Date in</label>
+                            <input type="date" className="form-control-lg border input-items" name="productDateIn" value={formValues.productDateIn} onChange={handleChange} />
+                        </div>
+                        <div className="d-flex">
+                            <label htmlFor="product-date-out" className="label-items">Date out</label>
+                            <input type="date" name="productDateOut" className="form-control-lg border input-items" value={formValues.productDateOut} onChange={handleChange} />
+                        </div>
                         <textarea className="form-control-lg border" placeholder="Enter your description..." name="productDes" value={formValues.productDes} onChange={handleChange} required></textarea>
                         <button className="btn btn-lg btn-primary" type="submit" >Save</button>
                         <button className="btn btn-lg btn-warning " onClick={props.onHide}>Cancel</button>

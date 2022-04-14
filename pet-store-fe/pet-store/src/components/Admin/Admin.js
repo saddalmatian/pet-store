@@ -24,13 +24,11 @@ function Admin() {
 
                 <div className="col-md" style={{ paddingLeft: "0" }} >
                     <Routes>
-                        <Route path='/' element={<Dashboard />} />
-                        <Route path='/dashboard' element={<Dashboard />} />
-                        <Route path='/product' element={<Product />} />
-                        <Route path='/promo' element={<Promo />} />
-                        <Route path='/staff' element={<Staff />} />
-                        <Route path='/bill' element={<Bill />} />
-
+                        <Route path='/admin/dashboard' element={<Dashboard />} />
+                        <Route path='/admin/product' element={<Product />} />
+                        <Route path='/admin/promo' element={<Promo />} />
+                        <Route path='/admin/staff' element={<Staff />} />
+                        <Route path='/admin/bill' element={<Bill />} />
                     </Routes>
                     <Login />
                 </div>
