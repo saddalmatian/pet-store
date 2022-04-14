@@ -1,5 +1,9 @@
 import hashlib
 import hmac
+from fastapi import HTTPException
+
+from sqlmodel import Session, select
+from app.api.models.domains.employees import EmployeeSQL
 from app.utils.db_helper import generate_ksuid
 from datetime import datetime
 from app.api.services.vnpay import vnpay
@@ -13,7 +17,7 @@ from app.db.bill.update_status import update_bill_status
 from app.db.bill.get_all_cart import get_all_cart_admin
 from app.db.product.update_product_quantity_in_bill import\
     update_product_quantity_in_bill
-
+from app.utils.db_helper import engine
 VNPAY_RETURN_URL = 'http://localhost:8000/bills/payment_return'
 # get from config
 VNPAY_PAYMENT_URL = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
@@ -30,14 +34,21 @@ def get_all_cart():
 
 
 def set_complete(
-    bill_id, employee_id,
-    payment_method, amount
+    username, bill_id
 ):
+    employee = EmployeeSQL
+    with Session(engine) as session:
+        statement = select(employee).where(
+            employee.employee_username == username)
+        try:
+            result = session.exec(statement).first()
+            employee_id = result.employee_id
+        except Exception:
+            raise HTTPException(status_code=404, detail="Employee not found")
     _ = update_product_quantity_in_bill(bill_id)
     response = update_bill_status(
         bill_id, employee_id,
-        'Completed', payment_method,
-        amount
+        'Completed'
     )
     return response
 

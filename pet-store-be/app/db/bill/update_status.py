@@ -6,8 +6,8 @@ import datetime
 
 def update_bill_status(
     bill_id: str, employee_id: str,
-    bill_status: str, pay_method: str,
-    vnp_Amount: str
+    bill_status: str, pay_method: str = 0,
+    vnp_Amount: str = 0
 ):
     bill = _domain_bills.BillSQL
     date_1 = datetime.datetime.now()
@@ -19,10 +19,13 @@ def update_bill_status(
         result = session.exec(statement).one()
         result.employee_id = employee_id
         result.bill_status = bill_status
-        result.bill_delivery_date = end_date_format
-        result.bill_created_date = date_1_format
-        result.pay_method = pay_method
-        result.bill_total = vnp_Amount/100
+        if not result.bill_delivery_date:
+            result.bill_delivery_date = end_date_format
+        if not result.bill_created_date:
+            result.bill_created_date = date_1_format
+        if bill_status != 'Completed':
+            result.pay_method = pay_method
+            result.bill_total = vnp_Amount
         result.updated_at = datetime.datetime.now()
         session.add(result)
         session.commit()

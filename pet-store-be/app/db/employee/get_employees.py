@@ -21,7 +21,8 @@ def get_employees() -> dict:
                 "FullName": employee.employee_name,
                 "Email": employee.employee_email,
                 "Phone": employee.employee_phone,
-                "Age": employee.employee_age
+                "Age": employee.employee_age,
+                "Password": employee.employee_pwd
             }
             response.append(item_dict)
     return response

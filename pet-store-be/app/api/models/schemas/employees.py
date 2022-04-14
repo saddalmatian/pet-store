@@ -14,6 +14,7 @@ class GetAllEmployee(
     _domain_employee.Phone, _domain_employee.Age,
     _domain_employee.Id, _domain_employee.FullName,
     _domain_employee.Username, _domain_employee.Email,
+    _domain_employee.Password
 ):
     pass
 

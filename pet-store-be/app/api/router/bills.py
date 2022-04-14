@@ -16,14 +16,12 @@ router = APIRouter(
     "/set-complete"
 )
 async def set_complete(
-    bill_id: str, employee_id: str,
-    payment_method: str, amount: int,
+    bill_id: str,
     authorization_token: str = Header(None)
 ):
-    _ = get_username_from_token(authorization_token)
+    username = get_username_from_token(authorization_token)
     response = _service_bills.set_complete(
-        bill_id, employee_id,
-        payment_method, amount
+        username, bill_id
     )
     return response
 

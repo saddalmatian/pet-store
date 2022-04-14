@@ -15,3 +15,7 @@ class PromotionalIn(
     list_product_id: List[_product_domains.ProductID] = Field(
         ..., alias='ListProductIds'
     )
+
+
+class PromotionalInUp(PromotionalIn, _promational_domains.PromotionalID):
+    pass
