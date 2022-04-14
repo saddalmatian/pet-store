@@ -13,10 +13,10 @@ function Comment( props ) {
                         <p className="user-name">{props.name}</p>
                         <p className="user-comment__content">{props.content}</p>
                     </div>
-                    <div className="user-reaction">
+                    {/* <div className="user-reaction">
                         <p className="user-action">Reply</p>
                         <p className="user-comment__time">8 hours ago</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

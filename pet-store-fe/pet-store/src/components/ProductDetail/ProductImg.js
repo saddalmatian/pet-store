@@ -4,7 +4,6 @@ import './ProductImg.css';
 
 function ProductImg( props ) {
     const [index, setIndex] = useState(0);
-    console.log(props);
 
     const handleClick = (e) => {
         setIndex(e);

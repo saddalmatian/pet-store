@@ -124,7 +124,7 @@
 
 .item-review__rating-num {
     font-size: 1.8rem;
-    margin: 0 10px;
+    margin: 0 5px 0 0;
     padding: .5rem;
     border-right: 2px solid var(--primary-color);
 }

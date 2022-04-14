@@ -37,11 +37,11 @@ function SignIn() {
         })
             .then(function (response) {
                 //handle success
-                console.log(response);
                 setSuccess(true);
                 const accessToken = response?.data?.Token;
-                console.log(accessToken);
+                const name = response?.data?.Username;
                 localStorage.setItem('Token', accessToken);
+                localStorage.setItem('Name', name);
                 setUser('');
                 setPwd('');
                 // window.location.reload();
@@ -100,7 +100,7 @@ function SignIn() {
                             <p ref={errRef} className="errmsg">{errMsg}</p>
 
                             <p className="sign-in__description">Nếu bạn chưa có tài khoản, vui lòng chọn
-                                <Link to="/sign_up"><span>Đăng ký</span></Link>
+                                <Link to="/sign_up"><span> Đăng ký</span></Link>
                             </p>
                             <input type="submit" className="sign-in__btn" value="Đăng nhập"></input>
                         </form>
