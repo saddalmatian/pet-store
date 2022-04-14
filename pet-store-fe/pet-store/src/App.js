@@ -42,7 +42,7 @@ function App() {
       <Routes>
         <Route path='/admin' element={<Admin />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
 
 
       <Admin />

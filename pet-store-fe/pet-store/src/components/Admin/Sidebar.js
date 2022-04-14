@@ -19,45 +19,45 @@ function Sidebar() {
             >
                 <SideNav.Toggle style={{ color: "#ffff" }} />
                 <SideNav.Nav selected={selected}>
-                    <NavItem eventKey="/dashboard">
+                    <NavItem eventKey="/admin/dashboard">
                         <NavIcon >
-                            <Link to="/dashboard"><i className="fa fa-fw fa-home" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
+                            <Link to="/admin/dashboard"><i className="fa fa-fw fa-home" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
                         </NavIcon>
                         <NavText style={{ color: "#ffff" }}>
-                            <Link to="/dashboard" style={{ textDecoration: '0' }}>Trang chủ</Link>
+                            <Link to="/admin/dashboard" style={{ textDecoration: '0' }}>Trang chủ</Link>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="/product">
+                    <NavItem eventKey="/admin/product">
                         <NavIcon >
-                            <Link to="/product"><i className="fa fa-fw fa-box-open" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
+                            <Link to="/admin/product"><i className="fa fa-fw fa-box-open" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
                         </NavIcon>
                         <NavText style={{ color: "#ffff" }}>
-                            <Link to="/product" style={{ textDecoration: '0' }} >  Sản phẩm</Link>
+                            <Link to="/admin/product" style={{ textDecoration: '0' }} >  Sản phẩm</Link>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="/bill">
+                    <NavItem eventKey="/admin/bill">
                         <NavIcon >
-                            <Link to="/bill" ><i className="fa fa-fw fa-credit-card" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
+                            <Link to="/admin/bill" ><i className="fa fa-fw fa-credit-card" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
                         </NavIcon>
                         <NavText style={{ color: "#ffff" }}>
 
-                            <Link to="/bill" style={{ textDecoration: '0' }}>Đơn hàng</Link>
+                            <Link to="/admin/bill" style={{ textDecoration: '0' }}>Đơn hàng</Link>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="/promo">
+                    <NavItem eventKey="/admin/promo">
                         <NavIcon >
-                            <Link to="/promo"><i className="fa fa-fw fa-tag" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
+                            <Link to="/admin/promo"><i className="fa fa-fw fa-tag" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
                         </NavIcon>
                         <NavText style={{ color: "#ffff" }}>
-                            <Link to="/promo" style={{ textDecoration: '0' }}>Khuyến mãi</Link>
+                            <Link to="/admin/promo" style={{ textDecoration: '0' }}>Khuyến mãi</Link>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="/staff">
+                    <NavItem eventKey="/admin/staff">
                         <NavIcon >
-                            <Link to="/staff"><i className="fa fa-fw fa-user-circle" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
+                            <Link to="/admin/staff"><i className="fa fa-fw fa-user-circle" style={{ fontSize: '1.75em', color: "#ffff" }} /></Link>
                         </NavIcon>
                         <NavText style={{ color: "#ffff" }}>
-                            <Link to="/staff" style={{ textDecoration: '0' }}>Nhân viên</Link>
+                            <Link to="/admin/staff" style={{ textDecoration: '0' }}>Nhân viên</Link>
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>
