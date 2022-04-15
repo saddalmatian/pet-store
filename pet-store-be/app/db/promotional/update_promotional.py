@@ -21,7 +21,7 @@ def update_promotional(
             promotional.promotional_id == pro_id
         )
         try:
-            result = session.exec(statement).first()
+            result = session.exec(statement).one()
         except Exception:
             raise HTTPException(
                 status_code=404, detail='Promotional not found'
