@@ -21,19 +21,22 @@ function ProductItem({ ...props }) {
                 <div className="product-item__img" style={{ backgroundImage: `url(${props.ImageSource})` }} alt="product-img"></div>
                 <h4 className="product-item__name">{props.ProductName}</h4>
                 <div className="product-item__price">
-                    { props.Promotional &&
-                        props.Promotional.promotional_id ? ( props.ProductCost &&
+                    {props.Promotional &&
+                        props.Promotional.promotional_id ? (props.ProductCost &&
                             <>
                                 <div className="product-item__price-old">{formatCash(props.ProductCost.toString())}đ</div>
                                 <div className="product-item__price-current">{formatCash(discount(props.ProductCost, props.Promotional.promotional_sale))}đ</div>
                             </>
-                        ) : ( props.ProductCost &&
-                            <div className="product-item__price-current">{formatCash(props.ProductCost)}đ</div>
-                        )
+                    ) : (props.ProductCost &&
+                        <div className="product-item__price-current">{formatCash(props.ProductCost)}đ</div>
+                    )
                     }
                 </div>
                 <div className="product-item__action">
-                    <Start value={props.RateStarNumber} />
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Start value={props.RateStarNumber} />
+                        <p className="sold-value">Đã bán {props.ProductSold}</p>
+                    </div>
                     <div className="product-item__cart">
                         <i className="fas fa-shopping-cart product-item__cart-icon"></i>
                     </div>

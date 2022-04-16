@@ -12,6 +12,7 @@ import Header from '../Header/Header';
 function Product() {
     const { idType } = useParams();
     const { petType } = useParams();
+    const { mostSold } = useParams();
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -24,6 +25,10 @@ function Product() {
             const path = `?pet_type_id=${petType}`;
             link = link.concat(path);
         } 
+        if(mostSold) {
+            const path = `?most_sold=${mostSold}`;
+            link = link.concat(path);
+        }
         axios.post(link,
             {
                 headers: {
@@ -33,7 +38,7 @@ function Product() {
         )
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [idType, petType])
+    }, [idType, petType, mostSold])
 
     return (
         <>
