@@ -13,22 +13,38 @@ function Product() {
     const { idType } = useParams();
     const { petType } = useParams();
     const { mostSold } = useParams();
+    const { isDesc } = useParams();
+    const { isAsc } = useParams();
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         let link = 'http://127.0.0.1:8000/product/get-all-products/';
+
         if (idType) {
             const path = `?product_type_id=${idType}`;
             link = link.concat(path);
-        } 
+        }; 
+
         if (petType) {
             const path = `?pet_type_id=${petType}`;
             link = link.concat(path);
-        } 
+        }; 
+
         if(mostSold) {
             const path = `?most_sold=${mostSold}`;
             link = link.concat(path);
-        }
+        };
+
+        if(isDesc) {
+            const path = `?order_by=${isDesc}`;
+            link = link.concat(path);
+        };
+
+        if(isAsc) {
+            const path = `?order_by=${isAsc}`;
+            link = link.concat(path);
+        };
+
         axios.post(link,
             {
                 headers: {
@@ -38,7 +54,7 @@ function Product() {
         )
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [idType, petType, mostSold])
+    }, [idType, petType, mostSold, isDesc, isAsc])
 
     return (
         <>
