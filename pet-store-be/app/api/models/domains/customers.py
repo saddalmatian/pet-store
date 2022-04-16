@@ -36,3 +36,7 @@ class Username(BaseModel):
 
 class Password(BaseModel):
     password: str = Field(alias='Password')
+
+
+class CustomerID(BaseModel):
+    customer_id: str = Field(alias='CustomerID')

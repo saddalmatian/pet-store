@@ -11,4 +11,4 @@ class RateSQL(SQLModel, table=True):
 
 
 class RateStarNumber(BaseModel):
-    rate_star_number: int = Field(alias='RateStarNumber')
+    rate_star_number: float = Field(alias='RateStarNumber')

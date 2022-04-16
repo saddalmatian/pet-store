@@ -3,7 +3,8 @@ from app.api.models.domains import\
     (
         products as _domain_products,
         images as _domain_images,
-        promotionals as _domain_promotionals
+        promotionals as _domain_promotionals,
+        rates as _domain_rates
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select, asc, desc
@@ -25,6 +26,20 @@ def check_search(a: str, b: str):
     if a.find(b) >= 0:
         return True
     return False
+
+
+def round_off_rating(number):
+    """Round a number to the closest half integer.
+    >>> round_off_rating(1.3)
+    1.5
+    >>> round_off_rating(2.6)
+    2.5
+    >>> round_off_rating(3.0)
+    3.0
+    >>> round_off_rating(4.1)
+    4.0"""
+
+    return round(number * 2) / 2
 
 
 def get_all_products_in_db(
@@ -92,12 +107,22 @@ def get_all_products_in_db(
                     image_source = detect_img.image_source
             product_cost = item.product_cost
             product_sold = item.product_sold
+            rate = _domain_rates.RateSQL
+            statement = select(rate).where(rate.product_id == product_id)
+            result = session.exec(statement)
+            rate_list = []
+            for rate in result:
+                rate_list.append(rate.rate_star_number)
+            avg_rate = 0
+            if rate_list:
+                avg_rate = sum(rate_list)/len(rate_list)
+            avg_rate = round_off_rating(avg_rate)
             item_dict = {
                 "ProductID": product_id,
                 "ProductName": product_name,
                 "ImageSource": image_source,
                 "ProductCost": product_cost,
-                "RateStarNumber": 0,
+                "RateStarNumber": avg_rate,
                 "Promotional": result_promotional,
                 "ProductSold": product_sold
             }

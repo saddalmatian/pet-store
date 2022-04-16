@@ -5,7 +5,8 @@ from app.api.router import\
         bookings, products, pet_types,
         images, customers,
         employees, bills, comments,
-        promotionals, dashboards
+        promotionals, dashboards,
+        rates
     )
 # db connection
 
@@ -22,6 +23,8 @@ app.include_router(bills.router)
 app.include_router(comments.router)
 app.include_router(promotionals.router)
 app.include_router(dashboards.router)
+app.include_router(rates.router)
+
 
 origins = [
     "http://localhost:3000",

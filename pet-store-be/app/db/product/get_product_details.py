@@ -12,6 +12,20 @@ from app.utils.db_helper import engine
 from sqlmodel import Session, select
 
 
+def round_off_rating(number):
+    """Round a number to the closest half integer.
+    >>> round_off_rating(1.3)
+    1.5
+    >>> round_off_rating(2.6)
+    2.5
+    >>> round_off_rating(3.0)
+    3.0
+    >>> round_off_rating(4.1)
+    4.0"""
+
+    return round(number * 2) / 2
+
+
 def get_product_details(
     product_id: str
 ) -> dict:
@@ -74,22 +88,19 @@ def get_product_details(
             }
             list_comments.append(comments)
         comment_amount = len(list_comments)
-        rate_number = 0
-        try:
-            statement_rate = select(product, rate).where(
-                and_(
-                    product.product_id == rate.product_id,
-                    product.product_id == product_id
-                )
-            )
-            results_rate = session.exec(statement_rate)
-            result_rate = results_rate.one()
-            rate_number = result_rate.RateSQL.rate_star_number
-        except Exception:
-            rate_number = 0
+        rate = _domain_rates.RateSQL
+        statement = select(rate).where(rate.product_id == product_id)
+        result = session.exec(statement)
+        rate_list = []
+        for rate in result:
+            rate_list.append(rate.rate_star_number)
+        avg_rate = 0
+        if rate_list:
+            avg_rate = sum(rate_list)/len(rate_list)
         statment_producttype = select(product_type).where(
             product_result.product_type_id == product_type.product_type_id
         )
+        avg_rate = round_off_rating(avg_rate)
         result = session.exec(statment_producttype)
         product_type_result = result.one()
         product_type_id = product_type_result.product_type_id
@@ -103,7 +114,7 @@ def get_product_details(
         result = session.exec(statement).one()
         brand_name = result.brand_name
     response = {
-        "RateStarNumber": rate_number,
+        "RateStarNumber": avg_rate,
         "ProductDescription": product_description,
         "ProductID": product_id,
         "ProductName": product_name,
