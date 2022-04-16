@@ -9,7 +9,7 @@ function Start( props ) {
             <i className="product-item__star--gold fas fa-star"></i>
             <i className="product-item__star--gold fas fa-star"></i>
             <i className="fas fa-star"></i> */}
-            <p className="product-item__star-value">{props.value}</p>
+            <p className="product-item__star-value">({props.value})</p>
         </div>
     );
 }

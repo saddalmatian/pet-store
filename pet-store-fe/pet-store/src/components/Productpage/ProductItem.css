@@ -68,11 +68,6 @@
   padding-bottom: 6px;
 }
 
-.product-item__action-rating {
-  font-size: 1rem;
-  color: #d5d5d5;
-}
-
 .product-item__cart-icon {
   font-size: 1.4rem;
   color: var(--primary-color);
@@ -113,4 +108,11 @@
 
 .product-item__sale-off-label {
   color: var(--white-color);
+}
+
+.sold-value {
+  font-size: 1.3rem;
+  color: var(--black-color);
+  margin-bottom: 0;
+  margin-left: 4px;
 }
