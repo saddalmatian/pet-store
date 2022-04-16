@@ -4,7 +4,6 @@ import './CateItem.css';
 import CateItemLink from './CateItemLink';
 
 function CateItem(props) {
-    console.log(props)
     return (
         <div className="category-item">
             <p className="category-item__heading">{props.heading}</p>
@@ -13,7 +12,6 @@ function CateItem(props) {
                     key={index}
                     style={{ textDecoration: "none", color: "var(--black-color)" }}
                 >
-                    {console.log(item)}
                     <CateItemLink title={item.ProductType} />
                 </Link>
             ))}

@@ -10,3 +10,7 @@
 .category-item__heading:hover {
   color: var(--primary-color);
 }
+
+.category-item__heading:active {
+  color: var(--primary-color);
+}

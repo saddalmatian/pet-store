@@ -44,7 +44,6 @@ function SignIn() {
                 localStorage.setItem('Name', name);
                 setUser('');
                 setPwd('');
-                // window.location.reload();
             })
             .catch(function (err) {
                 //handle error
