@@ -11,6 +11,14 @@ from sqlmodel import Session, asc, desc, select
 
 def get_profit_services():
     booking = _domain_bookings.BookingSQL
+    bathing = 0
+    bathing_count = 0
+    boarding = 0
+    boarding_count = 0
+    walking = 0
+    walking_count = 0
+    grooming = 0
+    grooming_count = 0
     with Session(engine) as session:
         total = 0
         temp = 0
@@ -19,9 +27,29 @@ def get_profit_services():
         for book in result:
             total += book.total
             temp += 1
+            if book.book_type == 'Bathing':
+                bathing_count += 1
+                bathing += book.total
+            if book.book_type == 'Boarding':
+                boarding_count += 1
+                boarding += book.total
+            if book.book_type == 'Walking':
+                walking_count += 1
+                walking += book.total
+            if book.book_type == 'Grooming':
+                grooming_count += 1
+                grooming += book.total
     response = {
         "Total": total,
-        "BookingNumber": temp
+        "BookingNumber": temp,
+        "BathingProfit": bathing,
+        "BathingCount": bathing_count,
+        "WalkingProfit": walking,
+        "WalkingCount": walking_count,
+        "BoardingProfit": boarding,
+        "BoardingCount": boarding_count,
+        "GroomingProfit": grooming,
+        "GroomingCount": grooming_count,
     }
     return response
 
@@ -72,6 +100,7 @@ def get_most_profit(order_by: str):
     image = _domain_images.ImageSQL
     response = []
     with Session(engine) as session:
+        total_profit = 0
         statement = select(product)
         if order_by == 'asc':
             statement = select(product)
@@ -101,8 +130,13 @@ def get_most_profit(order_by: str):
                 "RateStarNumber": 0,
                 "Profit": profit
             }
+            total_profit += profit
             _ = response.append(item_dict)
         response = sorted(response, key=lambda x: x['Profit'], reverse=True)
         if order_by == 'asc':
             response = sorted(response, key=lambda x: x['Profit'])
+        response = {
+            "TotalProfit": total_profit,
+            "ListProduct": response
+        }
     return response

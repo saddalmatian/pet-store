@@ -24,7 +24,7 @@ async def get_product_sold(
 
 @router.get("/get-most-profit")
 async def get_product_profit(
-    product_type: str, order_by: str = 'desc',
+    order_by: str = 'desc',
     authorization_token: str = Header(None),
 ) -> dict:
     username = get_username_from_token(authorization_token)

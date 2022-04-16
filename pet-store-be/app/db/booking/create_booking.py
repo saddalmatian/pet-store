@@ -11,13 +11,17 @@ def new_booking(
     user_id: str, booking_in: _schemas_booking.BookingIn
 ):
     book_id = generate_ksuid()
+    book_type = booking_in.book_type.value
+    _ = delattr(booking_in, 'book_type')
+
     booking = _domain_booking.BookingSQL(
         **booking_in.dict(by_alias=True),
         **{
             "BookId": book_id,
             "CustomerId": user_id,
             "Total": 0,
-            "BookStatus": 'New'
+            "BookStatus": 'New',
+            "BookType": book_type
         }
     )
     with Session(engine) as session:

@@ -2283,8 +2283,9 @@ CREATE TABLE `booking` (
   `book_time` datetime NOT NULL,
   `note` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `customer_phone` varchar(11) NOT NULL,
-  `customer_email` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_email` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `book_type` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`book_id`),
   KEY `fk_booking_1_idx` (`customer_id`),
   CONSTRAINT `fk_booking_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
@@ -2297,7 +2298,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES ('27rYcaBC0T9ebcYE66o',0,'asdasd','Completed',250000,'2022-04-16 03:25:46','string','string','string','270zIfx9EXn7OWk2lGF');
+INSERT INTO `booking` VALUES ('27rYcaBC0T9ebcYE66o',0,'asdasd','Completed',250000,'2022-04-16 03:25:46','string','string','string','270zIfx9EXn7OWk2lGF','Bathing'),('27t72oVPtrIGdPusW0f',1,'Trần Đăng Giang Hòa','Completed',125000,'2022-04-16 16:38:34','It sua','0914764104','gianghoatran09@gmail.com','270zIfx9EXn7OWk2lGF','Bathing'),('27t7A9n9QEMSeS1KAgr',2,'Võ Khánh Quí','Completed',500000,'2022-04-16 16:38:34','Nhiều sữa','0914764104','gianghoatran09@gmail.com','271Ct3h9TvB7jxntPM5','Boarding');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4464,4 +4465,4 @@ USE `pet_store`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-16 13:13:04
+-- Dump completed on 2022-04-16 23:46:25
