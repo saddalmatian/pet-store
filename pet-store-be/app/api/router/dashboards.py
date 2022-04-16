@@ -30,3 +30,12 @@ async def get_product_profit(
     username = get_username_from_token(authorization_token)
     response = _service_dashboard.get_product_profit(username, order_by)
     return response
+
+
+@router.get("/get-profit-service")
+async def get_service_profit(
+    authorization_token: str = Header(None),
+) -> dict:
+    username = get_username_from_token(authorization_token)
+    response = _service_dashboard.get_profit_service(username)
+    return response

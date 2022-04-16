@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from app.utils.db_helper import get_userid_from_username
 from app.db.booking.create_booking import new_booking
 from app.db.booking.set_booking_finish import set_booking_finish
@@ -9,6 +10,11 @@ def booking(
     username: str, booking_in: _schemas_booking.BookingIn,
 ):
     user_id = get_userid_from_username(username, is_customer=True)
+    pet_amount = booking_in.pet_amount
+    if pet_amount < 1:
+        raise HTTPException(
+            status_code=400, detail="Pet amount must greater than 0"
+        )
     response = new_booking(
         user_id, booking_in
     )

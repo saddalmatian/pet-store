@@ -2,10 +2,28 @@ from operator import and_
 from app.api.models.domains import\
     (
         products as _domain_products,
-        images as _domain_images
+        images as _domain_images,
+        bookings as _domain_bookings
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, asc, desc, select
+
+
+def get_profit_services():
+    booking = _domain_bookings.BookingSQL
+    with Session(engine) as session:
+        total = 0
+        temp = 0
+        statement = select(booking).where(booking.book_status == 'Completed')
+        result = session.exec(statement)
+        for book in result:
+            total += book.total
+            temp += 1
+    response = {
+        "Total": total,
+        "BookingNumber": temp
+    }
+    return response
 
 
 def get_most_sold(
