@@ -2,10 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.router import\
     (
-        products, pet_types,
+        bookings, products, pet_types,
         images, customers,
-        employees, services,
-        bills, comments,
+        employees, bills, comments,
         promotionals, dashboards
     )
 # db connection
@@ -18,7 +17,7 @@ app.include_router(pet_types.router)
 app.include_router(images.router)
 app.include_router(customers.router)
 app.include_router(employees.router)
-app.include_router(services.router)
+app.include_router(bookings.router)
 app.include_router(bills.router)
 app.include_router(comments.router)
 app.include_router(promotionals.router)

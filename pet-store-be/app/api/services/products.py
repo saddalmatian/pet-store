@@ -55,11 +55,13 @@ def get_all_products(
     product_type_id: Optional[str],
     pet_type_id: Optional[str],
     most_sold: Optional[bool],
-    order_by: str
+    order_by: str,
+    search_text: str
 ) -> list:
     response = get_all_products_in_db(
         product_type_id, pet_type_id,
-        most_sold, order_by
+        most_sold, order_by,
+        search_text
     )
     return response
 

@@ -19,11 +19,20 @@ def chain_or(a, b):
     return or_(a, b)
 
 
+def check_search(a: str, b: str):
+    a = a.lower()
+    b = b.lower()
+    if a.find(b) >= 0:
+        return True
+    return False
+
+
 def get_all_products_in_db(
     product_type_id: str,
     pet_type_id: str,
     most_sold: str,
-    order_by: str
+    order_by: str,
+    search_text: str
 ) -> dict:
     with Session(engine) as session:
         product = _domain_products.ProductSQL
@@ -99,4 +108,12 @@ def get_all_products_in_db(
             response = sorted(
                 response, key=lambda d: d['ProductSold'], reverse=True
             )
-    return response
+        if search_text:
+            response = list(map(lambda x: x if check_search(
+                x['ProductName'], search_text) else None, response)
+            )
+        final_response = []
+        for i in response:
+            if i is not None:
+                final_response.append(i)
+    return final_response
