@@ -15,6 +15,7 @@ function Product() {
     const { mostSold } = useParams();
     const { isDesc } = useParams();
     const { isAsc } = useParams();
+    const { searchText } = useParams();
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -23,24 +24,24 @@ function Product() {
         if (idType) {
             const path = `?product_type_id=${idType}`;
             link = link.concat(path);
-        }; 
+        };
 
         if (petType) {
             const path = `?pet_type_id=${petType}`;
             link = link.concat(path);
-        }; 
+        };
 
-        if(mostSold) {
+        if (mostSold) {
             const path = `?most_sold=${mostSold}`;
             link = link.concat(path);
         };
 
-        if(isDesc) {
+        if (isDesc) {
             const path = `?order_by=${isDesc}`;
             link = link.concat(path);
         };
 
-        if(isAsc) {
+        if (isAsc) {
             const path = `?order_by=${isAsc}`;
             link = link.concat(path);
         };
@@ -54,7 +55,7 @@ function Product() {
         )
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [idType, petType, mostSold, isDesc, isAsc])
+    }, [idType, petType, mostSold, isDesc, isAsc, searchText])
 
     return (
         <>
@@ -64,20 +65,16 @@ function Product() {
                 <div className="row">
                     <Category />
                     <div className="col-md-10">
-                        <div className="row">
-                            <Filter />
+                        <div className="row " >
+                            <Filter setProducts={setProducts}/>
                         </div>
                         <div className="d-flex gap-2 justify-content-center align-items-center">
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
-                                {/* <Routes> */}
                                 {products.map((product, index) =>
-                                    // <Route path={`/product_detail/${product.ProductID}`} element={<ProductDetail />}>
                                     <Link to={`/product_detail/${product.ProductID}`} key={index} style={{ textDecoration: "none" }}>
                                         <ProductItem  {...product} />
                                     </Link>
-                                    // </Route>
                                 )}
-                                {/* </Routes> */}
                             </div>
                         </div>
                     </div>

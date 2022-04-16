@@ -160,7 +160,7 @@ function ProductDetail({ ...props }) {
                         <Line />
                         <div className="comment-wrap">
                             <Start />
-                            <p className="item-review__rating-num">{product.RateStarNumber}</p>
+                            <p className="item-review__rating-num">({product.RateStarNumber})</p>
                             <p className="item-review__comment-total">{product.CommentAmounts} Comments</p>
                         </div>
                         <p className="item-review__comment-heading">Comment</p>

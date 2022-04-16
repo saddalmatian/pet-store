@@ -24,15 +24,17 @@ function Category() {
         <div className="col-md-2 category">
             <p className="category-heading">Danh mục sản phẩm</p>
             {productsTypes && productsTypes?.map((type, index) => (
-                <>
-                <Link 
-                    to={`/product-list/${type.PetTypeId}`} 
+                <Link
+                    to={`/product-list/${type.PetTypeId}`}
                     key={index}
                     style={{ textDecoration: "none", color: "var(--black-color)" }}
                 >
-                    <CateItem heading={`Sản phẩm cho ${type.PetTypeName}`} items={type.ListType} petType={type.PetTypeId} />
+                    <CateItem 
+                        heading={`Sản phẩm cho ${type.PetTypeName}`} 
+                        items={type.ListType} 
+                        petType={type.PetTypeId} 
+                    />
                 </Link>
-                </>
             ))}
         </div>
     );
