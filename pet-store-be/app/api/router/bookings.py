@@ -10,6 +10,20 @@ router = APIRouter(
 )
 
 
+@router.get(
+    "/get-all-booking",
+)
+async def get_all_booking(
+    book_type: str = '',
+    authorization_token: str = Header(None),
+):
+    username = get_username_from_token(authorization_token)
+    response = _service_booking.get_all_booking(
+        username, book_type
+    )
+    return response
+
+
 @router.post(
     "/booking",
 )

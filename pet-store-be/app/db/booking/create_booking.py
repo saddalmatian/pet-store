@@ -4,7 +4,22 @@ from app.api.models.domains import (
 )
 from app.api.models.schemas import bookings as _schemas_booking
 from app.utils.db_helper import engine, generate_ksuid
-from sqlmodel import Session
+from sqlmodel import Session, select
+
+
+def get_all_bookings(
+    book_type: str
+):
+    booking = _domain_booking.BookingSQL
+    with Session(engine) as session:
+        response = []
+        statement = select(booking)
+        if book_type:
+            statement = select(booking).where(booking.book_type == book_type)
+        result = session.exec(statement)
+        for item in result:
+            response.append(item)
+    return response
 
 
 def new_booking(

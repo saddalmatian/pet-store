@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from app.utils.db_helper import get_userid_from_username
-from app.db.booking.create_booking import new_booking
+from app.db.booking.create_booking import new_booking, get_all_bookings
 from app.db.booking.set_booking_finish import set_booking_finish
 from app.api.models.schemas import bookings as _schemas_booking
 from app.utils.security import is_employee_or_customer
@@ -29,4 +29,13 @@ def finish_booking(
         response = set_booking_finish(
             book_finish_in
         )
+        return response
+
+
+def get_all_booking(
+    username: str, book_type: str
+):
+    user = is_employee_or_customer(username)
+    if user == 'employee':
+        response = get_all_bookings(book_type)
         return response
