@@ -24,13 +24,12 @@ function ProductItem({ ...props }) {
                     {props.Promotional &&
                         props.Promotional.promotional_id ? (props.ProductCost &&
                             <>
-                                <div className="product-item__price-old">{formatCash(props.ProductCost.toString())}đ</div>
+                                <div className="product-item__price-old">{formatCash(props.ProductCost)}đ</div>
                                 <div className="product-item__price-current">{formatCash(discount(props.ProductCost, props.Promotional.promotional_sale))}đ</div>
                             </>
                     ) : (props.ProductCost &&
                         <div className="product-item__price-current">{formatCash(props.ProductCost)}đ</div>
-                    )
-                    }
+                    )}
                 </div>
                 <div className="product-item__action">
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
