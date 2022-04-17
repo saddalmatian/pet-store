@@ -5,6 +5,7 @@ import ModalType from './ModalType';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "./Header"
+import SideBar from './Sidebar'
 
 
 
@@ -57,6 +58,30 @@ function Product() {
             renderProduct();
         })
     }
+    const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
+
+    function handleResize() {
+        // iPhone X width, for example
+        if (window.innerWidth <= 375) {
+          setSideNavExpanded(false);
+    
+          // write other logic here such as disabling hamburger button
+        }
+      }
+    
+      React.useEffect(() => {
+        window.addEventListener("resize", handleResize);
+    
+        handleResize(); // on-component-mount, check already to see if user has a small device
+    
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []); 
+      const contentStyle = {
+        marginLeft: sideNavExpanded ? "250px" : "70px", // arbitrary values
+        transition: "margin 0.2s ease"
+      };
 
     const renderProduct = () => {
         return products.map((product, index) => {
@@ -97,24 +122,31 @@ function Product() {
     const [modalShowAdd, setModalShowAdd] = useState({ show: false, productID: '' });
     const [modalType, setModalType] = useState({ show: false })
     return (
+        <div>
+        <SideBar
+            setSideNavExpanded={setSideNavExpanded}
+            sideNavExpanded={sideNavExpanded}
+        />
+        <div style={contentStyle}>
         <div className="content-dashboard container-fluid" style={{ paddingLeft: "0" }}>
+            <div className="col-md" style={{ paddingLeft: "0" }}><Header title="Sản phẩm" />
+
             <ModalEdit products={details} show={modalShow.show} onHide={() => setModalShow({ show: false, productID: '' })} />
             {console.log(modalShow)}
-            <div className="col-md" style={{ paddingLeft: "0" }}><Header title="Dashboard" /></div>
-            <div style={{ marginLeft: "70px" }}>
+            <div>
                 <div className="title text-center" style={{ paddingTop: "10px" }}>Sản phẩm</div>
                 <div className="d-flex btn col-md gap-4 p-3 round-3 justify-content-end">
-                    <button className="btn btn-primary btn-lg p-3  round-3 " onClick={() => setModalShowAdd({ show: true, productID: '' })} >Add</button>
+                    <button className="btn btn-primary btn-lg p-3  round-3 " onClick={() => setModalShowAdd({ show: true, productID: '' })} >Thêm</button>
                     <ModalAdd show={modalShowAdd.show} onHide={() => setModalShowAdd(false)} />
                 </div>
                 <div className="row d-flex ">
                     <table className="table table-striped col-md table-content" style={{ width: '100%' }} >
                         <thead>
                             <tr className="text-center">
-                                <th>IMG</th>
+                                <th>Hình ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Giá</th>
-                                <th>Update</th>
+                                <th>Cập nhật</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -144,17 +176,17 @@ function Product() {
                     </table>
                 </div>
 
-                <div className="title text-center" style={{ paddingTop: "10px" }}>Sản phẩm type</div>
+                <div className="title text-center" style={{ paddingTop: "10px" }}>Loại sản phẩm</div>
                 <div className="d-flex btn col-md gap-4 p-3 round-3 justify-content-end">
-                    <button className="btn btn-primary btn-lg p-3  round-3 " onClick={() => setModalType({ show: true })} >Add</button>
+                    <button className="btn btn-primary btn-lg p-3  round-3 " onClick={() => setModalType({ show: true })} >Thêm</button>
                     <ModalType show={modalType.show} onHide={() => setModalType(false)} />
                 </div>
                 <div className="row d-flex justify-content-start">
                     <table className="table col-md table-content" style={{ width: '100%' }} >
                         <thead>
                             <tr className="text-center">
-                                <th>Animal</th>
-                                <th>Type</th>
+                                <th>Tên con vật </th>
+                                <th>Loại sản phẩm</th>
                             </tr>
                         </thead>
                         {/* {tbodies} */}
@@ -176,7 +208,9 @@ function Product() {
                     </table>
                 </div>
             </div>
+            </div>
         </div>
+        </div></div> 
     )
 }
 export default Product;

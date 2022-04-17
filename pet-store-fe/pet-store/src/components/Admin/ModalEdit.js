@@ -124,15 +124,15 @@ function ModalEdit(props) {
 
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
                         <div className="d-flex">
-                            <label htmlFor="product-id" className="label-items">Product ID</label>
+                            <label htmlFor="product-id" className="label-items">Mã sản phẩm</label>
                             <label className="form-control-lg input-items product-id"  >{products?.ProductID}</label>
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-name" className="label-items">Product Name</label>
+                            <label htmlFor="product-name" className="label-items">Tên sản phẩm</label>
                             <input type="text" className="form-control-lg border input-items product-name " name="productName" onChange={handleChange} defaultValue={products?.ProductName} required />
                         </div>
                         <div className="d-flex gap-4">
-                            <label htmlFor="product-img" className="label-items">Current Image</label>
+                            <label htmlFor="product-img" className="label-items">Hình hiện tại</label>
                             {products?.ListImages.map((img,index)=>(
                                   <img key={index} src={img.ImageSource} style={{ width: '80px', height: '80px' }} />
                             ))}
@@ -141,24 +141,24 @@ function ModalEdit(props) {
                             <img src={products?.ListImages[2].ImageSource} style={{ width: '80px', height: '80px' }} /> */}
                         </div>
                         <div className="d-flex" >
-                            <label htmlFor="product-img" className="label-items">Upload image</label>
+                            <label htmlFor="product-img" className="label-items">Tải lên hình</label>
                             <div className="row gap-3 ">
 
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 1</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 1</label>
                                     <div className="text-center"><img src={imageURL && imageURL} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler} alt="no pic" />
 
                                 </div>
 
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 2</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 2</label>
                                     <div className="text-center"><img src={imageURL2 && imageURL2} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler2} alt="no pic" />
 
                                 </div>
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 3</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 3</label>
                                     <div className="text-center"><img src={imageURL3 && imageURL3} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler3} alt="no pic" />
 
@@ -168,35 +168,35 @@ function ModalEdit(props) {
                         </div>
 
                         <div className="d-flex">
-                            <label htmlFor="product-cost" className="label-items">Product Cost (VND)</label>
+                            <label htmlFor="product-cost" className="label-items">Giá bán ra (VND)</label>
                             <input type="text" className="form-control-lg border input-items product-cost " name="productCost" onChange={handleChange} defaultValue={products?.ProductCost} required />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-cost" className="label-items">Original Cost (VND)</label>
+                            <label htmlFor="product-cost" className="label-items"> Giá nhập (VND)</label>
                             <input type="text" className="form-control-lg border input-items product-cost " name="productOriginPrice" onChange={handleChange} defaultValue={products?.ProductOriginalCost} required />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-quantity" className="label-items">Product Quantity</label>
+                            <label htmlFor="product-quantity" className="label-items">Số lượng</label>
                             <input type="number" className="form-control-lg border  product-quantity input-items" name="productQuantity" onChange={handleChange} defaultValue={products?.ProductQuantity} required />
 
 
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-rate" className="label-items">Rated</label>
+                            <label htmlFor="product-rate" className="label-items">Đánh giá</label>
                             <span className="form-control-lg producst-rate input-item">{products?.RateStarNumber}<i className="fa fa-star text-warning"></i></span>
 
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-pet-type" className="label-items">Brand Name</label>
+                            <label htmlFor="product-pet-type" className="label-items">Thương hiệu</label>
                             <input type="text" className="form-control-lg border input-items product-pet-type" name="brandName" defaultValue={products?.BrandName} onChange={handleChange} required />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-type" className="label-items">Product type</label>
+                            <label htmlFor="product-type" className="label-items">Loại sản phẩm</label>
                             <input type="text" className="form-control-lg border input-items product-type" name="productType" defaultValue={products?.ProductType} onChange={handleChange} />
                         </div>
                         {/* <input type="file" className="form-control-lg border input-items"/>*/}
                         <div className="d-flex">
-                            <label htmlFor="product-type" className="label-items">Pet type</label>
+                            <label htmlFor="product-type" className="label-items">Loại thú cưng</label>
                             <select className="form-control-lg border input-items option-type" name="petTypeName" defaultValue={formValues.petTypeName} onChange={handleChange}>
 
                                 {petName.map((a, index) => {
@@ -215,20 +215,20 @@ function ModalEdit(props) {
 
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-date-in" className="label-items">Date in</label>
+                            <label htmlFor="product-date-in" className="label-items">Ngày nhập </label>
                             <input type="date" className="form-control-lg border input-items" name="productDateIn" defaultValue={products?.ProductDateIn} onChange={handleChange} />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-date-out" className="label-items">Date out</label>
+                            <label htmlFor="product-date-out" className="label-items">Ngày xuất</label>
                             <input type="date" name="productDateOut" className="form-control-lg border input-items" defaultValue={products?.ProductDateOut} onChange={handleChange} />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-desc" className="label-items">Product Description</label>
+                            <label htmlFor="product-desc" className="label-items">Mô tả</label>
                             <textarea className="form-control-lg border input-items product-desc" name="productDes" defaultValue={products?.ProductDescription} onChange={handleChange} required></textarea>
                         </div>
                         <div className="d-flex text-center justify-content-end gap-5">
-                            <button className="btn btn-lg btn-primary" type="submit">Update</button>
-                            <button className="btn btn-lg btn-warning" onClick={removeImgPreview}>Close</button>
+                            <button className="btn btn-lg btn-primary" type="submit">Cập nhật</button>
+                            <button className="btn btn-lg btn-warning" onClick={removeImgPreview}>Đóng</button>
                         </div>
                     </div>
 

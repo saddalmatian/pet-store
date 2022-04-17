@@ -1,33 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Header.css'
-import Sidebar from"./Sidebar"
-import pic1 from "../../assets/images/Tucker.jpg";
+import axios from 'axios';
 import DropdownButton from "react-bootstrap/DropdownButton"
 import Dropdown from 'react-bootstrap/Dropdown'
+import Login from "./SignIn"
 
 
 function Header(props) {
+     const[name, setName]= useState();
 
+    useEffect(async function () {
+        await axios({
+            method: 'GET',
+            url:'http://127.0.0.1:8000/employees/get-employee',
+            headers:{
+                accept: 'application/json',
+                'authorization-token': localStorage.getItem('token')
+            }
+        }).then((response) => {setName(response.data.FullName)})
+    },[]);
     return (
         <nav className="navbar navbar-expand-lg header"  style={{zIndex:"1000"}}>
-            <div className="sidebar">
-                <Sidebar/>
-            </div>
-            <div className="container-fluid header-wrapper" style={{marginLeft:'64px'}}> 
+            <div className="container-fluid header-wrapper" > 
                 
                 <a className="navbar-brand" href="#">{props.title}</a>
                 
                 <div className="collapse navbar-collapse justify-content-end" id="navigation">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item dropdown">
-                            {/* <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
-                                <span className="no-icon "><img src={pic1} style={{width: '40px', height: '40px', borderRadius:'50px'}} /></span>
-                            </a> */}
-                            <DropdownButton id="dropdown-item-button" title="Dropdown button">
-                                <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
-                                <Dropdown.Item as="button">Action</Dropdown.Item>
-                                <Dropdown.Item as="button">Another action</Dropdown.Item>
-                                <Dropdown.Item as="button">Something else</Dropdown.Item>
+                            <DropdownButton id="dropdown-item-button" title={name}>
+                                <Dropdown.Item as="button" onClick={()=> {localStorage.removeItem('token'); localStorage.removeItem('Username') ;window.location.reload() ; <Login/>}}>Logout</Dropdown.Item>
                             </DropdownButton>
                         </li>
                     </ul>

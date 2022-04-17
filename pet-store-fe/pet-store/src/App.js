@@ -15,6 +15,13 @@ import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
+import Login from './components/Admin/SignIn';
+import Dashboard from "./components/Admin/Dashboard"
+import ProductAd from "./components/Admin/Product"
+import PromoAd from "./components/Admin/Promo"
+import StaffAd from "./components/Admin/Staff"
+import BillAd from "./components/Admin/Bill"
+import SerAd from "./components/Admin/Service"
 
 
 function App() {
@@ -39,9 +46,18 @@ function App() {
         <Route path='/sign_in' element={<SignIn />} />
         <Route path='/sign_up' element={<SignUp />} />
         <Route path='/cart' element={<Cart />} />
+        
         <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/dashboard' element={<Dashboard />} />
+        <Route path='/admin/product' element={<ProductAd />} />
+        <Route path='/admin/promo' element={<PromoAd />} />
+        <Route path='/admin/staff' element={<StaffAd />} />
+        <Route path='/admin/bill' element={<BillAd />} />
+        <Route path='/admin/service' element={<SerAd />} />
       </Routes>
+      {/* <Admin/> */}
       <Footer />
+
     </div>
   );
 }

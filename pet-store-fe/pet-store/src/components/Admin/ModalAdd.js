@@ -15,8 +15,8 @@ function ModalAdd(props) {
         brandName: '',
         imageList: [],
         petTypeName: '',
-        productDateIn:'',
-        productDateOut:''
+        productDateIn: '',
+        productDateOut: ''
     }
     // const [selectOption, setSelectOption]=useState({value: ''})
     const [formValues, setFormValues] = useState(initValues);
@@ -62,7 +62,7 @@ function ModalAdd(props) {
         props.onHide();
 
     }
-    
+
 
 
     console.log(typeof (formValues.image))
@@ -74,7 +74,7 @@ function ModalAdd(props) {
             bodyFormData.append('image_list', item);
             console.log(item)
         })
-      
+
         bodyFormData.append('product_quantity', parseInt(formValues.productQuantity))
         bodyFormData.append('product_name', formValues.productName)
         bodyFormData.append('product_description', formValues.productDes)
@@ -83,7 +83,7 @@ function ModalAdd(props) {
         bodyFormData.append('pet_type_name', formValues.petTypeName)
         bodyFormData.append('brand_name', formValues.brandName)
         bodyFormData.append('product_original_cost', parseInt(formValues.productOriginPrice))
-        bodyFormData.append('product_date_in', formValues.productDateIn  )
+        bodyFormData.append('product_date_in', formValues.productDateIn)
         bodyFormData.append('product_date_out', formValues.productDateOut)
         setSuccess(true);
         console.log(formValues.image, formValues);
@@ -117,50 +117,73 @@ function ModalAdd(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title >
-                    Add Product
+                    Thêm sản phẩm
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
-                        <input type="text" className="form-control-lg border" placeholder="Product name" name="productName" value={formValues.productName} onChange={handleChange} required />
-                        {/* <input type="text" className="form-control-lg border" placeholder="Brand name" name="brandName" value={formValues.brandName} onChange={handleChange} /> */}
-                        <select className="form-control-lg border" name="brandName" value={formValues.brandName} onChange={handleChange} >
-                            <option value="BrandA" >Cho chos</option>
-                            <option value="BrandB" >Cho meof</option>
-                        </select>
-
-                        <input type="text" className="form-control-lg border" placeholder="Quantity" name="productQuantity" value={formValues.productQuantity} onChange={handleChange} required />
-                        <input type="text" className="form-control-lg border" placeholder="Cost" name="productCost" value={formValues.productCost} onChange={handleChange} required />
-                        <input type="text" className="form-control-lg border" placeholder="Orginal cost" name="productOriginPrice" value={formValues.productOriginPrice} onChange={handleChange} required />
-                        <select className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
-                            <option value="Bird" >Bird</option>
-                            <option value="Dog" >Dog</option>
-                            <option value="Cat" >Cat</option>
-                        </select>
+                        <div className="d-flex">
+                            <label className="label-items"> Tên sản phẩm</label>
+                            <input type="text" className="form-control-lg  input-items border" name="productName" value={formValues.productName} onChange={handleChange} required />
+                        </div>
+                        {/* <input type="text" className="form-control-lg  input-items border" placeholder="Brand name" name="brandName" value={formValues.brandName} onChange={handleChange} /> */}
+                        <div className="d-flex">
+                            <label className="label-items">  Thương hiệu</label>
+                            <select className="form-control-lg  input-items border" name="brandName" value={formValues.brandName} onChange={handleChange} >
+                                <option value="BrandA" >BrandA</option>
+                                <option value="BrandB" >BrandB</option>
+                            </select>
+                        </div>
+                        <div className="d-flex">
+                            <label className="label-items">  Số lương</label>
+                            <input type="text" className="form-control-lg  input-items border"  name="productQuantity" value={formValues.productQuantity} onChange={handleChange} required />
+                        </div>
+                        <div className="d-flex">
+                            <label className="label-items"> Giá bán</label>
+                            <input type="text" className="form-control-lg  input-items border"  name="productCost" value={formValues.productCost} onChange={handleChange} required />
+                        </div>
+                        <div className="d-flex">
+                            <label className="label-items"> Giá nhập</label>
+                            <input type="text" className="form-control-lg  input-items border" name="productOriginPrice" value={formValues.productOriginPrice} onChange={handleChange} required />
+                        </div>
+                        <div className="d-flex">
+                            <label className="label-items"> Thú cưng </label>
+                            <select className="form-control-lg  input-items border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
+                                <option value="Bird" >Bird</option>
+                                <option value="Dog" >Dog</option>
+                                <option value="Cat" >Cat</option>
+                            </select>
+                        </div>
 
                         {/* <input type="text" className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}/> */}
-                        <input type="text" className="form-control-lg border" placeholder="Product type" name="productType" value={formValues.productType} onChange={handleChange} required />
-                        <input type="file" className="form-control-lg border" id="fileInput" name="image" onChange={handlePictureSelected} />
+                        <div className="d-flex">
+                            <label className="label-items"> Loại sản phẩm</label>
+                        <input type="text" className="form-control-lg input-items border" name="productType"  value={formValues.productType} onChange={handleChange} required />
+                        </div>
+                        <div className="d-flex">
+                            <label className="label-items"> Tải lên hình </label>
+                        <input type="file" className="form-control-lg input-items border" id="fileInput" name="image" onChange={handlePictureSelected} />
+                        </div>
                         <div className="d-flex" >
-                            <label htmlFor="product-img" className="label-items">Upload image</label>
+                            <label htmlFor="product-img" className="label-items">Hình sản phẩm </label>
                             <div className="row gap-3 ">
 
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 1</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 1</label>
                                     <div className="text-center"><img src={imageURL && imageURL} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler} alt="no pic" />
 
                                 </div>
 
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 2</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 2</label>
                                     <div className="text-center"><img src={imageURL2 && imageURL2} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler2} alt="no pic" />
 
                                 </div>
                                 <div className="col-md border">
-                                    <label htmlFor="product-img" className="label-items ">Image 3</label>
+                                    <label htmlFor="product-img" className="label-items ">Hình 3</label>
                                     <div className="text-center"><img src={imageURL3 && imageURL3} style={{ width: '100%', height: '100%' }} /></div>
                                     <input type="file" className="form-control-file form-control-sm input-items" onChange={changeHandler3} alt="no pic" />
 
@@ -169,16 +192,19 @@ function ModalAdd(props) {
                             </div>
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-date-in" className="label-items">Date in</label>
+                            <label htmlFor="product-date-in" className="label-items">Ngày nhập</label>
                             <input type="date" className="form-control-lg border input-items" name="productDateIn" value={formValues.productDateIn} onChange={handleChange} />
                         </div>
                         <div className="d-flex">
-                            <label htmlFor="product-date-out" className="label-items">Date out</label>
+                            <label htmlFor="product-date-out" className="label-items">Hạn sử dụng</label>
                             <input type="date" name="productDateOut" className="form-control-lg border input-items" value={formValues.productDateOut} onChange={handleChange} />
                         </div>
-                        <textarea className="form-control-lg border" placeholder="Enter your description..." name="productDes" value={formValues.productDes} onChange={handleChange} required></textarea>
-                        <button className="btn btn-lg btn-primary" type="submit" >Save</button>
-                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Cancel</button>
+                        <div className="d-flex">
+                            <label className="label-items">Mô tả</label>
+                        <textarea className="form-control-lg border input-items" placeholder="Enter your description..." name="productDes" value={formValues.productDes} onChange={handleChange} required></textarea>
+                        </div>
+                        <button className="btn btn-lg btn-primary" type="submit" > Lưu </button>
+                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Đóng</button>
 
 
                     </div>

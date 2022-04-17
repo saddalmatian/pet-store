@@ -15,7 +15,7 @@ function ModalAddStaff(props) {
     }
     const [formValues, setFormValues] = useState(initValues);
     const [formErrors, setFormErrors] = useState({});
-
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const handleChange = e => {
         const { name, value } = e.target;
         setFormValues({
@@ -28,8 +28,9 @@ function ModalAddStaff(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         setFormErrors(validate(formValues));
-        props.onHide();
-        window.location.reload();
+        setIsSubmitted(true);
+        // props.onHide();
+        // window.location.reload();
     }
     //api function
     var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ5NjA1MDU1fQ.jCLyuBjtSZ97xFTT_iWC6uzHx_Zr0zHArhz67XetxSU'
@@ -114,6 +115,9 @@ function ModalAddStaff(props) {
         return errors;
     }
 
+
+
+
     return (
         <Modal {...props}
             size="lg"
@@ -122,14 +126,21 @@ function ModalAddStaff(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title >
-                    Add Product
+                Thêm nhân viên
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
+                    {Object.keys(formErrors).length === 0 && isSubmitted ? (
+                    <div className='col-md success'>
+                        { setTimeout( window.location.reload(),10000)}
+                        <h3>Đăng ký thành công!</h3>
+                        
+                    </div>
+                    ) : (
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
                         <div className="d-flex">
-                            <label className="label-items_staff">FullName</label>
+                            <label className="label-items_staff"> Họ tên</label>
                             <input className="form-control-lg input-items_staff border" value={formValues.fullName} onChange={handleChange} name="fullName" />
                             {formErrors.fullName && <p className='sign-up__error'>{formErrors.fullName}</p>}
 
@@ -141,14 +152,14 @@ function ModalAddStaff(props) {
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_staff">Password</label>
+                            <label className="label-items_staff"> Mật khẩu</label>
                             <input type="password" className="form-control-lg input-items_staff border" value={formValues.pwd} onChange={handleChange} name="pwd" />
                             {formErrors.pwd && <p className='sign-up__error'>{formErrors.pwd}</p>}
 
                         </div>
 
                         <div className="d-flex">
-                            <label className="label-items_staff">Phone</label>
+                            <label className="label-items_staff"> Số điện thoai </label>
                             <input className="form-control-lg input-items_staff border" value={formValues.phone} onChange={handleChange} name="phone" />
                             {formErrors.phone && <p className='sign-up__error'>{formErrors.phone}</p>}
 
@@ -160,18 +171,18 @@ function ModalAddStaff(props) {
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_staff">Age</label>
+                            <label className="label-items_staff">Tuổi</label>
                             <input className="form-control-lg input-items_staff border" value={formValues.age} onChange={handleChange} name="age" />
                             {formErrors.age && <p className='sign-up__error'>{formErrors.age}</p>}
 
                         </div>
 
-                        <button className="btn btn-lg btn-primary" type="submit" >Save</button>
-                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Cancel</button>
+                        <button className="btn btn-lg btn-primary" type="submit" >Lưu </button>
+                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Đóng</button>
 
 
-                    </div>
-                    {console.log(formValues.petTypeName)}
+                    </div>)
+                    }
                 </form>
             </Modal.Body>
             {/* <Modal.Footer>
