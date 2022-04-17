@@ -36,7 +36,8 @@ def new_booking(
             "CustomerId": user_id,
             "Total": 0,
             "BookStatus": 'New',
-            "BookType": book_type
+            "BookType": book_type,
+            "FinishDate": None
         }
     )
     with Session(engine) as session:

@@ -3,6 +3,7 @@ from app.api.models.schemas import bookings as _schemas_booking
 from app.api.models.domains import bookings as _domains_booking
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
+import datetime
 
 
 def set_booking_finish(
@@ -12,12 +13,14 @@ def set_booking_finish(
     total = book_finish_in.total
     status = 'Completed'
     booking = _domains_booking.BookingSQL
+    finish_date = datetime.datetime.now()
     with Session(engine) as session:
         statement = select(booking).where(booking.book_id == book_id)
         try:
             result = session.exec(statement).one()
             result.book_status = status
             result.total = total
+            result.finish_date = finish_date
             session.add(result)
             session.commit()
         except Exception:

@@ -19,6 +19,7 @@ class BookingSQL(SQLModel, table=True):
     book_status: str = Field(alias='BookStatus')
     total: int = Field(alias='Total')
     book_type: str = Field(alias='BookType')
+    finish_date: datetime = Field(alias='FinishDate')
 
 
 class BookTypeNum(Enum):
