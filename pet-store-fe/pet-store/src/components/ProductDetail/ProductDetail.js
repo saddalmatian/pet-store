@@ -11,7 +11,6 @@ import ProductItem from '../Productpage/ProductItem';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../Header/Header';
-import Button from '../Button'
 
 function ProductDetail({ ...props }) {
     const [product, setProduct] = useState([]);
@@ -29,6 +28,18 @@ function ProductDetail({ ...props }) {
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, [id]);
 
+    function getProductDetail() {
+        axios.get(`http://127.0.0.1:8000/product/get-product-detail?product_id=${id}`,
+            {
+                headers: {
+                    accept: 'applcation/json'
+                }
+            }
+        )
+            .then(res => setProduct(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }
+
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -42,7 +53,20 @@ function ProductDetail({ ...props }) {
         )
             .then(res => setComments(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [id, comments]);
+    }, [id]);
+
+    function getComment() {
+        axios.get(`http://127.0.0.1:8000/comments/get-all-comments?product_id=${id}`,
+            {
+                headers: {
+                    accept: 'applcation/json',
+                    'authorization-token': localStorage.getItem('Token')
+                }
+            }
+        )
+            .then(res => setComments(res.data))
+            .catch(err => console.log(JSON.stringify(err, null, 2)))
+    }
 
     function formatCash(str) {
         return str.toString().split('').reverse().reduce((prev, next, index) => {
@@ -104,7 +128,9 @@ function ProductDetail({ ...props }) {
                         'authorization-token': localStorage.getItem('Token')
                     }
                 }
-            ).then(setCmt(''));
+            ).then(getComment())
+                .then(getProductDetail())
+                .then(setCmt(''))
         } else {
             alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
         }
@@ -126,6 +152,36 @@ function ProductDetail({ ...props }) {
 
     function discount(price, sale) {
         return price * (1 - sale / 100);
+    }
+
+    const [rateSuccess, setRateSuccess] = useState(false);
+
+    function handleRating(idProduct, rateStar) {
+        if (localStorage.getItem('Token')) {
+            axios.post(`http://127.0.0.1:8000/rates/rate-a-product`, {
+                RateStarNumber: rateStar,
+                ProductID: idProduct
+            },
+                {
+                    headers: {
+                        accept: 'applcation/json',
+                        'authorization-token': localStorage.getItem('Token')
+                    }
+                }
+            )
+                .then(getProductDetail())
+                .then(alert('Đánh giá sản phẩm thành công!'))
+                .then(setRateSuccess(true))
+                .catch(function (err) {
+                    if (!err?.response) {
+                        alert('Máy chủ hiện không phản hồi!')
+                    } else {
+                        alert('Đánh giá không thành công!')
+                    }
+                })
+        } else {
+            alert('Bạn cần đăng nhập để thực hiện thao tác này!');
+        }
     }
 
     return (
@@ -158,7 +214,6 @@ function ProductDetail({ ...props }) {
                             ) : (product.ProductCost &&
                                 <div className="item-price">{formatCash(product.ProductCost)} VND</div>
                             )}
-                            {/* {product.ProductCost && <p className="item-price">{formatCash(product.ProductCost.toString())} VND</p>} */}
                             <p className="item-quantity__available-heading">Thương hiệu:
                                 <span className="item-quantity__available-content">{product.BrandName}</span>
                             </p>
@@ -188,21 +243,33 @@ function ProductDetail({ ...props }) {
                         </p>
                         <Line />
                         <div className="comment-wrap">
-                            <Start />
+                            <i className="star-gold fas fa-star"></i>
                             <p className="item-review__rating-num">({product.RateStarNumber})</p>
                             <p className="item-review__comment-total">{product.CommentAmounts} Bình luận</p>
                         </div>
 
-                        <div className="product-rating">
-                            <p className="item-review__comment-heading">Đánh giá</p>
-                            <div className="comment-wrap">
-                                <i className="product-item__star fas fa-star"></i>
-                                <i className="product-item__star fas fa-star"></i>
-                                <i className="product-item__star fas fa-star"></i>
-                                <i className="product-item__star fas fa-star"></i>
-                                <i className="product-item__star fas fa-star"></i>
-                            </div>
-                        </div>
+                        {rateSuccess === false ?
+                            <div className="product-rating">
+                                <p className="item-review__comment-heading">Đánh giá</p>
+                                <div className="comment-wrap">
+                                    <button className='rate-btn' onClick={() => handleRating(product.ProductID, 1)}>
+                                        <i className="product-item__star fas fa-star"></i>
+                                    </button>
+                                    <button className='rate-btn' onClick={() => handleRating(product.ProductID, 2)}>
+                                        <i className="product-item__star fas fa-star"></i>
+                                    </button>
+                                    <button className='rate-btn' onClick={() => handleRating(product.ProductID, 3)}>
+                                        <i className="product-item__star fas fa-star"></i>
+                                    </button>
+                                    <button className='rate-btn' onClick={() => handleRating(product.ProductID, 4)}>
+                                        <i className="product-item__star fas fa-star"></i>
+                                    </button>
+                                    <button className='rate-btn' onClick={() => handleRating(product.ProductID, 5)}>
+                                        <i className="product-item__star fas fa-star"></i>
+                                    </button>
+                                </div>
+                            </div> : <p className="rate-success">Sản phẩm này đã được bạn đánh giá</p>
+                        }
 
                         <p className="item-review__comment-heading">Bình luận</p>
                         <input
@@ -210,6 +277,7 @@ function ProductDetail({ ...props }) {
                             className="item-review__input-comment"
                             onChange={(e) => setCmt(e.target.value)}
                             value={cmt}
+                            defaultValue=''
                         >
                         </input>
                         <input
