@@ -1,8 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "./Header"
+import SideBar from './Sidebar'
 import ModalAddStaff from "./ModalAddStaff"
 function Staff() {
+
+    const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
+
+    function handleResize() {
+        // iPhone X width, for example
+        if (window.innerWidth <= 375) {
+          setSideNavExpanded(false);
+    
+          // write other logic here such as disabling hamburger button
+        }
+      }
+    
+      React.useEffect(() => {
+        window.addEventListener("resize", handleResize);
+    
+        handleResize(); // on-component-mount, check already to see if user has a small device
+    
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []); 
+      const contentStyle = {
+        marginLeft: sideNavExpanded ? "250px" : "70px", // arbitrary values
+        transition: "margin 0.2s ease"
+      };
     const [staffs, setStaff] = useState([])
 
     useEffect(() => {
@@ -11,7 +37,7 @@ function Staff() {
             {
                 headers: {
                     accept: 'application/json',
-                    'authorization-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ5NjA1MDU1fQ.jCLyuBjtSZ97xFTT_iWC6uzHx_Zr0zHArhz67XetxSU'
+                    'authorization-token': localStorage.getItem('token')
                 }
             }
         )
@@ -26,7 +52,7 @@ function Staff() {
             {
                 headers: {
                     Accept: 'application/json, text/plain, */*',
-                    'authorization-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ5NjA1MDU1fQ.jCLyuBjtSZ97xFTT_iWC6uzHx_Zr0zHArhz67XetxSU',
+                    'authorization-token': localStorage.getItem('token'),
                 }
             }
         ).then(res => {
@@ -47,11 +73,11 @@ function Staff() {
                     <td>{staff.Phone}</td>
                     <td>{staff.Email}</td>
                     <td className="text-center p-0"  >
-                        <button className="btn btn-lg"  
+                        <button className="btn btn-lg"
                         >
                             <i className="fa fa-edit"></i>
                         </button>
-                        <button className="btn btn-lg"  onClick={() => removeData(staff.Username)}>
+                        <button className="btn btn-lg" onClick={() => removeData(staff.Username)}>
                             <i className="fa fa-delete-left" ></i>
                         </button>
 
@@ -76,29 +102,29 @@ function Staff() {
         });
     }
     console.log(formValues)
-    async function updateStaff(fullname, phone, age,pwd){
-        console.log(fullname, phone, age,pwd)
+    async function updateStaff(fullname, phone, age, pwd) {
+        console.log(fullname, phone, age, pwd)
         await axios({
             method: "put",
             url: "http://127.0.0.1:8000/employees/update-employee",
             body: JSON.stringify({
-                FullName: formValues.fullName||fullname,
+                FullName: formValues.fullName || fullname,
                 Phone: formValues.phone || phone,
                 Password: formValues.pwd || pwd,
                 Age: parseInt(formValues.age || age)
             }),
             headers: {
                 accept: 'application/json',
-                'authorization-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ5NjA1MDU1fQ.jCLyuBjtSZ97xFTT_iWC6uzHx_Zr0zHArhz67XetxSU',
-                'access-control-allow-credentials': true 
+                'authorization-token': localStorage.getItem('token'),
+                'access-control-allow-credentials': true
 
-                
+
             }
         })
-        .then(function (response) {
-            // window.location.reload();
-            console.log(response);
-        })
+            .then(function (response) {
+                // window.location.reload();
+                console.log(response);
+            })
 
             .catch(function (response) {
                 //handle error
@@ -108,60 +134,68 @@ function Staff() {
 
     }
     const [modalShowAddStaff, setModalShowAddStaff] = useState({ show: false, productID: '' });
-    // const [modalShowStaff, setModalShowStaff] = useState({ show: false,  });
     return (
+        // localStorage.getItem('Username')!=='admin' ? alert('Xin lỗi! Chức năng chỉ dành cho admin'):(
+        <div>
+            <SideBar
+                setSideNavExpanded={setSideNavExpanded}
+                sideNavExpanded={sideNavExpanded}
+            />
+            <div style={contentStyle}>
         <div className="content-staff container-fluid" style={{ paddingLeft: "0" }}>
-            {/* <ModalEditStaff staffs={details} show={modalShowStaff.show} onHide={() => setModalShowStaff({ show: false, productID: '' })} /> */}
-            <div className="col-md" style={{ paddingLeft: "0" }}><Header title="Nhân viên" /></div>
-            <div style={{ marginLeft: "70px" }}>
+            <div className="col-md" style={{ paddingLeft: "0" }}><Header title="Nhân viên" />
+                <div >
+                    <div className="row">
+                        <div className="title text-center col-md-11" style={{ paddingTop: "10px" }}>Nhân viên</div>
+                        <div className="d-flex btn col-md gap-4 nowrap p-3 round-3 justify-content-start">
+                            <button className="btn btn-primary btn-lg p-2 round-3" onClick={() => setModalShowAddStaff({ show: true, productID: '' })} >Thêm</button>
+                            <ModalAddStaff show={modalShowAddStaff.show} onHide={() => setModalShowAddStaff(false)} />
+                        </div>
+                    </div>
+                    <div className="row d-flex justify-content-start">
+                        <table className="table  col-md table-content" style={{ width: '100%' }} >
+                            <thead>
+                                <tr className="text-center">
+                                    <th>Username</th>
+                                    <th>Mật khẩu </th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Tuổi </th>
+                                    <th>Số điện thoại </th>
+                                    <th>Email</th>
+                                    <th>Cập nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {staffs.map((staff, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{staff.Username}</td>
+                                            <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Password} onChange={handleChange} name="pwd" /></td>
+                                            <td><input className="form-control-lg input-items_staff border" defaultValue={staff.FullName} onChange={handleChange} name="fullname" /></td>
+                                            <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Age} onChange={handleChange} name="age" /></td>
+                                            <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Phone} onChange={handleChange} name="phone" /></td>
+                                            <td>{staff.Email}</td>
+                                            <td className="text-center p-0"  >
+                                                <button className="btn btn-lg" 
+                                                    onClick={() =>updateStaff(staff.FullName, staff.Phone, staff.Age, staff.Password)}
+                                                >
+                                                    <i className="fa fa-check" style={{fontSize:"25px", fontWeight:"bold"}}></i>
+                                                </button>
+                                                <button className="btn btn-lg" onClick={() => removeData(staff.Username)}>
+                                                    <i className="fa fa-delete-left" ></i>
+                                                </button>
 
-                <div className="title text-center" style={{ paddingTop: "10px" }}>Nhân viên</div>
-                <div className="d-flex btn col-md gap-4 p-3 round-3 justify-content-end">
-                    <button className="btn btn-primary btn-lg p-3  round-3 " onClick={() => setModalShowAddStaff({ show: true, productID: '' })} >Add</button>
-                    <ModalAddStaff show={modalShowAddStaff.show} onHide={() => setModalShowAddStaff(false)} />
-                </div>
-                <div className="row d-flex justify-content-start">
-                    <table className="table  col-md table-content" style={{ width: '100%' }} >
-                        <thead>
-                            <tr className="text-center">
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Tên nhân viên</th>
-                                <th>Tuoi</th>
-                                <th>Sdt</th>
-                                <th>Email</th>
-                                <th>Update</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {staffs.map((staff, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{staff.Username}</td>
-                                        <td><input type="text" className="form-control-lg" defaultValue={staff.Password} onChange={handleChange} name="pwd" /></td>
-                                        <td><input type="text" className="form-control-lg" defaultValue={staff.FullName} onChange={handleChange} name="fullName" /></td>
-                                        <td><input type="text" className="form-control-lg" defaultValue={staff.Age} onChange={handleChange} name="age" /></td>
-                                        <td><input type="text" className="form-control-lg" defaultValue={staff.Phone} onChange={handleChange} name="phone" /></td>
-                                        <td>{staff.Email}</td>
-                                        <td className="text-center p-0"  >
-                                            <button className="btn btn-lg" 
-                                                 onClick={() =>updateStaff(staff.FullName, staff.Phone, staff.Age, staff.Password)}
-                                              >
-                                                <i className="fa fa-edit"></i>
-                                            </button>
-                                            <button className="btn btn-lg"  onClick={() => removeData(staff.Username)}>
-                                                <i className="fa fa-delete-left" ></i>
-                                            </button>
-
-                                        </td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        </div></div>
     )
 }
 export default Staff;

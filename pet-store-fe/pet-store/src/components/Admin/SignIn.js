@@ -6,8 +6,10 @@ import SignInImg from '../../assets/images/SignIn.jpg'
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Dashboard from './Dashboard'
+import Admin from './Admin'
+import Product from './Product'
 
-function SignIn({ setToken }) {
+function SignIn() {
 
     const [data, setData] = useState({
         username: "",
@@ -28,7 +30,6 @@ function SignIn({ setToken }) {
         var bodyFormData = new FormData();
         bodyFormData.append('username', data.username);
         bodyFormData.append('password', data.password);
-        setSuccess(true);
 
 
         await axios({
@@ -39,12 +40,13 @@ function SignIn({ setToken }) {
         })
             .then(function (response) {
                 //handle success
-                console.log(isSuccess)
                 console.log(response.data.Token);
+                localStorage.setItem('token',response.data.Token)
+                localStorage.setItem('Username',response.data.Username)
                 console.log(response);
                 // window.location.reload();
-                console.log(`${localStorage.getItem('token')}`)
-
+                setSuccess(true);
+                
 
 
             })
@@ -53,31 +55,35 @@ function SignIn({ setToken }) {
                 console.log(response);
             });
     }
-
+    // console.log(localStorage.getItem('token'))
 
     return (
+        localStorage.getItem('token') ? <Dashboard/>  : (
         <div className="container sign-in">
+           
+                <div className="row">
+                    <Heading mixin="Welcome to Pet Store" title="Đăng nhập" />
 
-            <div className="row">
-                <Heading mixin="Welcome to Pet Store" title="Đăng nhập" />
-                <div className="col-md sign-in__form">
+                    <div className="col-md sign-in__form">
 
-                    <form onSubmit={handleSubmit}>
-                        <p className="sign-in__label">Tên đăng nhập (*)</p>
-                        <input type="text" className="sign-in__input" name="username" onChange={handleChange} value={data.username}></input>
-                        <p className="sign-in__label">Mật khẩu (*)</p>
-                        <input type="password" className="sign-in__input" name="password" onChange={handleChange} value={data.password}></input>
-                        <input type="submit" className="sign-in__btn" value="Đăng nhập" ></input>
-                    </form>
+                        <form onSubmit={handleSubmit}>
+                            <p className="sign-in__label">Tên đăng nhập (*)</p>
+                            <input type="text" className="sign-in__input" name="username" onChange={handleChange} value={data.username}></input>
+                            <p className="sign-in__label">Mật khẩu (*)</p>
+                            <input type="password" className="sign-in__input" name="password" onChange={handleChange} value={data.password}></input>
+                            <input type="submit" className="sign-in__btn" value="Đăng nhập" ></input>
+                        </form>
+                    </div>
+
+                    <div className="col-md sign-in__image">
+                        <img className="sign-in__img" src={SignInImg} alt="Sign In"></img>
+                    </div>
+
                 </div>
-
-                <div className="col-md sign-in__image">
-                    <img className="sign-in__img" src={SignInImg} alt="Sign In"></img>
-                </div>
-            </div>
-
+           
 
         </div>
+        ) 
     );
 }
 

@@ -55,20 +55,20 @@ function ModalType(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title >
-                    Add Product
+                Thêm loại sản phẩm
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
-                        <input type="text" className="form-control-lg border" placeholder="Product type" name="productType" value={formValues.productType} onChange={handleChange} required />
+                        <input type="text" className="form-control-lg border" placeholder="Loại sản phẩm" name="productType" value={formValues.productType} onChange={handleChange} required />
                         <select className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
-                            <option value="Bird" >Bird</option>
-                            <option value="Dog" >Dog</option>
-                            <option value="Cat" >Cat</option>
+                            <option value="Bird" > Chim </option>
+                            <option value="Dog" >Chó</option>
+                            <option value="Cat" >Mèo</option>
                         </select>
-                        <button className="btn btn-lg btn-primary" type="submit" >Save</button>
-                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Cancel</button>
+                        <button className="btn btn-lg btn-primary" type="submit" >Lưu </button>
+                        <button className="btn btn-lg btn-warning " onClick={props.onHide}>Đóng</button>
                     </div>
                 </form>
             </Modal.Body>
