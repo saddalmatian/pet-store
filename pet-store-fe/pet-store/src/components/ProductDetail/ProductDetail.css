@@ -44,6 +44,12 @@
     color: var(--primary-color);
 }
 
+.item-price__old {
+    font-size: 1.6rem;
+    color: #666;
+    text-decoration: line-through;
+}
+
 .item-quantity__wrap {
     display: flex;
     width: 240px;
@@ -226,5 +232,10 @@
 
 .item-list {
     padding-bottom: 50px;
+}
+
+.product-item__star {
+    font-size: 3rem;
+    color: #dfdbdb;
 }
 
