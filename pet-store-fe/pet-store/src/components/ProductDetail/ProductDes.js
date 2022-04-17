@@ -4,7 +4,7 @@ import './ProductDes.css';
 function ProductDes( props ) {
     return (
         <div className="item-description">
-            <p className="item-description__heading">Description</p>
+            <p className="item-description__heading">Mô tả</p>
             <p className="item-description__content">
                 {props.content}
             </p>

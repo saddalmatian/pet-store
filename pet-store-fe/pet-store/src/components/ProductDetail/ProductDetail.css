@@ -239,3 +239,24 @@
     color: #dfdbdb;
 }
 
+.rate-btn {
+    background-color: var(--white-color);
+    padding: 1rem .5rem;
+}
+
+.rate-btn:hover .product-item__star {
+    color: var(--primary-color);
+}
+
+.rate-success {
+    margin: 30px 50px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.star-gold {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
