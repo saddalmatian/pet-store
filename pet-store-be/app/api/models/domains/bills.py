@@ -21,7 +21,6 @@ class BillDetailSQL(SQLModel, table=True):
     bill_detail_id: str = Field(primary_key=True)
     bill_id: str = Field(foreign_key="bill.bill_id")
     product_id: str
-    service_id: str
     promotional_id: str
     product_quantity: int
     cost: int
