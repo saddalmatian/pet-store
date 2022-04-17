@@ -129,8 +129,7 @@ async def delete_product(
 
 
 @router.get(
-    "/get-product-detail",
-    response_model=_schemas_product.ProductDetailResp
+    "/get-product-detail"
 )
 async def get_product_detail(
     product_id: str

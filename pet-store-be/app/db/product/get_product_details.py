@@ -6,7 +6,8 @@ from app.api.models.domains import\
         comments as _domain_comments,
         rates as _domain_rates,
         pet_types as _domain_pettypes,
-        brands as _domain_brands
+        brands as _domain_brands,
+        promotionals as _domain_promotionals
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
@@ -113,6 +114,24 @@ def get_product_details(
         statement = select(brand).where(brand.brand_id == product_brand_id)
         result = session.exec(statement).one()
         brand_name = result.brand_name
+        propro = _domain_promotionals.ProProSQL
+        statement = select(propro).where(propro.product_id == product_id)
+        result_propro = session.exec(statement).first()
+        result_promotional = {
+            "promotional_name": "",
+            "promotional_sale": 0,
+            "promotional_end_date": "",
+            "promotional_start_date": "",
+            "promotional_description": "",
+            "promotional_id": ""
+        }
+        if result_propro:
+            promotional_id = result_propro.promotional_id
+            promotion = _domain_promotionals.PromotionalSQL
+            statement = select(promotion).where(
+                promotion.promotional_id == promotional_id)
+            result_promo = session.exec(statement).first()
+            result_promotional = {**result_promo.dict()}
     response = {
         "RateStarNumber": avg_rate,
         "ProductDescription": product_description,
@@ -130,6 +149,7 @@ def get_product_details(
         "BrandName": brand_name,
         "ProductOriginalCost": product_original_cost,
         "ProductDateIn": product_date_in,
-        "ProductDateOut": product_date_out
+        "ProductDateOut": product_date_out,
+        "Promotional": result_promotional,
     }
     return response

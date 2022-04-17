@@ -108,7 +108,7 @@ def delete_product(
 
 def get_product_detail(
     product_id: str
-) -> _schemas_product.ProductDetailResp:
+):
     response = get_product_details(
         product_id
     )
