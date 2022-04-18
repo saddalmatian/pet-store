@@ -277,7 +277,6 @@ function ProductDetail({ ...props }) {
                             className="item-review__input-comment"
                             onChange={(e) => setCmt(e.target.value)}
                             value={cmt}
-                            defaultValue=''
                         >
                         </input>
                         <input
@@ -305,8 +304,8 @@ function ProductDetail({ ...props }) {
                     <div className="d-flex gap-2 align-items-center">
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
                             {listRelated && listRelated?.map((product, index) => (
-                                <div className="row d-flex gap-2">
-                                    <Link to={`/product_detail/${product.ProductID}`} key={index} style={{ textDecoration: "none" }}>
+                                <div className="row d-flex gap-2" key={index}>
+                                    <Link to={`/product_detail/${product.ProductID}`} style={{ textDecoration: "none" }}>
                                         <ProductItem  {...product} />
                                     </Link>
                                 </div>
