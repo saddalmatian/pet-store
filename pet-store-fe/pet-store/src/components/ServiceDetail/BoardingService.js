@@ -44,8 +44,8 @@ function BoardingService() {
                             <table className="service-table">
                                 <thead>
                                     <tr className="service-table__row">
-                                        <th className="service-table__heading">Weight</th>
-                                        <th className="service-table__heading">Price</th>
+                                        <th className="service-table__heading">Cân nặng</th>
+                                        <th className="service-table__heading">Chi phí ước tính</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +79,7 @@ function BoardingService() {
                     </div>
                 </div>
 
-                <Booking />
+                <Booking bookType="Boarding"/>
             </div>
         </>
     );

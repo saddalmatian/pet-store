@@ -10,7 +10,6 @@ import CartBox from './CartBox';
 function Cart() {
 
     const [info, setInfo] = useState([]);
-
     const token = localStorage.getItem('Token');
 
     useEffect(() => {

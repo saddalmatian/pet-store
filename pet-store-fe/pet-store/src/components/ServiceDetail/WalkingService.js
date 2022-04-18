@@ -49,7 +49,7 @@ function WalkingService() {
                     </div>
                 </div>
 
-                <Booking />
+                <Booking bookType="Walking"/>
             </div>
         </>
     );

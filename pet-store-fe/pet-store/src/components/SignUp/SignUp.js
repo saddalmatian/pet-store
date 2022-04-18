@@ -38,7 +38,7 @@ const SignUp = ({ submitForm }) => {
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmitted) {
             try {
-                const response = axios.post('http://127.0.0.1:8000/customers/sign-up',
+                axios.post('http://127.0.0.1:8000/customers/sign-up',
                     JSON.stringify({
                         FullName: formValues.fullname,
                         Phone: formValues.phone,
@@ -66,10 +66,6 @@ const SignUp = ({ submitForm }) => {
                         })
                     }
                 });
-                console.log(formValues);
-                console.log(response.data);
-                console.log(response.accessToken);
-                console.log(JSON.stringify(response));
             } catch (err) {
                 console.log(JSON.stringify(err, null, 2));
             }
