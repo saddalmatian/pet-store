@@ -5,6 +5,9 @@ from app.api.models.domains import (
 from app.api.models.schemas import bookings as _schemas_booking
 from app.utils.db_helper import engine, generate_ksuid
 from sqlmodel import Session, select
+from app.utils.security import password
+import smtplib
+from email.message import EmailMessage
 
 
 def get_all_bookings(
@@ -28,7 +31,7 @@ def new_booking(
     book_id = generate_ksuid()
     book_type = booking_in.book_type.value
     _ = delattr(booking_in, 'book_type')
-
+    receiver = booking_in.email
     booking = _domain_booking.BookingSQL(
         **booking_in.dict(by_alias=True),
         **{
@@ -43,4 +46,25 @@ def new_booking(
     with Session(engine) as session:
         session.add(booking)
         session.commit()
+    smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    smtp_server.ehlo()
+    sender = 'saddalmatian@gmail.com'
+    smtp_server.login(sender, password)
+    msg = EmailMessage()
+    msg['Subject'] = 'Petstore confimation!'
+    msg['From'] = sender
+    msg['To'] = receiver
+    msg.set_content(f"""\
+    Thank you for booked a {book_type} for your pet
+
+    Please show our employees this email for the confirmation when you
+    get to our store
+
+    Thank you,
+
+    Petstore
+    """)
+    # smtp_server.sendmail(sender, receiver, message)
+    smtp_server.send_message(msg)
+    smtp_server.close()
     return {"Message": "Booking successfully"}

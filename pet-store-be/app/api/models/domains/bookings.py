@@ -15,7 +15,7 @@ class BookingSQL(SQLModel, table=True):
     customer_email: str = Field(alias='Email')
     pet_amount: int = Field(alias='PetAmount')
     note: str = Field(alias='Note')
-    book_time: datetime = Field(alias='BookTime')
+    book_time: str = Field(alias='BookTime')
     book_status: str = Field(alias='BookStatus')
     total: int = Field(alias='Total')
     book_type: str = Field(alias='BookType')
