@@ -46,7 +46,7 @@ class Note(BaseModel):
 
 
 class BookTime(BaseModel):
-    book_time: datetime = Field(alias='BookTime')
+    book_time: str = Field(alias='BookTime')
 
 
 class BookStatus(BaseModel):
