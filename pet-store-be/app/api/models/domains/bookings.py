@@ -42,7 +42,7 @@ class PetAmount(BaseModel):
 
 
 class Note(BaseModel):
-    note: str = Field(alias='Note')
+    note: str = Field(default='', alias='Note')
 
 
 class BookTime(BaseModel):
