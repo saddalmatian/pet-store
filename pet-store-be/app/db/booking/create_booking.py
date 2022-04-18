@@ -32,6 +32,7 @@ def new_booking(
     book_type = booking_in.book_type.value
     _ = delattr(booking_in, 'book_type')
     receiver = booking_in.email
+    book_time = booking_in.book_time
     booking = _domain_booking.BookingSQL(
         **booking_in.dict(by_alias=True),
         **{
@@ -51,18 +52,17 @@ def new_booking(
     sender = 'saddalmatian@gmail.com'
     smtp_server.login(sender, password)
     msg = EmailMessage()
-    msg['Subject'] = 'Petstore confimation!'
+    msg['Subject'] = 'Thư xác nhận từ cửa hàng thú cưng'
     msg['From'] = sender
     msg['To'] = receiver
     msg.set_content(f"""\
-    Thank you for booked a {book_type} for your pet
+    Cảm ơn bạn đã đặt lịch cho thú cưng của bạn vào lúc {book_time}
 
-    Please show our employees this email for the confirmation when you
-    get to our store
+    Hãy đưa thư điện tử này cho nhân viên của chúng tôi kiểm tra khi bạn đến cửa hàng
 
-    Thank you,
+    Xin cảm ơn bạn
 
-    Petstore
+    Cửa hàng thú cưng.
     """)
     # smtp_server.sendmail(sender, receiver, message)
     smtp_server.send_message(msg)
