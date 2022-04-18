@@ -54,7 +54,7 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES ('27NrGeJ7ZdrPFFOUkdo','270zIfx9EXn7OWk2lGF','admin_id','2022-04-05','2022-04-08','Completed',250000,'VNPay',NULL),('27O4dh4VrSycQyMnVMf','270zIfx9EXn7OWk2lGF','admin_id','2022-04-12','2022-04-15','Completed',50000,'VNPay','2022-04-12 20:54:05.214324'),('27hSI7S9bzLpHV0jYmM','270zIfx9EXn7OWk2lGF','271CTAFbYmULdsqcba6','2022-04-14','2022-04-17','Completed',2500,'Cash','2022-04-14 21:10:36.923079'),('27nAmWkt1Rg0yUtwmhb','270zIfx9EXn7OWk2lGF','271CTAFbYmULdsqcba6','2022-04-12','2022-04-17','Completed',1250,'Cash','2022-04-14 21:18:27.337510');
+INSERT INTO `bill` VALUES ('27NrGeJ7ZdrPFFOUkdo','270zIfx9EXn7OWk2lGF','admin_id','2022-04-05','2022-04-08','Completed',250000,'VNPay',NULL),('27O4dh4VrSycQyMnVMf','270zIfx9EXn7OWk2lGF','admin_id','2022-04-12','2022-04-15','Completed',50000,'VNPay','2022-04-12 20:54:05.214324'),('27hSI7S9bzLpHV0jYmM','270zIfx9EXn7OWk2lGF','271CTAFbYmULdsqcba6','2022-04-14','2022-04-17','Completed',2500,'Cash','2022-04-14 21:10:36.923079'),('27nAmWkt1Rg0yUtwmhb','270zIfx9EXn7OWk2lGF','271CTAFbYmULdsqcba6','2022-04-12','2022-04-17','Completed',1250,'Cash','2022-04-17 22:04:01.001938');
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `booking` (
   `customer_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `book_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `total` int NOT NULL,
-  `book_time` datetime NOT NULL,
+  `book_time` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `note` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `customer_phone` varchar(11) NOT NULL,
   `customer_email` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -4466,4 +4466,4 @@ USE `sys`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-17 21:47:27
+-- Dump completed on 2022-04-18 12:31:26
