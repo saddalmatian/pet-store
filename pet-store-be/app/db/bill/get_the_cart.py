@@ -66,7 +66,6 @@ def get_the_cart(username):
                 temp_response = {
                     "ProductTotalCost": product_total_cost,
                     "PromotionalID": bill_detail.promotional_id,
-                    "ServiceID": bill_detail.service_id,
                     "ProductQuantity": bill_detail.product_quantity,
                     "ProductID": product_id,
                     "BillID": bill_detail.bill_id,
