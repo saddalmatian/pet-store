@@ -4,18 +4,19 @@ from app.api.models.domains import (
     customers as _domain_customers,
     employees as _domain_employees
 )
-from app.utils.db_helper import engine, get_userid_from_username
+from app.utils.db_helper import engine
 from sqlmodel import Session, select
-from operator import and_
 
 
-def get_all_cart_admin():
+def get_all_cart_admin(user_id: str):
     cart = _domain_bills.BillSQL
     customer = _domain_customers.CustomerSQL
     employee = _domain_employees.EmployeeSQL
     response = []
     with Session(engine) as session:
-        statement = select(cart)
+        statement = select(cart).where(cart.customer_id == user_id)
+        if user_id == 'admin_id':
+            statement = select(cart)
         try:
             result = session.exec(statement)
             for cart in result:
@@ -42,4 +43,3 @@ def get_all_cart_admin():
             raise HTTPException(
                 status_code=404, detail="There is no cart created yet !"
             )
-        return response

@@ -26,5 +26,6 @@ class GetEmployee(GetAllEmployee, _domain_employee.Password):
 class EmployeeUpIn(
     _domain_employee.FullName, _domain_employee.Age,
     _domain_employee.Password, _domain_employee.Phone,
+    _domain_employee.Id
 ):
     pass

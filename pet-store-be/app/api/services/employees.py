@@ -51,7 +51,7 @@ def update_employee(
     username: str,
 ) -> dict:
     _ = is_admin(username)
-    response = update_employee_detail(employee_in, username)
+    response = update_employee_detail(employee_in)
     return response
 
 

@@ -62,7 +62,7 @@ def new_booking(
 
     Xin cảm ơn bạn
 
-    Cửa hàng thú cưng.
+    Petstore.
     """)
     # smtp_server.sendmail(sender, receiver, message)
     smtp_server.send_message(msg)

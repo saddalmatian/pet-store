@@ -81,10 +81,11 @@ async def get_cart(
     "/get-all-cart"
 )
 async def get_all_cart(
-    authorization_token: str = Header(None)
+    authorization_token: str = Header(None),
+
 ):
-    _ = get_username_from_token(authorization_token)
-    response = _service_bills.get_all_cart()
+    username = get_username_from_token(authorization_token)
+    response = _service_bills.get_all_cart(username)
     return response
 
 

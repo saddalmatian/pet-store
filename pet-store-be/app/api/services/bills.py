@@ -4,7 +4,7 @@ from fastapi import HTTPException
 
 from sqlmodel import Session, select
 from app.api.models.domains.employees import EmployeeSQL
-from app.utils.db_helper import generate_ksuid
+from app.utils.db_helper import generate_ksuid, get_userid_from_username
 from datetime import datetime
 from app.api.services.vnpay import vnpay
 # from app.db.bill.add_to_cart import add_to_cart
@@ -28,8 +28,12 @@ VNPAY_TMN_CODE = '14H33NEJ'  # Website ID in VNPAY System, get from config
 VNPAY_HASH_SECRET_KEY = 'NVTDUKXFKKOPKEEQJDUZMTPIXEZZALKS'
 
 
-def get_all_cart():
-    response = get_all_cart_admin()
+def get_all_cart(username: str):
+    if username != 'admin':
+        user_id = get_userid_from_username(username, is_customer=True)
+    else:
+        user_id = get_userid_from_username(username)
+    response = get_all_cart_admin(user_id)
     return response
 
 
