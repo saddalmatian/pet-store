@@ -4,6 +4,7 @@ import Header from "./Header"
 import ModalAddPromo from './ModalAddPromo'
 import ModalUpdate from './ModalUpdatePromo'
 import SideBar from './Sidebar'
+import Login from './SignIn'
 function Promo() {
 
     const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
@@ -109,6 +110,7 @@ function Promo() {
     }
 
     return (
+        !localStorage.getItem('token') ? <Login/>  : (
         <div>
             <SideBar
                 setSideNavExpanded={setSideNavExpanded}
@@ -174,7 +176,7 @@ function Promo() {
                 </div>
             </div>
         </div>
-        </div></div>
+        </div></div>)
     )
 }
 export default Promo;

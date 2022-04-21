@@ -88,7 +88,7 @@ function ModalUpdatePromo(props) {
         v.push(product.product_id)
     )
     products.map((a, index) =>
-        v.push(a.ProductID))
+        console.log(products))
 
     return (
         <Modal {...props}
@@ -134,14 +134,15 @@ function ModalUpdatePromo(props) {
                             <label className="label-items_promo">List products</label>
                             <select className="form-control-lg border input-items_promo option-type" name="listProduct" required onChange={(e) => handleChangeSelect(e)} multiple>
                                 {
-                                props.promo && props.promo.ListProducts.map((product, i) =>
-                                    products.map((a, index) =>
-                                    (a.ProductID === product.product_id ?
-                                        <option value={product.product_id} selected key={i}>{product.product_name}</option>
-                                        : <option value={a.ProductID} key={i}>{a.ProductName}</option>
+                                    props.promo && props.promo.ListProducts.map((product, i) =>
+                                        products.map((a, index) =>
+                                        (a.ProductID === product.product_id ?
+                                            <option value={product.product_id} selected key={i}>{product.product_name}</option>
+                                            :(<option value={a.ProductID} key={i}>{a.ProductName}</option>)
+                                        )
+                                        )
+
                                     )
-                                    )
-                                )
                                 }
                             </select>
 

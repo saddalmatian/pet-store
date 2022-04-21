@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "./Header"
 import SideBar from './Sidebar'
+import Login from './SignIn'
 function Service() {
 
     const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
@@ -128,6 +129,7 @@ function Service() {
 
     const status = ['Completed', 'Incomplete', 'New']
     return (
+        !localStorage.getItem('token') ? <Login/>  : (
         <div>
             <SideBar
                 setSideNavExpanded={setSideNavExpanded}
@@ -195,7 +197,7 @@ function Service() {
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div></div>)
     )
 }
 export default Service;

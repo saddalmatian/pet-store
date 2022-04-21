@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from "./Header"
 import SideBar from './Sidebar'
 import ModalAddStaff from "./ModalAddStaff"
+import Login from './SignIn'
 function Staff() {
 
     const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
@@ -91,7 +92,8 @@ function Staff() {
         fullName: '',
         phone: '',
         age: '',
-        pwd: ''
+        pwd: '',
+        id:''
     }
     const [formValues, setFormValues] = useState(initValues);
     const handleChange = e => {
@@ -102,21 +104,22 @@ function Staff() {
         });
     }
     console.log(formValues)
-    async function updateStaff(fullname, phone, age, pwd) {
-        console.log(fullname, phone, age, pwd)
+    async function updateStaff(id,fullname, phone, age, pwd) {
+        console.log( id,fullname, phone, age, pwd)
         await axios({
             method: "put",
             url: "http://127.0.0.1:8000/employees/update-employee",
-            body: JSON.stringify({
+            data:{
+                EmployeeId: id,
                 FullName: formValues.fullName || fullname,
                 Phone: formValues.phone || phone,
                 Password: formValues.pwd || pwd,
-                Age: parseInt(formValues.age || age)
-            }),
+                Age: parseInt(formValues.age) || parseInt(age)
+            },
             headers: {
                 accept: 'application/json',
                 'authorization-token': localStorage.getItem('token'),
-                'access-control-allow-credentials': true
+                'Content-Type': 'application/json'
 
 
             }
@@ -136,6 +139,7 @@ function Staff() {
     const [modalShowAddStaff, setModalShowAddStaff] = useState({ show: false, productID: '' });
     return (
         // localStorage.getItem('Username')!=='admin' ? alert('Xin lỗi! Chức năng chỉ dành cho admin'):(
+            !localStorage.getItem('token') ? <Login/>  : (
         <div>
             <SideBar
                 setSideNavExpanded={setSideNavExpanded}
@@ -169,7 +173,7 @@ function Staff() {
                                 {staffs.map((staff, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{staff.Username}</td>
+                                            <td>{staff.EmployeeId}</td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Password} onChange={handleChange} name="pwd" /></td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.FullName} onChange={handleChange} name="fullname" /></td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Age} onChange={handleChange} name="age" /></td>
@@ -177,7 +181,7 @@ function Staff() {
                                             <td>{staff.Email}</td>
                                             <td className="text-center p-0"  >
                                                 <button className="btn btn-lg" 
-                                                    onClick={() =>updateStaff(staff.FullName, staff.Phone, staff.Age, staff.Password)}
+                                                    onClick={() =>updateStaff(staff.EmployeeId,staff.FullName, staff.Phone, staff.Age, staff.Password)}
                                                 >
                                                     <i className="fa fa-check" style={{fontSize:"25px", fontWeight:"bold"}}></i>
                                                 </button>
@@ -195,7 +199,7 @@ function Staff() {
                 </div>
             </div>
         </div>
-        </div></div>
+        </div></div>)
     )
 }
 export default Staff;

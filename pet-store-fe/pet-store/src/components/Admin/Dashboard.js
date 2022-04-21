@@ -5,7 +5,7 @@ import 'chart.js/auto';
 import { Pie, Bar } from "react-chartjs-2";
 import axios from 'axios';
 import SideBar from './Sidebar'
-
+import Login from'./SignIn'
 
 
 
@@ -232,6 +232,7 @@ function Dashboard() {
     }
 
     return (
+        !localStorage.getItem('token') ? <Login/>  : (
         <div>
             <SideBar
                 setSideNavExpanded={setSideNavExpanded}
@@ -397,7 +398,7 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)
     )
 }
 export default Dashboard;
