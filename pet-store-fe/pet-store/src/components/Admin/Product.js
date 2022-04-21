@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "./Header"
 import SideBar from './Sidebar'
+import Login from './SignIn'
 
 
 
@@ -122,6 +123,7 @@ function Product() {
     const [modalShowAdd, setModalShowAdd] = useState({ show: false, productID: '' });
     const [modalType, setModalType] = useState({ show: false })
     return (
+        !localStorage.getItem('token') ? <Login/>  : (
         <div>
         <SideBar
             setSideNavExpanded={setSideNavExpanded}
@@ -210,7 +212,7 @@ function Product() {
             </div>
             </div>
         </div>
-        </div></div> 
+        </div></div> )
     )
 }
 export default Product;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "./Header"
 import SideBar from './Sidebar'
+import Login from './SignIn'
 function Bill() {
 
     const [sideNavExpanded, setSideNavExpanded] = React.useState(false);
@@ -135,6 +136,7 @@ function Bill() {
     console.log(bills && bills);
     const status = ['Completed', 'Incomplete', 'New']
     return (
+        !localStorage.getItem('token') ? <Login/>  : (
         <div>
             <SideBar
                 setSideNavExpanded={setSideNavExpanded}
@@ -199,6 +201,6 @@ function Bill() {
             </div>
         </div>
         </div></div>
-    )
+    ))
 }
 export default Bill;
