@@ -70,7 +70,7 @@ const SignUp = ({ submitForm }) => {
                 console.log(JSON.stringify(err, null, 2));
             }
         }
-    }, [formErrors]);
+    }, [formErrors, isSubmitted, formValues]);
 
     const validate = (values) => {
         const errors = {};

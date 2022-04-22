@@ -65,6 +65,7 @@ function ProductDetail({ ...props }) {
             }
         )
             .then(res => setComments(res.data))
+            .then(getProductDetail())
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }
 
@@ -91,21 +92,23 @@ function ProductDetail({ ...props }) {
             )
         }
     }
+    const billID = localStorage.getItem('BillID');
 
-    const handleAddCart = (id, quantity) => {
+    const handleAddCart = () => {
+        let url = `http://127.0.0.1:8000/bills/add-product-to-cart?product_quantity=${quantity}&product_cost=${cost}&bill_id=${billID}&product_id=${id}`;
+        if (product.Promotional && product.Promotional.promotional_id) {
+            url.concat(`&promotional_id=${product.Promotional.promotional_id}`)
+        }
         if (localStorage.getItem('Token')) {
-            axios.post(`http://127.0.0.1:8000/bills/create-cart`,
-                {
-                    product_quantity: quantity,
-                    product_id: id
-                },
+            axios.post(url, '',
                 {
                     headers: {
                         accept: 'applcation/json',
                         'authorization-token': localStorage.getItem('Token')
                     }
                 }
-            ).then(console.log('Ok'))
+            )
+                .then(alert('Thêm sản phẩm vào giỏ hàng thành công!'))
         } else {
             alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
         }
@@ -169,20 +172,27 @@ function ProductDetail({ ...props }) {
                     }
                 }
             )
+                .then(function (res) {
+                    setRateSuccess(true);
+                    // getProductDetail();
+                    alert('Đánh giá sản phẩm thành công!');
+                })
                 .then(getProductDetail())
-                .then(alert('Đánh giá sản phẩm thành công!'))
+                // .then(alert('Đánh giá sản phẩm thành công!'))
                 .then(setRateSuccess(true))
                 .catch(function (err) {
                     if (!err?.response) {
                         alert('Máy chủ hiện không phản hồi!')
                     } else {
-                        alert('Đánh giá không thành công!')
+                        alert('Bạn đã đánh giá sản phẩm này rồi!')
                     }
                 })
         } else {
             alert('Bạn cần đăng nhập để thực hiện thao tác này!');
         }
     }
+
+    const cost = product.Promotional && product.Promotional.promotional_sale ? discount(product.ProductCost, product.Promotional.promotional_sale) : product.ProductCost;
 
     return (
         <>
@@ -227,7 +237,7 @@ function ProductDetail({ ...props }) {
                                 <span className="item-quantity__available-content">{product.ProductQuantity}</span>
                             </p>
                             <div>
-                                <button type="button" className="item-btn__add-cart" onClick={handleAddCart}>Thêm vào giỏ hàng</button>
+                                <button type="button" className="item-btn__add-cart" onClick={() => handleAddCart()}>Thêm vào giỏ hàng</button>
                             </div>
                         </div>
 
@@ -268,7 +278,8 @@ function ProductDetail({ ...props }) {
                                         <i className="product-item__star fas fa-star"></i>
                                     </button>
                                 </div>
-                            </div> : <p className="rate-success">Sản phẩm này đã được bạn đánh giá</p>
+                            </div> :
+                            <p className="rate-success">Sản phẩm này đã được bạn đánh giá</p>
                         }
 
                         <p className="item-review__comment-heading">Bình luận</p>
@@ -290,7 +301,7 @@ function ProductDetail({ ...props }) {
                 <Line />
 
                 {comments.ListComments && comments.ListComments?.map((cmt, index) => (
-                    <Comment avt={Avt} name={cmt.CommentorName} content={cmt.CommentDetail} key={index} />
+                    <Comment avt={Avt} name={cmt.CommentorName} content={cmt.CommentDetail} rate={cmt.RateStarNumber} key={index} />
                 ))}
 
                 {/* <p className="comment-load-more">Tải thêm...</p> */}
@@ -302,7 +313,7 @@ function ProductDetail({ ...props }) {
                     </div>
 
                     <div className="d-flex gap-2 align-items-center">
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 2fr)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 2fr)' }}>
                             {listRelated && listRelated?.map((product, index) => (
                                 <div className="row d-flex gap-2" key={index}>
                                     <Link to={`/product_detail/${product.ProductID}`} style={{ textDecoration: "none" }}>

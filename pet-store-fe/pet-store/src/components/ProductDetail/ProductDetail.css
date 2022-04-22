@@ -184,6 +184,11 @@
     font-size: 1.4rem;
     font-weight: bold;
     margin: 0;
+    margin-right: 10px;
+}
+
+.user-rate {
+    margin-left: 10px;
 }
 
 .user-comment__content {
