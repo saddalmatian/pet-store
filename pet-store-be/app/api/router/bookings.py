@@ -5,8 +5,6 @@ from app.api.services import bookings \
     as _service_booking
 from app.utils.security import get_username_from_token
 from fastapi import BackgroundTasks
-import smtplib
-from email.message import EmailMessage
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 
 
@@ -63,6 +61,7 @@ async def booking(
     message = MessageSchema(
         subject="Thư xác nhận từ cửa hàng thú cưng",
         recipients=[booking_in.email],
+        body=message
     )
     fm = FastMail(conf)
     background_tasks.add_task(
