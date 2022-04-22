@@ -154,7 +154,10 @@ def payment(
     vnpay_payment_url = vnp.get_payment_url(
         VNPAY_PAYMENT_URL, VNPAY_HASH_SECRET_KEY
     )
-    return vnpay_payment_url
+    return {
+        "PaymentURL": vnpay_payment_url,
+        "ReturnURL": vnp.requestData['vnp_ReturnUrl']
+    }
 
 
 def payment_return(
