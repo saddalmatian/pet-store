@@ -90,6 +90,10 @@ function ModalUpdatePromo(props) {
     products.map((a, index) =>
         console.log(products))
 
+    const [listCheck, setListCheck] = useState([]);
+
+    console.log(listCheck);
+
     return (
         <Modal {...props}
             size="lg"
@@ -98,50 +102,47 @@ function ModalUpdatePromo(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title >
-                    Add Product
+                    Cập nhật khuyến mãi
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
                         <div className="d-flex">
-                            <label className="label-items_promo">Start date</label>
+                            <label className="label-items_promo">Ngày bắt đầu</label>
                             <input className="form-control-lg input-items_promo border" type="date" defaultValue={props.promo?.Promotional.promotional_start_date} required onChange={(e) => handleChange(e)} name="promoStartDate" />
                             {/* {console.log(props.promo.Promotional.promotional_start_date)} */}
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_promo">End date</label>
+                            <label className="label-items_promo">Ngày kết thúc</label>
                             <input className="form-control-lg input-items_promo border" type="date" defaultValue={props.promo?.Promotional.promotional_end_date} required onChange={(e) => handleChange(e)} name="promoEndDate" />
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_promo">Name promo</label>
+                            <label className="label-items_promo">Tên khuyến mãi</label>
                             <input className="form-control-lg input-items_promo border" type="text" defaultValue={props.promo?.Promotional.promotional_name} required onChange={(e) => handleChange(e)} name="promoName" />
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_promo">Percent</label>
+                            <label className="label-items_promo">Phần trăm khuyến mãi</label>
                             <input type="text" className="form-control-lg input-items_promo border" defaultValue={props.promo?.Promotional.promotional_sale} required onChange={(e) => handleChange(e)} name="promoSale" />
 
                         </div>
 
                         <div className="d-flex">
-                            <label className="label-items_promo">Description</label>
+                            <label className="label-items_promo">Mô tả</label>
                             <input className="form-control-lg input-items_promo border" defaultValue={props.promo?.Promotional.promotional_description} required onChange={(e) => handleChange(e)} name="promoDesc" />
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_promo">List products</label>
+                            <label className="label-items_promo">Danh sách sản phẩm</label>
                             <select className="form-control-lg border input-items_promo option-type" name="listProduct" required onChange={(e) => handleChangeSelect(e)} multiple>
                                 {
                                     props.promo && props.promo.ListProducts.map((product, i) =>
-                                        products.map((a, index) =>
-                                        (a.ProductID === product.product_id ?
-                                            <option value={product.product_id} selected key={i}>{product.product_name}</option>
-                                            :(<option value={a.ProductID} key={i}>{a.ProductName}</option>)
-                                        )
-                                        )
 
+                                        products.filter((a) =>(a.ProductID === product.product_id) ?
+                                            setListCheck({...listCheck, product}) : null
+                                        )
                                     )
                                 }
                             </select>
