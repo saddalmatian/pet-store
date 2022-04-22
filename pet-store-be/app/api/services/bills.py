@@ -60,7 +60,7 @@ def set_complete(
 def pay_cash(bill_id, amount):
     response = update_bill_status(
         bill_id, 'admin_id',
-        'Đã xác nhận', 'Tiền mặt',
+        'Đang giao', 'Tiền mặt',
         amount
     )
     return response
@@ -200,7 +200,7 @@ def payment_return(
             if vnp_ResponseCode == "00":
                 _ = update_bill_status(
                     bill_id, 'admin_id',
-                    'Đã xác nhận', 'VNPay',
+                    'Đang giao', 'VNPay',
                     amount
                 )
                 return RedirectResponse("http://localhost:3000/info")
