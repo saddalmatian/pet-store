@@ -57,7 +57,7 @@ function ModalUpdatePromo(props) {
             }
         }).then(function (response) {
             window.location.reload();
-            alert('done')
+            alert("Cập nhật thành công")
             props.onHide();
         })
 
