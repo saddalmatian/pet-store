@@ -201,7 +201,7 @@ def payment_return(
                 _ = update_bill_status(
                     bill_id, 'admin_id',
                     'Đã xác nhận', 'VNPay',
-                    vnp_Amount
+                    amount
                 )
                 return RedirectResponse("http://localhost:3000/info")
             else:
