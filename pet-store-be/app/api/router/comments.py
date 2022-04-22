@@ -25,8 +25,7 @@ async def comment_on_product(
 
 
 @router.get(
-    "/get-all-comments",
-    response_model=_schemas_comment.CommentGetAll
+    "/get-all-comments"
 )
 async def get_comments(
     product_id: str,

@@ -27,6 +27,9 @@ class BookTypeNum(Enum):
     grooming = 'Grooming'
     boarding = 'Boarding'
     walking = 'Walking'
+    combo1 = 'Combo1'
+    combo2 = 'Combo2'
+    combo3 = 'Combo3'
 
 
 class BookType(BaseModel):
