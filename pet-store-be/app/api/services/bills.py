@@ -200,7 +200,7 @@ def payment_return(
             if vnp_ResponseCode == "00":
                 _ = update_bill_status(
                     bill_id, 'admin_id',
-                    'Đã giao', 'VNPay',
+                    'Đã xác nhận', 'VNPay',
                     vnp_Amount
                 )
                 return ("payment_return.html",
