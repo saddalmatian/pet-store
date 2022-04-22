@@ -125,7 +125,8 @@ function Staff() {
             }
         })
             .then(function (response) {
-                // window.location.reload();
+                alert("Cập nhật thành công")
+                window.location.reload();
                 console.log(response);
             })
 
@@ -173,7 +174,7 @@ function Staff() {
                                 {staffs.map((staff, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{staff.EmployeeId}</td>
+                                            <td>{staff.Username}</td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Password} onChange={handleChange} name="pwd" /></td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.FullName} onChange={handleChange} name="fullname" /></td>
                                             <td><input className="form-control-lg input-items_staff border" defaultValue={staff.Age} onChange={handleChange} name="age" /></td>
