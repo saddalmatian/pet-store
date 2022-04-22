@@ -18,7 +18,7 @@ def get_the_cart(username):
         statement = select(cart).where(
             and_(
                 cart.customer_id == user_id,
-                cart.bill_status == 'New'
+                cart.bill_status == 'Chưa xác nhận'
             )
         )
         try:

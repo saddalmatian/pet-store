@@ -29,7 +29,7 @@ def update_bill_status(
             result.bill_delivery_date = end_date_format
         if not result.bill_created_date:
             result.bill_created_date = date_1_format
-        if bill_status != 'Completed':
+        if bill_status != 'Hoàn thành':
             result.pay_method = pay_method
             result.bill_total = vnp_Amount
         result.updated_at = datetime.datetime.now()

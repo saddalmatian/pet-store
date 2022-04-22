@@ -16,8 +16,7 @@ def update_employee_detail(
     employee_password = employee_in.password
     employee_phone = employee_in.phone
     employee_age = employee_in.age
-    employee_id = employee.employee_id
-
+    employee_id = employee_in.employee_id
     with Session(engine) as session:
         statement = select(employee).where(
             employee.employee_id == employee_id

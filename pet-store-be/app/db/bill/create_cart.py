@@ -14,7 +14,7 @@ def create_a_cart(username):
         statement = select(cart).where(
             and_(
                 cart.customer_id == user_id,
-                cart.bill_status == 'New'
+                cart.bill_status == 'Chưa xác nhận'
             )
         )
         result = session.exec(statement)
@@ -26,7 +26,7 @@ def create_a_cart(username):
             employee_id='admin_id',  # default is admin
             bill_created_date=None,
             bill_delivery_date=None,
-            bill_status='New',
+            bill_status='Chưa xác nhận',
             bill_total=0,
             pay_method=None,
         )

@@ -52,7 +52,7 @@ def set_complete(
     _ = update_product_quantity_in_bill(bill_id)
     response = update_bill_status(
         bill_id, employee_id,
-        'Completed'
+        'Hoàn thành'
     )
     return response
 
@@ -60,7 +60,7 @@ def set_complete(
 def pay_cash(bill_id, amount):
     response = update_bill_status(
         bill_id, 'admin_id',
-        'Incomplete', 'Cash',
+        'Chưa hoàn thành', 'Cash',
         amount
     )
     return response
@@ -200,7 +200,7 @@ def payment_return(
             if vnp_ResponseCode == "00":
                 _ = update_bill_status(
                     bill_id, 'admin_id',
-                    'Completed', 'VNPay',
+                    'Hoàn thành', 'VNPay',
                     vnp_Amount
                 )
                 return ("payment_return.html",

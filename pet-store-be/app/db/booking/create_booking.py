@@ -39,7 +39,7 @@ def new_booking(
             "BookId": book_id,
             "CustomerId": user_id,
             "Total": 0,
-            "BookStatus": 'New',
+            "BookStatus": 'Chưa xác nhận',
             "BookType": book_type,
             "FinishDate": None
         }
