@@ -6,8 +6,7 @@ from app.api.models.schemas import bookings as _schemas_booking
 from app.utils.db_helper import engine, generate_ksuid
 from sqlmodel import Session, select
 from app.utils.security import password
-import smtplib
-from email.message import EmailMessage
+
 
 
 def get_all_bookings(
@@ -44,27 +43,19 @@ def new_booking(
             "FinishDate": None
         }
     )
-    with Session(engine) as session:
-        session.add(booking)
-        session.commit()
-    smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    smtp_server.ehlo()
-    sender = 'saddalmatian@gmail.com'
-    smtp_server.login(sender, password)
-    msg = EmailMessage()
-    msg['Subject'] = 'Thư xác nhận từ cửa hàng thú cưng'
-    msg['From'] = sender
-    msg['To'] = receiver
-    msg.set_content(f"""\
-    Cảm ơn bạn đã đặt lịch cho thú cưng của bạn vào lúc {book_time}
 
-    Hãy đưa thư điện tử này cho nhân viên của chúng tôi kiểm tra khi bạn đến cửa hàng
-
-    Xin cảm ơn bạn
-
-    Petstore.
-    """)
-    # smtp_server.sendmail(sender, receiver, message)
-    smtp_server.send_message(msg)
-    smtp_server.close()
+    # with Session(engine) as session:
+    #     session.add(booking)
+    #     session.commit()
+    # smtp_server = smtplib.SMTP('smtp.gmail.com', 465)
+    # smtp_server.ehlo()
+    # sender = 'saddalmatian@gmail.com'
+    # smtp_server.login(sender, password)
+    # msg = EmailMessage()
+    # msg['Subject'] = 'Thư xác nhận từ cửa hàng thú cưng'
+    # msg['From'] = sender
+    # msg['To'] = receiver
+    # # smtp_server.sendmail(sender, receiver, message)
+    # smtp_server.send_message(msg)
+    # smtp_server.close()
     return {"Message": "Booking successfully"}
