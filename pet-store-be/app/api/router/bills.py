@@ -84,7 +84,8 @@ async def get_all_cart(
     authorization_token: str = Header(None),
 
 ):
-    username = get_username_from_token(authorization_token)
+    # username = get_username_from_token(authorization_token)
+    username = 'khachhang1'
     response = _service_bills.get_all_cart(username)
     return response
 
