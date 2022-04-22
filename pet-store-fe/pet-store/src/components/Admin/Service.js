@@ -127,7 +127,7 @@ function Service() {
         })
     }
 
-    const status = ['Completed', 'Incomplete', 'New']
+    const status = ['Hoàn thành', 'Chưa hoàn thành', 'Mới']
     return (
         !localStorage.getItem('token') ? <Login/>  : (
         <div>
