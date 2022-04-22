@@ -1,28 +1,28 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function CartBox({ ...props }) {
 
     const [quantity, setQuantity] = useState(props.product.ProductQuantity);
-    const [total, setTotal] = useState(props.product.ProductTotalCost);
+    // const [total, setTotal] = useState(props.product.ProductTotalCost);
     const billID = localStorage.getItem('BillID');
     const token = localStorage.getItem('Token');
 
     // console.log(props);
     // console.log(props.product.ProductQuantity);
 
-    const article = {
-        "list_product": [
-            {
-              "ProductCost": props.product.ProductCost,
-              "PromotionalID": props.product.PromotionalID,
-              "ProductQuantity": quantity,
-              "ProductID": props.product.ProductID,
-              "BillID": billID
-            }
-          ],
-          "bill_id": billID
-    }
+    // const article = {
+    //     "list_product": [
+    //         {
+    //           "ProductCost": props.product.ProductCost,
+    //           "PromotionalID": props.product.PromotionalID,
+    //           "ProductQuantity": quantity,
+    //           "ProductID": props.product.ProductID,
+    //           "BillID": billID
+    //         }
+    //       ],
+    //       "bill_id": billID
+    // }
 
     // console.log(article);
 
