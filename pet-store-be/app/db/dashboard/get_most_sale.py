@@ -22,7 +22,7 @@ def get_profit_services():
     with Session(engine) as session:
         total = 0
         temp = 0
-        statement = select(booking).where(booking.book_status == 'Hoàn thành')
+        statement = select(booking).where(booking.book_status == 'Đã giao')
         result = session.exec(statement)
         for book in result:
             total += book.total

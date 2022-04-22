@@ -11,7 +11,7 @@ def set_booking_finish(
 ):
     book_id = book_finish_in.book_id
     total = book_finish_in.total
-    status = 'Hoàn thành'
+    status = 'Đã giao'
     booking = _domains_booking.BookingSQL
     finish_date = datetime.datetime.now()
     with Session(engine) as session:
