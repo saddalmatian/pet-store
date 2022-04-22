@@ -33,7 +33,7 @@ def get_random_products(product_type_id: str):
         ).order_by(func.random())
         result = session.exec(statement)
         for product in result:
-            if i != 5:
+            if i != 6:
                 image = _domain_images.ImageSQL
                 statement_image = select(image).where(
                     and_(
