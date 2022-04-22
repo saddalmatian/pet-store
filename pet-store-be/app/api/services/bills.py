@@ -16,7 +16,7 @@ from app.db.bill.remove_product_cart import remove_product_cart
 from app.db.bill.update_status import update_bill_status
 from app.db.bill.get_all_cart import get_all_cart_admin
 from app.db.product.update_product_quantity_in_bill import\
-    update_product_quantity_in_bill
+    update_product_quantity_in_bill, raise_sold
 from app.utils.db_helper import engine
 VNPAY_RETURN_URL = 'http://localhost:8000/bills/payment_return'
 # get from config
@@ -49,7 +49,7 @@ def set_complete(
             employee_id = result.employee_id
         except Exception:
             raise HTTPException(status_code=404, detail="Employee not found")
-    _ = update_product_quantity_in_bill(bill_id)
+    raise_sold(bill_id)
     response = update_bill_status(
         bill_id, employee_id,
         'Đã giao'
@@ -58,6 +58,7 @@ def set_complete(
 
 
 def pay_cash(bill_id, amount):
+    _ = update_product_quantity_in_bill(bill_id)
     response = update_bill_status(
         bill_id, 'admin_id',
         'Đang giao', 'Tiền mặt',
@@ -198,6 +199,7 @@ def payment_return(
         vnp_CardType = inputData['vnp_CardType']
         if vnp.validate_response(VNPAY_HASH_SECRET_KEY):
             if vnp_ResponseCode == "00":
+                _ = update_product_quantity_in_bill(bill_id)
                 _ = update_bill_status(
                     bill_id, 'admin_id',
                     'Đang giao', 'VNPay',
