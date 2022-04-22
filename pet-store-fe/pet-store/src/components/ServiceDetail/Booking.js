@@ -52,10 +52,13 @@ function Booking(props) {
                 {
                     headers:
                     {
+                        'Access-Control-Allow-Origin': '*',
+                        'accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'authorization-token': localStorage.getItem('Token')
-                    },
+                        'authorization-token': token,
+                    }
                 })
+                .then(res => console.log(res))
                 .catch(function (err) {
                     if (!err?.response) {
                         setFormErrors({
@@ -68,7 +71,7 @@ function Booking(props) {
                     }
                 });
         }
-    }, [formErrors])
+    }, [formErrors, bookingSuccess, info.BookTime, info.Email, info.FullName, info.Note, info.PetAmount, info.Phone, props.bookType, token])
 
 
     const validate = (values) => {
@@ -124,7 +127,7 @@ function Booking(props) {
                                     type="text"
                                     className="booking-input"
                                     name='FullName'
-                                    value={info.FullName}
+                                    defaultValue={info.FullName}
                                     onChange={handleChange}
                                 ></input>
                                 {formErrors.FullName && <p className='booking__error'>{formErrors.FullName}</p>}
@@ -137,7 +140,7 @@ function Booking(props) {
                                     className="booking-input"
                                     name='Phone'
                                     onChange={handleChange}
-                                    value={info.Phone}
+                                    defaultValue={info.Phone}
                                 ></input>
                                 {formErrors.Phone && <p className='booking__error'>{formErrors.Phone}</p>}
                             </div>
@@ -150,7 +153,7 @@ function Booking(props) {
                                     className="booking-input"
                                     name='Email'
                                     onChange={handleChange}
-                                    value={info.Email}
+                                    defaultValue={info.Email}
                                 ></input>
                                 {formErrors.Email && <p className='booking__error'>{formErrors.Email}</p>}
                             </div>
@@ -163,7 +166,7 @@ function Booking(props) {
                                     className="booking-input"
                                     name='PetAmount'
                                     onChange={handleChange}
-                                    value={info.PetAmount}
+                                    defaultValue={info.PetAmount}
                                 ></input>
                                 {formErrors.PetAmount && <p className='booking__error'>{formErrors.PetAmount}</p>}
                             </div>
@@ -175,7 +178,7 @@ function Booking(props) {
                                     className="booking-input"
                                     name='BookTime'
                                     onChange={handleChange}
-                                    value={info.BookTime}
+                                    defaultValue={info.BookTime}
                                 ></input>
                                 {formErrors.BookTime && <p className='booking__error'>{formErrors.BookTime}</p>}
                             </div>
@@ -187,7 +190,7 @@ function Booking(props) {
                                     className="booking-input"
                                     name='Note'
                                     onChange={handleChange}
-                                    value={info.Note}
+                                    defaultValue={info.Note}
                                 ></input>
                             </div>
 

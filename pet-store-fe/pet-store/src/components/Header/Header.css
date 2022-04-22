@@ -86,9 +86,24 @@
     font-weight: 500;
     padding: 4px;
     cursor: pointer;
+    text-align: center;
+}
+
+.user-dropdown__content a {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--primary-color);
 }
 
 .user-dropdown__content p:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.user-dropdown__content a:hover {
     background-color: var(--primary-color);
     color: var(--white-color);
 }

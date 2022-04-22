@@ -25,6 +25,7 @@ function Header() {
                             <span className='username'>{localStorage.getItem('Name')}</span>
                         </div>
                         <div className="user-dropdown__content">
+                            <p><Link to="/info">Thông tin</Link></p>
                             <p onClick={handleClick}>Đăng xuất</p>
                         </div>
                     </div>
