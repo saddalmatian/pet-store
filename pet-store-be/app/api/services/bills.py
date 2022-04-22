@@ -1,7 +1,7 @@
 import hashlib
 import hmac
 from fastapi import HTTPException
-
+from fastapi.responses import RedirectResponse
 from sqlmodel import Session, select
 from app.api.models.domains.employees import EmployeeSQL
 from app.utils.db_helper import generate_ksuid, get_userid_from_username
@@ -203,27 +203,9 @@ def payment_return(
                     'Đã xác nhận', 'VNPay',
                     vnp_Amount
                 )
-                return ("payment_return.html",
-                        {
-                            "title": "Kết quả thanh toán",
-                            "result": "Thành công",
-                            "order_id": order_id,
-                            "amount": amount,
-                            "order_desc": order_desc,
-                            "vnp_TransactionNo": vnp_TransactionNo,
-                            "vnp_ResponseCode": vnp_ResponseCode
-                        })
+                return RedirectResponse("http://localhost:3000/info")
             else:
-                return ("payment_return.html",
-                        {
-                            "title": "Kết quả thanh toán",
-                            "result": "Lỗi",
-                            "order_id": order_id,
-                            "amount": amount,
-                            "order_desc": order_desc,
-                            "vnp_TransactionNo": vnp_TransactionNo,
-                            "vnp_ResponseCode": vnp_ResponseCode
-                        })
+                return RedirectResponse("http://localhost:3000/error")
         else:
             return ("payment_return.html",
                     {

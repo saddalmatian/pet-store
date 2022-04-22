@@ -1,16 +1,9 @@
-from fastapi import HTTPException
 from app.api.models.domains import (
     bills as _domain_bills
 )
-from operator import and_
 from app.api.models.domains import\
     (
         products as _domain_products,
-        images as _domain_images,
-        comments as _domain_comments,
-        rates as _domain_rates,
-        pet_types as _domain_pettypes,
-        brands as _domain_brands
     )
 from app.utils.db_helper import engine
 from sqlmodel import Session, select
