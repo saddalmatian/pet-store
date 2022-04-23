@@ -288,7 +288,7 @@ CREATE TABLE `pet_type` (
 
 LOCK TABLES `pet_type` WRITE;
 /*!40000 ALTER TABLE `pet_type` DISABLE KEYS */;
-INSERT INTO `pet_type` VALUES ('25e4ZNqws4WtdsLL16E','Bird'),('25e4Z1jf2Gb09xbKLMU','Cat'),('25e4Yd7QFbidTDwaQSc','Dog');
+INSERT INTO `pet_type` VALUES ('25e4ZNqws4WtdsLL16E','Chim'),('25e4Yd7QFbidTDwaQSc','Chó'),('25e4Z1jf2Gb09xbKLMU','Mèo');
 /*!40000 ALTER TABLE `pet_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +406,7 @@ CREATE TABLE `product_type` (
 
 LOCK TABLES `product_type` WRITE;
 /*!40000 ALTER TABLE `product_type` DISABLE KEYS */;
-INSERT INTO `product_type` VALUES ('25e4orCMpwimZ7PosXL','Accessories','25e4Yd7QFbidTDwaQSc'),('25e4pOk9ANpVrPmPHxs','Accessories','25e4Z1jf2Gb09xbKLMU'),('25e4pi93eFipon10x68','Accessories','25e4ZNqws4WtdsLL16E'),('25e4pz4iMotJnOv7Mp6','Food','25e4ZNqws4WtdsLL16E'),('25e4qI6XQoe2lCQEcM1','Food','25e4Z1jf2Gb09xbKLMU'),('25e4qYhLwy26VkCl78U','Food','25e4Yd7QFbidTDwaQSc'),('25e4rP5ds5RdoOkP0d4','Hygiene','25e4Yd7QFbidTDwaQSc'),('25e4rbrfym7t7QQgf6S','Hygiene','25e4Z1jf2Gb09xbKLMU');
+INSERT INTO `product_type` VALUES ('25e4orCMpwimZ7PosXL','Phụ kiện','25e4Yd7QFbidTDwaQSc'),('25e4pOk9ANpVrPmPHxs','Phụ kiện','25e4Z1jf2Gb09xbKLMU'),('25e4pi93eFipon10x68','Phụ kiện','25e4ZNqws4WtdsLL16E'),('25e4pz4iMotJnOv7Mp6','Thức ăn','25e4ZNqws4WtdsLL16E'),('25e4qI6XQoe2lCQEcM1','Thức ăn','25e4Z1jf2Gb09xbKLMU'),('25e4qYhLwy26VkCl78U','Thức ăn','25e4Yd7QFbidTDwaQSc'),('25e4rP5ds5RdoOkP0d4','Vệ sinh','25e4Yd7QFbidTDwaQSc'),('25e4rbrfym7t7QQgf6S','Vệ sinh','25e4Z1jf2Gb09xbKLMU');
 /*!40000 ALTER TABLE `product_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4467,4 +4467,4 @@ USE `sys`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23  6:56:14
+-- Dump completed on 2022-04-23  7:47:08

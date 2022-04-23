@@ -8,7 +8,6 @@ from sqlmodel import Session, select
 from app.utils.security import password
 
 
-
 def get_all_bookings(
     book_type: str
 ):
@@ -30,8 +29,6 @@ def new_booking(
     book_id = generate_ksuid()
     book_type = booking_in.book_type.value
     _ = delattr(booking_in, 'book_type')
-    receiver = booking_in.email
-    book_time = booking_in.book_time
     booking = _domain_booking.BookingSQL(
         **booking_in.dict(by_alias=True),
         **{
@@ -43,10 +40,9 @@ def new_booking(
             "FinishDate": None
         }
     )
-
-    # with Session(engine) as session:
-    #     session.add(booking)
-    #     session.commit()
+    with Session(engine) as session:
+        session.add(booking)
+        session.commit()
     # smtp_server = smtplib.SMTP('smtp.gmail.com', 465)
     # smtp_server.ehlo()
     # sender = 'saddalmatian@gmail.com'
