@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
 --
--- Host: localhost    Database: pet_store
+-- Host: localhost    Database: sys
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -14,459 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `pet_store`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `pet_store` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `pet_store`;
-
---
--- Table structure for table `bill`
---
-
-DROP TABLE IF EXISTS `bill`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bill` (
-  `bill_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `bill_created_date` date DEFAULT NULL,
-  `bill_delivery_date` date DEFAULT NULL,
-  `bill_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `bill_total` int DEFAULT NULL,
-  `pay_method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `updated_at` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`bill_id`),
-  KEY `fk_b_c_ci_idx` (`customer_id`),
-  KEY `fk_b_e_ei_idx` (`employee_id`),
-  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bill`
---
-
-LOCK TABLES `bill` WRITE;
-/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES ('288L8Dw72NMGmayUAVX','270zIfx9EXn7OWk2lGF','271CTAFbYmULdsqcba6','2022-04-22','2022-04-25','Đã giao',15000,'Tiền mặt','2022-04-22 22:07:11.092860');
-/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bill_detail`
---
-
-DROP TABLE IF EXISTS `bill_detail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bill_detail` (
-  `bill_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_quantity` int DEFAULT NULL,
-  `cost` int DEFAULT NULL,
-  `bill_detail_id` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`bill_detail_id`),
-  KEY `fk_bd_b_bi_idx` (`bill_id`),
-  KEY `fk_bd_p_pi_idx1` (`promotional_id`),
-  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bill_detail`
---
-
-LOCK TABLES `bill_detail` WRITE;
-/*!40000 ALTER TABLE `bill_detail` DISABLE KEYS */;
-INSERT INTO `bill_detail` VALUES ('288L8Dw72NMGmayUAVX','27hYH7dx8y5ZcJvndVL','',12,120000,'288LCNftSg5lff3qQUz');
-/*!40000 ALTER TABLE `bill_detail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `booking`
---
-
-DROP TABLE IF EXISTS `booking`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `booking` (
-  `book_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_amount` int NOT NULL,
-  `customer_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `book_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `total` int NOT NULL,
-  `book_time` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `note` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `customer_phone` varchar(11) NOT NULL,
-  `customer_email` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `book_type` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `finish_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`book_id`),
-  KEY `fk_booking_1_idx` (`customer_id`),
-  CONSTRAINT `fk_booking_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `booking`
---
-
-LOCK TABLES `booking` WRITE;
-/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES ('28A6y0WWzd6zTBx1pys',4,'Khach Hang 1','Chưa xác nhận',0,'2022-04-22T23:52','','0914784473','anb1805737@student.ctu.edu.vn','270zIfx9EXn7OWk2lGF','Boarding',NULL);
-/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `brand`
---
-
-DROP TABLE IF EXISTS `brand`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `brand` (
-  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `brand_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`brand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `brand`
---
-
-LOCK TABLES `brand` WRITE;
-/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES ('brand_id_A','BrandA'),('brand_id_B','BrandB');
-/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comment`
---
-
-DROP TABLE IF EXISTS `comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comment` (
-  `comment_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `comment_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `comment_rep_target` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `comment_main` tinyint(1) NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `commentor_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`comment_id`),
-  KEY `fk_c_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_c_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comment`
---
-
-LOCK TABLES `comment` WRITE;
-/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES ('289nIQEozfBoxVErFNU','Test','',1,'27hYH7dx8y5ZcJvndVL','khachhang1'),('289o2pZAqc5BRPSatma','Test','',1,'27hYH7dx8y5ZcJvndVL','khachhang2');
-/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `customer`
---
-
-DROP TABLE IF EXISTS `customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer` (
-  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `customer_mail` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_username` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_pwd` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `address_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `customer_phone` varchar(11) NOT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customer`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('270zIfx9EXn7OWk2lGF','Khach Hang 1','khachhang1@gmail.com','khachhang1','khachhang1','Tan Hiep','0914784473'),('271Ct3h9TvB7jxntPM5','Khách Hàng 2','khachhang2@gmail.com','khachhang2','khachhang2','Tân Hiệp','0913763102'),('271CveoMjzi64DQYucy','Khách Hàng 3','khachhang3@gmail.com','khachhang3','khachhang3','Ô Môn, Cần Thơ','0913763103'),('271CxKOfWLAeNC2L40Z','Khách Hàng 4','khachhang4@gmail.com','khachhang4','khachhang4','Ninh Kiều, Cần Thơ','0913763104');
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `employee`
---
-
-DROP TABLE IF EXISTS `employee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employee` (
-  `employee_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `employee_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_phone` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_age` int NOT NULL,
-  `employee_username` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `employee_pwd` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `is_admin` tinyint NOT NULL,
-  PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employee`
---
-
-LOCK TABLES `employee` WRITE;
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('271CTAFbYmULdsqcba6','Nhân Viên 1','nhanvien1@gmail.com','0914764014',22,'nhanvien1','nhanvien1',0),('271CUAABVNBtutT4ZoN','Nhân Viên 2','nhanvien2@gmail.com','0914764012',22,'nhanvien2','nhanvien2',0),('271CVJ1D6Q7Tu4HbmRB','Nhân Viên 3','nhanvien3@gmail.com','0914764013',25,'nhanvien3','nhanvien3',0),('271CWv9Kq2eGbzMnYTv','Nhan Vien 4','nhanvien4@gmail.com','0914764104',21,'nhanvien4','nhanvien4',0),('271CfS2aqPGD5SnELOL','Nhân Viên 6','nhanvien6@gmail.com','0914764016',23,'nhanvien6','nhanvien6',0),('admin_id','Admin','admin@gmail.com','0914764104',22,'admin','admin',1);
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `image`
---
-
-DROP TABLE IF EXISTS `image`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `image` (
-  `image_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `image_source` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `image_display` tinyint NOT NULL,
-  PRIMARY KEY (`image_id`),
-  UNIQUE KEY `image_source_UNIQUE` (`image_source`),
-  KEY `fk_i_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `image`
---
-
-LOCK TABLES `image` WRITE;
-/*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES ('27hYH6osFyDZ5C8y1bK','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH6osFyDZ5C8y1bK70f62b7933d4e57a54d4d9899db03303.jpg',1),('27hYH7OonC4rU6egYqI','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH7OonC4rU6egYqInem-thu-10-510x510.jpg',0),('27hYH8axUI809YKDkM7','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH8axUI809YKDkM7nem-thu-7-510x510.jpg',0),('27hdADhPglFTkNnhyUt','27hdA2ax69FsVtOYbPy','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdADhPglFTkNnhyUtdai-dan-3-510x510.jpg',0),('27hdAEbiBqOA3MZDQk8','27hdA2ax69FsVtOYbPy','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdAEbiBqOA3MZDQk8dai-dan-1-510x510.jpg',1),('27hdFibd0gzwSUdZXaG','27hdFgudaenFpMWUXi3','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdFibd0gzwSUdZXaGdai-dan-3-510x510.jpg',0),('27hdFjfHyEHgsEpzG7z','27hdFgudaenFpMWUXi3','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdFjfHyEHgsEpzG7zdai-dan-1-510x510.jpg',1),('27hdJ4m784pxLwe68M8','27hdJ40P2nH1FGIBxO8','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdJ4m784pxLwe68M8dai-dan-1-510x510.jpg',1),('27hdJ8F1ubnicDFPItP','27hdJ40P2nH1FGIBxO8','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdJ8F1ubnicDFPItPdai-dan-3-510x510.jpg',0),('27hdqmGO0AxfKXmWsU6','27hdqq5z1Idb7qQs6hN','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdqmGO0AxfKXmWsU6kem-cat-mong-3-510x510.jpg',1),('27he7tNKW9UjjQkmFrG','27he7sjoF5oEa0iZMnD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27he7tNKW9UjjQkmFrGbat-an-doi-Round-Dog-2-510x510.jpg',1),('27heElsGAfLB8feMoYW','27heEpMqXJYxpc1r9ZK','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heElsGAfLB8feMoYWta-cho-nho-510x510.jpg',0),('27heEpimq1mqg8rEqYK','27heEpMqXJYxpc1r9ZK','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heEpimq1mqg8rEqYKta-cho-2-247x296.jpg',1),('27heMfkL9d7TRqcqLKm','27heMjpDFYxm3Ve4lZY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMfkL9d7TRqcqLKmta-cho-nho-510x510.jpg',0),('27heMjAgNCVj85mS9mD','27heMjpDFYxm3Ve4lZY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMjAgNCVj85mS9mDta-cho-2-247x296.jpg',1),('27heMsqADIQzumByMaI','27heMo4kfriLBRGeMCD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMsqADIQzumByMaIta-cho-2-247x296.jpg',1),('27heMthPv4gKfKCmc78','27heMo4kfriLBRGeMCD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMthPv4gKfKCmc78ta-cho-nho-510x510.jpg',0),('27heNAag0Ti6aBXBEPm','27heNA4AJvaqGCEJdPz','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heNAag0Ti6aBXBEPmta-cho-2-247x296.jpg',1),('27heNAwd6FxrReWWjT3','27heNA4AJvaqGCEJdPz','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heNAwd6FxrReWWjT3ta-cho-nho-510x510.jpg',0),('27helLrfbTHhgEvy7Sg','27helJYQdDgcyJqoP1V','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27helLrfbTHhgEvy7Sgdo-an-royal-510x510.jpg',1),('27hf5tgJkb0X1MXdRyR','27hf5tszyDUrbSzyxPM','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf5tgJkb0X1MXdRyRvong-tho-cam-6-510x510.jpg',1),('27hf5wXCYGUaevCowGL','27hf5tszyDUrbSzyxPM','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf5wXCYGUaevCowGLvong-tho-cam-1-510x510.jpg',0),('27hf6DOsy96pEz5BOCz','27hf69HjbIMd3I9JYrL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf6DOsy96pEz5BOCzvong-tho-cam-6-510x510.jpg',1),('27hf6EwWo3SLBSjl9M8','27hf69HjbIMd3I9JYrL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf6EwWo3SLBSjl9M8vong-tho-cam-1-510x510.jpg',0),('27hfLE9qJRtdZ8Vrpr5','27hfLKqN7Q6e2yFwJTP','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfLE9qJRtdZ8Vrpr5thuc-an-cho-con-1-510x510.jpg',1),('27hfWIjwPTASo07xLWl','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWIjwPTASo07xLWl3.jpg',0),('27hfWJQtCrJ9IjRGkT9','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWJQtCrJ9IjRGkT94.jpg',0),('27hfWJhVw7xBWbBfQz8','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWJhVw7xBWbBfQz81.jpg',1),('27hfWKJn7Ke2t8rYkXk','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWKJn7Ke2t8rYkXk2.jpg',0),('27hfWumabNMyaJo6GfP','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWumabNMyaJo6GfP1.jpg',1),('27hfWvanZVN5VeUDCjj','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWvanZVN5VeUDCjj3.jpg',0),('27hfWy4SlCHHtw0MNXT','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWy4SlCHHtw0MNXT2.jpg',0),('27hfX0TcfV6ssFpBROs','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfX0TcfV6ssFpBROs4.jpg',0),('27hfsLdcsxca7umOxqp','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsLdcsxca7umOxqp5.jpg',1),('27hfsMKMyUCbFML3miO','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsMKMyUCbFML3miO6.jpg',0),('27hfsNGl6NbT813W2Tu','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsNGl6NbT813W2Tu7.jpg',0),('27hfsfWNhbcKARsFoG5','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsfWNhbcKARsFoG55.jpg',1),('27hfsgJ63IbZPnZ73qJ','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsgJ63IbZPnZ73qJ6.jpg',0),('27hfsjV1VvLELXgACIw','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsjV1VvLELXgACIw7.jpg',0),('27hgcOtzMHRw9gIBgZ2','27hgcOd8rSpqmHwpHJt','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgcOtzMHRw9gIBgZ29.jpg',0),('27hgcPBBZ2rRl5Fn40u','27hgcOd8rSpqmHwpHJt','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgcPBBZ2rRl5Fn40u8.jpg',1),('27hgsbHNQlzF2x0TJjC','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsbHNQlzF2x0TJjC11.jpg',1),('27hgscJ29jRlHEvVCZz','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgscJ29jRlHEvVCZz12.jpg',0),('27hgshIOksQbbrEojG7','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgshIOksQbbrEojG713.jpg',0),('27hgssfmdxK3CKdg9sd','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgssfmdxK3CKdg9sd13.jpg',0),('27hgsskrSUWJtMg7Bv9','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsskrSUWJtMg7Bv912.jpg',0),('27hgsyN6lMW6mddsyc9','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsyN6lMW6mddsyc911.jpg',1),('27hgzJMVHAl5XTwXYH9','27hgzHsS7OnpH8F9w4D','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgzJMVHAl5XTwXYH9khan-5-510x510.jpg',1),('27hgzhFN7NXtcjZG9VI','27hgziZ4A4xRqNLjl2G','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgzhFN7NXtcjZG9VIkhan-5-510x510.jpg',1);
-/*!40000 ALTER TABLE `image` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pet_type`
---
-
-DROP TABLE IF EXISTS `pet_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pet_type` (
-  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`pet_type_id`),
-  UNIQUE KEY `pet_type_name_UNIQUE` (`pet_type_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pet_type`
---
-
-LOCK TABLES `pet_type` WRITE;
-/*!40000 ALTER TABLE `pet_type` DISABLE KEYS */;
-INSERT INTO `pet_type` VALUES ('25e4ZNqws4WtdsLL16E','Chim'),('25e4Yd7QFbidTDwaQSc','Chó'),('25e4Z1jf2Gb09xbKLMU','Mèo');
-/*!40000 ALTER TABLE `pet_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pro_pro`
---
-
-DROP TABLE IF EXISTS `pro_pro`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pro_pro` (
-  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `propro_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`propro_id`),
-  KEY `fk_pro_pro_1_idx` (`product_id`),
-  KEY `fk_pro_pro_2_idx` (`promotional_id`),
-  CONSTRAINT `fk_pro_pro_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_pro_pro_2` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pro_pro`
---
-
-LOCK TABLES `pro_pro` WRITE;
-/*!40000 ALTER TABLE `pro_pro` DISABLE KEYS */;
-INSERT INTO `pro_pro` VALUES ('27QbSVsdRZ1jWWLN2LX','27hYH7dx8y5ZcJvndVL','27pP2y8ldar5K4CCycB');
-/*!40000 ALTER TABLE `pro_pro` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `product`
---
-
-DROP TABLE IF EXISTS `product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product` (
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_quantity` int NOT NULL,
-  `product_sold` int NOT NULL,
-  `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_description` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_cost` int DEFAULT NULL,
-  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_original_cost` int NOT NULL,
-  `product_date_in` date NOT NULL,
-  `product_date_out` date DEFAULT NULL,
-  PRIMARY KEY (`product_id`),
-  KEY `fk_p_pt_pti_idx` (`product_type_id`),
-  KEY `fk_p_b_bi_idx` (`brand_id`),
-  CONSTRAINT `fk_p_b_bi` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product`
---
-
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('27hYH7dx8y5ZcJvndVL','Nệm thú',66,22,'25e4orCMpwimZ7PosXL','Bạn có biết, giấc ngủ không chỉ quan trọng đối với con người mà còn đối với tất cả các loài vật nuôi. Một đêm ngon giấc, thoải mái sẽ giúp thú cưng khỏe mạnh, vui vẻ hơn và hơn hết là tránh được những bệnh vặt. Việc để chó mèo nằm trên nền gạch, nền đất vào ban đêm chắc chắn sẽ dẫn đến những nguy hiểm như: Cảm, sổ mũi, ho khan Bị côn trùng cắn Dễ phát sinh bọ chét, bọ chét do ảnh hưởng của hơi đất => Chắc chắn đây là điều mà những người nuôi chó mèo sẽ không bao giờ mong muốn. Vì vậy, một chiếc giường ngủ cho chó mèo sẽ là sự lựa chọn sáng suốt của Sếp và tạo thói quen đi ngủ tốt cho chó mèo.',150000,'brand_id_A',120000,'2022-04-12',NULL),('27hdA2ax69FsVtOYbPy','Dây dắt chó đi kèm đai ngực hoạt tiết ',100,23,'25e4orCMpwimZ7PosXL','Dây xích cho chó kèm đai ngực Hoa văn là sản phẩm dành cho tất cả các giống chó. Là vật dụng không thể thiếu mỗi khi bạn muốn dắt chó đi dạo.',140000,'brand_id_A',120000,'2022-04-12',NULL),('27hdFgudaenFpMWUXi3','Đồ ăn nhẹ cho chó mèo - BẾP Bóng Bay Hai Đầu',120,31,'25e4orCMpwimZ7PosXL','Snack Cho Chó Và Mèo - Bóng Dây 2 Đầu KITTEN là sản phẩm dành cho tất cả các giống chó, mèo. Với bóng dây, bạn có thể hạn chế việc bé gặm đồ đạc trong nhà. Ngoài ra, đây còn là món đồ chơi giúp trẻ linh hoạt hơn.',90000,'brand_id_A',80000,'2022-04-12',NULL),('27hdJ40P2nH1FGIBxO8','Đồ ăn nhẹ cho chó mèo - BẾP Bóng Bay Hai Đầu',120,2,'25e4pOk9ANpVrPmPHxs','Snack Cho Chó Và Mèo - Bóng Dây 2 Đầu KITTEN là sản phẩm dành cho tất cả các giống chó, mèo. Với bóng dây, bạn có thể hạn chế việc bé gặm đồ đạc trong nhà. Ngoài ra, đây còn là món đồ chơi giúp trẻ linh hoạt hơn.',90000,'brand_id_A',80000,'2022-04-12',NULL),('27hdqq5z1Idb7qQs6hN','Dụng cụ cắt móng tay cho chó',15,0,'25e4orCMpwimZ7PosXL','Nó là một công cụ làm sạch vật nuôi, được làm bằng vật liệu bền.  Sản phẩm được các chuyên gia chăm sóc chó mèo trên thế giới khuyên dùng, giúp cắt tỉa gọn gàng móng chân cho chó mèo, mang lại cảm giác thoải mái và vệ sinh cho thú cưng.',80000,'brand_id_B',50000,'2022-04-12',NULL),('27he7sjoF5oEa0iZMnD','Bát ăn đôi',25,0,'25e4orCMpwimZ7PosXL','Bát ăn đôi hình tròn cho chó mèo được làm bằng nhựa cao cấp không độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  + Sản phẩm bát đôi tròn cho chó mèo xứng đáng là sự lựa chọn lý tưởng của bạn dành cho thú cưng của mình.  + Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng.  + Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.  + Có nhiều màu sắc khác nhau Bát đôi hình tròn cho chó mèo bền, đẹp cho chó mèo từ lớn đến nhỏ.  + Bát được thiết kế vừa vặn giúp chó mèo ăn tránh bị đổ.',95000,'brand_id_B',90000,'2022-04-12',NULL),('27heEpMqXJYxpc1r9ZK','Tả mặc cho chó nhỏ',25,0,'25e4orCMpwimZ7PosXL','Miếng lót tã được làm từ 100% cotton nguyên chất và các hạt polyme siêu thấm hút. Miếng lót sẽ thấm nhanh nước tiểu của thú cưng khi bé tè, đồng thời có tác dụng khử mùi, chống khuẩn, giữ cho bề mặt luôn khô thoáng.',105000,'brand_id_B',103000,'2022-04-12',NULL),('27heMjpDFYxm3Ve4lZY','Bát ăn xương nhỏ',100,0,'25e4orCMpwimZ7PosXL','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27heMo4kfriLBRGeMCD','Bát ăn xương nhỏ',100,0,'25e4pOk9ANpVrPmPHxs','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27heNA4AJvaqGCEJdPz','Bát ăn xương nhỏ',100,0,'25e4pi93eFipon10x68','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27helJYQdDgcyJqoP1V','Thức ăn hoàng gia cho Poodle nhỏ 1.5kg',12,0,'25e4qYhLwy26VkCl78U','Thức ăn dành riêng cho chó con có trọng lượng tối đa dưới 11 kg như Pug, Poodle, Bichon Frise, Corgi, Phốc sóc, Chihuahua, .. ở độ tuổi từ 2 - 10 kg.',60000,'brand_id_A',55000,'2022-04-12',NULL),('27hf5tszyDUrbSzyxPM','Vòng cổ thổ cẩm cho chó và mèo',25,0,'25e4orCMpwimZ7PosXL','Vòng cổ thổ cẩm cho chó mèo là phụ kiện không thể thiếu trong bộ sưu tập của thú cưng. Chiếc vòng cổ không chỉ khiến thú cưng của bạn trở nên thời trang hơn mà còn giúp bạn dễ dàng tìm thấy bé nhờ phần bèo nhún trên cổ áo.',75000,'brand_id_B',70000,'2022-04-12',NULL),('27hf69HjbIMd3I9JYrL','Vòng cổ thổ cẩm cho chó và mèo',25,0,'25e4pOk9ANpVrPmPHxs','Vòng cổ thổ cẩm cho chó mèo là phụ kiện không thể thiếu trong bộ sưu tập của thú cưng. Chiếc vòng cổ không chỉ khiến thú cưng của bạn trở nên thời trang hơn mà còn giúp bạn dễ dàng tìm thấy bé nhờ phần bèo nhún trên cổ áo.',75000,'brand_id_B',70000,'2022-04-12',NULL),('27hfLKqN7Q6e2yFwJTP','Thức ăn khô mini Royal Canin Puppy',10,0,'25e4qYhLwy26VkCl78U','Các giống chó nhỏ dưới 11kg (khi trưởng thành hoàn toàn) như: Poodle, Phốc, Cocker Spaniel, Pug, Chihuahua, Pomeranian, ... Chúng chỉ cần thức ăn dinh dưỡng có kiểu dáng nhỏ, tuy nhiên chúng đòi hỏi nhiều năng lượng hơn các giống lớn vì chúng có thời gian sinh trưởng ngắn hơn và mạnh hơn. Ngoài ra, tuổi thọ trung bình của chó nhỏ cao hơn chó lớn nên chế độ dinh dưỡng cũng cần khắt khe hơn. Công thức của ROYAL CANIN Mini Puppy được đo lường để đáp ứng các nhu cầu cụ thể của chó nhỏ trong suốt giai đoạn cuộc đời của chúng từ 2 đến 10 tháng tuổi.',80000,'brand_id_A',75000,'2022-04-12',NULL),('27hfWM2XRcr5HvhwNFC','Nệm chấm cho chó và mèo',75,0,'25e4pOk9ANpVrPmPHxs','Nệm hình vuông cho chó mèo Zenji với hình dáng và thiết kế độc đáo. Được thiết kế đặc biệt cho vật nuôi. Thích hợp cho tất cả các giống chó mèo.',250000,'brand_id_A',220000,'2022-04-12',NULL),('27hfWwX0hxQg3OP7pzY','Nệm chấm cho chó và mèo',75,0,'25e4orCMpwimZ7PosXL','Nệm hình vuông cho chó mèo Zenji với hình dáng và thiết kế độc đáo. Được thiết kế đặc biệt cho vật nuôi. Thích hợp cho tất cả các giống chó mèo.',250000,'brand_id_A',220000,'2022-04-12',NULL),('27hfsLjKtoLC2Zq3kxa','Cũi nhựa xây dựng cho chó và mèo',15,0,'25e4orCMpwimZ7PosXL','Lồng nhựa cho chó mèo phù hợp với tất cả các giống chó mèo nhỏ.',150000,'brand_id_A',130000,'2022-04-12',NULL),('27hfsgrnow7POQizCa4','Cũi nhựa xây dựng cho chó và mèo',15,0,'25e4pOk9ANpVrPmPHxs','Lồng nhựa cho chó mèo phù hợp với tất cả các giống chó mèo nhỏ.',150000,'brand_id_A',130000,'2022-04-12',NULL),('27hgcOd8rSpqmHwpHJt','Khay Haver cho chó',15,0,'25e4rP5ds5RdoOkP0d4','Hộp vệ sinh cho chó đúng nơi của Haver sử dụng nhựa tổng hợp cao cấp. Có tính đàn hồi giúp chó mèo bước vào thoải mái. Khay hướng dẫn chó đi vệ sinh đúng chỗ trong nhà với màu sắc đa dạng, bền và chịu lực tốt, tuổi thọ cao. Sử dụng kết hợp với bình xịt hướng dẫn vệ sinh đúng cách để đảm bảo huấn luyện chó thành công 100%.',95000,'brand_id_B',80000,'2022-04-12',NULL),('27hgsgAgtzjxbjd4JRh','Sữa Tắm SOS cho thú cưng',23,0,'25e4rP5ds5RdoOkP0d4','SOS màu nâu đỏ: Dòng sữa tắm dành riêng cho cho những bé chó mèo có bộ lông nâu đỏ, đen. SOS màu xanh dương: Dòng sữa tắm dành riêng cho các bé chó mèo sở hữu bộ lông trắng. SOS màu đen: Dòng sữa tắm chuyên dùng để phục hồi da tổn thương và đuổi ve rận cho chó mèo',150000,'brand_id_B',120000,'2022-04-12',NULL),('27hgsvcaJCzlihEJWRD','Sữa Tắm SOS cho thú cưng',23,0,'25e4rbrfym7t7QQgf6S','SOS màu nâu đỏ: Dòng sữa tắm dành riêng cho cho những bé chó mèo có bộ lông nâu đỏ, đen. SOS màu xanh dương: Dòng sữa tắm dành riêng cho các bé chó mèo sở hữu bộ lông trắng. SOS màu đen: Dòng sữa tắm chuyên dùng để phục hồi da tổn thương và đuổi ve rận cho chó mèo',150000,'brand_id_B',120000,'2022-04-12',NULL),('27hgzHsS7OnpH8F9w4D','Khăn Vệ Sinh Siêu Thấm',23,0,'25e4rP5ds5RdoOkP0d4','Có khả năng hút nước rất nhanh trong thời gian ngắn Khả năng hút nước có thể tương đương với 10 khăn bông thông thường, do vậy tiết kiệm rất nhiều thời gian trong quá trình lau khô cho vật nuôi Chỉ cần vắt là khô mà không cần phơi như khăn bông bình thường Kích thước : 43×32 cm',75000,'brand_id_B',60000,'2022-04-12',NULL),('27hgziZ4A4xRqNLjl2G','Khăn Vệ Sinh Siêu Thấm',23,0,'25e4rbrfym7t7QQgf6S','Có khả năng hút nước rất nhanh trong thời gian ngắn Khả năng hút nước có thể tương đương với 10 khăn bông thông thường, do vậy tiết kiệm rất nhiều thời gian trong quá trình lau khô cho vật nuôi Chỉ cần vắt là khô mà không cần phơi như khăn bông bình thường Kích thước : 43×32 cm',75000,'brand_id_B',60000,'2022-04-12',NULL);
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `product_pet`
---
-
-DROP TABLE IF EXISTS `product_pet`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product_pet` (
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  KEY `fk_pp_pt_pi_idx` (`pet_type_id`),
-  KEY `fk_pp_p_pi_idx` (`product_id`),
-  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
-  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_pet`
---
-
-LOCK TABLES `product_pet` WRITE;
-/*!40000 ALTER TABLE `product_pet` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product_pet` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `product_type`
---
-
-DROP TABLE IF EXISTS `product_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product_type` (
-  `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`product_type_id`),
-  KEY `fk_pt_pt_pti_idx` (`pet_type_id`),
-  CONSTRAINT `fk_pt_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_type`
---
-
-LOCK TABLES `product_type` WRITE;
-/*!40000 ALTER TABLE `product_type` DISABLE KEYS */;
-INSERT INTO `product_type` VALUES ('25e4orCMpwimZ7PosXL','Phụ kiện','25e4Yd7QFbidTDwaQSc'),('25e4pOk9ANpVrPmPHxs','Phụ kiện','25e4Z1jf2Gb09xbKLMU'),('25e4pi93eFipon10x68','Phụ kiện','25e4ZNqws4WtdsLL16E'),('25e4pz4iMotJnOv7Mp6','Thức ăn','25e4ZNqws4WtdsLL16E'),('25e4qI6XQoe2lCQEcM1','Thức ăn','25e4Z1jf2Gb09xbKLMU'),('25e4qYhLwy26VkCl78U','Thức ăn','25e4Yd7QFbidTDwaQSc'),('25e4rP5ds5RdoOkP0d4','Vệ sinh','25e4Yd7QFbidTDwaQSc'),('25e4rbrfym7t7QQgf6S','Vệ sinh','25e4Z1jf2Gb09xbKLMU');
-/*!40000 ALTER TABLE `product_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `promotional`
---
-
-DROP TABLE IF EXISTS `promotional`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `promotional` (
-  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `promotional_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `promotional_description` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `promotional_sale` int NOT NULL,
-  `promotional_start_date` date NOT NULL,
-  `promotional_end_date` date NOT NULL,
-  PRIMARY KEY (`promotional_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `promotional`
---
-
-LOCK TABLES `promotional` WRITE;
-/*!40000 ALTER TABLE `promotional` DISABLE KEYS */;
-INSERT INTO `promotional` VALUES ('27QbSVsdRZ1jWWLN2LX','Sieu sale 10/4','Chet me roi',50,'2022-04-15','2022-04-20'),('27kMafsMw7TRkHcQBlI','Truong GIang','Sieu sao sieu ngo',50,'2022-04-13','2022-04-26');
-/*!40000 ALTER TABLE `promotional` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rate`
---
-
-DROP TABLE IF EXISTS `rate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `rate` (
-  `rate_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `rate_star_number` int DEFAULT NULL,
-  PRIMARY KEY (`rate_id`),
-  KEY `fk_r_p_pi_idx` (`product_id`),
-  KEY `fk_r_c_ci_idx` (`customer_id`),
-  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rate`
---
-
-LOCK TABLES `rate` WRITE;
-/*!40000 ALTER TABLE `rate` DISABLE KEYS */;
-INSERT INTO `rate` VALUES ('27rqoExRFPruGAOYiwT','27hdA2ax69FsVtOYbPy','270zIfx9EXn7OWk2lGF',5),('27rrWZ9CQK1TjgcuoEv','27hdA2ax69FsVtOYbPy','271Ct3h9TvB7jxntPM5',2),('27rraK0bKzyXW6xNBgu','27hdA2ax69FsVtOYbPy','271CveoMjzi64DQYucy',4),('289n60v0fLgD8kxJ8lm','27hYH7dx8y5ZcJvndVL','270zIfx9EXn7OWk2lGF',5);
-/*!40000 ALTER TABLE `rate` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Current Database: `sys`
@@ -2650,7 +2197,455 @@ SET character_set_client = @saved_cs_client;
 -- Current Database: `pet_store`
 --
 
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `pet_store` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
 USE `pet_store`;
+
+--
+-- Table structure for table `bill`
+--
+
+DROP TABLE IF EXISTS `bill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bill` (
+  `bill_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `bill_created_date` date DEFAULT NULL,
+  `bill_delivery_date` date DEFAULT NULL,
+  `bill_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `bill_total` int DEFAULT NULL,
+  `pay_method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `updated_at` varchar(45) DEFAULT NULL,
+  `user_address` varchar(200) NOT NULL,
+  PRIMARY KEY (`bill_id`),
+  KEY `fk_b_c_ci_idx` (`customer_id`),
+  KEY `fk_b_e_ei_idx` (`employee_id`),
+  CONSTRAINT `fk_b_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_b_e_ei` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bill`
+--
+
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+INSERT INTO `bill` VALUES ('28EcZztyqHs4XOaiVQO','270zIfx9EXn7OWk2lGF','admin_id','2022-04-24','2022-04-27','Đang giao',150000,'Tiền mặt','2022-04-24 14:32:53.030117','AAAATEst');
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bill_detail`
+--
+
+DROP TABLE IF EXISTS `bill_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bill_detail` (
+  `bill_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_quantity` int DEFAULT NULL,
+  `cost` int DEFAULT NULL,
+  `bill_detail_id` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`bill_detail_id`),
+  KEY `fk_bd_b_bi_idx` (`bill_id`),
+  KEY `fk_bd_p_pi_idx1` (`promotional_id`),
+  CONSTRAINT `fk_bd_b_bi` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+LOCK TABLES `bill_detail` WRITE;
+/*!40000 ALTER TABLE `bill_detail` DISABLE KEYS */;
+INSERT INTO `bill_detail` VALUES ('28EcZztyqHs4XOaiVQO','27hYH7dx8y5ZcJvndVL','',1,1,'28EcktD2GI54Cf8alJO');
+/*!40000 ALTER TABLE `bill_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booking`
+--
+
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking` (
+  `book_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pet_amount` int NOT NULL,
+  `customer_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `book_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `total` int NOT NULL,
+  `book_time` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `note` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `customer_phone` varchar(11) NOT NULL,
+  `customer_email` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `book_type` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `finish_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`book_id`),
+  KEY `fk_booking_1_idx` (`customer_id`),
+  CONSTRAINT `fk_booking_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES ('28A6y0WWzd6zTBx1pys',4,'Khach Hang 1','Chưa xác nhận',0,'2022-04-22T23:52','','0914784473','anb1805737@student.ctu.edu.vn','270zIfx9EXn7OWk2lGF','Boarding',NULL);
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `brand`
+--
+
+DROP TABLE IF EXISTS `brand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `brand` (
+  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `brand_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`brand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `brand`
+--
+
+LOCK TABLES `brand` WRITE;
+/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
+INSERT INTO `brand` VALUES ('brand_id_A','BrandA'),('brand_id_B','BrandB');
+/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comment` (
+  `comment_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `comment_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `comment_rep_target` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `comment_main` tinyint(1) NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `commentor_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `fk_c_p_pi_idx` (`product_id`),
+  CONSTRAINT `fk_c_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES ('289nIQEozfBoxVErFNU','Test','',1,'27hYH7dx8y5ZcJvndVL','khachhang1'),('289o2pZAqc5BRPSatma','Test','',1,'27hYH7dx8y5ZcJvndVL','khachhang2');
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer` (
+  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `customer_mail` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_username` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_pwd` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `address_detail` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `customer_phone` varchar(11) NOT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer`
+--
+
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES ('270zIfx9EXn7OWk2lGF','Khach Hang 1','khachhang1@gmail.com','khachhang1','khachhang1','Tan Hiep','0914784473'),('271Ct3h9TvB7jxntPM5','Khách Hàng 2','khachhang2@gmail.com','khachhang2','khachhang2','Tân Hiệp','0913763102'),('271CveoMjzi64DQYucy','Khách Hàng 3','khachhang3@gmail.com','khachhang3','khachhang3','Ô Môn, Cần Thơ','0913763103'),('271CxKOfWLAeNC2L40Z','Khách Hàng 4','khachhang4@gmail.com','khachhang4','khachhang4','Ninh Kiều, Cần Thơ','0913763104');
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employee` (
+  `employee_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `employee_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee_phone` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee_age` int NOT NULL,
+  `employee_username` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `employee_pwd` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `is_admin` tinyint NOT NULL,
+  PRIMARY KEY (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES ('271CTAFbYmULdsqcba6','Nhân Viên 1','nhanvien1@gmail.com','0914764014',22,'nhanvien1','nhanvien1',0),('271CUAABVNBtutT4ZoN','Nhân Viên 2','nhanvien2@gmail.com','0914764012',22,'nhanvien2','nhanvien2',0),('271CVJ1D6Q7Tu4HbmRB','Nhân Viên 3','nhanvien3@gmail.com','0914764013',25,'nhanvien3','nhanvien3',0),('271CWv9Kq2eGbzMnYTv','Nhan Vien 4','nhanvien4@gmail.com','0914764104',21,'nhanvien4','nhanvien4',0),('271CfS2aqPGD5SnELOL','Nhân Viên 6','nhanvien6@gmail.com','0914764016',23,'nhanvien6','nhanvien6',0),('admin_id','Admin','admin@gmail.com','0914764104',22,'admin','admin',1);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `image` (
+  `image_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `image_source` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `image_display` tinyint NOT NULL,
+  PRIMARY KEY (`image_id`),
+  UNIQUE KEY `image_source_UNIQUE` (`image_source`),
+  KEY `fk_i_p_pi_idx` (`product_id`),
+  CONSTRAINT `fk_i_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `image`
+--
+
+LOCK TABLES `image` WRITE;
+/*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES ('27hYH6osFyDZ5C8y1bK','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH6osFyDZ5C8y1bK70f62b7933d4e57a54d4d9899db03303.jpg',1),('27hYH7OonC4rU6egYqI','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH7OonC4rU6egYqInem-thu-10-510x510.jpg',0),('27hYH8axUI809YKDkM7','27hYH7dx8y5ZcJvndVL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hYH8axUI809YKDkM7nem-thu-7-510x510.jpg',0),('27hdADhPglFTkNnhyUt','27hdA2ax69FsVtOYbPy','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdADhPglFTkNnhyUtdai-dan-3-510x510.jpg',0),('27hdAEbiBqOA3MZDQk8','27hdA2ax69FsVtOYbPy','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdAEbiBqOA3MZDQk8dai-dan-1-510x510.jpg',1),('27hdFibd0gzwSUdZXaG','27hdFgudaenFpMWUXi3','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdFibd0gzwSUdZXaGdai-dan-3-510x510.jpg',0),('27hdFjfHyEHgsEpzG7z','27hdFgudaenFpMWUXi3','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdFjfHyEHgsEpzG7zdai-dan-1-510x510.jpg',1),('27hdJ4m784pxLwe68M8','27hdJ40P2nH1FGIBxO8','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdJ4m784pxLwe68M8dai-dan-1-510x510.jpg',1),('27hdJ8F1ubnicDFPItP','27hdJ40P2nH1FGIBxO8','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdJ8F1ubnicDFPItPdai-dan-3-510x510.jpg',0),('27hdqmGO0AxfKXmWsU6','27hdqq5z1Idb7qQs6hN','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hdqmGO0AxfKXmWsU6kem-cat-mong-3-510x510.jpg',1),('27he7tNKW9UjjQkmFrG','27he7sjoF5oEa0iZMnD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27he7tNKW9UjjQkmFrGbat-an-doi-Round-Dog-2-510x510.jpg',1),('27heElsGAfLB8feMoYW','27heEpMqXJYxpc1r9ZK','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heElsGAfLB8feMoYWta-cho-nho-510x510.jpg',0),('27heEpimq1mqg8rEqYK','27heEpMqXJYxpc1r9ZK','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heEpimq1mqg8rEqYKta-cho-2-247x296.jpg',1),('27heMfkL9d7TRqcqLKm','27heMjpDFYxm3Ve4lZY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMfkL9d7TRqcqLKmta-cho-nho-510x510.jpg',0),('27heMjAgNCVj85mS9mD','27heMjpDFYxm3Ve4lZY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMjAgNCVj85mS9mDta-cho-2-247x296.jpg',1),('27heMsqADIQzumByMaI','27heMo4kfriLBRGeMCD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMsqADIQzumByMaIta-cho-2-247x296.jpg',1),('27heMthPv4gKfKCmc78','27heMo4kfriLBRGeMCD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heMthPv4gKfKCmc78ta-cho-nho-510x510.jpg',0),('27heNAag0Ti6aBXBEPm','27heNA4AJvaqGCEJdPz','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heNAag0Ti6aBXBEPmta-cho-2-247x296.jpg',1),('27heNAwd6FxrReWWjT3','27heNA4AJvaqGCEJdPz','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27heNAwd6FxrReWWjT3ta-cho-nho-510x510.jpg',0),('27helLrfbTHhgEvy7Sg','27helJYQdDgcyJqoP1V','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27helLrfbTHhgEvy7Sgdo-an-royal-510x510.jpg',1),('27hf5tgJkb0X1MXdRyR','27hf5tszyDUrbSzyxPM','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf5tgJkb0X1MXdRyRvong-tho-cam-6-510x510.jpg',1),('27hf5wXCYGUaevCowGL','27hf5tszyDUrbSzyxPM','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf5wXCYGUaevCowGLvong-tho-cam-1-510x510.jpg',0),('27hf6DOsy96pEz5BOCz','27hf69HjbIMd3I9JYrL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf6DOsy96pEz5BOCzvong-tho-cam-6-510x510.jpg',1),('27hf6EwWo3SLBSjl9M8','27hf69HjbIMd3I9JYrL','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hf6EwWo3SLBSjl9M8vong-tho-cam-1-510x510.jpg',0),('27hfLE9qJRtdZ8Vrpr5','27hfLKqN7Q6e2yFwJTP','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfLE9qJRtdZ8Vrpr5thuc-an-cho-con-1-510x510.jpg',1),('27hfWIjwPTASo07xLWl','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWIjwPTASo07xLWl3.jpg',0),('27hfWJQtCrJ9IjRGkT9','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWJQtCrJ9IjRGkT94.jpg',0),('27hfWJhVw7xBWbBfQz8','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWJhVw7xBWbBfQz81.jpg',1),('27hfWKJn7Ke2t8rYkXk','27hfWM2XRcr5HvhwNFC','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWKJn7Ke2t8rYkXk2.jpg',0),('27hfWumabNMyaJo6GfP','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWumabNMyaJo6GfP1.jpg',1),('27hfWvanZVN5VeUDCjj','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWvanZVN5VeUDCjj3.jpg',0),('27hfWy4SlCHHtw0MNXT','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfWy4SlCHHtw0MNXT2.jpg',0),('27hfX0TcfV6ssFpBROs','27hfWwX0hxQg3OP7pzY','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfX0TcfV6ssFpBROs4.jpg',0),('27hfsLdcsxca7umOxqp','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsLdcsxca7umOxqp5.jpg',1),('27hfsMKMyUCbFML3miO','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsMKMyUCbFML3miO6.jpg',0),('27hfsNGl6NbT813W2Tu','27hfsLjKtoLC2Zq3kxa','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsNGl6NbT813W2Tu7.jpg',0),('27hfsfWNhbcKARsFoG5','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsfWNhbcKARsFoG55.jpg',1),('27hfsgJ63IbZPnZ73qJ','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsgJ63IbZPnZ73qJ6.jpg',0),('27hfsjV1VvLELXgACIw','27hfsgrnow7POQizCa4','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hfsjV1VvLELXgACIw7.jpg',0),('27hgcOtzMHRw9gIBgZ2','27hgcOd8rSpqmHwpHJt','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgcOtzMHRw9gIBgZ29.jpg',0),('27hgcPBBZ2rRl5Fn40u','27hgcOd8rSpqmHwpHJt','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgcPBBZ2rRl5Fn40u8.jpg',1),('27hgsbHNQlzF2x0TJjC','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsbHNQlzF2x0TJjC11.jpg',1),('27hgscJ29jRlHEvVCZz','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgscJ29jRlHEvVCZz12.jpg',0),('27hgshIOksQbbrEojG7','27hgsgAgtzjxbjd4JRh','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgshIOksQbbrEojG713.jpg',0),('27hgssfmdxK3CKdg9sd','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgssfmdxK3CKdg9sd13.jpg',0),('27hgsskrSUWJtMg7Bv9','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsskrSUWJtMg7Bv912.jpg',0),('27hgsyN6lMW6mddsyc9','27hgsvcaJCzlihEJWRD','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgsyN6lMW6mddsyc911.jpg',1),('27hgzJMVHAl5XTwXYH9','27hgzHsS7OnpH8F9w4D','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgzJMVHAl5XTwXYH9khan-5-510x510.jpg',1),('27hgzhFN7NXtcjZG9VI','27hgziZ4A4xRqNLjl2G','http://127.0.0.1:8000/images/get-image?image_path=app%2Fmedia%2Fproduct%2F27hgzhFN7NXtcjZG9VIkhan-5-510x510.jpg',1);
+/*!40000 ALTER TABLE `image` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pet_type`
+--
+
+DROP TABLE IF EXISTS `pet_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pet_type` (
+  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pet_type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`pet_type_id`),
+  UNIQUE KEY `pet_type_name_UNIQUE` (`pet_type_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pet_type`
+--
+
+LOCK TABLES `pet_type` WRITE;
+/*!40000 ALTER TABLE `pet_type` DISABLE KEYS */;
+INSERT INTO `pet_type` VALUES ('25e4ZNqws4WtdsLL16E','Chim'),('25e4Yd7QFbidTDwaQSc','Chó'),('25e4Z1jf2Gb09xbKLMU','Mèo');
+/*!40000 ALTER TABLE `pet_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pro_pro`
+--
+
+DROP TABLE IF EXISTS `pro_pro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pro_pro` (
+  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `propro_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`propro_id`),
+  KEY `fk_pro_pro_1_idx` (`product_id`),
+  KEY `fk_pro_pro_2_idx` (`promotional_id`),
+  CONSTRAINT `fk_pro_pro_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_pro_pro_2` FOREIGN KEY (`promotional_id`) REFERENCES `promotional` (`promotional_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pro_pro`
+--
+
+LOCK TABLES `pro_pro` WRITE;
+/*!40000 ALTER TABLE `pro_pro` DISABLE KEYS */;
+INSERT INTO `pro_pro` VALUES ('27QbSVsdRZ1jWWLN2LX','27hYH7dx8y5ZcJvndVL','27pP2y8ldar5K4CCycB');
+/*!40000 ALTER TABLE `pro_pro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product` (
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_quantity` int NOT NULL,
+  `product_sold` int NOT NULL,
+  `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_description` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_cost` int DEFAULT NULL,
+  `brand_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_original_cost` int NOT NULL,
+  `product_date_in` date NOT NULL,
+  `product_date_out` date DEFAULT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `fk_p_pt_pti_idx` (`product_type_id`),
+  KEY `fk_p_b_bi_idx` (`brand_id`),
+  CONSTRAINT `fk_p_b_bi` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES ('27hYH7dx8y5ZcJvndVL','Nệm thú',64,22,'25e4orCMpwimZ7PosXL','Bạn có biết, giấc ngủ không chỉ quan trọng đối với con người mà còn đối với tất cả các loài vật nuôi. Một đêm ngon giấc, thoải mái sẽ giúp thú cưng khỏe mạnh, vui vẻ hơn và hơn hết là tránh được những bệnh vặt. Việc để chó mèo nằm trên nền gạch, nền đất vào ban đêm chắc chắn sẽ dẫn đến những nguy hiểm như: Cảm, sổ mũi, ho khan Bị côn trùng cắn Dễ phát sinh bọ chét, bọ chét do ảnh hưởng của hơi đất => Chắc chắn đây là điều mà những người nuôi chó mèo sẽ không bao giờ mong muốn. Vì vậy, một chiếc giường ngủ cho chó mèo sẽ là sự lựa chọn sáng suốt của Sếp và tạo thói quen đi ngủ tốt cho chó mèo.',150000,'brand_id_A',120000,'2022-04-12',NULL),('27hdA2ax69FsVtOYbPy','Dây dắt chó đi kèm đai ngực hoạt tiết ',100,23,'25e4orCMpwimZ7PosXL','Dây xích cho chó kèm đai ngực Hoa văn là sản phẩm dành cho tất cả các giống chó. Là vật dụng không thể thiếu mỗi khi bạn muốn dắt chó đi dạo.',140000,'brand_id_A',120000,'2022-04-12',NULL),('27hdFgudaenFpMWUXi3','Đồ ăn nhẹ cho chó mèo - BẾP Bóng Bay Hai Đầu',120,31,'25e4orCMpwimZ7PosXL','Snack Cho Chó Và Mèo - Bóng Dây 2 Đầu KITTEN là sản phẩm dành cho tất cả các giống chó, mèo. Với bóng dây, bạn có thể hạn chế việc bé gặm đồ đạc trong nhà. Ngoài ra, đây còn là món đồ chơi giúp trẻ linh hoạt hơn.',90000,'brand_id_A',80000,'2022-04-12',NULL),('27hdJ40P2nH1FGIBxO8','Đồ ăn nhẹ cho chó mèo - BẾP Bóng Bay Hai Đầu',120,2,'25e4pOk9ANpVrPmPHxs','Snack Cho Chó Và Mèo - Bóng Dây 2 Đầu KITTEN là sản phẩm dành cho tất cả các giống chó, mèo. Với bóng dây, bạn có thể hạn chế việc bé gặm đồ đạc trong nhà. Ngoài ra, đây còn là món đồ chơi giúp trẻ linh hoạt hơn.',90000,'brand_id_A',80000,'2022-04-12',NULL),('27hdqq5z1Idb7qQs6hN','Dụng cụ cắt móng tay cho chó',15,0,'25e4orCMpwimZ7PosXL','Nó là một công cụ làm sạch vật nuôi, được làm bằng vật liệu bền.  Sản phẩm được các chuyên gia chăm sóc chó mèo trên thế giới khuyên dùng, giúp cắt tỉa gọn gàng móng chân cho chó mèo, mang lại cảm giác thoải mái và vệ sinh cho thú cưng.',80000,'brand_id_B',50000,'2022-04-12',NULL),('27he7sjoF5oEa0iZMnD','Bát ăn đôi',25,0,'25e4orCMpwimZ7PosXL','Bát ăn đôi hình tròn cho chó mèo được làm bằng nhựa cao cấp không độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  + Sản phẩm bát đôi tròn cho chó mèo xứng đáng là sự lựa chọn lý tưởng của bạn dành cho thú cưng của mình.  + Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng.  + Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.  + Có nhiều màu sắc khác nhau Bát đôi hình tròn cho chó mèo bền, đẹp cho chó mèo từ lớn đến nhỏ.  + Bát được thiết kế vừa vặn giúp chó mèo ăn tránh bị đổ.',95000,'brand_id_B',90000,'2022-04-12',NULL),('27heEpMqXJYxpc1r9ZK','Tả mặc cho chó nhỏ',25,0,'25e4orCMpwimZ7PosXL','Miếng lót tã được làm từ 100% cotton nguyên chất và các hạt polyme siêu thấm hút. Miếng lót sẽ thấm nhanh nước tiểu của thú cưng khi bé tè, đồng thời có tác dụng khử mùi, chống khuẩn, giữ cho bề mặt luôn khô thoáng.',105000,'brand_id_B',103000,'2022-04-12',NULL),('27heMjpDFYxm3Ve4lZY','Bát ăn xương nhỏ',100,0,'25e4orCMpwimZ7PosXL','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27heMo4kfriLBRGeMCD','Bát ăn xương nhỏ',100,0,'25e4pOk9ANpVrPmPHxs','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27heNA4AJvaqGCEJdPz','Bát ăn xương nhỏ',100,0,'25e4pi93eFipon10x68','Bát ăn xương nhựa cho chó mèo được làm bằng nhựa cao cấp không gây độc hại, không ảnh hưởng đến chất lượng thức ăn, màu sắc bắt mắt giúp thú cưng ăn ngon miệng hơn.  Sản phẩm bát xương nhựa cho chó mèo xứng đáng là sự lựa chọn lý tưởng cho thú cưng của bạn. Bề mặt nhẵn bóng, dễ dàng vệ sinh sau khi sử dụng. Được thiết kế dựa trên tiêu chuẩn chất lượng Châu Âu.',25000,'brand_id_B',20000,'2022-04-12',NULL),('27helJYQdDgcyJqoP1V','Thức ăn hoàng gia cho Poodle nhỏ 1.5kg',12,0,'25e4qYhLwy26VkCl78U','Thức ăn dành riêng cho chó con có trọng lượng tối đa dưới 11 kg như Pug, Poodle, Bichon Frise, Corgi, Phốc sóc, Chihuahua, .. ở độ tuổi từ 2 - 10 kg.',60000,'brand_id_A',55000,'2022-04-12',NULL),('27hf5tszyDUrbSzyxPM','Vòng cổ thổ cẩm cho chó và mèo',25,0,'25e4orCMpwimZ7PosXL','Vòng cổ thổ cẩm cho chó mèo là phụ kiện không thể thiếu trong bộ sưu tập của thú cưng. Chiếc vòng cổ không chỉ khiến thú cưng của bạn trở nên thời trang hơn mà còn giúp bạn dễ dàng tìm thấy bé nhờ phần bèo nhún trên cổ áo.',75000,'brand_id_B',70000,'2022-04-12',NULL),('27hf69HjbIMd3I9JYrL','Vòng cổ thổ cẩm cho chó và mèo',25,0,'25e4pOk9ANpVrPmPHxs','Vòng cổ thổ cẩm cho chó mèo là phụ kiện không thể thiếu trong bộ sưu tập của thú cưng. Chiếc vòng cổ không chỉ khiến thú cưng của bạn trở nên thời trang hơn mà còn giúp bạn dễ dàng tìm thấy bé nhờ phần bèo nhún trên cổ áo.',75000,'brand_id_B',70000,'2022-04-12',NULL),('27hfLKqN7Q6e2yFwJTP','Thức ăn khô mini Royal Canin Puppy',10,0,'25e4qYhLwy26VkCl78U','Các giống chó nhỏ dưới 11kg (khi trưởng thành hoàn toàn) như: Poodle, Phốc, Cocker Spaniel, Pug, Chihuahua, Pomeranian, ... Chúng chỉ cần thức ăn dinh dưỡng có kiểu dáng nhỏ, tuy nhiên chúng đòi hỏi nhiều năng lượng hơn các giống lớn vì chúng có thời gian sinh trưởng ngắn hơn và mạnh hơn. Ngoài ra, tuổi thọ trung bình của chó nhỏ cao hơn chó lớn nên chế độ dinh dưỡng cũng cần khắt khe hơn. Công thức của ROYAL CANIN Mini Puppy được đo lường để đáp ứng các nhu cầu cụ thể của chó nhỏ trong suốt giai đoạn cuộc đời của chúng từ 2 đến 10 tháng tuổi.',80000,'brand_id_A',75000,'2022-04-12',NULL),('27hfWM2XRcr5HvhwNFC','Nệm chấm cho chó và mèo',75,0,'25e4pOk9ANpVrPmPHxs','Nệm hình vuông cho chó mèo Zenji với hình dáng và thiết kế độc đáo. Được thiết kế đặc biệt cho vật nuôi. Thích hợp cho tất cả các giống chó mèo.',250000,'brand_id_A',220000,'2022-04-12',NULL),('27hfWwX0hxQg3OP7pzY','Nệm chấm cho chó và mèo',75,0,'25e4orCMpwimZ7PosXL','Nệm hình vuông cho chó mèo Zenji với hình dáng và thiết kế độc đáo. Được thiết kế đặc biệt cho vật nuôi. Thích hợp cho tất cả các giống chó mèo.',250000,'brand_id_A',220000,'2022-04-12',NULL),('27hfsLjKtoLC2Zq3kxa','Cũi nhựa xây dựng cho chó và mèo',15,0,'25e4orCMpwimZ7PosXL','Lồng nhựa cho chó mèo phù hợp với tất cả các giống chó mèo nhỏ.',150000,'brand_id_A',130000,'2022-04-12',NULL),('27hfsgrnow7POQizCa4','Cũi nhựa xây dựng cho chó và mèo',15,0,'25e4pOk9ANpVrPmPHxs','Lồng nhựa cho chó mèo phù hợp với tất cả các giống chó mèo nhỏ.',150000,'brand_id_A',130000,'2022-04-12',NULL),('27hgcOd8rSpqmHwpHJt','Khay Haver cho chó',15,0,'25e4rP5ds5RdoOkP0d4','Hộp vệ sinh cho chó đúng nơi của Haver sử dụng nhựa tổng hợp cao cấp. Có tính đàn hồi giúp chó mèo bước vào thoải mái. Khay hướng dẫn chó đi vệ sinh đúng chỗ trong nhà với màu sắc đa dạng, bền và chịu lực tốt, tuổi thọ cao. Sử dụng kết hợp với bình xịt hướng dẫn vệ sinh đúng cách để đảm bảo huấn luyện chó thành công 100%.',95000,'brand_id_B',80000,'2022-04-12',NULL),('27hgsgAgtzjxbjd4JRh','Sữa Tắm SOS cho thú cưng',23,0,'25e4rP5ds5RdoOkP0d4','SOS màu nâu đỏ: Dòng sữa tắm dành riêng cho cho những bé chó mèo có bộ lông nâu đỏ, đen. SOS màu xanh dương: Dòng sữa tắm dành riêng cho các bé chó mèo sở hữu bộ lông trắng. SOS màu đen: Dòng sữa tắm chuyên dùng để phục hồi da tổn thương và đuổi ve rận cho chó mèo',150000,'brand_id_B',120000,'2022-04-12',NULL),('27hgsvcaJCzlihEJWRD','Sữa Tắm SOS cho thú cưng',23,0,'25e4rbrfym7t7QQgf6S','SOS màu nâu đỏ: Dòng sữa tắm dành riêng cho cho những bé chó mèo có bộ lông nâu đỏ, đen. SOS màu xanh dương: Dòng sữa tắm dành riêng cho các bé chó mèo sở hữu bộ lông trắng. SOS màu đen: Dòng sữa tắm chuyên dùng để phục hồi da tổn thương và đuổi ve rận cho chó mèo',150000,'brand_id_B',120000,'2022-04-12',NULL),('27hgzHsS7OnpH8F9w4D','Khăn Vệ Sinh Siêu Thấm',23,0,'25e4rP5ds5RdoOkP0d4','Có khả năng hút nước rất nhanh trong thời gian ngắn Khả năng hút nước có thể tương đương với 10 khăn bông thông thường, do vậy tiết kiệm rất nhiều thời gian trong quá trình lau khô cho vật nuôi Chỉ cần vắt là khô mà không cần phơi như khăn bông bình thường Kích thước : 43×32 cm',75000,'brand_id_B',60000,'2022-04-12',NULL),('27hgziZ4A4xRqNLjl2G','Khăn Vệ Sinh Siêu Thấm',23,0,'25e4rbrfym7t7QQgf6S','Có khả năng hút nước rất nhanh trong thời gian ngắn Khả năng hút nước có thể tương đương với 10 khăn bông thông thường, do vậy tiết kiệm rất nhiều thời gian trong quá trình lau khô cho vật nuôi Chỉ cần vắt là khô mà không cần phơi như khăn bông bình thường Kích thước : 43×32 cm',75000,'brand_id_B',60000,'2022-04-12',NULL);
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_pet`
+--
+
+DROP TABLE IF EXISTS `product_pet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_pet` (
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  KEY `fk_pp_pt_pi_idx` (`pet_type_id`),
+  KEY `fk_pp_p_pi_idx` (`product_id`),
+  CONSTRAINT `fk_pp_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `fk_pp_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_pet`
+--
+
+LOCK TABLES `product_pet` WRITE;
+/*!40000 ALTER TABLE `product_pet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product_pet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_type`
+--
+
+DROP TABLE IF EXISTS `product_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_type` (
+  `product_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `pet_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`product_type_id`),
+  KEY `fk_pt_pt_pti_idx` (`pet_type_id`),
+  CONSTRAINT `fk_pt_pt_pti` FOREIGN KEY (`pet_type_id`) REFERENCES `pet_type` (`pet_type_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_type`
+--
+
+LOCK TABLES `product_type` WRITE;
+/*!40000 ALTER TABLE `product_type` DISABLE KEYS */;
+INSERT INTO `product_type` VALUES ('25e4orCMpwimZ7PosXL','Phụ kiện','25e4Yd7QFbidTDwaQSc'),('25e4pOk9ANpVrPmPHxs','Phụ kiện','25e4Z1jf2Gb09xbKLMU'),('25e4pi93eFipon10x68','Phụ kiện','25e4ZNqws4WtdsLL16E'),('25e4pz4iMotJnOv7Mp6','Thức ăn','25e4ZNqws4WtdsLL16E'),('25e4qI6XQoe2lCQEcM1','Thức ăn','25e4Z1jf2Gb09xbKLMU'),('25e4qYhLwy26VkCl78U','Thức ăn','25e4Yd7QFbidTDwaQSc'),('25e4rP5ds5RdoOkP0d4','Vệ sinh','25e4Yd7QFbidTDwaQSc'),('25e4rbrfym7t7QQgf6S','Vệ sinh','25e4Z1jf2Gb09xbKLMU');
+/*!40000 ALTER TABLE `product_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promotional`
+--
+
+DROP TABLE IF EXISTS `promotional`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `promotional` (
+  `promotional_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `promotional_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `promotional_description` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `promotional_sale` int NOT NULL,
+  `promotional_start_date` date NOT NULL,
+  `promotional_end_date` date NOT NULL,
+  PRIMARY KEY (`promotional_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promotional`
+--
+
+LOCK TABLES `promotional` WRITE;
+/*!40000 ALTER TABLE `promotional` DISABLE KEYS */;
+INSERT INTO `promotional` VALUES ('27QbSVsdRZ1jWWLN2LX','Sieu sale 10/4','Chet me roi',50,'2022-04-15','2022-04-20'),('27kMafsMw7TRkHcQBlI','Truong GIang','Sieu sao sieu ngo',50,'2022-04-13','2022-04-26');
+/*!40000 ALTER TABLE `promotional` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rate`
+--
+
+DROP TABLE IF EXISTS `rate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rate` (
+  `rate_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `rate_star_number` int DEFAULT NULL,
+  PRIMARY KEY (`rate_id`),
+  KEY `fk_r_p_pi_idx` (`product_id`),
+  KEY `fk_r_c_ci_idx` (`customer_id`),
+  CONSTRAINT `fk_r_c_ci` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `fk_r_p_pi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rate`
+--
+
+LOCK TABLES `rate` WRITE;
+/*!40000 ALTER TABLE `rate` DISABLE KEYS */;
+INSERT INTO `rate` VALUES ('27rqoExRFPruGAOYiwT','27hdA2ax69FsVtOYbPy','270zIfx9EXn7OWk2lGF',5),('27rrWZ9CQK1TjgcuoEv','27hdA2ax69FsVtOYbPy','271Ct3h9TvB7jxntPM5',2),('27rraK0bKzyXW6xNBgu','27hdA2ax69FsVtOYbPy','271CveoMjzi64DQYucy',4),('289n60v0fLgD8kxJ8lm','27hYH7dx8y5ZcJvndVL','270zIfx9EXn7OWk2lGF',5);
+/*!40000 ALTER TABLE `rate` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Current Database: `sys`
@@ -4457,6 +4452,12 @@ USE `sys`;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Current Database: `pet_store`
+--
+
+USE `pet_store`;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -4467,4 +4468,4 @@ USE `sys`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23  7:47:08
+-- Dump completed on 2022-04-24 14:36:07
