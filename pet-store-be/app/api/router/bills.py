@@ -31,10 +31,14 @@ async def set_complete(
 )
 async def pay_cash(
     bill_id: str, amount: int,
+    user_address: str,
     authorization_token: str = Header(None)
 ):
     _ = get_username_from_token(authorization_token)
-    response = _service_bills.pay_cash(bill_id, amount)
+    response = _service_bills.pay_cash(
+        bill_id, amount,
+        user_address
+    )
     return response
 
 
@@ -73,6 +77,7 @@ async def get_cart(
     authorization_token: str = Header(None)
 ):
     username = get_username_from_token(authorization_token)
+    
     response = _service_bills.get_cart(username)
     return response
 
@@ -84,8 +89,8 @@ async def get_all_cart(
     authorization_token: str = Header(None),
 
 ):
-    # username = get_username_from_token(authorization_token)
-    username = 'khachhang1'
+    username = get_username_from_token(authorization_token)
+    
     response = _service_bills.get_all_cart(username)
     return response
 
@@ -97,6 +102,7 @@ async def create_cart(
     authorization_token: str = Header(None)
 ):
     username = get_username_from_token(authorization_token)
+    
     response = _service_bills.create_cart(username)
     return response
 
@@ -124,13 +130,13 @@ async def add_to_cart(
 )
 async def payment(
     vn_amount: int, vn_detail: str,
-    bill_id: str,
+    bill_id: str, user_address: str,
     authorization_token: str = Header(None),
 ):
     _ = get_username_from_token(authorization_token)
     response = _service_bills.payment(
         vn_amount, vn_detail,
-        bill_id
+        bill_id, user_address
     )
     return response
 
@@ -145,7 +151,7 @@ async def payment_return(
     vnp_ResponseCode: str, vnp_TmnCode: str,
     vnp_TransactionNo: str, vnp_TransactionStatus: str,
     vnp_TxnRef: str, vnp_SecureHash: str,
-    bill_id: str,
+    bill_id: str, user_address: str
 ):
     response = _service_bills.payment_return(
         vnp_Amount, vnp_BankCode,
@@ -154,6 +160,6 @@ async def payment_return(
         vnp_ResponseCode, vnp_TmnCode,
         vnp_TransactionNo, vnp_TransactionStatus,
         vnp_TxnRef, vnp_SecureHash,
-        bill_id
+        bill_id, user_address
     )
     return response
