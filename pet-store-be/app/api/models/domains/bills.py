@@ -14,6 +14,7 @@ class BillSQL(SQLModel, table=True):
     bill_total: int
     updated_at: date
     pay_method: str
+    user_address: str
 
 
 class BillDetailSQL(SQLModel, table=True):

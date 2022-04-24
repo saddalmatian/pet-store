@@ -52,17 +52,20 @@ def set_complete(
     raise_sold(bill_id)
     response = update_bill_status(
         bill_id, employee_id,
-        'Đã giao'
+        'Đã giao',
     )
     return response
 
 
-def pay_cash(bill_id, amount):
+def pay_cash(
+    bill_id, amount,
+    user_address
+):
     _ = update_product_quantity_in_bill(bill_id)
     response = update_bill_status(
         bill_id, 'admin_id',
         'Đang giao', 'Tiền mặt',
-        amount
+        amount, user_address
     )
     return response
 
@@ -118,7 +121,7 @@ def hmacsha512(key, data):
 
 def payment(
     vn_amount, vn_detail,
-    bill_id
+    bill_id, user_address
 ):
     # Process input data and build url payment
     order_type = 'other'
@@ -151,7 +154,7 @@ def payment(
         '%Y%m%d%H%M%S')  # 20150410063022
     vnp.requestData['vnp_IpAddr'] = '127.0.0.1'
     vnp.requestData['vnp_ReturnUrl'] = VNPAY_RETURN_URL + \
-        f'?bill_id={bill_id}'
+        f'?bill_id={bill_id}&user_address={user_address}'
     vnpay_payment_url = vnp.get_payment_url(
         VNPAY_PAYMENT_URL, VNPAY_HASH_SECRET_KEY
     )
@@ -168,7 +171,7 @@ def payment_return(
         vnp_ResponseCode, vnp_TmnCode,
         vnp_TransactionNo, vnp_TransactionStatus,
         vnp_TxnRef, vnp_SecureHash,
-        bill_id
+        bill_id, user_address
 ):
     inputData = {
         "vnp_TxnRef": vnp_TxnRef,
@@ -203,7 +206,7 @@ def payment_return(
                 _ = update_bill_status(
                     bill_id, 'admin_id',
                     'Đang giao', 'VNPay',
-                    amount
+                    amount, user_address
                 )
                 return RedirectResponse("http://localhost:3000/info")
             else:

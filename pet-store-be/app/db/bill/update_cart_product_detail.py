@@ -6,7 +6,7 @@ from operator import and_
 
 def update_cart_product_detail(
     username, list_product,
-    bill_id
+    bill_id, user_address
 ):
     cart = _domain_bills.BillSQL
     cart_detail = _domain_bills.BillDetailSQL
@@ -15,6 +15,9 @@ def update_cart_product_detail(
         list_detail = []
         statement = select(cart).where(cart.bill_id == bill_id)
         result_cart = session.exec(statement).one()
+        result_cart.user_address = user_address
+        session.add(result_cart)
+        session.commit()
         response.update({
             "Bill": {**result_cart.dict()}
         })

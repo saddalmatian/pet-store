@@ -8,7 +8,7 @@ import datetime
 def update_bill_status(
     bill_id: str, employee_id: str,
     bill_status: str, pay_method: str = 0,
-    vnp_Amount: str = 0
+    vnp_Amount: str = 0, user_address: str = ''
 ):
     bill = _domain_bills.BillSQL
     date_1 = datetime.datetime.now()
@@ -25,6 +25,8 @@ def update_bill_status(
             )
         result.employee_id = employee_id
         result.bill_status = bill_status
+        if user_address:
+            result.user_address = user_address
         if not result.bill_delivery_date:
             result.bill_delivery_date = end_date_format
         if not result.bill_created_date:

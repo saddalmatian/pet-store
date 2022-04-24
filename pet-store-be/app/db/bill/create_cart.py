@@ -29,6 +29,7 @@ def create_a_cart(username):
             bill_status='Chưa xác nhận',
             bill_total=0,
             pay_method=None,
+            user_address=''
         )
         response = {**bill.dict()}
         _ = session.add(bill)
