@@ -10,7 +10,7 @@ from app.api.services.vnpay import vnpay
 # from app.db.bill.add_to_cart import add_to_cart
 from app.db.bill.create_cart import create_a_cart
 from app.db.bill.add_item_to_cart import add_item_to_cart
-from app.db.bill.get_the_cart import get_the_cart
+from app.db.bill.get_the_cart import get_the_cart, get_cart_details
 from app.db.bill.update_cart_product_detail import update_cart_product_detail
 from app.db.bill.remove_product_cart import remove_product_cart
 from app.db.bill.update_status import update_bill_status
@@ -34,6 +34,11 @@ def get_all_cart(username: str):
     else:
         user_id = get_userid_from_username(username)
     response = get_all_cart_admin(user_id)
+    return response
+
+
+def get_cart_detail(username: str, bill_id: str):
+    response = get_cart_details(bill_id)
     return response
 
 

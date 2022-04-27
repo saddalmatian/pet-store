@@ -77,7 +77,6 @@ async def get_cart(
     authorization_token: str = Header(None)
 ):
     username = get_username_from_token(authorization_token)
-    
     response = _service_bills.get_cart(username)
     return response
 
@@ -90,8 +89,20 @@ async def get_all_cart(
 
 ):
     username = get_username_from_token(authorization_token)
-    
+
     response = _service_bills.get_all_cart(username)
+    return response
+
+
+@router.get(
+    "/get-cart-detail"
+)
+async def get_cart_detail(
+    bill_id: str,
+    authorization_token: str = Header(None),
+):
+    username = get_username_from_token(authorization_token)
+    response = _service_bills.get_cart_detail(username, bill_id)
     return response
 
 
@@ -102,7 +113,6 @@ async def create_cart(
     authorization_token: str = Header(None)
 ):
     username = get_username_from_token(authorization_token)
-    
     response = _service_bills.create_cart(username)
     return response
 
