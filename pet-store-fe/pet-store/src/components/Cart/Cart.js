@@ -89,6 +89,8 @@ function Cart() {
         });
     }
 
+    console.log(info.Address);
+
     function formatCash(str) {
         return str.toString().split('').reverse().reduce((prev, next, index) => {
             return ((index % 3) ? next : (next + ',')) + prev
@@ -111,7 +113,7 @@ function Cart() {
         if (payment.payment_method === 'vn-pay') {
             const detail = `${info.FullName} thanh toan hoa don ${billId}`;
 
-            axios.get(`http://127.0.0.1:8000/bills/vn-pay?vn_amount=${total}&vn_detail=${detail}&bill_id=${billId}`,
+            axios.get(`http://127.0.0.1:8000/bills/vn-pay?vn_amount=${total}&vn_detail=${detail}&bill_id=${billId}&user_address=${info.Address}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -133,7 +135,7 @@ function Cart() {
         }
 
         if (payment.payment_method === 'truc-tiep') {
-            axios.put(`http://127.0.0.1:8000/bills/pay-by-cash?bill_id=${billId}&amount=${total}`, '',
+            axios.put(`http://127.0.0.1:8000/bills/pay-by-cash?bill_id=${billId}&amount=${total}&user_address=${info.Address}`, '',
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -200,46 +202,46 @@ function Cart() {
                                 <div className="cart-box">
                                     <div className="box-address">
                                         <p className="box-address__heading">Địa chỉ giao hàng</p>
-                                        {
-                                            info.FullName &&
-                                            <input
-                                                type="text"
-                                                className="box-address__input"
-                                                placeholder="Họ và tên"
-                                                defaultValue={info.FullName}
-                                                onChange={handleChange}
-                                            ></input>
-                                        }
-                                        {
-                                            info.Phone &&
-                                            <input
-                                                type="text"
-                                                className="box-address__input"
-                                                placeholder="Số điện thoại"
-                                                defaultValue={info.Phone}
-                                                onChange={handleChange}
-                                            ></input>
-                                        }
-                                        {
-                                            info.Email &&
-                                            <input
-                                                type="text"
-                                                className="box-address__input"
-                                                placeholder="Email"
-                                                defaultValue={info.Email}
-                                                onChange={handleChange}
-                                            ></input>
-                                        }
-                                        {
-                                            info.Address &&
-                                            <input
-                                                type="text"
-                                                className="box-address__input"
-                                                placeholder="Địa chỉ"
-                                                defaultValue={info.Address}
-                                                onChange={handleChange}
-                                            ></input>
-                                        }
+
+                                        <input
+                                            type="text"
+                                            name='FullName'
+                                            className="box-address__input"
+                                            placeholder="Họ và tên"
+                                            value={info.FullName}
+                                            disabled
+                                        ></input>
+
+
+                                        <input
+                                            type="text"
+                                            name='Phone'
+                                            className="box-address__input"
+                                            placeholder="Số điện thoại"
+                                            value={info.Phone}
+                                            disabled
+                                        ></input>
+
+
+                                        <input
+                                            type="text"
+                                            name='Email'
+                                            className="box-address__input"
+                                            placeholder="Email"
+                                            value={info.Email}
+                                            disabled
+                                        ></input>
+
+
+                                        <input
+                                            type="text"
+                                            name='Address'
+                                            className="box-address__input"
+                                            placeholder="Địa chỉ"
+                                            defaultValue={info.Address}
+                                            onChange={handleChange}
+                                        ></input>
+
                                     </div>
                                     <Line />
 

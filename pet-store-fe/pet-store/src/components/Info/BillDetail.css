@@ -1,0 +1,94 @@
+.bill-detail__ctn {
+    background-color: var(--bg-color);
+    padding-bottom: 100px;
+}
+
+.bill-table {
+    border: 2px solid var(--primary-color);
+    margin: 4px;
+}
+
+.bill-heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    padding: 1.5rem;
+    text-decoration: underline;
+}
+
+.bill-label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-right: 4px;
+    padding-left: 16px;
+}
+
+.bill-values {
+    font-size: 1.6rem;
+}
+
+.product-list {
+    padding-top: 50px;
+}
+
+.bill-des {
+    padding-top: 50px;
+}
+
+.bill-thank {
+    /* border-right: 4px dashed var(--primary-color);   */
+}
+
+.bill-description {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    text-align: justify;
+    margin: 10px;
+}
+
+.bill-total {
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.bill-total-lable {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-right: 30px;
+}
+
+.bill-total__value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.bill-button {
+    display: flex;
+    padding-top: 70px;
+}
+
+.bill-icon {
+    margin-right: 6px;
+}
+
+.bill-btn {
+    font-size: 2rem;
+    padding: 1rem;
+    min-width: 180px;
+    margin: auto;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.bill-btn:hover {
+    color: var(--primary-color);
+    background-color: var(--white-color);
+}
+
+.bill-btn:active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
