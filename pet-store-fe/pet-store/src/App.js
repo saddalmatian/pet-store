@@ -26,6 +26,7 @@ import PromoAd from "./components/Admin/Promo"
 import StaffAd from "./components/Admin/Staff"
 import BillAd from "./components/Admin/Bill"
 import SerAd from "./components/Admin/Service"
+import BillDetail from './components/Info/BillDetail';
 
 
 function App() {
@@ -53,8 +54,8 @@ function App() {
         <Route path='/sign_in' element={<SignIn />} />
         <Route path='/sign_up' element={<SignUp />} />
         <Route path='/cart' element={<Cart />} />
-        
         <Route path='/info' element={<Info />} />
+        <Route path='/bill_detail/:idBill' element={<BillDetail />} />
         {/* <Route path='/error' element={alert('Thanh toán không thành công!')} /> */}
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/dashboard' element={<Dashboard />} />

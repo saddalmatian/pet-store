@@ -117,7 +117,12 @@ function ProductDetail({ ...props }) {
     const [cmt, setCmt] = useState('');
 
     const handleComment = (id, cmt) => {
+        
         if (localStorage.getItem('Token')) {
+            if(!cmt) {
+                alert("Bạn chưa điền bình luận");
+                return;
+            }
             axios.post(`http://127.0.0.1:8000/comments/comment-on-product`,
                 {
                     ProductID: id,

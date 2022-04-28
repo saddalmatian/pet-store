@@ -10,3 +10,12 @@
 .table-body {
     font-size: 1.6rem;
 }
+
+.bill-detail {
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.bill-detail:hover {
+    color: var(--black-color);
+}

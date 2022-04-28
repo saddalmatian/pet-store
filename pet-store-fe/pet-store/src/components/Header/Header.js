@@ -8,6 +8,7 @@ function Header() {
     const handleClick = () => {
         localStorage.removeItem('Token');
         localStorage.removeItem('Name');
+        localStorage.removeItem('BillID');
         window.location.reload();
         window.history.forward();
     }

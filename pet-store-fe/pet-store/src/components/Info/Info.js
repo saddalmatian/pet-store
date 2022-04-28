@@ -3,10 +3,12 @@ import './Info.css';
 import Header from '../Header/Header';
 import Heading from '../Heading';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Info() {
     const [bills, setBills] = useState('');
     const token = localStorage.getItem('Token');
+
 
     useEffect(() => {
         if (token) {
@@ -19,7 +21,6 @@ function Info() {
                 }
             )
                 .then(function (res) {
-                    console.log(res);
                     setBills(res.data);
                 })
                 .catch(function (err) {
@@ -50,6 +51,7 @@ function Info() {
                                     <th scope="col">Tổng thanh toán</th>
                                     <th scope="col">Phương thức thanh toán</th>
                                     <th scope="col">Trạng thái</th>
+                                    <th scope="col">Hoạt động</th>
                                 </tr>
                             </thead>
                             
@@ -62,6 +64,9 @@ function Info() {
                                             {bill.bill_total && <td>{formatCash(bill.bill_total)}</td>}
                                             <td>{bill.pay_method}</td>
                                             <td>{bill.bill_status}</td>
+                                            <td className="bill-detail">
+                                                <Link to={`/bill_detail/${bill.bill_id}`}>Xem chi tiết</Link>
+                                            </td>
                                         </tr>
                                     ))
                                 }
