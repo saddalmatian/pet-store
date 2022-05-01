@@ -84,11 +84,11 @@ def remove_product_from_cart(
 
 def update_cart_product(
     username, list_product,
-    bill_id
+    bill_id, user_address
 ):
     response = update_cart_product_detail(
         username, list_product,
-        bill_id
+        bill_id, user_address
     )
     return response
 
