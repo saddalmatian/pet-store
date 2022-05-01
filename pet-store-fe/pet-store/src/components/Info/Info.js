@@ -67,7 +67,6 @@ function Info() {
                                             <td className="bill-detail">
                                                 <Link to={`/bill_detail/${bill.bill_id}`}>Xem chi tiết</Link>
                                             </td>
-                                            {/* <Link to={`/bill_detail/${bill.bill_id}`}>Xem chi tiết</Link> */}
                                         </tr>
                                     ))
                                 }

@@ -11,11 +11,10 @@
     font-size: 1.6rem;
 }
 
-.bill-detail {
-    cursor: pointer;
+.bill-detail a {
     color: var(--primary-color);
 }
 
-.bill-detail:hover {
+.bill-detail:hover a {
     color: var(--black-color);
 }

@@ -4,6 +4,10 @@ import Header from '../Header/Header';
 import Heading from '../Heading';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+// import MyDoc from './MyDocument';
+// import ReactPDF from '@react-pdf/renderer';
+import Pdf from "react-to-pdf";
+
 
 function BillDetail() {
 
@@ -11,6 +15,7 @@ function BillDetail() {
     const [cart, setCart] = useState({});
     const token = localStorage.getItem('Token');
     const { idBill } = useParams();
+    const ref = React.createRef();
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/customers/get-customer-detail',
@@ -47,11 +52,14 @@ function BillDetail() {
         })
     }
 
-    console.log(cart);
+    const options = {
+        orientation: 'landscape',
+    };
+
     return (
         <>
             <Header />
-            <div className="container bill-detail__ctn">
+            <div ref={ref} className="container bill-detail__ctn">
                 <Heading mixin="Bill Detail" title="Chi tiết đơn hàng" />
                 <div className="row">
                     <div className="col-md bill-table">
@@ -78,7 +86,7 @@ function BillDetail() {
                         </div>
                     </div>
 
-                    { cart.Bill &&
+                    {cart.Bill &&
                         <div className="col-md bill-table">
                             <p className="bill-heading">Thông tin đơn hàng</p>
 
@@ -153,12 +161,15 @@ function BillDetail() {
                     </div>
                 </div>
 
-                <div className="bill-button">
-                    <button className="bill-btn">
+            </div>
+            <div className="bill-button">
+                <Pdf targetRef={ref} filename="bill.pdf" options={options} scale={0.85}>
+                    {({ toPdf }) => <button className="bill-btn" onClick={toPdf}>
                         <i className="fa-solid fa-print bill-icon"></i>
                         In hóa đơn
                     </button>
-                </div>
+                    }
+                </Pdf>
             </div>
         </>
     )
