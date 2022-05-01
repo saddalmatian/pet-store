@@ -1,0 +1,44 @@
+.img-ser1,
+.img-ser2 {
+  width: 100%;
+  position: relative;
+  border-radius: 15px;
+}
+
+.name-ser {
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+}
+
+.wrap {
+  display: flex;
+  background-color: #fff;
+  width: 100%;
+  height: 20%;
+  border-radius: 0 0 15px 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.service-hover {
+  transition: transform ease-in 0.1s;
+  will-change: transform;
+  text-decoration: none;
+}
+
+.service-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 20px 0 rgb(0 0 0 / 5%);
+}
+
+.service-hover:hover .wrap {
+    background-color: var(--primary-color);
+}
+
+.service-hover:hover .name-ser {
+    color: var(--white-color);
+}

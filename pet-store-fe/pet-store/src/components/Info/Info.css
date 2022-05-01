@@ -1,0 +1,20 @@
+.bill-info {
+    padding-bottom: 200px;
+    background-color: var(--bg-color);
+}
+
+.table-head {
+    font-size: 1.8rem;
+}
+
+.table-body {
+    font-size: 1.6rem;
+}
+
+.bill-detail a {
+    color: var(--primary-color);
+}
+
+.bill-detail:hover a {
+    color: var(--black-color);
+}

@@ -1,0 +1,44 @@
+.service-detail {
+    background-color: var(--bg-color);
+    padding-bottom: 50px;
+}
+
+.image-container {
+    display: flex;
+    flex: 0 0 0%;
+}
+
+.service-img {
+    width: 320px;
+    height: 320px;
+    border: 1px solid var(--primary-color);
+}
+
+.service-info {
+    margin: auto;
+}
+
+.content-container {
+    margin-bottom: 20px;
+}
+
+.service-content {
+    font-size: 1.8rem;
+}
+
+.service-table {
+    width: 80%;
+    border-collapse: separate;
+}
+
+.service-table__heading,
+.service-table__data {
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+}
+
+.service-table__heading {
+    background-color: var(--primary-color);
+}

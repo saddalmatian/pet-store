@@ -1,0 +1,8 @@
+.category-item__link {
+  font-size: 1.6rem;
+  margin-top: 0.75rem;
+}
+
+.category-item__link:hover {
+  color: var(--primary-color);
+}

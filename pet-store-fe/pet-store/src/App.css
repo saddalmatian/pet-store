@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,6 +14,7 @@
 
 :root {
   --primary-color: #FE9938;
+  --second-color: #FFDDBF;
   --black-color: #130f40;
   --light-color: #666666;
   --white-color: #fff;
@@ -29,12 +31,13 @@ ul {
   font-family: 'Satisfy', cursive;
   color: var(--primary-color);
   font-size: 3rem;
+  line-height: 3rem;
 }
 
 .title {
   font-size: 3rem;
   font-weight: bold;
-  /* padding-top: .25rem; */
+  line-height: 3rem;
   color: var(--black-color);
 }
 

@@ -1,0 +1,4 @@
+.line {
+    border-bottom: 4px solid var(--primary-color);
+    border-radius: 2px;
+}

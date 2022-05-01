@@ -1,0 +1,33 @@
+.modal-backdrop{
+    background-color: rgba(0,0,0,0.3);
+}
+.label-items{
+    font-size: 13px;
+    margin-right: 20px;
+    line-height:2;
+    width: 140px;
+    font-weight: bold;
+}
+.input-items{
+    width: 85%;
+}
+.label-items_staff{
+    font-size: 13px;
+    margin-right: 20px;
+    line-height:2;
+    width: 100px;
+    font-weight: bold;
+}
+.input-items_staff{
+    width: 90%;
+}
+.label-items_promo{
+    font-size: 13px;
+    margin-right: 20px;
+    line-height:2;
+    width: 125px;
+    font-weight: bold;
+}
+.input-items_promo{
+    width: 80%;
+}

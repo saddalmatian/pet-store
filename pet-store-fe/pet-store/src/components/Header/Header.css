@@ -8,11 +8,106 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 9%;
-    z-index: 10000;
+    padding: 2rem 2%;
+    z-index: 100;
 }
 
 .header-action {
     font-size: 1.7rem;
+    font-weight: 500;
     color: var(--primary-color);
 }
+
+.header-icon__cart {
+    color: var(--primary-color);
+    margin-right: .5rem;
+    padding: .75rem;
+    transition: all ease-in .1s;
+}
+
+.header-icon__cart:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 1rem;
+}
+
+.header-action__signin,
+.header-action__signup {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.header-action__signin:hover,
+.header-action__signup:hover {
+    opacity: .8;
+    color: var(--primary-color);
+}
+
+.header-icon__user {
+    color: var(--primary-color);
+    padding: .5rem;
+}
+
+.user {
+    cursor: pointer;
+    transition: all ease-in .1s;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+
+.user:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 1rem;
+}
+
+.user:hover .header-icon__user {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 1rem;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown__content {
+    display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px;
+  z-index: 1000;
+}
+
+.user-dropdown__content p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.user-dropdown__content a {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.user-dropdown__content p:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.user-dropdown__content a:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.user-dropdown:hover .user-dropdown__content {
+    display: block;
+  }

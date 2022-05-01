@@ -1,5 +1,16 @@
-.nav-list-item {
-  font-size: 1.7rem;
-  margin: 0 1.5rem;
+.nav-list-item__link {
+  text-decoration: none;
   color: var(--primary-color);
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 0 1.5rem;
+  padding: .75rem;
+  cursor: pointer;
+  transition: all ease-in .1s;
+}
+
+.nav-list-item__link:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-radius: 1rem;
 }
