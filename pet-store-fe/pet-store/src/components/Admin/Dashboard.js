@@ -245,7 +245,7 @@ function Dashboard() {
                             <div className="" style={{ marginTop: '10px' }}>
                                 <div className="chart d-flex col-md" >
 
-                                    <div className="chart-doughnut text-center col-md" style={{ width: '40%', height: '40%' }} >
+                                    <div className="chart-doughnut text-center col-md-4" style={{marginLeft:'150px'}}>
 
                                         {profits.ListProduct && profits.ListProduct.length > 0 ? (<Pie data={chartData}
                                             options={{
@@ -277,9 +277,11 @@ function Dashboard() {
                                                     display: true,
                                                     position: 'right'
                                                 }
-                                            }} />) : null}
+                                            }}
+                                            width={50}
+                                            height={50} />) : null}
                                     </div>
-                                    <div className="chart-doughnut text-center col-md" style={{ width: '40%', height: '40%' }} >
+                                    <div className="chart-doughnut text-center col-md-4" style={{marginLeft:'250px'}} >
 
                                         {profits.ListProduct && profits.ListProduct.length > 0 ? (<Pie data={chartData2}
                                             options={{
@@ -317,10 +319,7 @@ function Dashboard() {
                                 </div>
                             </div>
                             <div className="chart d-flex col-md">
-                                <div className="chart-doughnut " style={{ width: '50%', height: '50%' }}>
-
-                                    {/* <BarChartMonthly />
-                     */}
+                                <div className="chart-doughnut text-center col-md-6">  
                                     {sold.length > 0 ? <Bar data={barData} options={{
                                         plugins: {
                                             title: {
@@ -368,8 +367,8 @@ function Dashboard() {
                                     } /> : null}
 
                                 </div>
-                                <div className="chart-pie " style={{ width: '50%', height: '50%' }}>
-
+                                <div className="chart-pie  text-center col-md-6">
+                                    
                                     <Bar data={barDataSer} options={{
                                         plugins: {
                                             title: {

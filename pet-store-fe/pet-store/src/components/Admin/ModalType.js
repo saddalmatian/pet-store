@@ -36,6 +36,7 @@ function ModalType(props) {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
+            alert("Thêm sản phẩm thành công")
             window.location.reload();
         })
 
@@ -63,9 +64,9 @@ function ModalType(props) {
                     <div className="modal-content form-group d-flex row border-0 gap-4 ">
                         <input type="text" className="form-control-lg border" placeholder="Loại sản phẩm" name="productType" value={formValues.productType} onChange={handleChange} required />
                         <select className="form-control-lg border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
-                            <option value="Bird" > Chim </option>
-                            <option value="Dog" >Chó</option>
-                            <option value="Cat" >Mèo</option>
+                            <option value="Chim" > Chim </option>
+                            <option value="Chó" >Chó</option>
+                            <option value="Mèo" >Mèo</option>
                         </select>
                         <button className="btn btn-lg btn-primary" type="submit" >Lưu </button>
                         <button className="btn btn-lg btn-warning " onClick={props.onHide}>Đóng</button>

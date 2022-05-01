@@ -31,7 +31,7 @@ function Bill() {
       };
     
     const [bills, setBills] = useState([]);
-    var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6Im5oYW52aWVuMSIsImV4cCI6MTY0OTY2MTk5N30.yx2vaDdKKvGSIRppgk2S0OU_GDL4SG_0yENPOxRUBA8'
+    var token = localStorage.getItem('token')
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/bills/get-all-cart',
             {
@@ -134,7 +134,7 @@ function Bill() {
         })
     }
     console.log(bills && bills);
-    const status = ['Hoàn thành', 'Chưa hoàn thành', 'Mới']
+    const status = ['Đã giao', 'Đang giao', 'Chưa xác nhận']
     return (
         !localStorage.getItem('token') ? <Login/>  : (
         <div>
