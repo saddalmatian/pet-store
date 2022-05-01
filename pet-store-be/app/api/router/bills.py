@@ -60,12 +60,13 @@ async def remove_product_from_cart(
 async def update_cart_product(
     list_product: List[_schemas_bill.BillDetailIn],
     bill_id: str = Body(default=''),
+    user_address: str = Body(default=''),
     authorization_token: str = Header(None)
 ):
     username = get_username_from_token(authorization_token)
     response = _service_bills.update_cart_product(
         username, list_product,
-        bill_id
+        bill_id, user_address
     )
     return response
 
