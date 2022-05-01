@@ -24,7 +24,7 @@ function BillDetail() {
         )
             .then(res => setInfo(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
-    }, [token])
+    }, [token, idBill])
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/bills/get-cart-detail?bill_id=${idBill}`,
@@ -78,29 +78,31 @@ function BillDetail() {
                         </div>
                     </div>
 
-                    <div className="col-md bill-table">
-                        <p className="bill-heading">Thông tin đơn hàng</p>
+                    { cart.Bill &&
+                        <div className="col-md bill-table">
+                            <p className="bill-heading">Thông tin đơn hàng</p>
 
-                        <div className="bill-information d-flex">
-                            <p className="bill-label">Mã đơn:</p>
-                            {cart.Bill.bill_id && <p className="bill-values">{cart.Bill.bill_id}</p>}
-                        </div>
+                            <div className="bill-information d-flex">
+                                <p className="bill-label">Mã đơn:</p>
+                                {cart.Bill.bill_id && <p className="bill-values">{cart.Bill.bill_id}</p>}
+                            </div>
 
-                        <div className="bill-information d-flex">
-                            <p className="bill-label">Tình trạng:</p>
-                            {cart.Bill.bill_status && <p className="bill-values">{cart.Bill.bill_status}</p>}
-                        </div>
+                            <div className="bill-information d-flex">
+                                <p className="bill-label">Tình trạng:</p>
+                                {cart.Bill.bill_status && <p className="bill-values">{cart.Bill.bill_status}</p>}
+                            </div>
 
-                        <div className="bill-information d-flex">
-                            <p className="bill-label">Phương thức thanh toán:</p>
-                            {cart.Bill.pay_method && <p className="bill-values">{cart.Bill.pay_method}</p>}
-                        </div>
+                            <div className="bill-information d-flex">
+                                <p className="bill-label">Phương thức thanh toán:</p>
+                                {cart.Bill.pay_method && <p className="bill-values">{cart.Bill.pay_method}</p>}
+                            </div>
 
-                        <div className="bill-information d-flex">
-                            <p className="bill-label">Ngày giao dự kiến:</p>
-                            {cart.Bill.bill_delivery_date && <p className="bill-values">{cart.Bill.bill_delivery_date}</p>}
+                            <div className="bill-information d-flex">
+                                <p className="bill-label">Ngày giao dự kiến:</p>
+                                {cart.Bill.bill_delivery_date && <p className="bill-values">{cart.Bill.bill_delivery_date}</p>}
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
 
                 <div className="row product-list">
@@ -117,7 +119,7 @@ function BillDetail() {
 
                         <tbody className="table-body">
                             {
-                                cart.Bill.BillDetails && cart.Bill.BillDetails?.map((product, i) => (
+                                cart.BillDetails && cart.BillDetails?.map((product, i) => (
                                     <tr key={i}>
                                         <th scope="row">{i + 1}</th>
                                         <td>{product.ProductName}</td>
@@ -153,7 +155,7 @@ function BillDetail() {
 
                 <div className="bill-button">
                     <button className="bill-btn">
-                        <i class="fa-solid fa-print bill-icon"></i>
+                        <i className="fa-solid fa-print bill-icon"></i>
                         In hóa đơn
                     </button>
                 </div>

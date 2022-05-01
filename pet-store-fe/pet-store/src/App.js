@@ -19,7 +19,6 @@ import SignIn from './components/SignIn/SignIn';
 import Info from './components/Info/Info';
 import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
-import Login from './components/Admin/SignIn';
 import Dashboard from "./components/Admin/Dashboard"
 import ProductAd from "./components/Admin/Product"
 import PromoAd from "./components/Admin/Promo"
