@@ -1,47 +1,89 @@
+from datetime import date
+from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
+from typing import Optional
 
 
-class Product(SQLModel, table=True):
-    __tablename__ = "product"
+class ProductSQL(SQLModel, table=True):
+    __tablename__ = 'product'
     product_id: str = Field(primary_key=True)
-    pet_type_id: str = Field(foreign_key="product_pet.pet_type_id")
+    product_quantity: int
     product_name: str
-    product_detail: str
-    product_cost: str
+    product_sold: int
+    product_type_id: str = Field(
+        foreign_key='product_type.product_type_id')
+    product_description: str
+    product_cost: int
+    brand_id: str = Field(
+        foreign_key='brand.brand_id'
+    )
+    product_original_cost: int
+    product_date_in: date
+    product_date_out: date
 
 
-class ProductPet(SQLModel, table=True):
-    __tablename__ = "product_pet"
-    product_id: str = Field(foreign_key="product.product_id", primary_key=True)
-    pet_type_id: str = Field(foreign_key="pet_type.pet_type_id", primary_key=True)
+class ProductDateIn(BaseModel):
+    product_date_in: date = Field(default='', alias='ProductDateIn')
 
 
-class ProductType(SQLModel, table=True):
-    __tablename__ = "product_type"
+class ProductDateOut(BaseModel):
+    product_date_out: date = Field(default=None, alias='ProductDateOut')
+
+
+class ProductOriginalCost(BaseModel):
+    product_original_cost: int = Field(default='', alias='ProductOriginalCost')
+
+
+class ProductPetSQL(SQLModel, table=True):
+    __tablename__ = 'product_pet'
+    product_id: str = Field(foreign_key='product.product_id', primary_key=True)
+    pet_type_id: str = Field(
+        foreign_key='pet_type.pet_type_id', primary_key=True)
+
+
+class ProductTypeSQL(SQLModel, table=True):
+    __tablename__ = 'product_type'
     product_type_id: str = Field(primary_key=True)
-    product_id: str = Field(foreign_key="product.product_id")
+    pet_type_id: str = Field(
+        foreign_key='pet_type.pet_type_id')
     product_type: str
 
 
-class ProductDetail(SQLModel, table=True):
-    __tablename__ = "product_detail"
-    product_detail_id: str = Field(primary_key=True)
-    product_id: str = Field(foreign_key="product.product_id")
-    product_Description: str
-    product_cost: int
+class ProductID(BaseModel):
+    product_id: str = Field(default='', alias='ProductID')
 
 
-class Size(SQLModel, table=True):
-    __tablename__ = "size"
-    product_detail_id: str = Field(
-        foreign_key="product_detail.product_detail_id"
-    )
-    product_size: str
+class PetTypeID(BaseModel):
+    pet_type_id: str = Field(alias='PetTypeID')
 
 
-class Color(SQLModel, table=True):
-    __tablename__ = "color"
-    product_detail_id: str = Field(
-        foreign_key="product_detail.product_detail_id"
-    )
-    product_color: str
+class ProductName(BaseModel):
+    product_name: str = Field(alias='ProductName')
+
+
+class ProductCost(BaseModel):
+    product_cost: int = Field(alias='ProductCost')
+
+
+class ProductQuantity(BaseModel):
+    product_quantity: int = Field(alias='ProductQuantity')
+
+
+class ProductSold(BaseModel):
+    product_sold: int = Field(default=0, alias='ProductSold')
+
+
+class ProductType(BaseModel):
+    product_type: str = Field(alias='ProductType')
+
+
+class ProductTypeID(BaseModel):
+    product_type_id: str = Field(alias='ProductTypeID')
+
+
+class ProductTypeIDGetAll(BaseModel):
+    product_type_id: Optional[str] = Field(default='', alias='ProductTypeID')
+
+
+class ProductDescription(BaseModel):
+    product_description: str = Field(alias='ProductDescription')
