@@ -75,19 +75,10 @@ function Service() {
     }
     console.log(select)
 
-    async function renderUI() {
-        await axios.get('http://127.0.0.1:8000/bookings/get-all-booking',
-            {
-                headers: {
-                    accept: 'application/json',
-                    'authorization-token': token
-                }
-            }
-        )
-            .then(res => setListSer(res.data))
-            .catch(err => console.log(JSON.stringify(err, null, 2)))
-        console.log(listSer)
-        listSer.map((b, i) => {
+
+    const renderUI=()=> {
+            
+        return(listSer.map((b, i) => {
             console.log(b)
             return (
                     <tbody>
@@ -99,9 +90,9 @@ function Service() {
                                 <select className="form-control-lg border input-items option-type" name="status" onChange={(e) => handleChange(e, b.BookId, b.Total)}>
 
                                     {status.map((a, index) => {
-                                        if (b.BookStatus === a) {
+                                        if (select === a) {
                                             return (
-                                                <option value={a} selected key={index}>{a}</option>
+                                                <option value={select} selected key={index}>{select}</option>
                                             )
                                         } else {
                                             return (
@@ -124,10 +115,10 @@ function Service() {
 
                     </tbody>    
             )
-        })
+        }))
     }
 
-    const status = ['Completed', 'Incomplete', 'New']
+    const status = ['Hoàn thành', 'Chưa xác nhận']
     return (
         !localStorage.getItem('token') ? <Login/>  : (
         <div>
@@ -186,7 +177,7 @@ function Service() {
                                                 <td>{b.Email}</td>
                                                 <td>{b.PetAmount}</td>
                                                 <td>{b.Phone}</td>
-                                                <td>{b.Total}</td>
+                                               {b.Total===0?  <td>Chưa thanh toán</td>:<td>Đã thanh toán</td>}
                                                 <td>{b.Note}</td>
                                                 <td>{b.FinishDate}</td>
                                             </tr>

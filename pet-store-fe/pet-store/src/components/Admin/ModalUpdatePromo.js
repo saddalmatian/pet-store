@@ -83,16 +83,11 @@ function ModalUpdatePromo(props) {
             .then(res => setProducts(res.data))
             .catch(err => console.log(JSON.stringify(err, null, 2)))
     }, []);
-    const v = [];
-    props.promo && props.promo.ListProducts.map((product, i) =>
-        v.push(product.product_id)
-    )
-    products.map((a, index) =>
-        console.log(products))
 
-    const [listCheck, setListCheck] = useState([]);
+    // const [listCheck, setListCheck] = useState([]);
 
-    console.log(listCheck);
+
+    // console.log(listCheck);
 
     return (
         <Modal {...props}
@@ -124,7 +119,7 @@ function ModalUpdatePromo(props) {
 
                         </div>
                         <div className="d-flex">
-                            <label className="label-items_promo">Phần trăm khuyến mãi</label>
+                            <label className="label-items_promo">Phần trăm</label>
                             <input type="text" className="form-control-lg input-items_promo border" defaultValue={props.promo?.Promotional.promotional_sale} required onChange={(e) => handleChange(e)} name="promoSale" />
 
                         </div>
@@ -138,12 +133,20 @@ function ModalUpdatePromo(props) {
                             <label className="label-items_promo">Danh sách sản phẩm</label>
                             <select className="form-control-lg border input-items_promo option-type" name="listProduct" required onChange={(e) => handleChangeSelect(e)} multiple>
                                 {
-                                    props.promo && props.promo.ListProducts.map((product, i) =>
+                                    products.map(a => {
+                                        var checkP = false;
+                                        props.promo && props.promo.ListProducts.map(product => {
+                                            if (product.product_id == a.ProductID) {
+                                                checkP = true;
+                                            }
+                                        })
 
-                                        products.filter((a) =>(a.ProductID === product.product_id) ?
-                                            setListCheck({...listCheck, product}) : null
-                                        )
-                                    )
+                                        if (checkP) {
+                                            return <option value={a.ProductID} selected key={a.ProductID}>{a.ProductName}</option>
+                                        } else {
+                                            return <option value={a.ProductID} key={a.ProductID}>{a.ProductName}</option>
+                                        }
+                                    })
                                 }
                             </select>
 

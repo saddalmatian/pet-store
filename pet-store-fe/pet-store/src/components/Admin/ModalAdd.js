@@ -33,7 +33,9 @@ function ModalAdd(props) {
             ...formValues,
             [name]: value
         });
+        
     }
+    console.log(formValues);
     //preview image before upload
     const [imageURL, setImageURL] = useState(null);
     const [image, setImg] = useState(null);
@@ -69,7 +71,7 @@ function ModalAdd(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         var bodyFormData = new FormData();
-        formValues.imageList = [image, image2, image3];
+        formValues.imageList = [image||null, image2||null, image3||null];
         formValues.imageList.forEach(item => {
             bodyFormData.append('image_list', item);
             console.log(item)
@@ -86,8 +88,8 @@ function ModalAdd(props) {
         bodyFormData.append('product_date_in', formValues.productDateIn)
         bodyFormData.append('product_date_out', formValues.productDateOut)
         setSuccess(true);
-        console.log(formValues.image, formValues);
-        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VybmFtZSI6Im5oYW52aWVuMSIsImV4cCI6MTY0OTY2MTk5N30.yx2vaDdKKvGSIRppgk2S0OU_GDL4SG_0yENPOxRUBA8'
+        console.log(formValues.petTypeName, formValues.brandName);
+        var token = localStorage.getItem('token')
         await axios({
             method: "post",
             url: "http://127.0.0.1:8000/product/create-product",
@@ -98,6 +100,7 @@ function ModalAdd(props) {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(function (response) {
+            alert("Thêm sản phẩm thành công")
             window.location.reload();
         })
 
@@ -113,7 +116,7 @@ function ModalAdd(props) {
         <Modal {...props}
             size="xl"
             aria-labelledby="contained-modal-title-vcenter"
-
+            onHide={removeImgPreview}
         >
             <Modal.Header closeButton>
                 <Modal.Title >
@@ -131,6 +134,7 @@ function ModalAdd(props) {
                         <div className="d-flex">
                             <label className="label-items">  Thương hiệu</label>
                             <select className="form-control-lg  input-items border" name="brandName" value={formValues.brandName} onChange={handleChange} >
+                                <option>Chọn thương hiệu</option>
                                 <option value="BrandA" >BrandA</option>
                                 <option value="BrandB" >BrandB</option>
                             </select>
@@ -150,9 +154,10 @@ function ModalAdd(props) {
                         <div className="d-flex">
                             <label className="label-items"> Thú cưng </label>
                             <select className="form-control-lg  input-items border" name="petTypeName" value={formValues.petTypeName} onChange={handleChange}>
-                                <option value="Bird" >Bird</option>
-                                <option value="Dog" >Dog</option>
-                                <option value="Cat" >Cat</option>
+                                <option>Chọn loại thú cưng</option>
+                                <option value="Chim" >Chim</option>
+                                <option value="Chó" >Chó</option>
+                                <option value="Mèo" >Mèo</option>
                             </select>
                         </div>
 
@@ -161,10 +166,10 @@ function ModalAdd(props) {
                             <label className="label-items"> Loại sản phẩm</label>
                         <input type="text" className="form-control-lg input-items border" name="productType"  value={formValues.productType} onChange={handleChange} required />
                         </div>
-                        <div className="d-flex">
+                        {/* <div className="d-flex">
                             <label className="label-items"> Tải lên hình </label>
                         <input type="file" className="form-control-lg input-items border" id="fileInput" name="image" onChange={handlePictureSelected} />
-                        </div>
+                        </div> */}
                         <div className="d-flex" >
                             <label htmlFor="product-img" className="label-items">Hình sản phẩm </label>
                             <div className="row gap-3 ">
