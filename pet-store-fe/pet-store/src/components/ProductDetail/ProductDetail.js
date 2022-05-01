@@ -137,8 +137,8 @@ function ProductDetail({ ...props }) {
                     }
                 }
             ).then(getComment())
-                .then(getProductDetail())
-                .then(setCmt(''))
+            .then(getProductDetail())
+            .then(setCmt(''))
         } else {
             alert('Bạn cần đăng nhập trước khi thực hiện thao tác này!');
         }

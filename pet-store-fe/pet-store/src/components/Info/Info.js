@@ -9,7 +9,6 @@ function Info() {
     const [bills, setBills] = useState('');
     const token = localStorage.getItem('Token');
 
-
     useEffect(() => {
         if (token) {
             axios.get(`http://127.0.0.1:8000/bills/get-all-cart`,
@@ -58,6 +57,7 @@ function Info() {
                             <tbody className="table-body">
                                 {
                                     bills && bills?.map((bill, index) => (
+                                        bill.bill_total === 0 ? null :
                                         <tr key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{bill.bill_created_date}</td>
@@ -67,6 +67,7 @@ function Info() {
                                             <td className="bill-detail">
                                                 <Link to={`/bill_detail/${bill.bill_id}`}>Xem chi tiết</Link>
                                             </td>
+                                            {/* <Link to={`/bill_detail/${bill.bill_id}`}>Xem chi tiết</Link> */}
                                         </tr>
                                     ))
                                 }
